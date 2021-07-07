@@ -1,20 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Route, Switch } from "react-router";
 import Amplify from "aws-amplify";
 import { I18n } from "aws-amplify";
-import Home from "./Home";
-import SignUp from "./Auth/SignUp";
-import SignIn from "./Auth/SignIn";
-import SignOut from "./Auth/SignOut";
-import Profile from "./Auth/Profile";
-import ForgotPassword from "./Auth/ForgotPassword";
-import Searches from "./Searches";
-import Listings from "./Listings";
-import NotFound from "./NotFound";
-import Privacy from "./Privacy";
-import TermsOfUse from "./TermsOfUse";
 import { AuthContext } from "../providers/AuthProvider";
+import Routes from "./Routes";
 
 const useStyles = makeStyles(theme => ({
   section: {
@@ -26,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Routing() {
+export default function Auth() {
 	const classes = useStyles();
   const { setAuth } = useContext(AuthContext);
 
@@ -75,19 +64,7 @@ export default function Routing() {
 
   return (
     <section className={classes.section}>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/signout" component={SignOut} />
-        <Route path="/forgot-password" component={ForgotPassword} />
-        <Route path="/searches" component={Searches} />
-        <Route path="/listings" component={Listings} />
-        <Route path="/privacy" component={Privacy} />
-        <Route path="/termsofuse" component={TermsOfUse} />
-        <Route component={NotFound}/>
-      </Switch>
+      {Routes}
     </section>
   );
 }
