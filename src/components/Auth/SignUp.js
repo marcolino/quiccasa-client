@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import FormElement from "../FormElement";
+import { StatusContext } from "../../providers/StatusProvider";
 
 const SignUp = () => {
+  const { setStatus } = useContext(StatusContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,6 +16,10 @@ const SignUp = () => {
   const [code, setCode] = useState("");
   const history = useHistory();
   
+  useEffect(() => {
+    setStatus({showFooter: false});
+  }, [setStatus]);
+
   const signUp = (e) => {
     e.preventDefault();
 

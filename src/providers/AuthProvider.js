@@ -1,4 +1,4 @@
-import React, { useState, createContext/*, useCallback*/ } from "react";
+import React, { useState, createContext } from "react";
 
 const initialState = { authorized: false, user: null };
 
@@ -6,10 +6,9 @@ const AuthContext = createContext(initialState);
 
 const AuthProvider = (props) => {
   const [auth, setAuth] = useState(initialState);
-  //const setAuthPersistent = useCallback(setAuth, [setAuth]);
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth/*: setAuthPersistent*/ }}>
+    <AuthContext.Provider value={{ auth, setAuth }}>
       {props.children}
     </AuthContext.Provider>
   )

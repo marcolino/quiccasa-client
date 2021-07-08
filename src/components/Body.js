@@ -6,7 +6,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import Routes from "./Routes";
 
 const useStyles = makeStyles(theme => ({
-  section: {
+  body: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -15,12 +15,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Auth() {
+export default function Body() {
 	const classes = useStyles();
   const { setAuth } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log("CONFIGURING AMPLIFY");
+    //console.log("CONFIGURING AMPLIFY");
 
     const isLocalhost = Boolean(
       window.location.hostname === 'localhost' ||
@@ -34,7 +34,7 @@ export default function Auth() {
   
     const oauth = {
       domain: 'sistemisolari.auth.eu-west-1.amazoncognito.com',
-      scope: ['phone', 'email', 'profile'/*, 'openid', 'aws.cognito.signin.user.admin'*/],
+      scope: ['phone', 'email', 'profile', 'openid'/*, 'aws.cognito.signin.user.admin'*/],
       responseType: 'code', // or 'token', note that REFRESH token will only be generated when the responseType is code
     };
 
@@ -63,8 +63,8 @@ export default function Auth() {
   }, [setAuth]);
 
   return (
-    <section className={classes.section}>
+    <div className={classes.body}>
       {Routes}
-    </section>
+    </div>
   );
 }

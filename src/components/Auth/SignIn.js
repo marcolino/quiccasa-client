@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import Avatar from "@material-ui/core/Avatar";
@@ -20,9 +20,11 @@ import {
   FacebookIcon,
   TwitterIcon,
   GoogleIcon,
-} from "../FederatedSigninIcons";
+} from "../IconFederatedSignin";
+import { FormInput } from "../FormElements";
 import DividerWithText from "../DividerWithText";
 import { AuthContext } from "../../providers/AuthProvider";
+import { StatusContext } from "../../providers/StatusProvider";
 
 const styles = theme => ({
   paper: {
@@ -119,7 +121,12 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const history = useHistory();
   const { setAuth } = useContext(AuthContext);
-  const [rememberMe, setRememberMe] = useState(true); // TODO: get from user choice
+  const { setStatus } = useContext(StatusContext);
+  const [rememberMe, setRememberMe] = useState(true);
+
+  useEffect(() => {
+    setStatus({showFooter: false});
+  }, [setStatus]);
 
   const signIn = (e) => {
     e.preventDefault();
@@ -212,6 +219,15 @@ const SignIn = () => {
 
           <DividerWithText> {"or"} </DividerWithText>
 
+          <FormInput
+            id={"email"}
+            value={email}
+            onChange={setEmail}
+            placeholder={"Email"}
+            startAdornmentIcon={<Person />}
+            endAdornmentIcon={<Person />}
+          />
+{/*
           <TextField
             required
             autoFocus
@@ -237,6 +253,7 @@ const SignIn = () => {
               ),
             }}
           />
+*/}
 
           <TextField
             required
@@ -302,7 +319,7 @@ const SignIn = () => {
             </Grid>
           </Grid>
 
-          <DividerWithText></DividerWithText>
+          <DividerWithText />
 
           <Grid container direction="row" alignItems="center" justify="center" spacing={1}>
             <Grid item>
@@ -320,25 +337,8 @@ const SignIn = () => {
         </form>
       </div>
 
-      {/*
-      <Box mt={8}> {/* TODO: go to a footer * /}
-        <Copyright />
-      </Box>
-      */}
-
     </Container>
   );
 }
-
-// const Copyright = () => {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="right">
-//       {'Copyright © '} {new Date().getFullYear()}, {' '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         SistemiSolari
-//       </Link>{' '}
-//     </Typography>
-//   );
-// }
 
 export default SignIn;

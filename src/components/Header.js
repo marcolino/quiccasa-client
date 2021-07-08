@@ -7,7 +7,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    //flexGrow: 1,
   },
   offset: theme.mixins.toolbar,
   header: {
@@ -109,7 +109,7 @@ export default function Header() {
     return (
       <Toolbar className={classes.toolbar}>
         <RouterLink to="/">
-          <IconCustom name="logo-main" size={40} />
+          <IconCustom name="LogoMain" size={40} />
         </RouterLink>
         <div>{getMenuButtons()}</div>
       </Toolbar>
@@ -203,14 +203,13 @@ export default function Header() {
     });
   };
 
+  // <div className={classes.root}>
   return (
-    <div className={classes.root}>
-      <header>
-        <AppBar className={classes.header} elevation={10} position="fixed">
-          {mobileView ? displayMobile() : displayDesktop()}
-        </AppBar>
-      </header>
+    <header>
+      <AppBar className={classes.header} elevation={5} position="fixed">
+        {mobileView ? displayMobile() : displayDesktop()}
+      </AppBar>
       <div className={classes.offset} />
-    </div>
-  );
+    </header>
+);
 }

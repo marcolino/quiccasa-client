@@ -1,4 +1,4 @@
-import React, {useContext } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -12,10 +12,9 @@ export default function Home() {
 	const classes = useStyles();
   const { auth } = useContext(AuthContext);
 
-  //console.log('AUTH:', auth);
   return (
     <div className={classes.home}>
-        {`Home for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user ${auth.isAuthenticated ? auth.user.attributes.email : ''}`}
-   </div>
+      {`Home for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user ${auth.isAuthenticated ? auth.user.attributes.email : ''}`}
+    </div>
   );
 }

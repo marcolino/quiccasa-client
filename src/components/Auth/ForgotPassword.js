@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import FormElement from "../FormElement";
+import { StatusContext } from "../../providers/StatusProvider";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,11 @@ const ForgotPassword = () => {
   const [waitingForCode, setWaitingForCode] = useState(false);
   const [code, setCode] = useState("");
   const history = useHistory();
+  const { setStatus } = useContext(StatusContext);
+
+  useEffect(() => {
+    setStatus({showFooter: false});
+  }, [setStatus]);
 
   const forgotPassword = (e) => {
     e.preventDefault();
@@ -18,8 +24,8 @@ const ForgotPassword = () => {
         setWaitingForCode(true);
         setPassword("");
         switch (data.CodeDeliveryDetails.DeliveryMedium) {
-          default: // TODO: ... treat EMAIL/SMS/... separately ?
-            alert(`Verification code sent via ${data.CodeDeliveryDetails.AttributeName} to ${data.CodeDeliveryDetails.Destination}.\nPlease open it and copy and paste it here.`); // TODO: ...
+          default: // in future we could treat EMAIL/SMS/... separately...
+            alert(`Verification code sent via ${data.CodeDeliveryDetails.AttributeName} to ${data.CodeDeliveryDetails.Destination}.\nPlease open it and copy and paste it here.`);
         }
       })
       .catch((err) => {
@@ -36,7 +42,7 @@ const ForgotPassword = () => {
         setWaitingForCode(false);
         setEmail("");
         setCode("");
-        if (data) alert("Password reset successfully") ; // TODO...
+        if (data) alert("Password reset successfully. You can now sign in with the new password"); // TODO...
         history.push("/signin");
       })
       .catch((err) => {

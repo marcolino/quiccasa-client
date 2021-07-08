@@ -8,9 +8,11 @@ if [ ! -f ".env" ]; then
   exit 0
 fi
 
-gpg -c --no-symkey-cache ".env"
-if [ $? -ne 0 ]; then
-  echo "Failed encrypting .env file"
-  exit 1
+if [ ".env" -nt ".env.gpg" ]; then # encript again only if .env file is newer
+  gpg --batch --yes -c ".env"
+  if [ $? -ne 0 ]; then
+    echo "Failed encrypting .env file"
+    exit 1
+  fi
 fi
 exit 0

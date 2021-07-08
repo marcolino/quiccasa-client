@@ -1,16 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-//import LogoMain from "../assets/logo-main.png";
+import IconLogoMain from "../assets/icons/LogoMain.png";
+import IconLogoTest from "../assets/icons/LogoTest.png";
 
-const requestImageFile = require.context("../assets/images", true, /\.png$/);
+//const requestIconFile = require.context("../assets/icons", true, /\.png$/);
 
-const IconCustom = (props) => (
-  <img src={requestImageFile(`./${props.name}.png`).default} style={props.style} width={props.size} height={props.size} alt={`${props.name}`} />
-);
+/* <img src={requestIconFile(`./${props.name}.png`).default} style={props.style} width={props.size} height={props.size} alt={`${props.name}`} /> */
+//<img src={} style={props.style} width={props.size} height={props.size} alt={`${props.name}`} />
+const IconCustom = (props) => {
+  let icon = null;
+  switch (props.name) {
+    case "LogoMain": icon = IconLogoMain; break;
+    case "LogoTest": icon = IconLogoTest; break;
+    default: icon = "#"; break;
+  }
+
+  return (
+    <img src={icon} style={props.style} width={props.size} height={props.size} alt={`${props.name}`} />
+  );    
+};
 
 IconCustom.propTypes = {
   name: PropTypes.oneOf([
-    'logo-main',
+    "LogoMain",
+    "LogoTest",
   ]).isRequired,
   size: PropTypes.number,
   style: PropTypes.object,
