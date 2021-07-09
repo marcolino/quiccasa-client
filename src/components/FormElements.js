@@ -15,83 +15,48 @@ import {
   // TODO... GoogleIcon,
 } from "./IconFederatedSignin";
 
-const styles = theme => ({
-  submit: {
-    margin: theme.spacing(3, 0, 1, 0),
-    color: "white",
-    backgroundColor: theme.palette.success.main,
-    textTransform: "none",
-    fontSize: "1.5em",
-  },
-  submitFederatedSignInFacebook: {
-    margin: theme.spacing(2, 0, 0, 0),
-    backgroundColor: theme.palette.facebook,
-    justifyContent: 'flex-start',
-    paddingLeft: theme.spacing(5),
-    fontSize: "1.2em",
-  },
-  // submitFederatedSignInTwitter: {
-  //   margin: theme.spacing(1, 0, 0, 0),
-  //   backgroundColor: theme.palette.twitter,
-  //   justifyContent: 'flex-start',
-  //   paddingLeft: theme.spacing(5),
-  //   fontSize: "1.2em",
-  // },
-  // submitFederatedSignInGoogle: {
-  //   margin: theme.spacing(1, 0, 0, 0),
-  //   backgroundColor: theme.palette.google,
-  //   justifyContent: 'flex-start',
-  //   paddingLeft: theme.spacing(5),
-  //   fontSize: "1.2em",
-  // },
-  textField: {
-    color: "red", //"#333",
-    backgroundColor: "#fff",
-    "&::placeholder": {
-      textOverflow: "ellipsis",
-      color: "green", //"#444",
-      backgroundColor: "yellow",
-    },
-    "& .MuiOutlinedInput-root": {
-      backgroundColor: "#fff",
-    },
-  },
-  startAdornment: {
-    backgroundColor: "#eaedf0",
-    height: "2.5rem",
-    maxHeight: "3rem",
-    marginLeft: -15,
-    marginRight: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderRight: "1px solid #c5c5c5",
-  },
-  endAdornment: {
-    backgroundColor: "#eaedf0",
-    height: "2.5rem",
-    maxHeight: "3rem",
-    marginLeft: 5,
-    marginRight: -15,
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderLeft: "1px solid #c5c5c5",
-  },
-  rememberMe: {
-    marginLeft: theme.spacing(0.2),
-    color: theme.palette.success.main,
-  },
-  rememberMeLabel: {
-    fontSize: "0.875em",
-  },
-});
-const useStyles = makeStyles((theme) => (styles(theme)));
-
 export const FormInput = (props) => {
+  const styles = theme => ({
+    textField: {
+      color: "red", //"#333",
+      backgroundColor: "#fff",
+      "&::placeholder": {
+        textOverflow: "ellipsis",
+        color: "green", //"#444",
+        backgroundColor: "yellow",
+      },
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "#fff",
+      },
+    },
+    startAdornment: {
+      backgroundColor: "#eaedf0",
+      height: "2.5rem",
+      maxHeight: "3rem",
+      marginLeft: -15,
+      marginRight: 5,
+      paddingLeft: 10,
+      paddingRight: 10,
+      borderRight: "1px solid #c5c5c5",
+    },
+    endAdornment: {
+      backgroundColor: "#eaedf0",
+      height: "2.5rem",
+      maxHeight: "3rem",
+      marginLeft: 5,
+      marginRight: -15,
+      paddingLeft: 10,
+      paddingRight: 10,
+      borderLeft: "1px solid #c5c5c5",
+    },
+  });
+  const useStyles = makeStyles((theme) => (styles(theme)));
   const classes = useStyles();
 
   return (
     <TextField
       id={props.id}
+      type={props.type}
       value={props.value}
       required={props.required}
       autoFocus={props.autoFocus}
@@ -100,27 +65,27 @@ export const FormInput = (props) => {
       fullWidth={props.fullWidth}
       label={props.label}
       size={props.size}
+      margin={props.margin}
       className={props.className ? props.className : classes.textField}
-      placeholder={"Email sdfjkgjkdlfsg jksdfdfkjh gkjsdfg kjsdfgkjfdshg sgsfg kgjkh."}
-      type="text"
+      placeholder={"Email"}
       onChange={e => props.onChange(e.target.value)}
       InputProps={{
-        startAdornment: (
+        startAdornment: props.startAdornmentIcon ? (
           <InputAdornment
             className={props.startAdornmentClass ? props.startAdornmentClass : classes.startAdornment}
             position="start"
           >
             {props.startAdornmentIcon}
           </InputAdornment>
-        ),
-        endAdornment: (
+        ) : (<></>),
+        endAdornment: props.endAdornmentIcon ? (
           <InputAdornment
             className={props.endAdornmentClass ? props.endAdornmentClass : classes.endAdornment}
             position="end"
           >
             {props.endAdornmentIcon}
           </InputAdornment>
-        ),
+        ) : (<></>)
       }}
     />
   );
@@ -128,11 +93,36 @@ export const FormInput = (props) => {
 
 FormInput.propTypes = {
   id: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([
+    "button",
+    "checkbox",
+    "color",
+    "date",
+    "datetime-local",
+    "email",
+    "file",
+    "hidden",
+    "image",
+    "month",
+    "number",
+    "password",
+    "radio",
+    "range",
+    "reset",
+    "search",
+    "submit",
+    "tel",
+    "text",
+    "time",
+    "url",
+    "week",
+  ]),
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   required: PropTypes.bool,
   autoFocus: PropTypes.bool,
   autoComplete: PropTypes.bool,
+  className: PropTypes.object,
   variant: PropTypes.oneOf([
     "filled",
     "outlined",
@@ -144,30 +134,20 @@ FormInput.propTypes = {
     "small",
     "medium",
   ]),
+  margin: PropTypes.oneOf([
+    "none",
+    "normal",
+    "dense",
+  ]),
   placeholder: PropTypes.string,
-  type: PropTypes.string,
   startAdornmentClass: PropTypes.string,
   startAdornmentIcon: PropTypes.object,
   endAdornmentClass: PropTypes.string,
   endAdornmentIcon: PropTypes.object,
-/*
-  value={props.value}
-  onChange={e => props.setValue(e.target.value)}
-  InputProps={{
-    startAdornment: (
-      <InputAdornment
-        className={props.startAdornmentClass ? props.startAdornmentClass : classes.startAdornment}
-        position="start"
-      >
-        {props.startAdornmentIcon}
-  name: PropTypes.oneOf([
-    'LogoMain',
-    'LogoTest',
-  ]).isRequired,
-*/
 };
 
 FormInput.defaultProps = {
+  type: "text",
   required: false,
   autoFocus: false,
   autoComplete: false,
@@ -175,9 +155,9 @@ FormInput.defaultProps = {
   fullWidth: true,
   label: "",
   size: "small",
+  margin: "normal",
   className: null,
   placeholder: "",
-  type: "text",
   startAdornmentClass: null,
   endAdornmentClass: null,
 };
@@ -185,6 +165,23 @@ FormInput.defaultProps = {
 
 
 export const FormButton = (props) => {
+  const styles = theme => ({
+    submit: {
+      margin: theme.spacing(3, 0, 1, 0),
+      color: "white",
+      backgroundColor: theme.palette.success.main,
+      textTransform: "none",
+      fontSize: "1.5em",
+    },
+    submitFederatedSignInFacebook: {
+      margin: theme.spacing(2, 0, 0, 0),
+      backgroundColor: theme.palette.facebook,
+      justifyContent: 'flex-start',
+      paddingLeft: theme.spacing(5),
+      fontSize: "1.2em",
+    },
+  });
+  const useStyles = makeStyles((theme) => (styles(theme)));
   const classes = useStyles();
 
   return (
@@ -203,6 +200,17 @@ export const FormButton = (props) => {
 }
 
 export const FormCheckbox = (props) => {
+  const styles = theme => ({
+    rememberMe: {
+      marginLeft: theme.spacing(0.2),
+      color: theme.palette.success.main,
+    },
+    rememberMeLabel: {
+      fontSize: "0.875em",
+    },
+  });
+  const useStyles = makeStyles((theme) => (styles(theme)));
+
   const classes = useStyles();
 
   return (
@@ -224,3 +232,47 @@ export const FormCheckbox = (props) => {
     />
   );
 }
+
+export const DividerWithText = (props) => {
+  const styles = theme => ({
+    container: {
+      display: "flex",
+      alignItems: "center",
+      marginTop: theme.spacing(props.marginVertical),
+      marginBottom: theme.spacing(props.marginVertical),
+    },
+    divider: {
+      width: "100%",
+      borderBottom: "1px solid " + (props.color ? props.color : theme.palette.primary.main),
+      paddingLeft: theme.spacing(1),
+    },
+    text: {
+      paddingLeft: theme.spacing(props.paddingHorizontal),
+      paddingRight: theme.spacing(props.paddingHorizontal),
+    },
+  });
+  const useStyles = makeStyles((theme) => (styles(theme)));
+  const classes = useStyles();
+
+  return (
+    <div className={classes.container}>
+      <div className={classes.divider} />
+      {props.children && <span className={classes.text}>
+        {props.children}
+      </span>}
+      <div className={classes.divider} />
+    </div>
+  );
+};
+
+DividerWithText.propTypes = {
+  color: PropTypes.string,
+  marginVertical: PropTypes.oneOf([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]),
+  paddingHorizontal: PropTypes.oneOf([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]),
+};
+
+DividerWithText.defaultProps = {
+  marginVertical: 3,
+  paddingHorizontal: 1,
+};
+

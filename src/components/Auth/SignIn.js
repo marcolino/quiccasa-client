@@ -3,8 +3,6 @@ import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
@@ -13,7 +11,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
 import {
@@ -21,10 +18,10 @@ import {
   TwitterIcon,
   GoogleIcon,
 } from "../IconFederatedSignin";
-import { FormInput } from "../FormElements";
-import DividerWithText from "../DividerWithText";
+import { FormInput, DividerWithText } from "../FormElements";
 import { AuthContext } from "../../providers/AuthProvider";
 import { StatusContext } from "../../providers/StatusProvider";
+import { shadeColor } from "../../libs/Styling";
 
 const styles = theme => ({
   paper: {
@@ -34,41 +31,53 @@ const styles = theme => ({
     alignItems: "center",
   },
   avatar: {
-    margin: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
     backgroundColor: theme.palette.primary.dark,
   },
   form: {
     width: "100%", // fix IE 11 issue
-    marginTop: theme.spacing(1),
-    autocomplete: "off",
+    margin: theme.spacing(-1),
   },
   submit: {
     margin: theme.spacing(3, 0, 1, 0),
     color: "white",
-    backgroundColor: theme.palette.success.main,
     textTransform: "none",
     fontSize: "1.5em",
+    backgroundColor: theme.palette.success.main,
+    "&:hover": {
+      backgroundColor: shadeColor(theme.palette.success.main, -25),
+    },
   },
   submitFederatedSignInFacebook: {
     margin: theme.spacing(2, 0, 0, 0),
-    backgroundColor: theme.palette.facebook,
     justifyContent: 'flex-start',
     paddingLeft: theme.spacing(5),
     fontSize: "1.2em",
+    backgroundColor: theme.palette.facebook,
+    "&:hover": {
+      backgroundColor: shadeColor(theme.palette.facebook, -25),
+    },
   },
   submitFederatedSignInTwitter: {
     margin: theme.spacing(1, 0, 0, 0),
-    backgroundColor: theme.palette.twitter,
     justifyContent: 'flex-start',
     paddingLeft: theme.spacing(5),
     fontSize: "1.2em",
+    backgroundColor: theme.palette.twitter,
+    "&:hover": {
+      backgroundColor: shadeColor(theme.palette.twitter, -25),
+    },
   },
   submitFederatedSignInGoogle: {
     margin: theme.spacing(1, 0, 0, 0),
-    backgroundColor: theme.palette.google,
     justifyContent: 'flex-start',
     paddingLeft: theme.spacing(5),
     fontSize: "1.2em",
+    backgroundColor: theme.palette.google,
+    "&:hover": {
+      backgroundColor: shadeColor(theme.palette.google, -25),
+    },
   },
   textField: {
     color: "#333",
@@ -166,24 +175,43 @@ const SignIn = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
 
-        <Grid container direction="row" alignItems="center" justify="center">
+        <Grid container justify="center">
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+        </Grid>
+        <Grid container justify="flex-start">
+          <Typography component="h1" variant="body2">
+            {"Sign in with a social account"}
+          </Typography>
+        </Grid>
+{/* 
+        <Grid container alignItems="center" justify="center" spacing={10}>
           <Grid item>
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
             </Avatar>
           </Grid>
+        </Grid>
+        <Grid container direction="row" justify="flex-start" spacing={10}>
           <Grid item>
-            <Typography component="h1" variant="h5">
-              {"Sign in"}
+            <Typography component="h1" variant="body2">
+              {"Sign in with a social account"}
             </Typography>
           </Grid>
-        </Grid>
+        </Grid> */}
+
+        {/* <Grid container direction="row" alignItems="flex-start" j_ustify="center">
+          <Grid item>
+            <Typography component="h5" variant="body1">
+              {"Sign in with a social account"}
+            </Typography>
+            </Grid>
+        </Grid> */}
 
         <form className={classes.form} noValidate autoComplete="off">
-
           <Button
             type="submit"
             fullWidth
@@ -193,7 +221,7 @@ const SignIn = () => {
             startIcon={<FacebookIcon />}
             onClick={(e) => federatedSignIn(e, 'Facebook')}
           >
-            {"Sign in with Facebook"}
+            {"Facebook"}
           </Button>
           <Button
             type="submit"
@@ -204,7 +232,7 @@ const SignIn = () => {
             startIcon={<TwitterIcon />}
             onClick={(e) => federatedSignIn(e, 'Twitter')}
           >
-            {"Sign in with Twitter"}
+            {"Twitter"}
           </Button>
           <Button
             type="submit"
@@ -214,10 +242,20 @@ const SignIn = () => {
             startIcon={<GoogleIcon />}
             onClick={(e) => federatedSignIn(e, 'Google')}
           >
-            {"Sign in with Google"}
+            {"Google"}
           </Button>
+          {/* <DividerWithText> {"or"} </DividerWithText> */}
+          <DividerWithText>
+            <Typography component="h1" variant="body2">
+              {"or"}
+            </Typography>
+          </DividerWithText>
 
-          <DividerWithText> {"or"} </DividerWithText>
+          <Grid container justify="flex-start">
+            <Typography component="h1" variant="body2">
+              {"Sign in with email and password"}
+            </Typography>
+          </Grid>
 
           <FormInput
             id={"email"}
@@ -225,62 +263,17 @@ const SignIn = () => {
             onChange={setEmail}
             placeholder={"Email"}
             startAdornmentIcon={<Person />}
-            endAdornmentIcon={<Person />}
+            margin={"dense"}
           />
-{/*
-          <TextField
-            required
-            autoFocus
-            autoComplete="false"
-            variant="outlined"
-            fullWidth
-            id="email"
-            //label={"Email"}
-            size="small"
-            className={classes.textField}
-            placeholder={"Email"}
-            type="text"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment
-                  className={classes.startAdornment}
-                  position="start"
-                >
-                  <Person />
-                </InputAdornment>
-              ),
-            }}
-          />
-*/}
-
-          <TextField
-            required
-            autoComplete="false"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            id="password"
-            //label="Password"
-            size="small"
-            className={classes.textField}
-            placeholder={"Password"}
+          <FormInput
+            id={"password"}
             type="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment
-                  className={classes.startAdornment}
-                  position="start"
-                >
-                  <Lock />
-                </InputAdornment>
-              ),
-            }}
+            onChange={setPassword}
+            placeholder={"Password"}
+            startAdornmentIcon={<Lock />}
+            margin={"dense"}
           />
-
           <Button
             type="submit"
             fullWidth
@@ -291,7 +284,6 @@ const SignIn = () => {
           >
             {"Sign In"}
           </Button>
-
           <Grid container alignItems="center">
             <Grid className={classes.rememberMe}>
               <FormControlLabel
@@ -323,7 +315,8 @@ const SignIn = () => {
 
           <Grid container direction="row" alignItems="center" justify="center" spacing={1}>
             <Grid item>
-              <Typography className={classes.text}>
+              {/* <Typography className={classes.text}> */}
+              <Typography component="h1" variant="body2">
                 {"Don't have an account?"} {" "}
               </Typography>
             </Grid>

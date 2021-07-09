@@ -148,7 +148,7 @@ export default function Header() {
         </Drawer>
 
         <RouterLink to="/">
-          <IconCustom name="logo-main" size={32} />
+          <IconCustom name="LogoMain" size={32} />
         </RouterLink>
 
       </Toolbar>
