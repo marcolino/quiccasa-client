@@ -126,12 +126,13 @@ const useStyles = makeStyles((theme) => (styles(theme)));
 
 const SignIn = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
+  const [rememberMe, setRememberMe] = useState(true);
+  const [disabled, setDisabled] = useState(false);
   const { setAuth } = useContext(AuthContext);
   const { setStatus } = useContext(StatusContext);
-  const [rememberMe, setRememberMe] = useState(true);
 
   useEffect(() => {
     setStatus({showFooter: false});
@@ -139,6 +140,8 @@ const SignIn = () => {
 
   const signIn = (e) => {
     e.preventDefault();
+    if (disabled) return;
+    setDisabled(true);
 
     Auth.signIn({
       username: email,
@@ -155,7 +158,8 @@ const SignIn = () => {
       })
       .catch((err) => {
         console.error(err);
-      });
+      })
+    ;
   };
 
   const federatedSignIn = (e, provider) => {
@@ -247,7 +251,7 @@ const SignIn = () => {
           {/* <DividerWithText> {"or"} </DividerWithText> */}
           <DividerWithText>
             <Typography component="h1" variant="body2">
-              {"or"}
+              <i>{"or"}</i>
             </Typography>
           </DividerWithText>
 
@@ -281,6 +285,7 @@ const SignIn = () => {
             color="primary"
             className={classes.submit}
             onClick={(e) => signIn(e)}
+            disabled={disabled}
           >
             {"Sign In"}
           </Button>

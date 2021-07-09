@@ -33,7 +33,8 @@ url(${OpenSansTtf}) format('ttf')
 export default createMuiTheme({
   typography: {
     fontFamily: [
-      'Roboto',
+      'Open Sans',
+//      'Roboto',
 //      'Open Sans',
       '-apple-system',
       'BlinkMacSystemFont',

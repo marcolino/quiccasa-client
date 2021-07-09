@@ -243,7 +243,7 @@ export const DividerWithText = (props) => {
     },
     divider: {
       width: "100%",
-      borderBottom: "1px solid " + (props.color ? props.color : theme.palette.primary.main),
+      borderBottom: "1px solid " + (props.color ? props.color : theme.palette.primary.dark),
       paddingLeft: theme.spacing(1),
     },
     text: {
