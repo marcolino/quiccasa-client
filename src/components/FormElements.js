@@ -10,25 +10,37 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 //import Person from "@material-ui/icons/Person";
 // TODO... import Lock from "@material-ui/icons/Lock";
 import {
-  FacebookIcon,
+  // TODO... FacebookIcon,
   // TODO... TwitterIcon,
   // TODO... GoogleIcon,
 } from "./IconFederatedSignin";
+import { shadeColor } from "../libs/Styling";
+
+
 
 export const FormInput = (props) => {
   const styles = theme => ({
     textField: {
-      color: "red", //"#333",
-      backgroundColor: "#fff",
-      "&::placeholder": {
-        textOverflow: "ellipsis",
-        color: "green", //"#444",
-        backgroundColor: "yellow",
-      },
-      "& .MuiOutlinedInput-root": {
-        backgroundColor: "#fff",
+    },
+    input: {
+      //color: "red",
+      "&:-webkit-autofill::first-line": { // does not work...
+        fontFamily: "Open Sans",
+        fontSize: "1.1em",
       },
     },
+    // textField: {
+    //   color: "red", //"#333",
+    //   backgroundColor: "#fff",
+    //   "&::placeholder": {
+    //     textOverflow: "ellipsis",
+    //     color: "green", //"#444",
+    //     backgroundColor: "yellow",
+    //   },
+    //   "& .MuiOutlinedInput-root": {
+    //     backgroundColor: "#fff",
+    //   },
+    // },
     startAdornment: {
       backgroundColor: "#eaedf0",
       height: "2.5rem",
@@ -67,8 +79,9 @@ export const FormInput = (props) => {
       size={props.size}
       margin={props.margin}
       className={props.className ? props.className : classes.textField}
-      placeholder={"Email"}
+      placeholder={props.placeholder}
       onChange={e => props.onChange(e.target.value)}
+      error={props.error !== null}
       InputProps={{
         startAdornment: props.startAdornmentIcon ? (
           <InputAdornment
@@ -85,65 +98,67 @@ export const FormInput = (props) => {
           >
             {props.endAdornmentIcon}
           </InputAdornment>
-        ) : (<></>)
+        ) : (<></>),
+        className: classes.input,
       }}
     />
   );
 }
 
 FormInput.propTypes = {
-  id: PropTypes.string.isRequired,
-  type: PropTypes.oneOf([
-    "button",
-    "checkbox",
-    "color",
-    "date",
-    "datetime-local",
-    "email",
-    "file",
-    "hidden",
-    "image",
-    "month",
-    "number",
-    "password",
-    "radio",
-    "range",
-    "reset",
-    "search",
-    "submit",
-    "tel",
-    "text",
-    "time",
-    "url",
-    "week",
-  ]),
+  // id: PropTypes.string,
+  // type: PropTypes.oneOf([
+  //   "button",
+  //   "checkbox",
+  //   "color",
+  //   "date",
+  //   "datetime-local",
+  //   "email",
+  //   "file",
+  //   "hidden",
+  //   "image",
+  //   "month",
+  //   "number",
+  //   "password",
+  //   "radio",
+  //   "range",
+  //   "reset",
+  //   "search",
+  //   "submit",
+  //   "tel",
+  //   "text",
+  //   "time",
+  //   "url",
+  //   "week",
+  // ]),
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  required: PropTypes.bool,
-  autoFocus: PropTypes.bool,
-  autoComplete: PropTypes.bool,
-  className: PropTypes.object,
-  variant: PropTypes.oneOf([
-    "filled",
-    "outlined",
-    "standard",
-  ]),
-  fullWidth: PropTypes.bool,
-  label: PropTypes.string,
-  size: PropTypes.oneOf([
-    "small",
-    "medium",
-  ]),
-  margin: PropTypes.oneOf([
-    "none",
-    "normal",
-    "dense",
-  ]),
-  placeholder: PropTypes.string,
+  // onChange: PropTypes.func,
+  // required: PropTypes.bool,
+  // autoFocus: PropTypes.bool,
+  // autoComplete: PropTypes.bool,
+  // className: PropTypes.object,
+  // variant: PropTypes.oneOf([
+  //   "filled",
+  //   "outlined",
+  //   "standard",
+  // ]),
+  // fullWidth: PropTypes.bool,
+  // label: PropTypes.string,
+  // size: PropTypes.oneOf([
+  //   "small",
+  //   "medium",
+  // ]),
+  // margin: PropTypes.oneOf([
+  //   "none",
+  //   "normal",
+  //   "dense",
+  // ]),
+  // placeholder: PropTypes.string,
   startAdornmentClass: PropTypes.string,
   startAdornmentIcon: PropTypes.object,
   endAdornmentClass: PropTypes.string,
   endAdornmentIcon: PropTypes.object,
+  error: PropTypes.string,
 };
 
 FormInput.defaultProps = {
@@ -155,11 +170,12 @@ FormInput.defaultProps = {
   fullWidth: true,
   label: "",
   size: "small",
-  margin: "normal",
+  margin: "dense",
   className: null,
   placeholder: "",
   startAdornmentClass: null,
   endAdornmentClass: null,
+  error: "",
 };
 
 
@@ -168,17 +184,24 @@ export const FormButton = (props) => {
   const styles = theme => ({
     submit: {
       margin: theme.spacing(3, 0, 1, 0),
+      textTransform: "none",
+      fontSize: "1.3em",
       color: "white",
       backgroundColor: theme.palette.success.main,
-      textTransform: "none",
-      fontSize: "1.5em",
+      "&:hover": {
+        backgroundColor: shadeColor(theme.palette.success.main, -25),
+      },
     },
     submitFederatedSignInFacebook: {
       margin: theme.spacing(2, 0, 0, 0),
-      backgroundColor: theme.palette.facebook,
       justifyContent: 'flex-start',
       paddingLeft: theme.spacing(5),
-      fontSize: "1.2em",
+      fontSize: "1.3em",
+      color: "white",
+      backgroundColor: theme.palette.facebook,
+      "&:hover": {
+        backgroundColor: shadeColor(theme.palette.facebook, -25),
+      },
     },
   });
   const useStyles = makeStyles((theme) => (styles(theme)));
@@ -186,18 +209,45 @@ export const FormButton = (props) => {
 
   return (
     <Button
-      type="submit"
-      fullWidth
-      variant="contained"
-      color="primary"
-      className={`${classes.submit} ${classes.submitFederatedSignInFacebook}`}
-      startIcon={<FacebookIcon />}
-      onClick={(e) => props.onClick(e, 'Facebook')} //federatedSignIn(e, 'Facebook')}
+      fullWidth={props.fullWidth}
+      variant={props.variant}
+      color={props.color}
+      className={props.className ? props.className : classes.submit}
+      startIcon={props.startIcon}
+      onClick={props.onClick}
+      disabled={props.disabled}
     >
-      {"Sign in with Facebook"}
+      {props.children}
     </Button>
   );
 }
+
+FormButton.propTypes = {
+  // fullWidth: PropTypes.bool,
+  // variant: PropTypes.oneOf([
+  //   "contained",
+  //   "outlined",
+  //   "text",
+  // ]),
+  // color: PropTypes.oneOf([
+  //   "default",
+  //   "inherit",
+  //   "primary",
+  //   "secondary",
+  // ]),
+  // //className: 
+  // startIcon: PropTypes.object,
+  // onClick: PropTypes.func,
+  // disabled: PropTypes.bool,
+}
+
+FormButton.defaultProps = {
+  fullWidth: true,
+  variant: "contained",
+  color: "primary",
+};
+
+
 
 export const FormCheckbox = (props) => {
   const styles = theme => ({
@@ -233,7 +283,53 @@ export const FormCheckbox = (props) => {
   );
 }
 
-export const DividerWithText = (props) => {
+
+
+export const FormText = (props) => {
+  // const styles = theme => ({
+  // });
+  // const useStyles = makeStyles((theme) => (styles(theme)));
+  // const classes = useStyles();
+
+  return (
+    <Typography component={props.component} variant={props.variant} {...props}>
+      {props.children}
+    </Typography>
+  );
+};
+
+FormText.propTypes = {
+  component: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  variant: PropTypes.oneOf([
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "subtitle1",
+    "subtitle2",
+    "body1",
+    "body2",
+    "caption",
+    "button",
+    "overline",
+    "srOnly",
+    "inherit",
+  ]),
+};
+
+FormText.defaultProps = {
+  component: "h1",
+  variant: "body2",
+};
+
+
+
+export const FormDividerWithText = (props) => {
   const styles = theme => ({
     container: {
       display: "flex",
@@ -265,14 +361,13 @@ export const DividerWithText = (props) => {
   );
 };
 
-DividerWithText.propTypes = {
+FormDividerWithText.propTypes = {
   color: PropTypes.string,
   marginVertical: PropTypes.oneOf([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]),
   paddingHorizontal: PropTypes.oneOf([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]),
 };
 
-DividerWithText.defaultProps = {
+FormDividerWithText.defaultProps = {
   marginVertical: 3,
   paddingHorizontal: 1,
 };
-

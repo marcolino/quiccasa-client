@@ -1,13 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
+import { ToastContainer, toast } from "./components/Toasts";
 import reportWebVitals from "./reportWebVitals";
+import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
 
 const root = document.getElementById('root');
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    <ToastContainer />
   </React.StrictMode>,
   root
 );
@@ -25,3 +28,5 @@ ReactDOM.render(
 
 // reportWebVitals(sendToAnalytics);
 reportWebVitals(console.log);
+
+registerServiceWorker(toast.info);

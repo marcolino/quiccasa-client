@@ -1,7 +1,31 @@
+/* general */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* react-toastify */
+.Toastify__toast--info {
+  background: #0088bb;
+}
+.Toastify__toast--success {
+  background: #395c0c;
+}
+.Toastify__toast--warning {
+  background: #e9a930;
+}
+.Toastify__toast--error {
+  background: #ab181c;
+}
+.toastContainer {
+  margin-top: 3.5rem; /* to show under toolbar */
+}
+.toastBody {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.2rem;
+  NOborder-radius: 132px;
 }
