@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+form {
+  width: "100%"; /* fix IE 11 issue */
+}
+
 /* react-toastify */
 .Toastify__toast--info {
   background: #0088bb;
@@ -27,5 +31,4 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-size: 1.2rem;
-  NOborder-radius: 132px;
 }

@@ -18,12 +18,12 @@ const FacebookIcon = () => (
   </div>
 );
 const TwitterIcon = () => (
-  <div style={style}>
+  <div style={{...style, width: 21, marginLeft: 1, marginRight: 8}}>
     <TwitterSvg />
   </div>
 );
 const GoogleIcon = () => (
-  <div style={style}>
+  <div style={{...style, width: 20, marginLeft: 1, marginRight: 10}}>
     <GoogleSvg />
   </div>
 );

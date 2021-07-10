@@ -12,27 +12,16 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
-import {
-  FacebookIcon,
-  TwitterIcon,
-  GoogleIcon,
-} from "../IconFederatedSignin";
+import { FacebookIcon, TwitterIcon, GoogleIcon } from "../FederatedIcons";
 import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText, FormDividerWithText } from "../FormElements";
 import { AuthContext } from "../../providers/AuthProvider";
 import { StatusContext } from "../../providers/StatusProvider";
-import { shadeColor } from "../../libs/Styling";
 import { validateEmail, checkPassword } from "../../libs/Validation";
 
 const styles = theme => ({
   avatar: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(3),
-    backgroundColor: theme.palette.primary.dark,
-  },
-  form: {
-    width: "100%", // fix IE 11 issue
-    margin: theme.spacing(0),
+    backgroundColor: theme.palette.success.main,
   },
   link: {
     color: theme.palette.success.main,
@@ -125,7 +114,7 @@ const SignIn = () => {
         setAuth({isAuthenticated: true, user});
         setEmail("");
         setPassword("");
-        //history.push("/"); // check if we need this...
+        //history.push("/"); // TODO: check if we need this, when social sign in will work...
       })
       .catch((err) => {
         toast.error(err);
@@ -141,11 +130,15 @@ const SignIn = () => {
 
       <form className={classes.form} noValidate autoComplete="off">
 
+        <Box m={1} />
+
         <Grid container justify="center">
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
         </Grid>
+
+        <Box m={3} />
 
         <Grid container justify="flex-start">
           <FormText>
@@ -196,6 +189,7 @@ const SignIn = () => {
           onChange={setEmail}
           placeholder={"Email"}
           startAdornmentIcon={<Person />}
+          disabled={disabled}
           error={error.email}
         />
         <FormInput
@@ -205,6 +199,7 @@ const SignIn = () => {
           onChange={setPassword}
           placeholder={"Password"}
           startAdornmentIcon={<Lock />}
+          disabled={disabled}
           error={error.password}
         />
 
@@ -227,6 +222,7 @@ const SignIn = () => {
                   className={classes.rememberMe}
                   color="primary"
                   size="small"
+                  disabled={disabled}
                 />
               }
               label={
@@ -237,7 +233,11 @@ const SignIn = () => {
             />
           </Grid>
           <Grid className={classes.forgotPassword}>
-            <Link href="/forgot-password" className={classes.forgotPassword}>
+            <Link
+              href="/forgot-password"
+              className={classes.forgotPassword}
+              disabled={disabled}
+            >
               {"Forgot Password?"}
             </Link>
           </Grid>
@@ -252,7 +252,11 @@ const SignIn = () => {
             </FormText>
           </Grid>
           <Grid item>
-            <Link href="/signup" className={classes.link}>
+            <Link
+              href="/signup"
+              className={classes.link}
+              disabled={true}
+            >
               <FormText>
                 {"Register Now!"}
               </FormText>

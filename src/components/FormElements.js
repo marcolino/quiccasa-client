@@ -13,7 +13,7 @@ import {
   // TODO... FacebookIcon,
   // TODO... TwitterIcon,
   // TODO... GoogleIcon,
-} from "./IconFederatedSignin";
+} from "./FederatedIcons";
 import { shadeColor } from "../libs/Styling";
 import { capitalize } from "../libs/Misc";
 
@@ -69,6 +69,7 @@ export const FormInput = (props) => {
       className={props.className ? props.className : classes.textField}
       placeholder={props.placeholder}
       onChange={e => props.onChange(e.target.value)}
+      disabled={props.disabled}
       error={props.error !== null}
       InputProps={{
         startAdornment: props.startAdornmentIcon ? (
@@ -146,6 +147,7 @@ FormInput.propTypes = {
   startAdornmentIcon: PropTypes.object,
   endAdornmentClass: PropTypes.string,
   endAdornmentIcon: PropTypes.object,
+  disabled: PropTypes.bool,
   error: PropTypes.string,
 };
 
@@ -163,6 +165,7 @@ FormInput.defaultProps = {
   placeholder: "",
   startAdornmentClass: null,
   endAdornmentClass: null,
+  disabled: false,
   error: "",
 };
 
@@ -182,10 +185,9 @@ export const FormButton = (props) => {
     },
     submitFederated: {
       margin: theme.spacing(1, 0, 0, 0),
-      justifyContent: 'flex-start',
+      justifyContent: "flex-start",
       paddingLeft: theme.spacing(5),
       fontSize: "1.3em",
-      color: "white",
     },  
     submitFederatedFacebook: {
       backgroundColor: theme.palette.facebook,
@@ -215,7 +217,7 @@ export const FormButton = (props) => {
       fullWidth={props.fullWidth}
       variant={props.variant}
       color={props.color}
-      className={`${classes.submit} ${props.social ? classes["submitFederated" + capitalize(props.social)] : ""} ${props.className}`}
+      className={`${classes.submit} ${props.social ? classes.submitFederated : ""} ${props.social ? classes["submitFederated" + capitalize(props.social)] : ""} ${props.className}`}
       startIcon={props.startIcon}
       onClick={props.onClick}
       disabled={props.disabled}
@@ -231,22 +233,6 @@ FormButton.propTypes = {
     "Twitter",
     "Google",
   ]),
-  // fullWidth: PropTypes.bool,
-  // variant: PropTypes.oneOf([
-  //   "contained",
-  //   "outlined",
-  //   "text",
-  // ]),
-  // color: PropTypes.oneOf([
-  //   "default",
-  //   "inherit",
-  //   "primary",
-  //   "secondary",
-  // ]),
-  // //className: 
-  // startIcon: PropTypes.object,
-  // onClick: PropTypes.func,
-  // disabled: PropTypes.bool,
 }
 
 FormButton.defaultProps = {
@@ -276,64 +262,73 @@ export const FormCheckbox = (props) => {
     <FormControlLabel
       control={
         <Checkbox
-          checked={props.checked} //rememberMe}
-          onChange={(e) => props.onChange(e.target.checked)} //setRememberMe(e.target.checked)}
-          className={classes.rememberMe}
-          color="primary"
-          size="small"
+          checked={props.checked}
+          onChange={(e) => props.onChange(e.target.checked)}
+          className={`${props.className} ${classes.rememberMe}`}
+          color={props.color}
+          size={props.size}
+          disabled={props.disabled}
         />
       }
       label={
-        <Typography className={classes.rememberMeLabel}>
-          {"Remember me"}
+        <Typography
+          // className={classes.rememberMeLabel}
+          className={`${props.classNameLabel} ${classes.rememberMeLabel}`}
+        >
+          {props.children}
         </Typography>
       }
     />
   );
 }
 
+FormCheckbox.propTypes = {
+};
+
+FormCheckbox.defaultProps = {
+  checked: false,
+  color: "primary",
+  size: "small",
+};
+
 
 
 export const FormText = (props) => {
-  // const styles = theme => ({
-  // });
-  // const useStyles = makeStyles((theme) => (styles(theme)));
-  // const classes = useStyles();
-
   return (
-    <Typography component={props.component} variant={props.variant} {...props}>
+    <Typography
+      component={props.component}
+      variant={props.variant}
+      {...props}
+    >
       {props.children}
     </Typography>
   );
 };
 
 FormText.propTypes = {
-  component: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
-  variant: PropTypes.oneOf([
-    "h1",
-    "h2",
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "subtitle1",
-    "subtitle2",
-    "body1",
-    "body2",
-    "caption",
-    "button",
-    "overline",
-    "srOnly",
-    "inherit",
-  ]),
 };
 
 FormText.defaultProps = {
   component: "h1",
   variant: "body2",
+};
+
+
+export const FormAvatar = (props) => {
+  // TODO...
+  return (
+    <Typography
+      {...props}
+    >
+      {props.children}
+    </Typography>
+  );
+};
+
+FormAvatar.propTypes = {
+};
+
+FormAvatar.defaultProps = {
 };
 
 
