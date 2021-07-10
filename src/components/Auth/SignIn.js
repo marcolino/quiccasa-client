@@ -8,6 +8,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
@@ -33,39 +34,6 @@ const styles = theme => ({
     width: "100%", // fix IE 11 issue
     margin: theme.spacing(0),
   },
-  submitFederatedSignInFacebook: {
-    margin: theme.spacing(2, 0, 0, 0),
-    justifyContent: 'flex-start',
-    paddingLeft: theme.spacing(5),
-    fontSize: "1.3em",
-    color: "white",
-    backgroundColor: theme.palette.facebook,
-    "&:hover": {
-      backgroundColor: shadeColor(theme.palette.facebook, -25),
-    },
-  },
-  submitFederatedSignInTwitter: {
-    margin: theme.spacing(1, 0, 0, 0),
-    justifyContent: 'flex-start',
-    paddingLeft: theme.spacing(5),
-    fontSize: "1.3em",
-    color: "white",
-    backgroundColor: theme.palette.twitter,
-    "&:hover": {
-      backgroundColor: shadeColor(theme.palette.twitter, -25),
-    },
-  },
-  submitFederatedSignInGoogle: {
-    margin: theme.spacing(1, 0, 0, 0),
-    justifyContent: 'flex-start',
-    paddingLeft: theme.spacing(5),
-    fontSize: "1.3em",
-    color: "white",
-    backgroundColor: theme.palette.google,
-    "&:hover": {
-      backgroundColor: shadeColor(theme.palette.google, -25),
-    },
-  },
   link: {
     color: theme.palette.success.main,
   },
@@ -74,7 +42,6 @@ const styles = theme => ({
     color: theme.palette.success.main,
   },
   forgotPassword: {
-    _fontSize: "1em",
     marginLeft: "auto",
     marginRight: theme.spacing(0.2),
     color: theme.palette.success.main,
@@ -158,7 +125,7 @@ const SignIn = () => {
         setAuth({isAuthenticated: true, user});
         setEmail("");
         setPassword("");
-        //history.push("/");
+        //history.push("/"); // check if we need this...
       })
       .catch((err) => {
         toast.error(err);
@@ -172,127 +139,128 @@ const SignIn = () => {
   return (
     <Container maxWidth="xs">
 
-        <form className={classes.form} noValidate autoComplete="off">
+      <form className={classes.form} noValidate autoComplete="off">
 
-          <Grid container justify="center">
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-          </Grid>
+        <Grid container justify="center">
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+        </Grid>
 
-          <Grid container justify="flex-start">
-            <FormText>
-              {"Sign in with a social account"}
-            </FormText>
-          </Grid>
+        <Grid container justify="flex-start">
+          <FormText>
+            {"Sign in with a social account"}
+          </FormText>
+        </Grid>
 
-          <FormButton
-            social={"facebook"} // TODO
-            className={`${classes.submit} ${classes.submitFederatedSignInFacebook}`} // TODO
-            startIcon={<FacebookIcon />}
-            onClick={(e) => federatedSignIn(e, 'Facebook')}
-            disabled={disabled}
-          >
-            {"Facebook"}
-          </FormButton>
-          <FormButton
-            className={`${classes.submit} ${classes.submitFederatedSignInTwitter}`}
-            startIcon={<TwitterIcon />}
-            onClick={(e) => federatedSignIn(e, 'Twitter')}
-            disabled={disabled}
-          >
-            {"Twitter"}
-          </FormButton>
-          <FormButton
-            className={`${classes.submit} ${classes.submitFederatedSignInGoogle}`}
-            startIcon={<GoogleIcon />}
-            onClick={(e) => federatedSignIn(e, 'Google')}
-            disabled={disabled}
-          >
-            {"Google"}
-          </FormButton>
+        <FormButton
+          social={"Facebook"}
+          startIcon={<FacebookIcon />}
+          onClick={(e) => federatedSignIn(e, 'Facebook')}
+          disabled={disabled}
+        >
+          {"Facebook"}
+        </FormButton>
+        <FormButton
+          social={"Twitter"}
+          startIcon={<TwitterIcon />}
+          onClick={(e) => federatedSignIn(e, 'Twitter')}
+          disabled={disabled}
+        >
+          {"Twitter"}
+        </FormButton>
+        <FormButton
+          social={"Google"}
+          startIcon={<GoogleIcon />}
+          onClick={(e) => federatedSignIn(e, 'Google')}
+          disabled={disabled}
+        >
+          {"Google"}
+        </FormButton>
 
-          <FormDividerWithText>
-            <FormText>
-              <i>{"or"}</i>
-            </FormText>
-          </FormDividerWithText>
+        <FormDividerWithText>
+          <FormText>
+            <i>{"or"}</i>
+          </FormText>
+        </FormDividerWithText>
 
-          <Grid container justify="flex-start">
-            <FormText>
-              {"Sign in with email and password"}
-            </FormText>
-          </Grid>
+        <Grid container justify="flex-start">
+          <FormText>
+            {"Sign in with email and password"}
+          </FormText>
+        </Grid>
 
-          <FormInput
-            id={"email"}
-            value={email}
-            onChange={setEmail}
-            placeholder={"Email"}
-            startAdornmentIcon={<Person />}
-            error={error.email}
-          />
-          <FormInput
-            id={"password"}
-            type="password"
-            value={password}
-            onChange={setPassword}
-            placeholder={"Password"}
-            startAdornmentIcon={<Lock />}
-            error={error.password}
-          />
+        <FormInput
+          id={"email"}
+          value={email}
+          onChange={setEmail}
+          placeholder={"Email"}
+          startAdornmentIcon={<Person />}
+          error={error.email}
+        />
+        <FormInput
+          id={"password"}
+          type="password"
+          value={password}
+          onChange={setPassword}
+          placeholder={"Password"}
+          startAdornmentIcon={<Lock />}
+          error={error.password}
+        />
 
-          <FormButton
-            onClick={signIn}
-            disabled={disabled}
-          >
-            {"Sign In"}
-          </FormButton>
+        <Box m={1} />
 
-          <Grid container alignItems="center">
-            <Grid className={classes.rememberMe}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    className={classes.rememberMe}
-                    color="primary"
-                    size="small"
-                  />
-                }
-                label={
-                  <FormText>
-                    {"Remember me"}
-                  </FormText>
-                }
-              />
-            </Grid>
-            <Grid className={classes.forgotPassword}>
-              <Link href="/forgot-password" className={classes.forgotPassword}>
-                {"Forgot Password?"}
-              </Link>
-            </Grid>
-          </Grid>
+        <FormButton
+          onClick={signIn}
+          disabled={disabled}
+        >
+          {"Sign In"}
+        </FormButton>
 
-          <FormDividerWithText />
-
-          <Grid container direction="row" justify="center" spacing={1}>
-            <Grid item>
-              <FormText>
-                {"Don't have an account?"}
-              </FormText>
-            </Grid>
-            <Grid item>
-              <Link href="/signup" className={classes.link}>
+        <Grid container alignItems="center">
+          <Grid className={classes.rememberMe}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className={classes.rememberMe}
+                  color="primary"
+                  size="small"
+                />
+              }
+              label={
                 <FormText>
-                  {"Register Now!"}
+                  {"Remember me"}
                 </FormText>
-              </Link>
-            </Grid>
+              }
+            />
           </Grid>
+          <Grid className={classes.forgotPassword}>
+            <Link href="/forgot-password" className={classes.forgotPassword}>
+              {"Forgot Password?"}
+            </Link>
+          </Grid>
+        </Grid>
 
-        </form>
+        <FormDividerWithText />
+
+        <Grid container direction="row" justify="center" spacing={1}>
+          <Grid item>
+            <FormText>
+              {"Don't have an account?"}
+            </FormText>
+          </Grid>
+          <Grid item>
+            <Link href="/signup" className={classes.link}>
+              <FormText>
+                {"Register Now!"}
+              </FormText>
+            </Link>
+          </Grid>
+        </Grid>
+
+      </form>
 
     </Container>
   );

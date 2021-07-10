@@ -15,6 +15,7 @@ import {
   // TODO... GoogleIcon,
 } from "./IconFederatedSignin";
 import { shadeColor } from "../libs/Styling";
+import { capitalize } from "../libs/Misc";
 
 
 
@@ -22,23 +23,10 @@ export const FormInput = (props) => {
   const styles = theme => ({
     textField: {
     },
-    input: {
-      //color: "red",
-      "&:-webkit-autofill::first-line": { // does not work...
-        fontFamily: "Open Sans",
-        fontSize: "1.1em",
-      },
-    },
-    // textField: {
-    //   color: "red", //"#333",
-    //   backgroundColor: "#fff",
-    //   "&::placeholder": {
-    //     textOverflow: "ellipsis",
-    //     color: "green", //"#444",
-    //     backgroundColor: "yellow",
-    //   },
-    //   "& .MuiOutlinedInput-root": {
-    //     backgroundColor: "#fff",
+    // input: {
+    //   "&:-webkit-autofill::first-line": { // does not work...
+    //     fontFamily: "Open Sans",
+    //     fontSize: "1.1em",
     //   },
     // },
     startAdornment: {
@@ -183,7 +171,7 @@ FormInput.defaultProps = {
 export const FormButton = (props) => {
   const styles = theme => ({
     submit: {
-      margin: theme.spacing(3, 0, 1, 0),
+      margin: theme.spacing(1, 0, 0, 0),
       textTransform: "none",
       fontSize: "1.3em",
       color: "white",
@@ -192,17 +180,32 @@ export const FormButton = (props) => {
         backgroundColor: shadeColor(theme.palette.success.main, -25),
       },
     },
-    submitFederatedSignInFacebook: {
-      margin: theme.spacing(2, 0, 0, 0),
+    submitFederated: {
+      margin: theme.spacing(1, 0, 0, 0),
       justifyContent: 'flex-start',
       paddingLeft: theme.spacing(5),
       fontSize: "1.3em",
       color: "white",
+    },  
+    submitFederatedFacebook: {
       backgroundColor: theme.palette.facebook,
       "&:hover": {
         backgroundColor: shadeColor(theme.palette.facebook, -25),
       },
     },
+    submitFederatedTwitter: {
+      backgroundColor: theme.palette.twitter,
+      "&:hover": {
+        backgroundColor: shadeColor(theme.palette.twitter, -25),
+      },
+    },
+    submitFederatedGoogle: {
+      backgroundColor: theme.palette.google,
+      "&:hover": {
+        backgroundColor: shadeColor(theme.palette.google, -25),
+      },
+    },
+  
   });
   const useStyles = makeStyles((theme) => (styles(theme)));
   const classes = useStyles();
@@ -212,7 +215,7 @@ export const FormButton = (props) => {
       fullWidth={props.fullWidth}
       variant={props.variant}
       color={props.color}
-      className={props.className ? props.className : classes.submit}
+      className={`${classes.submit} ${props.social ? classes["submitFederated" + capitalize(props.social)] : ""} ${props.className}`}
       startIcon={props.startIcon}
       onClick={props.onClick}
       disabled={props.disabled}
@@ -223,6 +226,11 @@ export const FormButton = (props) => {
 }
 
 FormButton.propTypes = {
+  social: PropTypes.oneOf([
+    "Facebook",
+    "Twitter",
+    "Google",
+  ]),
   // fullWidth: PropTypes.bool,
   // variant: PropTypes.oneOf([
   //   "contained",
@@ -245,6 +253,7 @@ FormButton.defaultProps = {
   fullWidth: true,
   variant: "contained",
   color: "primary",
+  social: null,
 };
 
 

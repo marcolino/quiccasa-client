@@ -9,5 +9,6 @@
 - gestione I18n
 - gestione errori (rimuovere gli alert!)
 - gestione suspense/loading ed eventualmente bloccare l'interazione
+- risolvere showFooter
 - risolvere i vari TODO's
 - capire React.lazy()
