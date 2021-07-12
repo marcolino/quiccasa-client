@@ -7,7 +7,7 @@ import IconLogoTest from "../assets/icons/LogoTest.png";
 
 /* <img src={requestIconFile(`./${props.name}.png`).default} style={props.style} width={props.size} height={props.size} alt={`${props.name}`} /> */
 //<img src={} style={props.style} width={props.size} height={props.size} alt={`${props.name}`} />
-const IconCustom = (props) => {
+export default function IconCustom(props) {
   let icon = null;
   switch (props.name) {
     case "LogoMain": icon = IconLogoMain; break;
@@ -35,5 +35,3 @@ IconCustom.defaultProps = {
   style: {},
   alt: "icon",
 };
-
-export default IconCustom;

@@ -4,31 +4,15 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
-//import Person from "@material-ui/icons/Person";
-// TODO... import Lock from "@material-ui/icons/Lock";
-import {
-  // TODO... FacebookIcon,
-  // TODO... TwitterIcon,
-  // TODO... GoogleIcon,
-} from "./FederatedIcons";
 import { shadeColor } from "../libs/Styling";
 import { capitalize } from "../libs/Misc";
 
-
-
 export const FormInput = (props) => {
   const styles = theme => ({
-    textField: {
-    },
-    // input: {
-    //   "&:-webkit-autofill::first-line": { // does not work...
-    //     fontFamily: "Open Sans",
-    //     fontSize: "1.1em",
-    //   },
-    // },
     startAdornment: {
       backgroundColor: "#eaedf0",
       height: "2.5rem",
@@ -95,54 +79,7 @@ export const FormInput = (props) => {
 }
 
 FormInput.propTypes = {
-  // id: PropTypes.string,
-  // type: PropTypes.oneOf([
-  //   "button",
-  //   "checkbox",
-  //   "color",
-  //   "date",
-  //   "datetime-local",
-  //   "email",
-  //   "file",
-  //   "hidden",
-  //   "image",
-  //   "month",
-  //   "number",
-  //   "password",
-  //   "radio",
-  //   "range",
-  //   "reset",
-  //   "search",
-  //   "submit",
-  //   "tel",
-  //   "text",
-  //   "time",
-  //   "url",
-  //   "week",
-  // ]),
   value: PropTypes.string.isRequired,
-  // onChange: PropTypes.func,
-  // required: PropTypes.bool,
-  // autoFocus: PropTypes.bool,
-  // autoComplete: PropTypes.bool,
-  // className: PropTypes.object,
-  // variant: PropTypes.oneOf([
-  //   "filled",
-  //   "outlined",
-  //   "standard",
-  // ]),
-  // fullWidth: PropTypes.bool,
-  // label: PropTypes.string,
-  // size: PropTypes.oneOf([
-  //   "small",
-  //   "medium",
-  // ]),
-  // margin: PropTypes.oneOf([
-  //   "none",
-  //   "normal",
-  //   "dense",
-  // ]),
-  // placeholder: PropTypes.string,
   startAdornmentClass: PropTypes.string,
   startAdornmentIcon: PropTypes.object,
   endAdornmentClass: PropTypes.string,
@@ -173,35 +110,35 @@ FormInput.defaultProps = {
 
 export const FormButton = (props) => {
   const styles = theme => ({
-    submit: {
+    button: {
       margin: theme.spacing(1, 0, 0, 0),
       textTransform: "none",
       fontSize: "1.3em",
-      color: "white",
+      color: "white", // TODO
       backgroundColor: theme.palette.success.main,
       "&:hover": {
         backgroundColor: shadeColor(theme.palette.success.main, -25),
       },
     },
-    submitFederated: {
+    buttonFederated: {
       margin: theme.spacing(1, 0, 0, 0),
       justifyContent: "flex-start",
       paddingLeft: theme.spacing(5),
       fontSize: "1.3em",
     },  
-    submitFederatedFacebook: {
+    buttonFederatedFacebook: {
       backgroundColor: theme.palette.facebook,
       "&:hover": {
         backgroundColor: shadeColor(theme.palette.facebook, -25),
       },
     },
-    submitFederatedTwitter: {
+    buttonFederatedTwitter: {
       backgroundColor: theme.palette.twitter,
       "&:hover": {
         backgroundColor: shadeColor(theme.palette.twitter, -25),
       },
     },
-    submitFederatedGoogle: {
+    buttonFederatedGoogle: {
       backgroundColor: theme.palette.google,
       "&:hover": {
         backgroundColor: shadeColor(theme.palette.google, -25),
@@ -217,7 +154,8 @@ export const FormButton = (props) => {
       fullWidth={props.fullWidth}
       variant={props.variant}
       color={props.color}
-      className={`${classes.submit} ${props.social ? classes.submitFederated : ""} ${props.social ? classes["submitFederated" + capitalize(props.social)] : ""} ${props.className}`}
+      size={props.size}
+      className={`${classes.button} ${props.social ? classes.buttonFederated : ""} ${props.social ? classes["buttonFederated" + capitalize(props.social)] : ""} ${props.className}`}
       startIcon={props.startIcon}
       onClick={props.onClick}
       disabled={props.disabled}
@@ -246,17 +184,18 @@ FormButton.defaultProps = {
 
 export const FormCheckbox = (props) => {
   const styles = theme => ({
-    rememberMe: {
-      marginLeft: theme.spacing(0.2),
-      color: theme.palette.success.main,
-    },
-    rememberMeLabel: {
-      fontSize: "0.875em",
+    disabled: {
+      color: "grey",
+      cursor: "default",
+      "&:hover": {
+        textDecoration: "none",
+      },
     },
   });
   const useStyles = makeStyles((theme) => (styles(theme)));
-
   const classes = useStyles();
+
+  const classNameDisabled = props.disabled ? classes.disabled : "";
 
   return (
     <FormControlLabel
@@ -264,19 +203,18 @@ export const FormCheckbox = (props) => {
         <Checkbox
           checked={props.checked}
           onChange={(e) => props.onChange(e.target.checked)}
-          className={`${props.className} ${classes.rememberMe}`}
+          className={`${props.className} ${classNameDisabled}`}
           color={props.color}
           size={props.size}
           disabled={props.disabled}
         />
       }
       label={
-        <Typography
-          // className={classes.rememberMeLabel}
-          className={`${props.classNameLabel} ${classes.rememberMeLabel}`}
+        <FormText
+          className={`${props.className} ${classNameDisabled}`}
         >
           {props.children}
-        </Typography>
+        </FormText>
       }
     />
   );
@@ -314,21 +252,36 @@ FormText.defaultProps = {
 };
 
 
-export const FormAvatar = (props) => {
-  // TODO...
+
+export const FormLink = (props) => {
+  const styles = theme => ({
+    disabled: {
+      color: "grey",
+      cursor: "default",
+      "&:hover": {
+        textDecoration: "none",
+      },
+    },
+  });
+  const useStyles = makeStyles((theme) => (styles(theme)));
+  const classes = useStyles();
+
+  const classNameDisabled = props.disabled ? classes.disabled : "";
+
   return (
-    <Typography
-      {...props}
+    <Link
+      href={props.href}
+      className={`${props.className} ${classNameDisabled}`}
     >
       {props.children}
-    </Typography>
+    </Link>
   );
 };
 
-FormAvatar.propTypes = {
+FormLink.propTypes = {
 };
 
-FormAvatar.defaultProps = {
+FormLink.defaultProps = {
 };
 
 
@@ -372,6 +325,6 @@ FormDividerWithText.propTypes = {
 };
 
 FormDividerWithText.defaultProps = {
-  marginVertical: 3,
+  marginVertical: 1,
   paddingHorizontal: 1,
 };

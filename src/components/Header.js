@@ -74,7 +74,7 @@ export default function Header() {
         href: "/profile",
       },
       {
-        label: "Logout",
+        label: "Sign out",
         href: "/signout",
       },
     ] : [

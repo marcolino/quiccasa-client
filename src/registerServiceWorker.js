@@ -9,7 +9,7 @@ export default function register(toast) {
 
       window.addEventListener('online', () => {
         if(!isAppOnline){
-          toast('🔁 The connectivity is back, sync in progress...');
+          toast.info('🔁 The connectivity is back, sync in progress...');
           isAppOnline = true;
         }
       });
@@ -39,14 +39,14 @@ function registerValidSW(swUrl, toast) {
             if (navigator.serviceWorker.controller) {
               toast.info('🔄 New content is available; please refresh.')
             } else {
-              toast('💾 Content is cached for offline use.')
+              toast.info('💾 Content is cached for offline use.')
             }
           }
         };
       };
     })
     .catch(error => {
-      toast.error('Error during service worker registration: ' + error,);
+      toast.error('Error during service worker registration: ' + error);
     });
 }
 
@@ -67,9 +67,7 @@ function checkValidServiceWorker(swUrl, toast) {
       }
     })
     .catch(() => {
-      toast(
-        '⛔ No internet connection found. App is running in offline mode.'
-      );
+      toast.warning('⛔ No internet connection found. App is running in offline mode.');
     });
 }
 

@@ -1,13 +1,37 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
-import FormElement from "../FormElement";
+import { makeStyles } from "@material-ui/core/styles";
+import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
+import LockOpenOutlined from "@material-ui/icons/LockOpenOutlined";
+import ConfirmationNumber from "@material-ui/icons/ConfirmationNumber";
+import Lock from "@material-ui/icons/Lock";
+import LockOpen from "@material-ui/icons/LockOpen";
+import { toast } from "../Toasts";
+import { FormInput, FormButton, FormText } from "../FormElements";
 import { StatusContext } from "../../providers/StatusProvider";
+//import { shadeColor } from "../../libs/Styling";
+import { validateEmail, checkPassword } from "../../libs/Validation";
 
-const ForgotPassword = () => {
+const styles = theme => ({
+  avatar: {
+    backgroundColor: theme.palette.success.main,
+  },
+});
+const useStyles = makeStyles((theme) => (styles(theme)));
+
+export default function ForgotPassword() {
+  const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmed, setPasswordConfirmed] = useState("");
+  const [disabled, setDisabled] = useState(false);
+  const [error, setError] = useState({ email: null, password: null, passwordConfirmed: null, code: null });
   const [waitingForCode, setWaitingForCode] = useState(false);
+  const [codeDeliveryMedium, setCodeDeliveryMedium] = useState("");
   const [code, setCode] = useState("");
   const history = useHistory();
   const { setStatus } = useContext(StatusContext);
@@ -16,8 +40,44 @@ const ForgotPassword = () => {
     setStatus({showFooter: false});
   }, [setStatus]);
 
+  const validateForm = () => { // validate email formally
+console.log('VALIDATEFORM!');
+    if (!waitingForCode) {
+      if (!validateEmail(email)) {
+        const err = "Please supply a valid email";
+        setError({ ...error, email: err });
+        toast.error(err);
+        return false;
+      }
+    }
+
+    if (waitingForCode) {
+      if (!checkPassword(password)) {
+        const err = "Please supply a more complex password";
+        setError({ ...error, password: err });
+        toast.error(err);
+        return false;
+      }
+
+      if (password !== passwordConfirmed) {
+        const err = "The confirmed password does not match the password";
+        setError({ ...error, passwordConfirmed: err });
+        toast.error(err);
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   const forgotPassword = (e) => {
     e.preventDefault();
+    if (disabled) return;
+    if (!validateForm()) return;
+
+    setDisabled(true);
+    setError({ email: null, password: null, passwordConfirmed: null, code: null });
+
     Auth.forgotPassword(email)
       .then((data) => {
         console.log(data);
@@ -25,93 +85,156 @@ const ForgotPassword = () => {
         setPassword("");
         switch (data.CodeDeliveryDetails.DeliveryMedium) {
           default: // in future we could treat EMAIL/SMS/... separately...
-            alert(`Verification code sent via ${data.CodeDeliveryDetails.AttributeName} to ${data.CodeDeliveryDetails.Destination}.\nPlease open it and copy and paste it here.`);
+            const medium = data.CodeDeliveryDetails.AttributeName;
+            const email = data.CodeDeliveryDetails.Destination;
+            setCodeDeliveryMedium(medium);
+            setDisabled(false); // TODO: always re-enable in case of error!
+            toast.info(<div>Verification code sent via {medium} to {email}.<br />Please open it and copy and paste it here.</div>);
         }
       })
       .catch((err) => {
-        alert(err.message);
-        console.log(err);
+console.error('forgotPassword error:', err);
+        setDisabled(false); // TODO: always re-enable in case of error!
+        toast.error(err.message);
       });
   };
   
   const confirmForgotPassword = (e) => {
     e.preventDefault();
+    setDisabled(true);
     
     Auth.forgotPasswordSubmit(email, code, password)
-      .then((data) => {
+      .then(() => {
         setWaitingForCode(false);
         setEmail("");
+        setPassword("");
+        setPasswordConfirmed("");
         setCode("");
-        if (data) alert("Password reset successfully. You can now sign in with the new password"); // TODO...
+        toast.success("Password reset successfully. You can now sign in with your new password");
         history.push("/signin");
       })
       .catch((err) => {
-        alert(err.message);
-        console.log(err);
+console.error('confirmForgotPassword error:', err);
+        setDisabled(false);
+        toast.error(err.message);
       })
     ;
   };
   
   const resendCode = () => {
+    setDisabled(true);
+
     Auth.resendResetPassword(email)
       .then(() => {
-        console.log("code resent successfully");
+        toast.info("Code resent successfully");
       })
       .catch((err) => {
-        alert(err.message);
-        console.log(err);
+console.log('resendCode error:', err);
+        setDisabled(false);
+        toast.error(err.message);
       });
   };
-  
+   
   return (
-    <div className="form">
-      <h3>Reset Password</h3>
-      {!waitingForCode && (
-        <form>
-          <FormElement label="Your email" forId="sign-up-email">
-            <input
-              id="sign-up-email"
-              type="email"
+    <Container maxWidth="xs">
+
+      <form className={classes.form} noValidate autoComplete="off">
+        {!waitingForCode && (
+          <>
+            <Box m={1} />
+
+            <Grid container justify="center">
+              <Avatar className={classes.avatar}>
+                <LockOpenOutlined />
+              </Avatar>
+            </Grid>
+
+            <Box m={3} />
+
+            <Grid container justify="flex-start">
+              <FormText>
+                {"Reset password"}
+              </FormText>
+            </Grid>
+
+            <Box m={1} />
+
+            <FormInput
+              id={"email"}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="email"
+              onChange={setEmail}
+              placeholder={"Email"}
+              startAdornmentIcon={<LockOpen />}
+              disabled={disabled}
+              error={error.email}
             />
-          </FormElement>
-          <button type="submit" onClick={forgotPassword}>
-            Reset password
-          </button>
-        </form>
-      )}
-      {waitingForCode && (
-        <form>
-          <FormElement label="New password" forId="new-password">
-            <input
-              id="new-password"
+
+            <Box m={1} />
+
+            <FormButton
+              onClick={forgotPassword}
+              disabled={disabled}
+            >
+              {"Request password reset"}
+            </FormButton>
+          </>
+        )}
+        {waitingForCode && (
+          <>
+            <FormInput
+              id={"password"}
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="password"
+              onChange={setPassword}
+              placeholder={"New password"}
+              startAdornmentIcon={<Lock />}
+              disabled={disabled}
+              error={error.password}
             />
-          </FormElement>
-          <FormElement label="Confirmation code" forId="sign-up-code">
-            <input
-              id="sign-up-code"
-              type="text"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="code"
-            />
-          </FormElement>
-          <button type="submit" onClick={confirmForgotPassword}>
-            Confirm to reset password
-          </button>
-          <button type="button" onClick={resendCode}>
-            Resend code
-          </button>
-        </form>
-      )}
-    </div>
-  );
-};
 
-export default ForgotPassword;
+            <FormInput
+              id={"passwordConfirmed"}
+              type="password"
+              value={passwordConfirmed}
+              onChange={setPasswordConfirmed}
+              placeholder={"New password confirmation"}
+              startAdornmentIcon={<Lock />}
+              disabled={disabled}
+              error={error.passwordConfirmed}
+            />
+
+            <FormInput
+              id={"confirmationCode"}
+              type="text" // number
+              value={code}
+              onChange={setCode}
+              placeholder={"Numeric code just received by " + codeDeliveryMedium}
+              startAdornmentIcon={<ConfirmationNumber />}
+              disabled={disabled}
+              error={error.password}
+            />
+
+            <Box m={1} />
+
+            <FormButton
+              onClick={confirmForgotPassword}
+            >
+              Confirm Password Reset
+            </FormButton>
+
+            <Grid container justify="flex-end">
+              <FormButton
+                onClick={resendCode}
+                fullWidth={false}
+                className={classes.resendCode}
+              >
+                Resend code
+              </FormButton>
+            </Grid>
+          </>
+        )}
+      </form>
+
+    </Container>
+  );
+}

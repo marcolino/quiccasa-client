@@ -25,10 +25,10 @@ export default function Footer() {
 
 const Copyright = (props) => {
   return (
-    <Typography variant="body2" color={props.color}>
+    <Typography component="h6" variant="body2" color={props.color}>
       {packageJson.name} {" "}
       {"v"}{packageJson.version} {" ~ "}
-      {'Copyright © '} {new Date().getFullYear()}, {' '}
+      {'©'} {' '} {new Date().getFullYear()}, {' '}
       <Link color="inherit" href={config.COMPANY_HOME_SITE_URL}>
         {config.COMPANY_NAME}
       </Link>{' '}

@@ -12,3 +12,4 @@
 - risolvere showFooter
 - risolvere i vari TODO's
 - capire React.lazy()
+- onChange={(e) => setEmail(e.target.value)} => setEmail

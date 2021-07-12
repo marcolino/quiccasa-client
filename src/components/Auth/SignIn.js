@@ -3,9 +3,6 @@ import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
@@ -14,7 +11,7 @@ import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
 import { FacebookIcon, TwitterIcon, GoogleIcon } from "../FederatedIcons";
 import { toast } from "../Toasts";
-import { FormInput, FormButton, FormText, FormDividerWithText } from "../FormElements";
+import { FormInput, FormButton, FormText, FormDividerWithText, FormCheckbox, FormLink } from "../FormElements";
 import { AuthContext } from "../../providers/AuthProvider";
 import { StatusContext } from "../../providers/StatusProvider";
 import { validateEmail, checkPassword } from "../../libs/Validation";
@@ -23,22 +20,28 @@ const styles = theme => ({
   avatar: {
     backgroundColor: theme.palette.success.main,
   },
-  link: {
-    color: theme.palette.success.main,
-  },
   rememberMe: {
-    marginLeft: theme.spacing(0.2),
     color: theme.palette.success.main,
   },
   forgotPassword: {
+    color: theme.palette.success.main,
+  },
+  signUp: {
+    color: theme.palette.success.main,
+  },
+  columnLeft: {
+    marginLeft: theme.spacing(0.2),
+  },
+  columnRight: {
     marginLeft: "auto",
     marginRight: theme.spacing(0.2),
-    color: theme.palette.success.main,
-  }
+  },
 });
 const useStyles = makeStyles((theme) => (styles(theme)));
 
-const SignIn = () => {
+
+
+export default function SignIn() {
   const classes = useStyles();
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -54,6 +57,7 @@ const SignIn = () => {
   }, [setStatus]);
 
   const validateForm = () => {
+    
     // validate email formally
     if (!validateEmail(email)) {
       const err = "Please supply a valid email";
@@ -146,6 +150,8 @@ const SignIn = () => {
           </FormText>
         </Grid>
 
+        <Box m={1} />
+
         <FormButton
           social={"Facebook"}
           startIcon={<FacebookIcon />}
@@ -171,17 +177,23 @@ const SignIn = () => {
           {"Google"}
         </FormButton>
 
+        <Box m={3} />
+
         <FormDividerWithText>
           <FormText>
             <i>{"or"}</i>
           </FormText>
         </FormDividerWithText>
 
+        <Box m={3} />
+
         <Grid container justify="flex-start">
           <FormText>
             {"Sign in with email and password"}
           </FormText>
         </Grid>
+
+        <Box m={1} />
 
         <FormInput
           id={"email"}
@@ -192,6 +204,7 @@ const SignIn = () => {
           disabled={disabled}
           error={error.email}
         />
+
         <FormInput
           id={"password"}
           type="password"
@@ -213,33 +226,24 @@ const SignIn = () => {
         </FormButton>
 
         <Grid container alignItems="center">
-          <Grid className={classes.rememberMe}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className={classes.rememberMe}
-                  color="primary"
-                  size="small"
-                  disabled={disabled}
-                />
-              }
-              label={
-                <FormText>
-                  {"Remember me"}
-                </FormText>
-              }
-            />
+          <Grid className={classes.columnLeft}>
+            <FormCheckbox
+              checked={rememberMe}
+              onChange={setRememberMe}
+              className={classes.rememberMe}
+              disabled={disabled}
+            >
+              {"Remember me"}
+            </FormCheckbox>
           </Grid>
-          <Grid className={classes.forgotPassword}>
-            <Link
+          <Grid className={classes.columnRight}>
+            <FormLink
               href="/forgot-password"
               className={classes.forgotPassword}
               disabled={disabled}
             >
               {"Forgot Password?"}
-            </Link>
+            </FormLink>
           </Grid>
         </Grid>
 
@@ -252,15 +256,13 @@ const SignIn = () => {
             </FormText>
           </Grid>
           <Grid item>
-            <Link
+            <FormLink
               href="/signup"
-              className={classes.link}
-              disabled={true}
+              className={classes.signUp}
+              disabled={disabled}
             >
-              <FormText>
-                {"Register Now!"}
-              </FormText>
-            </Link>
+              {"Register Now!"}
+            </FormLink>
           </Grid>
         </Grid>
 
@@ -270,4 +272,3 @@ const SignIn = () => {
   );
 }
 
-export default SignIn;
