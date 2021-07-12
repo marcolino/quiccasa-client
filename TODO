@@ -3,13 +3,17 @@
 - attivare la certificazione SSL anche per quiccasa.sistemisolari.com - OK
 - gestione deploy su AWS - OK
 - gestione config (vedi footer, "Sistemi Solari", per esempio...) - OK
-- rimuovere components/FormElement.js, ed estrarre i componenti da SignIn.js a components/FormInput.js, ...
+- rimuovere components/FormElement.js, ed estrarre i componenti da SignIn.js a components/FormInput.js OK
+- pulire la cache di cloudfront dopo un deploy OK
+- gestione errori (rimuovere gli alert!) ALMOST OK
+- SignUp: rendere name/surname sulla stessa riga sul desktop
+- migliorare header / menu (vedi material-ui examples)
+- onChange={(e) => setEmail(e.target.value)} => setEmail
 - verificare che le traduzioni del backend AWS Ampilify (I18n) siano state implementate da Amplify
-- pulire la cache di cloudfront dopo un deploy
+- far funzionare i login federati
 - gestione I18n
-- gestione errori (rimuovere gli alert!)
 - gestione suspense/loading ed eventualmente bloccare l'interazione
 - risolvere showFooter
 - risolvere i vari TODO's
+- scrivere il README
 - capire React.lazy()
-- onChange={(e) => setEmail(e.target.value)} => setEmail
