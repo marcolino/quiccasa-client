@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -24,20 +24,20 @@
   "scripts": {
     "start": "react-scripts start",
     "start-production": "yarn build && serve -s build",
-    "prebuild": "yarn install-pre-push-hook; yarn sitemap-build",
+    "prebuild": "yarn install-pre-push-hook && yarn sitemap-build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-once": "react-scripts test --watchAll=false",
-    "deploy": "yarn test-once && yarn build && yarn install-service-worker && yarn sync",
+    "deploy": "yarn test-once && yarn build && yarn sync",
+    "deploy-DOES-NOT-WORK-AS-IS": "yarn test-once && yarn build && yarn install-service-worker && yarn sync",
     "postdeploy": "yarn cloudfront-invalidate-cache",
     "cloudfront-invalidate-cache": "aws cloudfront create-invalidation --distribution-id=E30CJEQ2PIR5NL --paths /",
-    "env-crypt-NOOO_USE_.GIT-HOOKS-PREPUSH": "gpg -c --no-symkey-cache .env",
     "env-decrypt": "gpg -d .env.gpg",
     "sync": "aws s3 sync build/ s3://quiccasa.sistemisolari.com",
     "eject": "echo -n 'Really sure to eject [yes/no] ? '; read answer; [ $answer = 'yes' ] && react-scripts eject || true",
-    "install-pre-push-hook": "cp --remove-destination scripts/git-hooks/pre-push .git/hooks/pre-push; chmod 700 .git/hooks/pre-push",
+    "install-pre-push-hook": "cp --remove-destination scripts/git-hooks/pre-push .git/hooks/pre-push && chmod 700 .git/hooks/pre-push",
     "sitemap-build": "babel-node scripts/sitemap-build.js",
-    "install-service-worker": "cp src/registerServiceWorker.js public/service-worker.js"
+    "install-service-worker-DOES-NOT-WORK-AS-IS": "cp src/registerServiceWorker.js public/service-worker.js"
   },
   "eslintConfig": {
     "extends": [
