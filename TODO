@@ -6,7 +6,9 @@
 - rimuovere components/FormElement.js, ed estrarre i componenti da SignIn.js a components/FormInput.js OK
 - pulire la cache di cloudfront dopo un deploy OK
 - gestione errori (rimuovere gli alert!) ALMOST OK
-- SignUp: rendere name/surname sulla stessa riga sul desktop
+- usare fieldset per disabilitare gli input durante le fetch
+- sistemare le icone in SignUp
+- rendere name/surname sulla stessa riga sul desktop in SignUp
 - migliorare header / menu (vedi material-ui examples)
 - onChange={(e) => setEmail(e.target.value)} => setEmail
 - verificare che le traduzioni del backend AWS Ampilify (I18n) siano state implementate da Amplify
