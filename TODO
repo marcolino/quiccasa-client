@@ -15,7 +15,7 @@
 - far funzionare i login federati
 - gestione I18n
 - gestione suspense/loading ed eventualmente bloccare l'interazione
-- risolvere showFooter
+- risolvere showFooter testando il path attuale in Footer
 - risolvere i vari TODO's
 - scrivere il README
 - capire React.lazy()
