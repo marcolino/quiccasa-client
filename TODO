@@ -5,17 +5,19 @@
 - gestione config (vedi footer, "Sistemi Solari", per esempio...) - OK
 - rimuovere components/FormElement.js, ed estrarre i componenti da SignIn.js a components/FormInput.js OK
 - pulire la cache di cloudfront dopo un deploy OK
-- gestione errori (rimuovere gli alert!) ALMOST OK
-- usare fieldset per disabilitare gli input durante le fetch
-- sistemare le icone in SignUp
-- rendere name/surname sulla stessa riga sul desktop in SignUp
+- mostrare icona di loading mentre disabled == true OK
+- gestione suspense/loading ed eventualmente bloccare l'interazione OK ALMOST
+- gestione errori (rimuovere gli alert!) OK ALMOST
+- SignUp: rendere name/surname sulla stessa riga sul desktop
 - migliorare header / menu (vedi material-ui examples)
 - onChange={(e) => setEmail(e.target.value)} => setEmail
+- nei componenti Auth, non usare "toast" per i messaggi importanti (codice inviato a ..."), ma inserirli nel layout, quando possibile
 - verificare che le traduzioni del backend AWS Ampilify (I18n) siano state implementate da Amplify
 - far funzionare i login federati
 - gestione I18n
-- gestione suspense/loading ed eventualmente bloccare l'interazione
-- risolvere showFooter testando il path attuale in Footer
+- risolvere showFooter
 - risolvere i vari TODO's
 - scrivere il README
-- capire React.lazy()
+- scrivere i Temini d'Uso e la Privacy, e mettere i link in SignUp
+- tracciare la registrazione (e altro) dell'utente con react-tracking e google tag manager (?)
+- capire React.lazy(), e usarlo, se può servire
