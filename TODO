@@ -11,7 +11,8 @@
 - SignUp: rendere name/surname sulla stessa riga sul desktop
 - migliorare header / menu (vedi material-ui examples)
 - onChange={(e) => setEmail(e.target.value)} => setEmail
-- nei componenti Auth, non usare "toast" per i messaggi importanti (codice inviato a ..."), ma inserirli nel layout, quando possibile
+- nei componenti Auth non usare "toast" per i messaggi importanti (codice inviato a ..."), ma inserirli nel layout, quando possibile
+- nel componente SignIn invertire l'ordine del login social con quellousername/password
 - verificare che le traduzioni del backend AWS Ampilify (I18n) siano state implementate da Amplify
 - far funzionare i login federati
 - gestione I18n
@@ -21,3 +22,4 @@
 - scrivere i Temini d'Uso e la Privacy, e mettere i link in SignUp
 - tracciare la registrazione (e altro) dell'utente con react-tracking e google tag manager (?)
 - capire React.lazy(), e usarlo, se può servire
+- capire come ottimizzare i bundles in build (sopattutto js/ e media/)

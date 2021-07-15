@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router';
 
-import Home from "./Home";
+//import Home from "./Home";
 import SignUp from "./Auth/SignUp";
 import SignIn from "./Auth/SignIn";
 import SignOut from "./Auth/SignOut";
@@ -13,7 +13,10 @@ import NotFound from "./NotFound";
 import Privacy from "./Privacy";
 import TermsOfUse from "./TermsOfUse";
 
+const Home = lazy(() => import("./Home"));
+
 export default (
+  <Suspense fallback={<span>Loading...</span>}>
   <Switch>
     <Route path="/" exact component={Home} />
     <Route path="/signup" component={SignUp} />
@@ -27,4 +30,5 @@ export default (
     <Route path="/termsofuse" component={TermsOfUse} />
     <Route path="" component={NotFound}/>
   </Switch>
+  </Suspense>
 );
