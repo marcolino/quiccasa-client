@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
