@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Amplify from "aws-amplify";
+import Amplify, { Auth } from "aws-amplify";
 import { I18n } from "aws-amplify";
 import { AuthContext } from "../providers/AuthProvider";
 import Routes from "./Routes";
@@ -53,7 +53,7 @@ export default function Body() {
 
     I18n.setLanguage('it');
     
-    Amplify.Auth.currentAuthenticatedUser()
+    Auth.currentAuthenticatedUser()
     .then(user => {
       console.log('currentAuthenticatedUser:', user);
       setAuth({isAuthenticated: true, user});

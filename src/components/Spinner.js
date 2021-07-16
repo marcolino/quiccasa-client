@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { usePromiseTracker } from "react-promise-tracker";
 import Loader from "react-loader-spinner";
 
-export const Spinner = (props) => {
+export default function Spinner(props) {
 
   const spinnerDelay = 150; // milliseconds delay before showing spinner
   const spinnerType = "ThreeDots";

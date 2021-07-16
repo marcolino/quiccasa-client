@@ -8,6 +8,7 @@ import { StatusProvider, StatusContext } from "../providers/StatusProvider";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
+import Spinner from "./Spinner";
 import theme from "../theme";
 
 export default function App() {
@@ -17,7 +18,8 @@ export default function App() {
         <StatusProvider>
           <CssBaseline />
           <BrowserRouter>
-            <Page />
+            <Contents />
+            <Spinner />
           </BrowserRouter>
         </StatusProvider>
       </AuthProvider>
@@ -27,11 +29,11 @@ export default function App() {
 
 const footerHeight = '1.5rem';
 const useStyles = makeStyles(theme => ({
-  pageContainer: {
+  contentsContainer: {
     position: 'relative',
     minHeight: '100vh',
   },
-  contentWrap: {
+  contentsWrap: {
     paddingBottom: footerHeight,
   },
   header: {
@@ -52,13 +54,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Page = () => {
+const Contents = () => {
 	const classes = useStyles();
   const { status } = useContext(StatusContext);
 
   return (
-    <div className={classes.pageContainer}>
-      <div className={classes.contentWrap}>
+    <div className={classes.contentsContainer}>
+      <div className={classes.contentsWrap}>
         <Header className={classes.header} />
         <Body className={classes.body} />
       </div>

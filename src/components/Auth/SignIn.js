@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Auth } from "aws-amplify";
+ import { Auth } from "aws-amplify";
+//import { signIn } from "../AuthPromise";
+import { trackPromise } from "react-promise-tracker";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -77,17 +79,18 @@ export default function SignIn() {
     return true;
   };
 
-  const signIn = (e) => {
+  const emailSignIn = (e) => {
     e.preventDefault();
     if (disabled) return;
     if (!validateForm()) return;
     setDisabled(true);
     setError({ email: null, password: null });
 
-    Auth.signIn({
-      username: email,
-      password,
-    })
+    trackPromise(
+      Auth.signIn({
+        username: email,
+        password,
+      })
       .then((user) => {
         setAuth({isAuthenticated: true, user});
         if (!rememberMe) {
@@ -103,7 +106,7 @@ export default function SignIn() {
       .finally(() => {
         setDisabled(false);
       })
-    ;
+    );
   };
 
   const federatedSignIn = (e, provider) => {
@@ -219,7 +222,7 @@ export default function SignIn() {
         <Box m={1} />
 
         <FormButton
-          onClick={signIn}
+          onClick={emailSignIn}
           disabled={disabled}
         >
           {"Sign In"}
