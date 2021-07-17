@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { AuthProvider } from "../providers/AuthProvider";
-import { StatusProvider, StatusContext } from "../providers/StatusProvider";
+import { StatusProvider } from "../providers/StatusProvider";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
@@ -56,7 +56,6 @@ const useStyles = makeStyles(theme => ({
 
 const Contents = () => {
 	const classes = useStyles();
-  const { status } = useContext(StatusContext);
 
   return (
     <div className={classes.contentsContainer}>
@@ -64,11 +63,9 @@ const Contents = () => {
         <Header className={classes.header} />
         <Body className={classes.body} />
       </div>
-      {status.showFooter && /* we don't want any footer for Auth screens, so render it conditionally */
-        <div className={classes.footer}>
-          <Footer />
-        </div>
-      }
+      <div className={classes.footer}>
+        <Footer />
+      </div>
     </div>
   );
 }

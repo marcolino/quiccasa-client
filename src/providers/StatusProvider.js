@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 
-const initialState = { showFooter: true };
+const initialState = {};
 
 const StatusContext = createContext(initialState);
 

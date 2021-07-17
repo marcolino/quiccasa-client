@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import { signUp, resendSignUp, confirmSignUp } from "../AuthPromise";
+import { usePromiseTracker } from "react-promise-tracker";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -9,12 +10,12 @@ import Box from "@material-ui/core/Box";
 import AccountCircleOutlined from "@material-ui/icons/AccountCircleOutlined";
 import ConfirmationNumber from "@material-ui/icons/ConfirmationNumber";
 import Person from "@material-ui/icons/Person";
+import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/Lock";
 import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText } from "../FormElements";
-import { StatusContext } from "../../providers/StatusProvider";
-import { shadeColor } from "../../libs/Styling";
 import { validateEmail, checkPassword } from "../../libs/Validation";
+import config from "../../config.json";
 
 const styles = theme => ({
   avatar: {
@@ -27,13 +28,9 @@ const styles = theme => ({
     marginLeft: "auto",
     marginRight: theme.spacing(0.2),
   },
-  resendCode: {
-    fontSize: "1em !important",
-    backgroundColor: theme.palette.secondary.dark + " !important",
-    "&:hover": {
-      backgroundColor: shadeColor(theme.palette.secondary.dark, -25)  + " !important",
-    },
-  }
+  fieldset: {
+    border: 0,
+  },
 });
 const useStyles = makeStyles((theme) => (styles(theme)));
 
@@ -45,24 +42,18 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmed, setPasswordConfirmed] = useState("");
+  const [codeDeliveryMedium, setCodeDeliveryMedium] = useState("");
   const [waitingForCode, setWaitingForCode] = useState(false);
-  //const [warning, setWarning] = useState(null);
   const [code, setCode] = useState("");
-  const [disabled, setDisabled] = useState(false);
-  const [error, setError] = useState({ firstName: null, lastName: null, email: null, password: null, passwordConfirmed: null, code: null });
-  //const { setAuth } = useContext(AuthContext);
-  const { setStatus } = useContext(StatusContext);
+  const [error, setError] = useState({});
+  const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
 
-  useEffect(() => {
-    setStatus({showFooter: false});
-  }, [setStatus]);
-
-  const validateForm = () => {
+  const validateFormStep1 = () => {
     
     // validate email formally
     if (!validateEmail(email)) {
       const err = "Please supply a valid email";
-      setError({ ...error, email: err });
+      setError({ email: err });
       toast.error(err);
       return false;
     }
@@ -70,14 +61,21 @@ export default function SignUp() {
     // check password for minimum complexity
     if (!checkPassword(password)) {
       const err = "Please supply a more complex password";
-      setError({ ...error, password: err });
+      setError({ password: err });
+      toast.error(err);
+      return false;
+    }
+
+    if (!passwordConfirmed) {
+      const err = "Please confirm the password";
+      setError({ passwordConfirmed: err });
       toast.error(err);
       return false;
     }
 
     if (password !== passwordConfirmed) {
       const err = "The confirmed password does not match the password";
-      setError({ ...error, password: err });
+      setError({ passwordConfirmed: err });
       toast.error(err);
       return false;
     }
@@ -85,226 +83,212 @@ export default function SignUp() {
     return true;
   };
 
-  const signUp = (e) => {
+  const validateFormStep2 = () => {
+    if (code.length <= 0) {
+      setError({ code: "Code is mandatory"});
+      return false;
+    }
+    return true;
+  };
+
+  const formSignUp = (e) => {
     e.preventDefault();
-    if (disabled) return;
-    
-    if (!validateStep1()) return;
+    if (!validateFormStep1()) return;
+    setError({});
 
-    if (!validateForm()) return;
-    setDisabled(true);
-    setError({ email: null, password: null }); // ...
-
-    Auth.signUp({ username: email, password, attributes: { email, name: firstName, family_name: lastName } })
-      .then((data) => {
-        console.log('signUp:', data);
+    signUp({
+      username: email,
+      password,
+      attributes: {
+        email,
+        name: firstName,
+        family_name: lastName,
+        /* IMPROVE: add custom fields
+        phone_number: phoneNumber, // E.164 number convention: country code (1 to 3 digits) + subscriber number (max 12 digits)
+        "custom:favorite_flavor": FavoriteFlavour, // custom attribute, not standard
+        */
+      }
+    }, {
+      success: (data) => {
+        console.log('signUp success data:', data);
+        const medium = data.codeDeliveryDetails.DeliveryMedium.toLowerCase();
+        toast.info(`Confirmation code just sent by ${medium}`)
+        setCodeDeliveryMedium(medium);
         setWaitingForCode(true);
         setPassword("");
-        //setWarning(null);
-        //history.push("/");
-console.info('waitingForCode', waitingForCode);
-        toast.info("Confirmation code just sent..."); // TODO...
-      })
-      .catch((err) => {
-        //setWarning(err.message);
+      },
+      error: (err) => {
+        console.error('signup error data:', err);
         toast.error(err.message);
-console.error(err);
-      })
-      .finally(() => {
-        setDisabled(false);
-      })
-    ;
+        switch (err.code) {
+          case "UsernameExistsException":
+            setError({ email: err.message }); // since we use email as username, we blame email field as guilty
+            break;
+          default:
+            setError({}); // we don't know whom to blame
+        }
+      },
+    });
   };
 
-  const validateStep1 = () => {
-    if (email.length <= 0) {
-      //setWarning("Email is mandatory");
-      setError({ ...error, email: "Email is mandatory"});
-      return false;
-    }
-    if (password.length <= 0) {
-      //setWarning("Password is mandatory");
-      setError({ ...error, password: "Password is mandatory"});
-      return false;
-    }
-    if (password !== passwordConfirmed) {
-      //setWarning("Passwords do not match");
-      setError({ ...error, passwordConfirmed: "Passwords do not match"});
-      return false;
-    }
-    return true;
-  };
-
-  const validateStep2 = () => {
-    if (code.length <= 0) {
-      //setWarning("Code is mandatory");
-      setError({ ...error, code: "Code is mandatory"});
-      return false;
-    }
-    return true;
-  };
-
-  const confirmSignUp = (e) => {
+  const formConfirmSignUp = (e) => {
     e.preventDefault();
-    
-    if (!validateStep2()) {
-      return;
-    }
+    if (!validateFormStep2()) return;
+    setError({});
 
-    Auth.confirmSignUp(email, code)
-      .then((data) => {
-        console.log('confirmSignUp:', data);
+    confirmSignUp(email, code, {
+      success: (data) => {
+        console.log('confirmSignUp success data:', data);
         if (data === "SUCCESS") {
-          toast.success("Registered successfully. You can now sign in with email and password.")
+          toast.success(<div>Registered successfully.<br />You can now sign in with email and password.</div>);
         } else {
-          toast.error(data); // TODO: check data error format from cognito...
+          console.error('confirmSignUp succes, not SUCCESS data:', data);
+          toast.error(data);
         }
         setWaitingForCode(false);
         setEmail("");
         setCode("");
-        //setWarning(null);
         history.push("/signin");
-      })
-      .catch((err) => {
-        //setWarning(err.message);
-        toast.error(err);
-      })
-    ;
+      },
+      error: (err) => {
+        console.error('confirmSignUp error data:', err);
+        toast.error(err.message);
+        setError({ code: err.message});
+      },
+    });
   };
   
-  const resendCode = () => {
-    Auth.resendSignUp(email)
-      .then(() => {
-        //setWarning(null);
-        toast.info("Code resent successfully");
-      })
-      .catch((err) => {
-        //setWarning(err.message);
-        setError({ ...error, code: err.message}); // add code
-      });
+  const formResendSignUpCode = (e) => {
+    e.preventDefault();
+    setError({});
+
+    resendSignUp(email, {
+      success: (data) => {
+        toast.info(`Code resent successfully by ${codeDeliveryMedium}`);
+      },
+      error: (err) => {
+        console.error('resendSignUp error data:', err)
+        toast.error(err.message);
+        setError({ code: err.message});
+      },
+    });
   };
-  
   
   return (
     <Container maxWidth="xs">
 
       <form className={classes.form} noValidate autoComplete="off">
-        {!waitingForCode && (
-          <>
+        <fieldset disabled={promiseInProgress} className={classes.fieldset}>
+          {!waitingForCode && (
+            <>
 
-            <Box m={1} />
+              <Box m={1} />
 
-            <Grid container justify="center">
-              <Avatar className={classes.avatar}>
-                <AccountCircleOutlined />
-              </Avatar>
-            </Grid>
+              <Grid container justify="center">
+                <Avatar className={classes.avatar}>
+                  <AccountCircleOutlined />
+                </Avatar>
+              </Grid>
 
-            <Box m={3} />
+              <Box m={3} />
 
-            <Grid container justify="flex-start">
-              <FormText>
-                {"Register with your data"}
-              </FormText>
-            </Grid>
+              <Grid container justify="flex-start">
+                <FormText>
+                  {"Register with your data"}
+                </FormText>
+              </Grid>
 
-            <Box m={1} />
+              <Box m={1} />
 
-            <FormInput
-              id={"firstName"}
-              value={firstName}
-              onChange={setFirstName}
-              placeholder={"First Name"}
-              startAdornmentIcon={<Person />}
-              disabled={disabled}
-              error={error.firstName}
-            />
+              <FormInput
+                id={"firstName"}
+                value={firstName}
+                onChange={setFirstName}
+                placeholder={"First Name"}
+                startAdornmentIcon={<Person />}
+                error={error.firstName}
+              />
 
-            <FormInput
-              id={"lastName"}
-              value={lastName}
-              onChange={setLastName}
-              placeholder={"Last Name"}
-              startAdornmentIcon={<Person />}
-              disabled={disabled}
-              error={error.lastName}
-            />
+              <FormInput
+                id={"lastName"}
+                value={lastName}
+                onChange={setLastName}
+                placeholder={"Last Name"}
+                startAdornmentIcon={<Person />}
+                error={error.lastName}
+              />
 
-            <FormInput
-              id={"email"}
-              value={email}
-              onChange={setEmail}
-              placeholder={"Email"}
-              startAdornmentIcon={<Person />}
-              disabled={disabled}
-              error={error.email}
-            />
+              <FormInput
+                id={"email"}
+                value={email}
+                onChange={setEmail}
+                placeholder={"Email"}
+                startAdornmentIcon={<Email />}
+                error={error.email}
+              />
 
-            <FormInput
-              id={"password"}
-              type="password"
-              value={password}
-              onChange={setPassword}
-              placeholder={"Password"}
-              startAdornmentIcon={<Lock />}
-              disabled={disabled}
-              error={error.password}
-            />
+              <FormInput
+                id={"password"}
+                type="password"
+                value={password}
+                onChange={setPassword}
+                placeholder={"Password"}
+                startAdornmentIcon={<Lock />}
+                error={error.password}
+              />
 
-            <FormInput
-              id={"passwordConfirmed"}
-              type="password"
-              value={passwordConfirmed}
-              onChange={setPasswordConfirmed}
-              placeholder={"Password confirmation"}
-              startAdornmentIcon={<Lock />}
-              disabled={disabled}
-              error={error.passwordConfirmed}
-            />
+              <FormInput
+                id={"passwordConfirmed"}
+                type="password"
+                value={passwordConfirmed}
+                onChange={setPasswordConfirmed}
+                placeholder={"Password confirmation"}
+                startAdornmentIcon={<Lock />}
+                error={error.passwordConfirmed}
+              />
 
-            <Box m={1} />
+              <Box m={1} />
 
-            <FormButton
-              onClick={signUp}
-              disabled={disabled}
-            >
-              {"Sign Up"}
-            </FormButton>
-
-          </>
-        )}
-        {waitingForCode && (
-          <>
-            <FormInput
-              id={"signUpCode"} // TODO: signUpCode => confirmationCode
-              type="number"
-              value={code}
-              onChange={setCode}
-              placeholder={"Numeric code just received by email"} // TODO: EMAIL / SMS
-              startAdornmentIcon={<ConfirmationNumber />}
-              disabled={disabled}
-              error={error.password}
-            />
-
-            <FormButton
-              onClick={confirmSignUp}
-            >
-              Confirm Sign Up
-            </FormButton>
-
-            <Grid container justify="flex-end">
               <FormButton
-                onClick={resendCode}
-                fullWidth={false}
-                className={classes.resendCode}
+                onClick={formSignUp}
               >
-                Resend code
+                {"Sign Up"}
               </FormButton>
-            </Grid>
-          </>
-        )}
-      </form>
 
+            </>
+          )}
+          {waitingForCode && (
+            <>
+              <FormInput
+                id={"signUpCode"}
+                type="number"
+                value={code}
+                onChange={setCode}
+                placeholder={`Numeric code just received by ${codeDeliveryMedium}`}
+                startAdornmentIcon={<ConfirmationNumber />}
+                error={error.code}
+              />
+
+              <FormButton
+                onClick={formConfirmSignUp}
+              >
+                Confirm Sign Up
+              </FormButton>
+
+              <Grid container justify="flex-end">
+                <FormButton
+                  onClick={formResendSignUpCode}
+                  fullWidth={false}
+                  className={"buttonSecondary"}
+                >
+                  Resend code
+                </FormButton>
+              </Grid>
+            </>
+          )}
+        </fieldset>
+      </form>
+      
     </Container>
   );
 }

@@ -13,7 +13,7 @@ export default function Privacy() {
 
   return (
     <div className={classes.privacy}>
-      {`Privacy`} {/* TODO */}
+      {`Privacy`}
    </div>
   );
 }

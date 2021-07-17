@@ -11,7 +11,7 @@ export default function TermsOfUse() {
 
   return (
     <div className={classes.termsofuse}>
-      {`Terms of Use`} {/* TODO */}
+      {`Terms of Use`}
    </div>
   );
 }

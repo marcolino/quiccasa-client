@@ -6,6 +6,7 @@
 - rimuovere components/FormElement.js, ed estrarre i componenti da SignIn.js a components/FormInput.js OK
 - pulire la cache di cloudfront dopo un deploy OK
 - mostrare icona di loading mentre disabled == true OK
+- risolvere showFooter - OK
 - gestione suspense/loading ed eventualmente bloccare l'interazione OK ALMOST
 - gestione errori (rimuovere gli alert!) OK ALMOST
 - SignUp: rendere name/surname sulla stessa riga sul desktop
@@ -16,7 +17,6 @@
 - verificare che le traduzioni del backend AWS Ampilify (I18n) siano state implementate da Amplify
 - far funzionare i login federati
 - gestione I18n
-- risolvere showFooter
 - risolvere i vari TODO's
 - scrivere il README
 - scrivere i Temini d'Uso e la Privacy, e mettere i link in SignUp

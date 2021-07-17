@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { shadeColor } from "../libs/Styling";
-import { capitalize } from "../libs/Misc";
+import { capitalize, isEmptyObject } from "../libs/Misc";
 
 export const FormInput = (props) => {
   const styles = theme => ({
@@ -54,7 +54,7 @@ export const FormInput = (props) => {
       placeholder={props.placeholder}
       onChange={e => props.onChange(e.target.value)}
       disabled={props.disabled}
-      error={props.error !== null}
+      error={!isEmptyObject(props.error)}
       InputProps={{
         startAdornment: props.startAdornmentIcon ? (
           <InputAdornment
@@ -120,6 +120,16 @@ export const FormButton = (props) => {
         backgroundColor: shadeColor(theme.palette.success.main, -25),
       },
     },
+    buttonSecondary: {
+      margin: theme.spacing(1, 0, 0, 0),
+      textTransform: "none",
+      fontSize: "1em !important",
+      color: "white", // TODO
+      backgroundColor: theme.palette.secondary.dark + " !important",
+      "&:hover": {
+        backgroundColor: shadeColor(theme.palette.secondary.dark, -25)  + " !important",
+      },
+    },
     buttonFederated: {
       margin: theme.spacing(1, 0, 0, 0),
       justifyContent: "flex-start",
@@ -155,7 +165,7 @@ export const FormButton = (props) => {
       variant={props.variant}
       color={props.color}
       size={props.size}
-      className={`${classes.button} ${props.social ? classes.buttonFederated : ""} ${props.social ? classes["buttonFederated" + capitalize(props.social)] : ""} ${props.className}`}
+      className={`${classes.button} ${props.social ? classes.buttonFederated : ""} ${props.social ? classes["buttonFederated" + capitalize(props.social)] : ""} ${classes[props.className]}`}
       startIcon={props.startIcon}
       onClick={props.onClick}
       disabled={props.disabled}

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import { signOut } from "../AuthPromise";
 import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "../Toasts";
 
@@ -11,16 +11,17 @@ export default function SignOut() {
   const { setAuth } = useContext(AuthContext);
 
   useEffect(() => {
-    Auth.signOut()
-      .then(() => {
-        toast.success("Signed out");
+    signOut({
+      success: () => {
+        //toast.success("Signed out"); // too noisy...
         setAuth({isAuthenticated: false, user: null})
         history.replace("/");
-      })
-      .catch((err) => {
+      },
+      error: (err) => {
+        console.error('signOut error data:', err);
         toast.error(err.message);
-      })
-    ;
+      }
+    });
   }, [history, setAuth]);
 
   return null;

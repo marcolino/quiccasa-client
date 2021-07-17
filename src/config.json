@@ -1,4 +1,9 @@
 {
   "COMPANY_NAME": "Sistemi Solari",
-  "COMPANY_HOME_SITE_URL": "https://www.sistemisolari.com"
+  "COMPANY_HOME_SITE_URL": "https://www.sistemisolari.com",
+  "spinner": {
+    "delay": 150,
+    "type": "ThreeDots",
+    "color": "green"
+  }
 }
