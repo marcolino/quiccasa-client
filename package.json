@@ -1,14 +1,23 @@
 {
-  "name": "quiccasa-client-sw",
-  "version": "0.1.0",
+  "name": "quiccasa-client",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.1",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "aws-amplify": "^4.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-loader-spinner": "^4.0.0",
+    "react-promise-tracker": "^2.1.0",
+    "react-router-dom": "^5.2.0",
+    "react-router-sitemap": "^1.2.0",
     "react-scripts": "4.0.3",
+    "react-toastify": "^7.0.4",
+    "sitemap": "^7.0.0",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.3",
     "workbox-broadcast-update": "^5.1.3",
@@ -25,9 +34,20 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-production": "yarn build && serve -s build",
+    "prebuild-DISABLED-FOR-BABEL-VERY-DIFFICULT-TO_SETUP": "yarn install-pre-push-hook && yarn sitemap-build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test-once": "react-scripts test --watchAll=false",
+    "deploy": "yarn test-once && yarn build && yarn sync",
+    "deploy-DOES-NOT-WORK-AS-IS": "yarn test-once && yarn build && yarn install-service-worker && yarn sync",
+    "postdeploy": "yarn cloudfront-invalidate-cache",
+    "cloudfront-invalidate-cache": "aws cloudfront create-invalidation --distribution-id=E30CJEQ2PIR5NL --paths /",
+    "env-decrypt": "gpg -d .env.gpg",
+    "sync": "aws s3 sync build/ s3://quiccasa.sistemisolari.com",
+    "eject": "echo -n 'Really sure to eject [yes/no] ? '; read answer; [ $answer = 'yes' ] && react-scripts eject || true",
+    "install-pre-push-hook": "cp --remove-destination scripts/git-hooks/pre-push .git/hooks/pre-push && chmod 700 .git/hooks/pre-push",
+    "sitemap-build": "babel-node scripts/sitemap-build.js"
   },
   "eslintConfig": {
     "extends": [
@@ -46,5 +66,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "7.14.6",
+    "@babel/preset-env": "^7.14.7"
   }
 }
