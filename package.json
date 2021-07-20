@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
@@ -35,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start-production": "yarn build && serve -s build",
-    "prebuild": " yarn install-pre-push-hook && yarn sitemap-build",
+    "prebuild": "yarn install-pre-push-hook && yarn sitemap-build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-once": "react-scripts test --watchAll=false",
