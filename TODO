@@ -16,11 +16,11 @@
 - capire come ottimizzare i bundles in build (sopattutto js/ e media/) - OK
 - scrivere i Termini d'uso e la Privacy Policy, e mettere i link in SignUp - OK
 - rendere name/surname sulla stessa riga sul desktop in SignUp - OK
+- migliorare il fallback di Suspense in Routes (attualmente è "Loading...") - OK
 - verificare che le traduzioni del backend AWS Ampilify (I18n) siano state implementate da Amplify - OPENED ISSUE ON https://github.com/aws-amplify/amplify-js/issues/8599 - See https://github.com/aws-amplify/amplify-js/blob/master/packages/aws-amplify-react/src/AmplifyI18n.tsx
 - nei componenti Auth non usare "toast" per i messaggi importanti (codice inviato a ..."), ma inserirli nel layout, quando possibile - ?
 - mettere changefreq e priority in Routes, e gestirno in scripts/sitemap-build.js
 - migliorare header / menu (vedi material-ui examples) (menu per mobile almeno aggiungere icone)
-- migliorare il fallback di Suspense in Routes (attualmente è "Loading...")
 - far funzionare i login federati
 - gestire I18n
 - risolvere i vari TODO's

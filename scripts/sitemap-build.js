@@ -1,24 +1,29 @@
 const fs = require('fs');
 
-const sitemapFileName = "./sitemap.xml"; // TODO: "./public/sitemap.xml";
-const hostName = "https://quiccasa.sistemisolari.com/"; // the url of the website: the protocol and the domain name with a trailing slash
+const sitemapFileName = "./public/sitemap.xml";
+const hostName = "https://quiccasa.sistemisolari.com"; // the url of the website: the protocol and the domain name
 const routesPath = "./src/components/Routes.js";
-const priority = 0.5;
-const freq = "monthly";
+const defaultFrequency = "monthly";
+const defaultPriority = 0.5;
 
-//console.log("routesPath:", routesPath);
 const routes = [];
 fs.readFile(routesPath, "utf8", (err, data) => {
   if (err) {
     throw err;
   }
   data.split(/\r?\n/).forEach(line => {
-    //console.log("-" + line);
     const matchRoute = /^\s*<Route (.*?) \/>/.exec(line);
     if (matchRoute !== null) {
       const matchPath = /path=[\"\'](.*?)[\"\']/.exec(matchRoute);
-      //console.log("path:", matchPath[0]);
-      routes.push(matchPath[0]);
+      const matchFrequency = /sitemapFrequency=\{[\"\']?(.*?)[\"\']?\}/.exec(matchRoute);
+      const matchPriority = /sitemapPriority=\{[\"\']?(.*?)[\"\']?\}/.exec(matchRoute);
+      if (matchPath[1]) {
+        routes.push({
+          path: matchPath[1],
+          frequency: matchFrequency ? matchFrequency[1] : defaultFrequency,
+          priority: matchPriority ? matchPriority[1] : defaultPriority,
+        });
+      }
     }
   });
 
@@ -34,15 +39,18 @@ fs.readFile(routesPath, "utf8", (err, data) => {
 
 
 function generate_xml_sitemap(routes) {
-  let xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+  let xml = `
+<?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">`;
   for (const route of routes) {
     xml += `
-  <url>
-    <loc>${hostName}${route}</loc>
-    <changefreq>${freq}</changefreq>
-    <priority>${priority}</priority>
-  </url>`;
+    <url>
+      <loc>${hostName}${route.path}</loc>
+      <changefreq>${route.frequency}</changefreq>
+      <priority>${route.priority}</priority>
+    </url>`;
   }
-  xml += "</urlset>";
+  xml += `
+  </urlset>`;
   return xml;
 }
