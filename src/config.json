@@ -1,0 +1,20 @@
+{
+  "companyName": "Sistemi Solari",
+  "companyHomeSiteName": "sistemisolari.com",
+  "companyHomeSiteUrl": "https://www.sistemisolari.com",
+  "companyOwner": "Marco Solari",
+  "companyOwnerFiscalCode": "SLRMRC61M31L219Y",
+  "companyOwnerStreetAddress": "Corso Quintino Sella, 92/43",
+  "companyOwnerCity": "Torino",
+  "companyOwnerProvince": "TO",
+  "companyOwnerZipCode": "10132",
+  "companyOwnerPhone": "+39 333 6480983",
+  "companyOwnerEmail": "marcosolari@gmail.com",
+  "appName": "quiccasa",
+  "appSiteUrl": "quiccasa.sistemisolari.com",
+  "spinner": {
+    "delay": 150,
+    "type": "ThreeDots",
+    "color": "green"
+  }
+}

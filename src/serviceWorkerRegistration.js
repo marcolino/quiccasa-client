@@ -11,11 +11,12 @@
 // opt-in, read https://cra.link/PWA
 
 const isLocalhost = Boolean(
-  window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === '[::1]' ||
-    // 127.0.0.0/8 are considered localhost for IPv4.
-    window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
+  false
+  // window.location.hostname === 'localhost' ||
+  //   // [::1] is the IPv6 localhost address.
+  //   window.location.hostname === '[::1]' ||
+  //   // 127.0.0.0/8 are considered localhost for IPv4.
+  //   window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 );
 
 export function register(config) {
@@ -35,7 +36,6 @@ export function register(config) {
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still exists or not.
         checkValidServiceWorker(swUrl, config);
-
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
@@ -43,7 +43,11 @@ export function register(config) {
             'This web app is being served cache-first by a service ' +
               'worker. To learn more, visit https://cra.link/PWA'
           );
-        });
+          config.info(
+            'This web app is being served cache-first by a service ' +
+              'worker. To learn more, visit https://cra.link/PWA'
+          );
+    });
       } else {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);
@@ -71,6 +75,11 @@ function registerValidSW(swUrl, config) {
                 'New content is available and will be used when all ' +
                   'tabs for this page are closed. See https://cra.link/PWA.'
               );
+              config.info(
+                'New content is available and will be used when all ' +
+                  'tabs for this page are closed. See https://cra.link/PWA.'
+              );
+
 
               // Execute callback
               if (config && config.onUpdate) {
@@ -81,6 +90,7 @@ function registerValidSW(swUrl, config) {
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
               console.log('Content is cached for offline use.');
+              config.info('Content is cached for offline use.');
 
               // Execute callback
               if (config && config.onSuccess) {
@@ -92,6 +102,7 @@ function registerValidSW(swUrl, config) {
       };
     })
     .catch((error) => {
+      config.error('Error during service worker registration:', error);
       console.error('Error during service worker registration:', error);
     });
 }
@@ -116,10 +127,12 @@ function checkValidServiceWorker(swUrl, config) {
         });
       } else {
         // Service worker found. Proceed as normal.
+config.info('Service worker found. Proceed as normal.');
         registerValidSW(swUrl, config);
       }
     })
     .catch(() => {
+      config.info('No internet connection found. App is running in offline mode.');
       console.log('No internet connection found. App is running in offline mode.');
     });
 }
@@ -131,6 +144,7 @@ export function unregister() {
         registration.unregister();
       })
       .catch((error) => {
+        //config.error(error.message);
         console.error(error.message);
       });
   }
