@@ -1,5 +1,5 @@
 /**
- * Build sitemap.xml for a react web app, starting from the routes file, using only node.js
+ * Build sitemap.xml for a react web app, starting from the routes file, using only node.js 
  */
 
 const fs = require('fs');
