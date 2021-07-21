@@ -16,7 +16,7 @@ export default function IconCustom(props) {
   }
 
   return (
-    <img src={icon} style={props.style} width={props.size} height={props.size} alt={`${props.name}`} />
+    <img src={icon} style={props.style} width={props.size} height={props.size} alt={`${props.name}`} {...props} />
   );    
 };
 

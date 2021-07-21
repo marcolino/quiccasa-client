@@ -47,7 +47,8 @@ export default createMuiTheme({
       main: '#eaedf0',
       dark: grey[800],
     },
-    headerBackground: {
+    headerBackground: blueGrey[100],
+    _headerBackground: { // TODO: nonsense light/main/dark ...
       light: blueGrey[100],
       main: blueGrey[200],
       dark: blueGrey[300],
