@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
@@ -41,14 +41,14 @@
     "test": "react-scripts test",
     "test-once": "react-scripts test --watchAll=false",
     "deploy": "yarn test-once && yarn build && yarn sync",
-    "deploy-DOES-NOT-WORK-AS-IS": "yarn test-once && yarn build && yarn install-service-worker && yarn sync",
-    "postdeploy": "yarn cloudfront-invalidate-cache",
+    "postdeploy": "yarn cloudfront-invalidate-cache && yarn sitemap-search-engines-update",
     "cloudfront-invalidate-cache": "aws cloudfront create-invalidation --distribution-id=E30CJEQ2PIR5NL --paths /",
     "env-decrypt": "gpg -d .env.gpg",
     "sync": "aws s3 sync build/ s3://quiccasa.sistemisolari.com",
     "eject": "echo -n 'Really sure to eject [yes/no] ? '; read answer; [ $answer = 'yes' ] && react-scripts eject || true",
     "install-pre-push-hook": "cp --remove-destination scripts/git-hooks/pre-push .git/hooks/pre-push && chmod 700 .git/hooks/pre-push",
-    "sitemap-build": "babel-node scripts/sitemap-build.js"
+    "sitemap-build": "babel-node scripts/sitemap-build.js",
+    "sitemap-search-engines-update": "scripts/sitemap-search-engines-update.sh"
   },
   "eslintConfig": {
     "extends": [
