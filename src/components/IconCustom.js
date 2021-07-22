@@ -3,10 +3,6 @@ import PropTypes from "prop-types";
 import IconLogoMain from "../assets/icons/LogoMain.png";
 import IconLogoTest from "../assets/icons/LogoTest.png";
 
-//const requestIconFile = require.context("../assets/icons", true, /\.png$/);
-
-/* <img src={requestIconFile(`./${props.name}.png`).default} style={props.style} width={props.size} height={props.size} alt={`${props.name}`} /> */
-//<img src={} style={props.style} width={props.size} height={props.size} alt={`${props.name}`} />
 export default function IconCustom(props) {
   let icon = null;
   switch (props.name) {

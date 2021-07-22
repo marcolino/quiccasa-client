@@ -14,7 +14,7 @@ import { FacebookIcon, TwitterIcon, GoogleIcon } from "../FederatedIcons";
 import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText, FormDividerWithText, FormCheckbox, FormLink } from "../FormElements";
 import { AuthContext } from "../../providers/AuthProvider";
-import { validateEmail, checkPassword } from "../../libs/Validation";
+import { validateEmail/*, checkPassword*/ } from "../../libs/Validation";
 import config from "../../config.json";
 
 const styles = theme => ({
@@ -65,9 +65,16 @@ export default function SignIn() {
       return false;
     }
 
-    // check password for minimum complexity
-    if (!checkPassword(password)) {
-      const err = "Please supply a more complex password";
+    // // check password for minimum complexity
+    // if (!checkPassword(password)) {
+    //   const err = "Please supply a more complex password";
+    //   setError({ password: err });
+    //   toast.error(err);
+    //   return false;
+    // }
+
+    if (!password) {
+      const err = "Please supply a password";
       setError({ password: err });
       toast.error(err);
       return false;
@@ -128,7 +135,7 @@ export default function SignIn() {
       <form className={classes.form} noValidate autoComplete="off">
         <fieldset disabled={promiseInProgress} className={classes.fieldset}>
 
-          <Box m={1} />
+          <Box m={0} />
 
           <Grid container justifyContent="center">
             <Avatar className={classes.avatar}>
@@ -136,7 +143,7 @@ export default function SignIn() {
             </Avatar>
           </Grid>
 
-          <Box m={3} />
+          <Box m={2} />
 
           <Grid container justifyContent="flex-start">
             <FormText>
@@ -144,7 +151,7 @@ export default function SignIn() {
             </FormText>
           </Grid>
 
-          <Box m={1} />
+          <Box m={0} />
 
           <FormInput
             id={"email"}
@@ -193,7 +200,7 @@ export default function SignIn() {
             </Grid>
           </Grid>
 
-          <Box m={3} />
+          <Box m={2} />
 
           <Grid container direction="row" justifyContent="center" spacing={1}>
             <Grid item>

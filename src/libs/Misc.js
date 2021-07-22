@@ -12,7 +12,7 @@ export const isEmptyObject = (obj) => {
   );
 };
 
-export const isAuthlocation = (location) => {
+export const isAuthLocation = (location) => {
   return (
     (location.pathname === "/signup") ||
     (location.pathname === "/signin") ||

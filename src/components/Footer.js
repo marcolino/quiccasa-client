@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
-import { isAuthlocation } from "../libs/Misc";
+import { isAuthLocation } from "../libs/Misc";
 import config from "../config.json";
 import packageJson from "../package.alias.json";
 
@@ -17,7 +17,7 @@ const styles = theme => ({
 export default function Footer() {
   const location = useLocation();
 
-  return isAuthlocation(location) ? null : ( // hide footer while in auth screens
+  return isAuthLocation(location) ? null : ( // hide footer while in auth screens
     <Container style={styles().footer}>
       <Grid container justifyContent="center">
         <Copyright color={"textSecondary"} />

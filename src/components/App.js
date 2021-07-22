@@ -27,6 +27,8 @@ export default function App() {
   );
 }
 
+// TODO: use isAuthLocation, and not in Footer, to avoid showing footer at all if not wanted
+
 const footerHeight = '1.5rem';
 const useStyles = makeStyles(theme => ({
   contentsContainer: {

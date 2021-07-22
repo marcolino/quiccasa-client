@@ -17,5 +17,6 @@
     "delay": 150,
     "type": "ThreeDots",
     "color": "green"
-  }
+  },
+  "mobileDesktopWatershed": 900
 }

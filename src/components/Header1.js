@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.headerForeground.dark,
     paddingRight: "1em", //"79px",
     paddingLeft: "1em", //"118px",
-    "@media (max-width: 900px)": {
+    "@media  screen and (max-width: 900px)": {
       paddingLeft: 0,
     },
   },
@@ -109,7 +109,7 @@ export default function Header() {
 
   useEffect(() => {
     const setResponsiveness = () => {
-      return window.innerWidth < 900
+      return window.innerWidth < config.mobileDesktopWatershed
         ? setState((prevState) => ({ ...prevState, mobileView: true }))
         : setState((prevState) => ({ ...prevState, mobileView: false }));
     };
