@@ -17,6 +17,7 @@ const styles = theme => ({
 
 export default function Footer() {
   const location = useLocation();
+// TODO: use useLocation in () ...
 
   return isAuthLocation(location) ? null : ( // hide footer while in auth screens
     <Container style={styles().footer}>
