@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/styles";
-import Amplify/*, { Auth }*/ from "aws-amplify";
-import { I18n } from "aws-amplify";
+import Amplify, { I18n } from "aws-amplify";
 import { currentAuthenticatedUser } from "./AuthPromise";
 import { AuthContext } from "../providers/AuthProvider";
 import Routes from "./Routes";
@@ -51,7 +50,7 @@ export default function Body() {
       },
     });
 
-    I18n.setLanguage('it');
+    I18n.setLanguage('it'); // TODO: this should enable amplify localized error messages, but it's not yet implemented (try using it before configure()...)
     
     // Auth.currentAuthenticatedUser()
     // .then(user => {

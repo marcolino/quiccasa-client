@@ -8,6 +8,7 @@ import { isAuthLocation } from "../libs/Misc";
 import config from "../config.json";
 import packageJson from "../package.alias.json";
 
+// TODO: use makeStyles() ...
 const styles = theme => ({
 	footer: {
     fontStyle: 'italic',

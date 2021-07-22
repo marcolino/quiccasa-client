@@ -26,19 +26,20 @@ const PrivacyPolicy = lazy(() => import("./PrivacyPolicy"));
 const TermsOfUse = lazy(() => import("./TermsOfUse"));
 
 export default (
-  <Suspense fallback={<span>...</span>}>
+  <Suspense fallback={<span>... TODO ...</span>}> {/* TODO */}
     <Switch>
-      <Route path="/" exact component={Home} s_itemapFrequency={"weekly"} sitemapPriority={1.0} />
-      <Route path="/signup" component={SignUp} sitemapFrequency={"monthly"} sitemapPriority={0.3} />
-      <Route path="/signin" component={SignIn} sitemapFrequency={"monthly"} sitemapPriority={0.3} />
-      <Route path="/profile" component={Profile} sitemapFrequency={"monthly"} sitemapPriority={0.3} />
-      <Route path="/signout" component={SignOut} sitemapFrequency={"monthly"} sitemapPriority={0.3} />
-      <Route path="/forgot-password" component={ForgotPassword} sitemapFrequency={"monthly"} sitemapPriority={0.3} />
-      <Route path="/searches" component={Searches} sitemapFrequency={"weekly"} sitemapPriority={0.9} />
-      <Route path="/listings" component={Listings} sitemapFrequency={"weekly"} sitemapPriority={0.9} />
-      <Route path="/privacy-policy" component={PrivacyPolicy} sitemapFrequency={"monthly"} sitemapPriority={0.2} />
-      <Route path="/terms-of-use" component={TermsOfUse} sitemapFrequency={"monthly"} sitemapPriority={0.2} />
-      <Route path="" component={NotFound} sitemapFrequency={0.5} sitemapPriority={"yearly"} />
+      {/* sitemapFrequency and sitemapPriority are for sitemap building */}
+      <Route path="/" exact component={Home} /> {/* sitemapFrequency={"weekly"} sitemapPriority={1.0} */}
+      <Route path="/signup" component={SignUp} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.3} */}
+      <Route path="/signin" component={SignIn} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.3} */}
+      <Route path="/profile" component={Profile} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.3} */}
+      <Route path="/signout" component={SignOut} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.3} */}
+      <Route path="/forgot-password" component={ForgotPassword} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.3} */}
+      <Route path="/searches" component={Searches} /> {/* sitemapFrequency={"weekly"} sitemapPriority={0.9} */}
+      <Route path="/listings" component={Listings} /> {/* sitemapFrequency={"weekly"} sitemapPriority={0.9} */}
+      <Route path="/privacy-policy" component={PrivacyPolicy} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.2} */}
+      <Route path="/terms-of-use" component={TermsOfUse} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.2} */}
+      <Route path="" component={NotFound} /> {/* sitemapFrequency={"yearly"} sitemapPriority={0.5} */}
     </Switch>
   </Suspense>
 );
