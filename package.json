@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.31",
+  "version": "0.1.32",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
@@ -36,7 +36,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start-production": "yarn build && serve -s build",
-    "prebuild": "yarn install-pre-push-hook && yarn sitemap-build",
+    "prebuild": "yarn install-pre-push-hook && yarn sitemap-build && yarn favicons-build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-once": "react-scripts test --watchAll=false",
@@ -48,7 +48,8 @@
     "eject": "echo -n 'Really sure to eject [yes/no] ? '; read answer; [ $answer = 'yes' ] && react-scripts eject || true",
     "install-pre-push-hook": "cp --remove-destination scripts/git-hooks/pre-push .git/hooks/pre-push && chmod 700 .git/hooks/pre-push",
     "sitemap-build": "babel-node scripts/sitemap-build.js",
-    "sitemap-search-engines-update": "scripts/sitemap-search-engines-update.sh"
+    "sitemap-search-engines-update": "scripts/sitemap-search-engines-update.sh",
+    "favicons-build": "scripts/favicons-build.sh"
   },
   "eslintConfig": {
     "extends": [
