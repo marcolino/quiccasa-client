@@ -1,8 +1,9 @@
+#!/usr/bin/env node
 /**
  * Build sitemap.xml for a react web app, starting from the routes file, using only node.js
  */
 
-const fs = require('fs');
+const fs = require("fs");
 
 const sitemapFileName = "./public/sitemap.xml";
 const hostName = "https://quiccasa.sistemisolari.com"; // the url of the website: the protocol and the domain name
@@ -21,7 +22,7 @@ fs.readFile(routesPath, "utf8", (err, data) => {
       const matchPath = /path=[\"\'](.*?)[\"\']/.exec(matchRoute);
       const matchFrequency = /sitemapFrequency=\{[\"\']?(.*?)[\"\']?\}/.exec(matchRoute);
       const matchPriority = /sitemapPriority=\{[\"\']?(.*?)[\"\']?\}/.exec(matchRoute);
-      if (matchPath[1]) {
+      if (matchPath && matchFrequency) {
         routes.push({
           path: matchPath[1],
           frequency: matchFrequency ? matchFrequency[1] : defaultFrequency,

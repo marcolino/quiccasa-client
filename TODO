@@ -24,17 +24,29 @@
 - provare react-gravatar - OK
 - modificare i tests Jest per funzionare con Suspense - OK
 - finire scripts/sitemap-search-engines-update.sh - OK
+- parametrizzare title in index.html - OK
+- usare il main brand logo per le favicon e i logo in /static (e rinominare "logo" in "favicon") - OK
+- usare react-gravatar solo per il logged user e solo nell'header, non nel menu - OK
+- gestire meta name="theme-color" in index.html - OK
+- parametrizzare short_name e name in manifest.json - OK
 - verificare che le traduzioni del backend AWS Ampilify (I18n) siano state implementate da Amplify - OPENED ISSUE ON https://github.com/aws-amplify/amplify-js/issues/8599 - See https://github.com/aws-amplify/amplify-js/blob/master/packages/aws-amplify-react/src/AmplifyI18n.tsx
+
 - nei componenti Auth non usare "toast" per i messaggi importanti (codice inviato a ..."), ma inserirli nel layout, quando possibile - ?
 - tracciare la registrazione (e altro) dell'utente con react-tracking e google tag manager (?)
 - creare le email privacy@sistemisolari.com, info@sistemisolari.com su AWS SES (?)
-- usare react-gravatar solo per il logged user e solo nell'header, non nel menu
-- usare il main brand logo per le favicon e i logo in /static (logo... dovrebbe essere rinominato favicon...)
+- spostare la posizione dello Spinner sull'header (?)
+
 - far funzionare i login federati
 - gestire I18n
-- risolvere i vari TODO's
-- parametrizzare title in index.html e short_name e name in manifest.json
-- completare il README.md
+- dopo aver gestito I18n (con i18next?), cambiare "html lang" quando si cambia lingua con `i18next.on('languageChanged', (lng) => {document.documentElement.setAttribute('lang', lng);});`
 - aggiungere tests Jest con "toMatchSnapshot()"
-- tradurre i Temini d'uso e la Privacy Policy almeno in inglese
 - dopo aver aggiunto qualche contenuto, pensare a qualche animazione
+- risolvere i vari TODO's
+- tradurre i Temini d'uso e la Privacy Policy almeno in inglese
+- completare (e testare) gli attributi aria
+- capire e gestire testing coverage
+- seguire i suggerimenti di chrome lighhouse
+- gestire la navigazione da tastiera (e in signup/confirm, o dove ci sono più submit, attivare il corretto default submit)
+- gestire tags opengraph / twitter in index.html
+- completare il README.md (copiare lo stile di uno bello)
+- usare sempre " anzichè '

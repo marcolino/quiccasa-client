@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -27,15 +27,16 @@ const useStyles = makeStyles((theme) => ({
   root: {
     //flexGrow: 1,
   },
-  offset: theme.mixins.toolbar,
+  offset: theme.mixins.toolbar, // to avoid contents to show behide headr
   header: {
-    backgroundColor: theme.palette.headerBackground,
-    color: theme.palette.headerForeground.dark,
+    fontSize: "1.15em",
+    backgroundColor: theme.palette.header.backgroundColor,
+    color: theme.palette.header.color,
     paddingRight: theme.spacing(1),
     paddingLeft: theme.spacing(1),
   },
   logo: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(0.5),
     marginRight: theme.spacing(2),
   },
   menuLink: {
@@ -44,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       textDecoration: "none",
     },
+  },
+  menuLabel: {
+    paddingLeft: theme.spacing(1.5),
+  },
+  headerLabel: {
   },
   title: {
     flexGrow: 1,
@@ -55,9 +61,11 @@ const useStyles = makeStyles((theme) => ({
   drawerContainer: {
   },
   menuItem: {
-    borderBottom: "1px solid #e8e8e8",
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    borderBottom: "1px solid #eaeaea",
+    paddingLeft: theme.spacing(1.5),
+    paddingRight: theme.spacing(1.5),
+    paddingTop: "1.5vw",
+    paddingBottom: "1.5vw",
   },
   menuPadding: {
     padding: 0,
@@ -67,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuAppBar() {
   const classes = useStyles();
   const { auth } = useContext(AuthContext);
+  const history = useHistory();
 
   // handle responsiveness
   useEffect(() => {
@@ -104,6 +113,10 @@ export default function MenuAppBar() {
     setAnchorUserMenuEl(null);
   };
   
+  const handleUserJoin = (event) => {
+    history.push("/signin");
+  };
+
   const mainItems = [
     {
       label: "Home",
@@ -127,11 +140,7 @@ export default function MenuAppBar() {
     [
       {
         label: "Profile",
-        icon: 
-        <IconGravatar
-          email={auth.user.attributes.email}
-          size={30}
-        />,
+        icon: <AccountCircleIcon />,
         href: "/profile",
       },
       {
@@ -168,7 +177,7 @@ export default function MenuAppBar() {
         }}>
           <Grid container spacing={1} alignItems="center">
             {icon}
-            <span style={{ paddingLeft: 8, paddingTop: 3 }}>{label}</span>
+            <span className={classes.menuLabel}>{label}</span>
           </Grid>
         </Link>
       </MenuItem>
@@ -184,7 +193,7 @@ export default function MenuAppBar() {
         color: "inherit",
         className: classes.menuLink,
       }}>
-        {label}
+        <span className={classes.headerLabel}>{label}</span>
       </Link>
     ));
   };
@@ -204,7 +213,7 @@ export default function MenuAppBar() {
           }}>
             <Grid container spacing={1} alignItems="center">
               {icon}
-              <span style={{ paddingLeft: 8, paddingTop: 3 }}>{label}</span>
+              <span className={classes.menuLabel}>{label}</span>
             </Grid>
           </Link>
         </MenuItem>
@@ -214,7 +223,7 @@ export default function MenuAppBar() {
   return (
     <header>
       <AppBar className={classes.header} elevation={5} position="fixed">
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" s_tyle={{fontSize: "1.15em"}}>
 
           {/* drawer button */}
           {state.view === "mobile" &&
@@ -247,9 +256,9 @@ export default function MenuAppBar() {
           </RouterLink>
 
           {/* main brand logo text */}
-          <Typography variant="subtitle1" className={classes.title}>
+          <div className={classes.title}>
             {config.appTitle}
-          </Typography>
+          </div>
 
           {state.view === "desktop" &&
             <div>
@@ -259,7 +268,34 @@ export default function MenuAppBar() {
 
           {/* user menu */}
           <>
-            <IconButton
+            {auth.isAuthenticated ?
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleUserMenuOpen}
+                color="inherit"
+              >
+                {auth.isAuthenticated ?
+                  <IconGravatar
+                    email={auth.user.attributes.email}
+                    size={30}
+                  />
+                :
+                  <AccountCircleIcon />
+                }
+              </IconButton>
+            :
+              <Button
+                variant="contained"
+                size="small"
+                color="secondary"
+                onClick={handleUserJoin}
+              >
+                {"Join!"}
+              </Button>
+            }
+            {/* <IconButton
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
@@ -270,10 +306,11 @@ export default function MenuAppBar() {
                 <IconGravatar
                   email={auth.user.attributes.email}
                   size={30}
-                /> :
+                />
+              :
                 <AccountCircleIcon />
               }
-            </IconButton>
+            </IconButton> */}
 
             <Menu
               id="menu-appbar"

@@ -11,12 +11,11 @@
 // opt-in, read https://cra.link/PWA
 
 const isLocalhost = Boolean(
-  false
-  // window.location.hostname === 'localhost' ||
-  //   // [::1] is the IPv6 localhost address.
-  //   window.location.hostname === '[::1]' ||
-  //   // 127.0.0.0/8 are considered localhost for IPv4.
-  //   window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
+  window.location.hostname === 'localhost' ||
+    // [::1] is the IPv6 localhost address.
+    window.location.hostname === '[::1]' ||
+    // 127.0.0.0/8 are considered localhost for IPv4.
+    window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 );
 
 export function register(config) {
@@ -73,13 +72,12 @@ function registerValidSW(swUrl, config) {
               // content until all client tabs are closed.
               console.log(
                 'New content is available and will be used when all ' +
-                  'tabs for this page are closed. See https://cra.link/PWA.'
+                  'tabs for this page are closed.' // See https://cra.link/PWA.
               );
               config.info(
                 'New content is available and will be used when all ' +
-                  'tabs for this page are closed. See https://cra.link/PWA.'
+                  'tabs for this page are closed.' // See https://cra.link/PWA.
               );
-
 
               // Execute callback
               if (config && config.onUpdate) {
@@ -104,7 +102,8 @@ function registerValidSW(swUrl, config) {
     .catch((error) => {
       config.error('Error during service worker registration:', error);
       console.error('Error during service worker registration:', error);
-    });
+    })
+  ;
 }
 
 function checkValidServiceWorker(swUrl, config) {
@@ -127,14 +126,15 @@ function checkValidServiceWorker(swUrl, config) {
         });
       } else {
         // Service worker found. Proceed as normal.
-config.info('Service worker found. Proceed as normal.');
+        //config.info('Service worker found. Proceed as normal.');
         registerValidSW(swUrl, config);
       }
     })
     .catch(() => {
       config.info('No internet connection found. App is running in offline mode.');
       console.log('No internet connection found. App is running in offline mode.');
-    });
+    })
+  ;
 }
 
 export function unregister() {

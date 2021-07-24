@@ -20,36 +20,38 @@ export default function Home() {
   return (
     <div className={classes.home}>
       {`Home for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user ${auth.isAuthenticated ? auth.user.attributes.email : ''}`}
-h 1 <br />
-h 2 <br />
-h 3 <br />
-h 4 <br />
-h 5 <br />
-h 6 <br />
-h 7 <br />
-h 8 <br />
-h 9 <br />
-h 0 <br />
-h 1 <br />
-h 2 <br />
-h 3 <br />
-h 4 <br />
-h 5 <br />
-h 6 <br />
-h 7 <br />
-h 8 <br />
-h 9 <br />
-h 0 <br />
-h 1 <br />
-h 2 <br />
-h 3 <br />
-h 4 <br />
-h 5 <br />
-h 6 <br />
-h 7 <br />
-h 8 <br />
-h 9 <br />
-h 0 <br />
-    </div>
+{/*
+      <br /> 1
+      <br /> 2
+      <br /> 3
+      <br /> 4
+      <br /> 5
+      <br /> 6
+      <br /> 7
+      <br /> 8
+      <br /> 9
+      <br /> 0
+      <br /> 1
+      <br /> 2
+      <br /> 3
+      <br /> 4
+      <br /> 5
+      <br /> 6
+      <br /> 7
+      <br /> 8
+      <br /> 9
+      <br /> 0
+      <br /> 1
+      <br /> 2
+      <br /> 3
+      <br /> 4
+      <br /> 5
+      <br /> 6
+      <br /> 7
+      <br /> 8
+      <br /> 9
+      <br /> 0
+*/}
+   </div>
   );
 }

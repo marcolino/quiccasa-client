@@ -13,10 +13,13 @@
   "appName": "quiccasa",
   "appTitle": "Quiccasa",
   "appSiteUrl": "quiccasa.sistemisolari.com",
+  "startUrl": ".",
+  "display": "standalone",
   "spinner": {
     "delay": 150,
     "type": "ThreeDots",
     "color": "green"
   },
+  "footerHeight": "1.5rem",
   "mobileDesktopWatershed": 900
 }

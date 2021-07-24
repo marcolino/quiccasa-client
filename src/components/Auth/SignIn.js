@@ -14,7 +14,7 @@ import { FacebookIcon, TwitterIcon, GoogleIcon } from "../FederatedIcons";
 import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText, FormDividerWithText, FormCheckbox, FormLink } from "../FormElements";
 import { AuthContext } from "../../providers/AuthProvider";
-import { validateEmail/*, checkPassword*/ } from "../../libs/Validation";
+import { validateEmail } from "../../libs/Validation";
 import config from "../../config.json";
 
 const styles = theme => ({
@@ -64,14 +64,6 @@ export default function SignIn() {
       toast.error(err);
       return false;
     }
-
-    // // check password for minimum complexity
-    // if (!checkPassword(password)) {
-    //   const err = "Please supply a more complex password";
-    //   setError({ password: err });
-    //   toast.error(err);
-    //   return false;
-    // }
 
     if (!password) {
       const err = "Please supply a password";
@@ -234,7 +226,7 @@ export default function SignIn() {
             </FormText>
           </Grid>
 
-          <Box m={1} />
+          <Box m={0} />
 
           <FormButton
             social={"Facebook"}

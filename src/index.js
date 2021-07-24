@@ -4,7 +4,6 @@ import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { ToastContainer, toast } from "./components/Toasts";
-//import "./index.css";
 
 const root = document.getElementById('root');
 ReactDOM.render(
@@ -32,4 +31,3 @@ reportWebVitals(console.log);
 // Learn more about service workers: https://cra.link/PWA
 //serviceWorkerRegistration.unregister();
 serviceWorkerRegistration.register(toast);
-//registerServiceWorker(toast); OLD

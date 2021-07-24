@@ -65,7 +65,7 @@ export default function Body() {
         setAuth({isAuthenticated: true, user});
       },
       error: (err) => {
-        console.info(err);
+        //console.info(err);
       }
     });
   }, [setAuth]);

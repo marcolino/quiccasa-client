@@ -1,17 +1,20 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from '@material-ui/core/CssBaseline';
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { AuthProvider } from "../providers/AuthProvider";
 import { StatusProvider } from "../providers/StatusProvider";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
 import Spinner from "./Spinner";
-import theme from "../theme";
+import { isAuthLocation } from "../libs/Misc";
+import config from "../config";
+import theme from "../themes/default"; // here we choose the theme
 
 export default function App() {
+
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
@@ -27,37 +30,33 @@ export default function App() {
   );
 }
 
-// TODO: use isAuthLocation, and not in Footer, to avoid showing footer at all if not wanted
-
-const footerHeight = '1.5rem';
 const useStyles = makeStyles(theme => ({
   contentsContainer: {
-    position: 'relative',
-    minHeight: '100vh',
+    position: "relative",
+    minHeight: "100vh",
   },
-  contentsWrap: {
-    paddingBottom: footerHeight,
-  },
+  contentsWrap: props => ({
+    paddingBottom: props.footerHeight,
+  }),
   header: {
-    flexGrow: 1,
   },
   body: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'left',
-    //padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "left",
   },
-  footer: {
-    position: 'absolute',
-    bottom: '0.5rem',
-    width: '100%',
-    height: footerHeight,
-  },
+  footer: props => ({
+    position: "absolute",
+    bottom: "0.5rem",
+    width: "100%",
+    height: props.footerHeight,
+  }),
 }));
 
 const Contents = () => {
-	const classes = useStyles();
+  const location = useLocation();
+	const classes = useStyles({footerHeight: isAuthLocation(location) ? 0 : config.footerHeight }); // hide footer while in auth screens
 
   return (
     <div className={classes.contentsContainer}>

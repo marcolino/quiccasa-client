@@ -3,7 +3,7 @@
     <url>
       <loc>https://quiccasa.sistemisolari.com/</loc>
       <changefreq>weekly</changefreq>
-      <priority>1.0</priority>
+      <priority>0.7</priority>
     </url>
     <url>
       <loc>https://quiccasa.sistemisolari.com/signup</loc>
@@ -16,38 +16,13 @@
       <priority>0.3</priority>
     </url>
     <url>
-      <loc>https://quiccasa.sistemisolari.com/profile</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.3</priority>
-    </url>
-    <url>
-      <loc>https://quiccasa.sistemisolari.com/signout</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.3</priority>
-    </url>
-    <url>
-      <loc>https://quiccasa.sistemisolari.com/forgot-password</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.3</priority>
-    </url>
-    <url>
       <loc>https://quiccasa.sistemisolari.com/searches</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
+      <changefreq>daily</changefreq>
+      <priority>1.0</priority>
     </url>
     <url>
       <loc>https://quiccasa.sistemisolari.com/listings</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-    </url>
-    <url>
-      <loc>https://quiccasa.sistemisolari.com/privacy-policy</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.2</priority>
-    </url>
-    <url>
-      <loc>https://quiccasa.sistemisolari.com/terms-of-use</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.2</priority>
+      <changefreq>daily</changefreq>
+      <priority>1.0</priority>
     </url>
   </urlset>

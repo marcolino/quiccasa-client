@@ -137,21 +137,21 @@ export const FormButton = (props) => {
       fontSize: "1.3em",
     },  
     buttonFederatedFacebook: {
-      backgroundColor: theme.palette.facebook,
+      backgroundColor: theme.palette.socialButtons.facebook.backgroundColor,
       "&:hover": {
-        backgroundColor: shadeColor(theme.palette.facebook, -25),
+        backgroundColor: shadeColor(theme.palette.socialButtons.facebook.backgroundColor, -25),
       },
     },
     buttonFederatedTwitter: {
-      backgroundColor: theme.palette.twitter,
+      backgroundColor: theme.palette.socialButtons.twitter.backgroundColor,
       "&:hover": {
-        backgroundColor: shadeColor(theme.palette.twitter, -25),
+        backgroundColor: shadeColor(theme.palette.socialButtons.twitter.backgroundColor, -25),
       },
     },
     buttonFederatedGoogle: {
-      backgroundColor: theme.palette.google,
+      backgroundColor: theme.palette.socialButtons.google.backgroundColor,
       "&:hover": {
-        backgroundColor: shadeColor(theme.palette.google, -25),
+        backgroundColor: shadeColor(theme.palette.socialButtons.google.backgroundColor, -25),
       },
     },
   
