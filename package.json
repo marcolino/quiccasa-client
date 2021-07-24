@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
@@ -36,7 +36,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start-production": "yarn build && serve -s build",
-    "prebuild": "yarn install-pre-push-hook && yarn sitemap-build && yarn favicons-build",
+    "prebuild": "yarn install-pre-push-hook && yarn sitemap-build && yarn favicons-build && yarn manifest-build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-once": "react-scripts test --watchAll=false",
@@ -47,9 +47,12 @@
     "sync": "aws s3 sync build/ s3://quiccasa.sistemisolari.com",
     "eject": "echo -n 'Really sure to eject [yes/no] ? '; read answer; [ $answer = 'yes' ] && react-scripts eject || true",
     "install-pre-push-hook": "cp --remove-destination scripts/git-hooks/pre-push .git/hooks/pre-push && chmod 700 .git/hooks/pre-push",
-    "sitemap-build": "babel-node scripts/sitemap-build.js",
+    "sitemap-build": "node scripts/sitemap-build.js",
     "sitemap-search-engines-update": "scripts/sitemap-search-engines-update.sh",
-    "favicons-build": "scripts/favicons-build.sh"
+    "favicons-build": "scripts/favicons-build.sh",
+    "manifest-build": "scripts/manifest-build.js",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "lighthouse": "lighthouse http://localhost:3000/ --output json --output-path src/__tests__/lighthouseOutput.json"
   },
   "eslintConfig": {
     "extends": [
@@ -71,6 +74,8 @@
   },
   "devDependencies": {
     "@babel/core": "7.14.6",
-    "@babel/preset-env": "^7.14.7"
+    "@babel/preset-env": "^7.14.7",
+    "lighthouse": "^8.1.0",
+    "webpack-bundle-analyzer": "^4.4.2"
   }
 }
