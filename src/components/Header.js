@@ -252,7 +252,7 @@ export default function MenuAppBar() {
 
           {/* main brand logo icon */}
           <RouterLink to="/">
-            <IconCustom name="LogoMain" size={30} className={classes.logo}/>
+            <IconCustom name="LogoMain" size={30} className={classes.logo} />
           </RouterLink>
 
           {/* main brand logo text */}
@@ -277,10 +277,11 @@ export default function MenuAppBar() {
                 color="inherit"
               >
                 {auth.isAuthenticated ?
-                  <IconGravatar
-                    email={auth.user.attributes.email}
-                    size={30}
-                  />
+                  <AccountCircleIcon />
+                  // <IconGravatar
+                  //   email={auth.user.attributes.email}
+                  //   size={30}
+                  // />
                 :
                   <AccountCircleIcon />
                 }
@@ -295,22 +296,6 @@ export default function MenuAppBar() {
                 {"Join!"}
               </Button>
             }
-            {/* <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleUserMenuOpen}
-              color="inherit"
-            >
-              {auth.isAuthenticated ?
-                <IconGravatar
-                  email={auth.user.attributes.email}
-                  size={30}
-                />
-              :
-                <AccountCircleIcon />
-              }
-            </IconButton> */}
 
             <Menu
               id="menu-appbar"

@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
+import IconCustom from "./IconCustom";
 import { isAuthLocation } from "../libs/Misc";
 import config from "../config.json";
 import packageJson from "../package.alias.json";
@@ -15,28 +16,24 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function Footer() {
+export default function Footer(props) {
   const location = useLocation();
 	const classes = useStyles();
 
   return isAuthLocation(location) ? null : ( // hide footer while in auth screens
     <Container className={classes.footer}>
       <Grid container justifyContent="center">
-        <Copyright color={"textSecondary"} />
+        <Typography component="h6" variant="body2" color={"textSecondary"}>
+          {packageJson.name} {" "}
+          {"v"}{packageJson.version} {" ~ "}
+          {"©"} {" "} {new Date().getFullYear()}, {" "}
+          <Link color="inherit" href={config.companyHomeSiteUrl}>
+            {config.companyName}
+          </Link>
+          <span>&emsp;</span>
+          <IconCustom name={`Network.${props.isOnline ? "on" : "off"}`} fill="red" size={12} alt="Network connection indicator" title={`Network connection is ${props.isOnline ? "on" : "off"}`} />
+        </Typography>
       </Grid>
     </Container>
-  );
-}
-
-const Copyright = (props) => {
-  return (
-    <Typography component="h6" variant="body2" color={props.color}>
-      {packageJson.name} {" "}
-      {"v"}{packageJson.version} {" ~ "}
-      {"©"} {" "} {new Date().getFullYear()}, {" "}
-      <Link color="inherit" href={config.companyHomeSiteUrl}>
-        {config.companyName}
-      </Link>{" "}
-    </Typography>
   );
 }

@@ -7,10 +7,10 @@ import Routes from "./Routes";
 
 const useStyles = makeStyles(theme => ({
   body: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'left',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "left",
     padding: theme.spacing(2),
   },
 }));
@@ -22,9 +22,9 @@ export default function Body() {
   useEffect(() => {
 
     const isLocalhost = Boolean(
-      window.location.hostname === 'localhost' ||
+      window.location.hostname === "localhost" ||
       // [::1] is the IPv6 localhost address.
-      window.location.hostname === '[::1]' ||
+      window.location.hostname === "[::1]" ||
       // 127.0.0.1/8 is considered localhost for IPv4.
       window.location.hostname.match(
         /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
@@ -32,16 +32,26 @@ export default function Body() {
     );
   
     const oauth = {
-      domain: 'sistemisolari.auth.eu-west-1.amazoncognito.com',
-      scope: ['phone', 'email', 'profile', 'openid'/*, 'aws.cognito.signin.user.admin'*/],
-      responseType: 'code', // or 'token', note that REFRESH token will only be generated when the responseType is code
+      domain: "sistemisolari.auth.eu-west-1.amazoncognito.com",
+      scope: ["phone", "email", "profile", "openid"/*, "aws.cognito.signin.user.admin"*/],
+      responseType: "code", // or "token", note that REFRESH token will only be generated when the responseType is code
     };
 
+console.log("isLocalhost:", isLocalhost);
     Amplify.configure({
       Auth: {
-        oauth: {...oauth,
-          redirectSignIn:  isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
-          redirectSignOut:  isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
+        oauth: {
+          
+          //...oauth,
+
+          domain: "sistemisolari.auth.eu-west-1.amazoncognito.com",
+          scope: ["phone", "email", "profile", "openid"/*, "aws.cognito.signin.user.admin"*/],
+          responseType: "code", // or "token", note that REFRESH token will only be generated when the responseType is code
+
+          //redirectSignIn: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
+          redirectSignIn: isLocalhost ? "http://localhost:3000/oauth2" : "https://sistemisolari.auth.eu-west-1.amazoncognito.com/oauth2/authorize",
+          //https://sistemisolari.auth.eu-west-1.amazoncognito.com/oauth2/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&response_type=code&client_id=67c2r6sh1fo6c85u819m9pir91&identity_provider=facebook&scope=phone%20email%20profile%20openid&state=GcPFRP5T6K9GjrYXIfpBEq4fPEjg1wu9&code_challenge=XB2RTxVNEFc5S9SyEwFiUerhSKcJkTOEMJkjHDfK0rA&code_challenge_method=S256         
+          redirectSignOut: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
         },
         region: process.env.REACT_APP_REGION,
         userPoolId: process.env.REACT_APP_USER_POOL_ID,
@@ -50,18 +60,18 @@ export default function Body() {
       },
     });
 
-    I18n.setLanguage('it'); // TODO: this should enable amplify localized error messages, but it's not yet implemented (try using it before configure()...)
+    I18n.setLanguage("it"); // TODO: this should enable amplify localized error messages, but it's not yet implemented (try using it before configure()...)
     
     // Auth.currentAuthenticatedUser()
     // .then(user => {
-    //   console.log('currentAuthenticatedUser:', user);
+    //   console.log("currentAuthenticatedUser:", user);
     //   setAuth({isAuthenticated: true, user});
     // })
     // .catch(err => console.log(err));
   
     currentAuthenticatedUser({
       success: (user) => {
-        console.log('currentAuthenticatedUser:', user);
+        console.log("currentAuthenticatedUser:", user);
         setAuth({isAuthenticated: true, user});
       },
       error: (err) => {

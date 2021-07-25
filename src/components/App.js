@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { BrowserRouter, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { AuthProvider } from "../providers/AuthProvider";
 import { StatusProvider } from "../providers/StatusProvider";
+import { OnlineStatusProvider, OnlineStatusContext } from "../providers/OnlineStatusProvider";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
 import Spinner from "./Spinner";
+import CookieBanner from "./CookieBanner";
 import { isAuthLocation } from "../libs/Misc";
 import config from "../config";
 import theme from "../themes/default"; // here we choose the theme
@@ -18,13 +20,15 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        <StatusProvider>
-          <CssBaseline />
-          <BrowserRouter>
-            <Contents />
-            <Spinner />
-          </BrowserRouter>
-        </StatusProvider>
+        <OnlineStatusProvider>
+          <StatusProvider>
+            <CssBaseline />
+            <BrowserRouter>
+              <Contents />
+              <Spinner />
+            </BrowserRouter>
+          </StatusProvider>
+        </OnlineStatusProvider>
       </AuthProvider>
     </ThemeProvider>
   );
@@ -56,6 +60,7 @@ const useStyles = makeStyles(theme => ({
 
 const Contents = () => {
   const location = useLocation();
+  const isOnline = useContext(OnlineStatusContext);
 	const classes = useStyles({footerHeight: isAuthLocation(location) ? 0 : config.footerHeight }); // hide footer while in auth screens
 
   return (
@@ -63,9 +68,10 @@ const Contents = () => {
       <div className={classes.contentsWrap}>
         <Header className={classes.header} />
         <Body className={classes.body} />
+        <CookieBanner />
       </div>
       <div className={classes.footer}>
-        <Footer />
+        <Footer isOnline={isOnline} />
       </div>
     </div>
   );

@@ -30,6 +30,7 @@
 - gestire meta name="theme-color" in index.html - OK
 - parametrizzare short_name e name in manifest.json - OK
 - verificare che le traduzioni del backend AWS Ampilify (I18n) siano state implementate da Amplify - OPENED ISSUE ON https://github.com/aws-amplify/amplify-js/issues/8599 - See https://github.com/aws-amplify/amplify-js/blob/master/packages/aws-amplify-react/src/AmplifyI18n.tsx
+- handle cookie consent popup - OK
 
 - nei componenti Auth non usare "toast" per i messaggi importanti (codice inviato a ..."), ma inserirli nel layout, quando possibile - ?
 - tracciare la registrazione (e altro) dell'utente con react-tracking e google tag manager (?)
@@ -42,6 +43,7 @@
 - aggiungere tests Jest con "toMatchSnapshot()"
 - dopo aver aggiunto qualche contenuto, pensare a qualche animazione
 - risolvere i vari TODO's
+- accettare invio come main submit in tutti i forms
 - tradurre i Temini d'uso e la Privacy Policy almeno in inglese
 - completare (e testare) gli attributi aria
 - capire e gestire testing coverage
@@ -50,3 +52,6 @@
 - gestire tags opengraph / twitter in index.html
 - completare il README.md (copiare lo stile di uno bello)
 - usare sempre " anzichè '
+- rimuovere console.*()
+- organizzare meglio la cartella assets
+- organizzare meglio la configurazione amplify (attualmente in Body)

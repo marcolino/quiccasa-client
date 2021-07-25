@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { signIn, federatedSignIn } from "../AuthPromise";
 import { usePromiseTracker } from "react-promise-tracker";
+ import { currentAuthenticatedUser } from "../AuthPromise";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -10,12 +11,14 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
-import { FacebookIcon, TwitterIcon, GoogleIcon } from "../FederatedIcons";
+import { FacebookIcon, TwitterIcon, GoogleIcon } from "../IconFederated";
 import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText, FormDividerWithText, FormCheckbox, FormLink } from "../FormElements";
 import { AuthContext } from "../../providers/AuthProvider";
+import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { validateEmail } from "../../libs/Validation";
 import config from "../../config.json";
+ import { Auth } from "aws-amplify";
 
 const styles = theme => ({
   avatar: {
@@ -53,6 +56,7 @@ export default function SignIn() {
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState({});
   const { setAuth } = useContext(AuthContext);
+  const isOnline = useContext(OnlineStatusContext);
   const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
 
   const validateForm = () => {
@@ -79,6 +83,7 @@ export default function SignIn() {
     e.preventDefault();
     if (promiseInProgress) return;
     if (!validateForm()) return;
+    if (!isOnline) return toast.warning("Sorry, we are currently offline. Please wait for the network to become available.");
     setError({});
 
     signIn({
@@ -105,20 +110,76 @@ export default function SignIn() {
   const formFederatedSignIn = (e, provider) => {
     e.preventDefault();
     if (promiseInProgress) return;
+    if (!isOnline) return toast.warning("Sorry, we are currently offline. Please wait for the network to become available.");
 
-    federatedSignIn({
-      provider,
-    }, {
-      success: (user) => {
-        setAuth({isAuthenticated: true, user});
-        setEmail("");
-        setPassword("");
-        //history.push("/"); // TODO: check if we need this, when social sign in will work...
-      },
-      error: (err) => {
-        toast.error(err);
-      },
+
+
+    console.log('federatedSignIn provider:', provider);
+    Auth.federatedSignIn(
+      { provider }
+    ).then(cred => {
+      // if success, you will get the AWS credentials
+      console.log('cred:', cred);
+      return Auth.currentAuthenticatedUser();
+    }).then(user => {
+      // if success, the user object you passed in Auth.federatedSignIn
+      console.log('success:', user);
+    }).catch(e => {
+      console.log('error:', e);
     });
+
+
+
+    // Auth.federatedSignIn(
+    //   "google"
+    // ).then((user) => {
+    //   console.log('federatedSignIn success! - user:', user)
+    //   setAuth({isAuthenticated: true, user});
+    //   setEmail("");
+    //   setPassword("");
+    //   //history.push("/"); // TODO: check if we need this, when social sign in will work...
+
+    //   // TODO: do we need this or Home's currentAuthenticatedUser() is sufficient?
+    //   currentAuthenticatedUser({
+    //     success: (user) => {
+    //       console.log("federatedSignIn currentAuthenticatedUser:", user);
+    //       setAuth({isAuthenticated: true, user});
+    //     },
+    //     error: (err) => {
+    //       //console.info(err);
+    //     }
+    //   });
+    // }).catch((data) => {
+    //   console.error(data)
+    // });
+
+
+
+//     federatedSignIn(
+//       "google" //provider,
+//     , {
+//       success: (user) => {
+// console.log('federatedSignIn success! - user:', user)
+//         setAuth({isAuthenticated: true, user});
+//         setEmail("");
+//         setPassword("");
+//         //history.push("/"); // TODO: check if we need this, when social sign in will work...
+
+//         // TODO: do we need this or Home's currentAuthenticatedUser() is sufficient?
+//         currentAuthenticatedUser({
+//           success: (user) => {
+//             console.log("federatedSignIn currentAuthenticatedUser:", user);
+//             setAuth({isAuthenticated: true, user});
+//           },
+//           error: (err) => {
+//             //console.info(err);
+//           }
+//         });
+//       },
+//       error: (err) => {
+//         toast.error(err);
+//       },
+//     });
   };
 
   return (

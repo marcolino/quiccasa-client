@@ -26,7 +26,6 @@ const PrivacyPolicy = lazy(() => import("./PrivacyPolicy"));
 const TermsOfUse = lazy(() => import("./TermsOfUse"));
 
 export default (
-  // <Suspense fallback={<span>... TODO ...</span>}> {/* TODO */}
   <Suspense fallback={<Spinner />}>
     <Switch>
       {/* sitemapFrequency and sitemapPriority are for sitemap building */}

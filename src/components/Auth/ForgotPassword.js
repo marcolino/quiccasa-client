@@ -94,9 +94,9 @@ export default function ForgotPassword() {
         }
       },
       error: (err) => {
-        console.error('forgotPassword error:', err);
+        console.error("forgotPassword error:", err);
         toast.error(err.message);
-        setError({ email: err.message}); // TODO: confirm we always should blame email input for error
+        setError({ email: err.message}); // TODO: should we always blame email input for error?
       }
     });
   };
@@ -107,7 +107,7 @@ export default function ForgotPassword() {
     
     forgotPasswordSubmit(email, code, password, {
       success: data => {
-        console.log('confirmForgotPassword success data:', data);
+        console.log("confirmForgotPassword success data:", data);
         setWaitingForCode(false);
         setEmail("");
         setPassword("");
@@ -117,7 +117,7 @@ export default function ForgotPassword() {
         history.push("/signin");
       },
       error: (err) => {
-        console.error('confirmForgotPassword error:', err);
+        console.error("confirmForgotPassword error:", err);
         toast.error(err.message);
         setError({ password: err.message}); // TODO: check whom to blame for error
       }

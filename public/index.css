@@ -49,7 +49,8 @@ input::-webkit-inner-spin-button {
   background: #0088bb !important;
 }
 .Toastify__toast--warning {
-  background: #B85500 !important;  
+  /* background: #B85500 !important; */
+  background: orange !important; /* TODO: lighthouse does not like low contrast styles... */
 }
 .Toastify__toast--error {
   background: #921014 !important;

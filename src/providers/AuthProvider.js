@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 
-const initialState = { authorized: false, user: null };
+const initialState = { /*authorized*/ isAuthenticated: false, user: null };
 
 const AuthContext = createContext(initialState);
 

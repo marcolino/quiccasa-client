@@ -1,6 +1,6 @@
-import { ReactComponent as FacebookSvg } from '../assets/facebook.svg';
-import { ReactComponent as TwitterSvg } from '../assets/twitter.svg';
-import { ReactComponent as GoogleSvg } from '../assets/google.svg';
+import { ReactComponent as FacebookSvg } from '../assets/icons/FederatedFacebook.svg';
+import { ReactComponent as TwitterSvg } from '../assets/icons/FederatedTwitter.svg';
+import { ReactComponent as GoogleSvg } from '../assets/icons/FederatedGoogle.svg';
 
 const style = {
   display: 'flex',
