@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { signIn, federatedSignIn } from "../AuthPromise";
+import { signIn/*, federatedSignIn*/ } from "../AuthPromise";
 import { usePromiseTracker } from "react-promise-tracker";
- import { currentAuthenticatedUser } from "../AuthPromise";
+ //import { currentAuthenticatedUser } from "../AuthPromise";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -18,7 +18,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { validateEmail } from "../../libs/Validation";
 import config from "../../config.json";
- import { Auth } from "aws-amplify";
+ import { Auth, Hub } from 'aws-amplify';
 
 const styles = theme => ({
   avatar: {
@@ -58,6 +58,18 @@ export default function SignIn() {
   const { setAuth } = useContext(AuthContext);
   const isOnline = useContext(OnlineStatusContext);
   const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
+
+  useEffect(() => {
+    //checkUser();
+console.log('HUB listening...');
+    Hub.listen("auth", data => {
+      const { payload } = data;
+console.log('DATA:', data);
+      if (payload.event === "signOut") {
+        //setUser(null);
+      }
+    });
+  }, []);
 
   const validateForm = () => {
     
@@ -112,21 +124,23 @@ export default function SignIn() {
     if (promiseInProgress) return;
     if (!isOnline) return toast.warning("Sorry, we are currently offline. Please wait for the network to become available.");
 
-
-
     console.log('federatedSignIn provider:', provider);
-    Auth.federatedSignIn(
-      { provider }
-    ).then(cred => {
+    try {
+      Auth.federatedSignIn(
+        { provider }
+    ).then(user => {
       // if success, you will get the AWS credentials
-      console.log('cred:', cred);
-      return Auth.currentAuthenticatedUser();
-    }).then(user => {
-      // if success, the user object you passed in Auth.federatedSignIn
-      console.log('success:', user);
+      console.log('user:', user);
+    //   return Auth.currentAuthenticatedUser();
+    // }).then(user => {
+    //   // if success, the user object you passed in Auth.federatedSignIn
+    //   console.log('success:', user);
     }).catch(e => {
       console.log('error:', e);
     });
+    } catch(e) {
+      console.log('error:', e);
+    }
 
 
 

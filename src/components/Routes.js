@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Route, Switch } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 import Spinner from "./Spinner";
 // import Home from "./Home";
 // import SignUp from "./Auth/SignUp";
@@ -39,6 +39,7 @@ export default (
       <Route path="/listings" component={Listings} /> {/* sitemapFrequency={"daily"} sitemapPriority={1.0} */}
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-use" component={TermsOfUse} />
+      <Redirect from="/oauth2" to="/" />
       <Route path="" component={NotFound} />
     </Switch>
   </Suspense>

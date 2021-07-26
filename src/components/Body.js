@@ -5,6 +5,8 @@ import { currentAuthenticatedUser } from "./AuthPromise";
 import { AuthContext } from "../providers/AuthProvider";
 import Routes from "./Routes";
 
+window.LOG_LEVEL = 'DEBUG'; 
+
 const useStyles = makeStyles(theme => ({
   body: {
     display: "flex",
@@ -31,11 +33,17 @@ export default function Body() {
       )
     );
   
-    const oauth = {
-      domain: "sistemisolari.auth.eu-west-1.amazoncognito.com",
-      scope: ["phone", "email", "profile", "openid"/*, "aws.cognito.signin.user.admin"*/],
-      responseType: "code", // or "token", note that REFRESH token will only be generated when the responseType is code
-    };
+    // const oauth = {
+    //   domain: "sistemisolari.auth.eu-west-1.amazoncognito.com",
+    //   scope: ["phone", "email", "profile", "openid"/*, "aws.cognito.signin.user.admin"*/],
+    //   responseType: "code", // or "token", note that REFRESH token will only be generated when the responseType is code
+    // };
+
+
+/*
+Error 400: redirect_uri_mismatch
+The redirect URI in the request, https://sistemisolari.auth.eu-west-1.amazoncognito.com/oauth2/idpresponse, does not match the ones authorized for the OAuth client. To update the authorized redirect URIs, visit: https://console.developers.google.com/apis/credentials/oauthclient/748892040096-s5a1v8vldot626utfleckr08r51qtigp.apps.googleusercontent.com?project=748892040096
+*/
 
 console.log("isLocalhost:", isLocalhost);
     Amplify.configure({
@@ -46,7 +54,7 @@ console.log("isLocalhost:", isLocalhost);
 
           domain: "sistemisolari.auth.eu-west-1.amazoncognito.com",
           scope: ["phone", "email", "profile", "openid"/*, "aws.cognito.signin.user.admin"*/],
-          responseType: "code", // or "token", note that REFRESH token will only be generated when the responseType is code
+          responseType: "token", //"code", // or "token", note that REFRESH token will only be generated when the responseType is code
 
           //redirectSignIn: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
           redirectSignIn: isLocalhost ? "http://localhost:3000/oauth2" : "https://sistemisolari.auth.eu-west-1.amazoncognito.com/oauth2/authorize",

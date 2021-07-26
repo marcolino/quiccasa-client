@@ -19,7 +19,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import IconCustom from "./IconCustom";
-import IconGravatar from "./IconGravatar";
+ //import IconGravatar from "./IconGravatar";
 import { AuthContext } from "../providers/AuthProvider";
 import config from "../config.json";
 
