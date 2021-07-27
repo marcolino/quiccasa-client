@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { signIn/*, federatedSignIn*/ } from "../AuthPromise";
+import { signIn, federatedSignIn } from "../AuthPromise";
 import { usePromiseTracker } from "react-promise-tracker";
- //import { currentAuthenticatedUser } from "../AuthPromise";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -11,14 +10,13 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
-import { FacebookIcon, TwitterIcon, GoogleIcon } from "../IconFederated";
+import { FacebookIcon, GoogleIcon } from "../IconFederated";
 import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText, FormDividerWithText, FormCheckbox, FormLink } from "../FormElements";
 import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { validateEmail } from "../../libs/Validation";
 import config from "../../config.json";
- import { Auth, Hub } from 'aws-amplify';
 
 const styles = theme => ({
   avatar: {
@@ -59,32 +57,20 @@ export default function SignIn() {
   const isOnline = useContext(OnlineStatusContext);
   const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
 
-  useEffect(() => {
-    //checkUser();
-console.log('HUB listening...');
-    Hub.listen("auth", data => {
-      const { payload } = data;
-console.log('DATA:', data);
-      if (payload.event === "signOut") {
-        //setUser(null);
-      }
-    });
-  }, []);
-
   const validateForm = () => {
     
     // validate email formally
     if (!validateEmail(email)) {
       const err = "Please supply a valid email";
       setError({ email: err });
-      toast.error(err);
+      toast.warning(err);
       return false;
     }
 
     if (!password) {
       const err = "Please supply a password";
       setError({ password: err });
-      toast.error(err);
+      toast.warning(err);
       return false;
     }
 
@@ -112,7 +98,7 @@ console.log('DATA:', data);
         history.push("/");
       },
       error: (err) => {
-        console.error('signIn error data:', err);
+        console.error("signIn error data:", err);
         toast.error(err.message);
         setError({}); // we don't know whom to blame
       },
@@ -124,76 +110,16 @@ console.log('DATA:', data);
     if (promiseInProgress) return;
     if (!isOnline) return toast.warning("Sorry, we are currently offline. Please wait for the network to become available.");
 
-    console.log('federatedSignIn provider:', provider);
-    try {
-      Auth.federatedSignIn(
-        { provider }
-    ).then(user => {
-      // if success, you will get the AWS credentials
-      console.log('user:', user);
-    //   return Auth.currentAuthenticatedUser();
-    // }).then(user => {
-    //   // if success, the user object you passed in Auth.federatedSignIn
-    //   console.log('success:', user);
-    }).catch(e => {
-      console.log('error:', e);
+    federatedSignIn({provider}, {
+      success: (user) => {
+        //console.log("federatedSignIn user:", user); // always undefined, at this moment...
+      },
+      error: (err) => {
+        console.error("federatedSignIn error data:", err);
+        toast.error(err);
+        setError({}); // we don't know whom to blame
+      },
     });
-    } catch(e) {
-      console.log('error:', e);
-    }
-
-
-
-    // Auth.federatedSignIn(
-    //   "google"
-    // ).then((user) => {
-    //   console.log('federatedSignIn success! - user:', user)
-    //   setAuth({isAuthenticated: true, user});
-    //   setEmail("");
-    //   setPassword("");
-    //   //history.push("/"); // TODO: check if we need this, when social sign in will work...
-
-    //   // TODO: do we need this or Home's currentAuthenticatedUser() is sufficient?
-    //   currentAuthenticatedUser({
-    //     success: (user) => {
-    //       console.log("federatedSignIn currentAuthenticatedUser:", user);
-    //       setAuth({isAuthenticated: true, user});
-    //     },
-    //     error: (err) => {
-    //       //console.info(err);
-    //     }
-    //   });
-    // }).catch((data) => {
-    //   console.error(data)
-    // });
-
-
-
-//     federatedSignIn(
-//       "google" //provider,
-//     , {
-//       success: (user) => {
-// console.log('federatedSignIn success! - user:', user)
-//         setAuth({isAuthenticated: true, user});
-//         setEmail("");
-//         setPassword("");
-//         //history.push("/"); // TODO: check if we need this, when social sign in will work...
-
-//         // TODO: do we need this or Home's currentAuthenticatedUser() is sufficient?
-//         currentAuthenticatedUser({
-//           success: (user) => {
-//             console.log("federatedSignIn currentAuthenticatedUser:", user);
-//             setAuth({isAuthenticated: true, user});
-//           },
-//           error: (err) => {
-//             //console.info(err);
-//           }
-//         });
-//       },
-//       error: (err) => {
-//         toast.error(err);
-//       },
-//     });
   };
 
   return (
@@ -306,21 +232,14 @@ console.log('DATA:', data);
           <FormButton
             social={"Facebook"}
             startIcon={<FacebookIcon />}
-            onClick={(e) => formFederatedSignIn(e, 'Facebook')}
+            onClick={(e) => formFederatedSignIn(e, "Facebook")}
           >
             {"Facebook"}
           </FormButton>
           <FormButton
-            social={"Twitter"}
-            startIcon={<TwitterIcon />}
-            onClick={(e) => formFederatedSignIn(e, 'Twitter')}
-          >
-            {"Twitter"}
-          </FormButton>
-          <FormButton
             social={"Google"}
             startIcon={<GoogleIcon />}
-            onClick={(e) => formFederatedSignIn(e, 'Google')}
+            onClick={(e) => formFederatedSignIn(e, "Google")}
           >
             {"Google"}
           </FormButton>

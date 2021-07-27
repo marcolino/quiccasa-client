@@ -142,12 +142,6 @@ export const FormButton = (props) => {
         backgroundColor: shadeColor(theme.palette.socialButtons.facebook.backgroundColor, -25),
       },
     },
-    buttonFederatedTwitter: {
-      backgroundColor: theme.palette.socialButtons.twitter.backgroundColor,
-      "&:hover": {
-        backgroundColor: shadeColor(theme.palette.socialButtons.twitter.backgroundColor, -25),
-      },
-    },
     buttonFederatedGoogle: {
       backgroundColor: theme.palette.socialButtons.google.backgroundColor,
       "&:hover": {
@@ -178,7 +172,6 @@ export const FormButton = (props) => {
 FormButton.propTypes = {
   social: PropTypes.oneOf([
     "Facebook",
-    "Twitter",
     "Google",
   ]),
 }

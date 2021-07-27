@@ -43,7 +43,7 @@ export default function ForgotPassword() {
     if (!waitingForCode) {
       if (!validateEmail(email)) {
         const err = "Please supply a valid email";
-        toast.error(err);
+        toast.warning(err);
         setError({ email: err });
         return false;
       }
@@ -52,7 +52,7 @@ export default function ForgotPassword() {
     if (waitingForCode) {
       if (!checkPassword(password)) {
         const err = "Please supply a more complex password";
-        toast.error(err);
+        toast.warning(err);
         setError({ password: err });
         return false;
       }
@@ -60,13 +60,13 @@ export default function ForgotPassword() {
       if (!passwordConfirmed) {
         const err = "Please confirm the password";
         setError({ passwordConfirmed: err });
-        toast.error(err);
+        toast.warning(err);
         return false;
       }
   
       if (password !== passwordConfirmed) {
         const err = "The confirmed password does not match the password";
-        toast.error(err);
+        toast.warning(err);
         setError({ passwordConfirmed: err });
         return false;
       }

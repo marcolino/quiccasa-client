@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Switch, Route, Redirect } from 'react-router';
+import { Switch, Route } from 'react-router';
 import Spinner from "./Spinner";
 // import Home from "./Home";
 // import SignUp from "./Auth/SignUp";
@@ -28,7 +28,11 @@ const TermsOfUse = lazy(() => import("./TermsOfUse"));
 export default (
   <Suspense fallback={<Spinner />}>
     <Switch>
-      {/* sitemapFrequency and sitemapPriority are for sitemap building */}
+      {/**
+       * Comments with `sitemapFrequency` and `sitemapPriority` are for sitemap building:
+       * if they are present, the route is added to sitemap.xml with those values,
+       * when it is automatically built before deploying.
+       */}
       <Route path="/" exact component={Home} /> {/* sitemapFrequency={"weekly"} sitemapPriority={0.7} */}
       <Route path="/signup" component={SignUp} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.3} */}
       <Route path="/signin" component={SignIn} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.3} */}
@@ -39,7 +43,6 @@ export default (
       <Route path="/listings" component={Listings} /> {/* sitemapFrequency={"daily"} sitemapPriority={1.0} */}
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-use" component={TermsOfUse} />
-      <Redirect from="/oauth2" to="/" />
       <Route path="" component={NotFound} />
     </Switch>
   </Suspense>

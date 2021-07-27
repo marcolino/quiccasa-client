@@ -4,8 +4,7 @@ import Amplify, { I18n } from "aws-amplify";
 import { currentAuthenticatedUser } from "./AuthPromise";
 import { AuthContext } from "../providers/AuthProvider";
 import Routes from "./Routes";
-
-window.LOG_LEVEL = 'DEBUG'; 
+import config from "../config.json";
 
 const useStyles = makeStyles(theme => ({
   body: {
@@ -33,33 +32,23 @@ export default function Body() {
       )
     );
   
+    // set isAuthenticated to undefined because we don't know yet, and so that we can later detect this suspense state
+    setAuth({isAuthenticated: undefined, user: null});
+
     // const oauth = {
     //   domain: "sistemisolari.auth.eu-west-1.amazoncognito.com",
-    //   scope: ["phone", "email", "profile", "openid"/*, "aws.cognito.signin.user.admin"*/],
-    //   responseType: "code", // or "token", note that REFRESH token will only be generated when the responseType is code
+    //   scope: ["phone", "email", "profile", "openid", "aws.cognito.signin.user.admin"],
+    //   responseType: "code", // "code" or "token"; note that REFRESH token will only be generated when the responseType is "code"
     // };
 
+    window.LOG_LEVEL = (process.env.NODE_ENV !== "production" && config.debugAwsAmplify ? "DEBUG" : "");
 
-/*
-Error 400: redirect_uri_mismatch
-The redirect URI in the request, https://sistemisolari.auth.eu-west-1.amazoncognito.com/oauth2/idpresponse, does not match the ones authorized for the OAuth client. To update the authorized redirect URIs, visit: https://console.developers.google.com/apis/credentials/oauthclient/748892040096-s5a1v8vldot626utfleckr08r51qtigp.apps.googleusercontent.com?project=748892040096
-*/
-
-console.log("isLocalhost:", isLocalhost);
     Amplify.configure({
       Auth: {
-        oauth: {
-          
-          //...oauth,
-
-          domain: "sistemisolari.auth.eu-west-1.amazoncognito.com",
-          scope: ["phone", "email", "profile", "openid"/*, "aws.cognito.signin.user.admin"*/],
-          responseType: "token", //"code", // or "token", note that REFRESH token will only be generated when the responseType is code
-
-          //redirectSignIn: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
-          redirectSignIn: isLocalhost ? "http://localhost:3000/oauth2" : "https://sistemisolari.auth.eu-west-1.amazoncognito.com/oauth2/authorize",
-          //https://sistemisolari.auth.eu-west-1.amazoncognito.com/oauth2/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&response_type=code&client_id=67c2r6sh1fo6c85u819m9pir91&identity_provider=facebook&scope=phone%20email%20profile%20openid&state=GcPFRP5T6K9GjrYXIfpBEq4fPEjg1wu9&code_challenge=XB2RTxVNEFc5S9SyEwFiUerhSKcJkTOEMJkjHDfK0rA&code_challenge_method=S256         
-          redirectSignOut: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
+        //oauth: {...oauth,
+        oauth: {...config.oauth,
+          redirectSignIn: isLocalhost ? "http://localhost:3000/" : "https://sistemisolari.auth.eu-west-1.amazoncognito.com/",
+          redirectSignOut: isLocalhost ? "http://localhost:3000/" : "https://sistemisolari.auth.eu-west-1.amazoncognito.com/",
         },
         region: process.env.REACT_APP_REGION,
         userPoolId: process.env.REACT_APP_USER_POOL_ID,
@@ -70,20 +59,14 @@ console.log("isLocalhost:", isLocalhost);
 
     I18n.setLanguage("it"); // TODO: this should enable amplify localized error messages, but it's not yet implemented (try using it before configure()...)
     
-    // Auth.currentAuthenticatedUser()
-    // .then(user => {
-    //   console.log("currentAuthenticatedUser:", user);
-    //   setAuth({isAuthenticated: true, user});
-    // })
-    // .catch(err => console.log(err));
-  
     currentAuthenticatedUser({
       success: (user) => {
-        console.log("currentAuthenticatedUser:", user);
+        console.info("current authenticated user is", user);
         setAuth({isAuthenticated: true, user});
       },
       error: (err) => {
-        //console.info(err);
+        console.info("no current authenticated user");
+        setAuth({isAuthenticated: false, user: null});
       }
     });
   }, [setAuth]);

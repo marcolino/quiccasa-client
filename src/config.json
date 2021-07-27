@@ -21,5 +21,11 @@
     "color": "green"
   },
   "footerHeight": "1.5rem",
-  "mobileDesktopWatershed": 900
+  "mobileDesktopWatershed": 900,
+  "oauth": {
+    "domain": "sistemisolari.auth.eu-west-1.amazoncognito.com",
+    "scope": [ "phone", "email", "profile", "openid", "aws.cognito.signin.user.admin"],
+    "responseType": "code"
+  },
+  "debugAwsAmplify": false
 }

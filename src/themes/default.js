@@ -39,9 +39,6 @@ export default createMuiTheme({
       facebook: {
         backgroundColor: "#1877f2",
       },
-      twitter: {
-        backgroundColor: "#1da1f2",
-      },
       google: {
         backgroundColor: "#db4437",
       },

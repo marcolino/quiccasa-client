@@ -19,7 +19,8 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import IconCustom from "./IconCustom";
- //import IconGravatar from "./IconGravatar";
+ import IconGravatar from "./IconGravatar";
+ import ImageCustom from "./ImageCustom";
 import { AuthContext } from "../providers/AuthProvider";
 import config from "../config.json";
 
@@ -220,6 +221,7 @@ export default function MenuAppBar() {
     ));
   };
 
+console.log('AUTH:', auth);
   return (
     <header>
       <AppBar className={classes.header} elevation={5} position="fixed">
@@ -277,24 +279,40 @@ export default function MenuAppBar() {
                 color="inherit"
               >
                 {auth.isAuthenticated ?
-                  <AccountCircleIcon />
+                  //<AccountCircleIcon />
+
                   // <IconGravatar
                   //   email={auth.user.attributes.email}
                   //   size={30}
                   // />
+
+                  //<img src={auth.user.attributes.picture} alt="user's icon" width={30} style={{borderRadius: "50%"}} />
+
+                  //<ImageCustom src={auth.user.attributes.picture} alt="user's icon" width={30} style={{borderRadius: "50%"}} />
+
+                  //<IconCustom name="UserPicture" size={30} className={classes.logo} />
+
+                  auth.user.attributes.picture ?
+                    <ImageCustom src={auth.user.attributes.picture} alt="user's icon" width={30} style={{borderRadius: "50%"}} />
+                  :
+                    <IconGravatar
+                      email={auth.user.attributes.email}
+                      size={30}
+                    />
                 :
                   <AccountCircleIcon />
                 }
               </IconButton>
             :
-              <Button
-                variant="contained"
-                size="small"
-                color="secondary"
-                onClick={handleUserJoin}
-              >
-                {"Join!"}
-              </Button>
+              (auth.isAuthenticated === false) && // if auth.isAuthenticated is undefined, we don't kow yet, so do not show anything...
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="secondary"
+                  onClick={handleUserJoin}
+                >
+                  {"Join !"}
+                </Button>
             }
 
             <Menu

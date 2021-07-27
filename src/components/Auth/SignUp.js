@@ -73,7 +73,7 @@ export default function SignUp() {
     if (!validateEmail(email)) {
       const err = "Please supply a valid email";
       setError({ email: err });
-      toast.error(err);
+      toast.warning(err);
       return false;
     }
 
@@ -81,21 +81,21 @@ export default function SignUp() {
     if (!checkPassword(password)) {
       const err = "Please supply a more complex password";
       setError({ password: err });
-      toast.error(err);
+      toast.warning(err);
       return false;
     }
 
     if (!passwordConfirmed) {
       const err = "Please confirm the password";
       setError({ passwordConfirmed: err });
-      toast.error(err);
+      toast.warning(err);
       return false;
     }
 
     if (password !== passwordConfirmed) {
       const err = "The confirmed password does not match the password";
       setError({ passwordConfirmed: err });
-      toast.error(err);
+      toast.warning(err);
       return false;
     }
 
@@ -129,7 +129,7 @@ export default function SignUp() {
       }
     }, {
       success: (data) => {
-        console.log('signUp success data:', data);
+        console.log("signUp success data:", data);
         const medium = data.codeDeliveryDetails.DeliveryMedium.toLowerCase();
         toast.info(`Confirmation code just sent by ${medium}`)
         setCodeDeliveryMedium(medium);
@@ -137,8 +137,8 @@ export default function SignUp() {
         setPassword("");
       },
       error: (err) => {
-        console.error('signup error data:', err);
-        toast.error(err.message);
+        console.error("signup error data:", err);
+        toast.warning(err.message);
         switch (err.code) {
           case "UsernameExistsException":
             setError({ email: err.message }); // since we use email as username, we blame email field as guilty
@@ -157,11 +157,10 @@ export default function SignUp() {
 
     confirmSignUp(email, code, {
       success: (data) => {
-        console.log('confirmSignUp success data:', data);
         if (data === "SUCCESS") {
           toast.success(<div>Registered successfully.<br />You can now sign in with email and password.</div>);
         } else {
-          console.error('confirmSignUp succes, not SUCCESS data:', data);
+          console.error("confirmSignUp success, but data is not 'SUCCESS'", data);
           toast.error(data);
         }
         setWaitingForCode(false);
@@ -170,7 +169,7 @@ export default function SignUp() {
         history.push("/signin");
       },
       error: (err) => {
-        console.error('confirmSignUp error data:', err);
+        console.error("confirmSignUp error data:", err);
         toast.error(err.message);
         setError({ code: err.message});
       },
@@ -186,7 +185,7 @@ export default function SignUp() {
         toast.info(`Code resent successfully by ${codeDeliveryMedium}`);
       },
       error: (err) => {
-        console.error('resendSignUp error data:', err)
+        console.error("resendSignUp error data:", err)
         toast.error(err.message);
         setError({ code: err.message});
       },
@@ -219,7 +218,7 @@ export default function SignUp() {
 
               <Box m={1} />
 
-              <Grid container direction={'row'} spacing={state.rowSpacing} >
+              <Grid container direction={"row"} spacing={state.rowSpacing} >
                 <Grid item xs={12} sm={6}>
                   <FormInput
                     id={"firstName"}
