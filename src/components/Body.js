@@ -45,7 +45,6 @@ export default function Body() {
 
     Amplify.configure({
       Auth: {
-        //oauth: {...oauth,
         oauth: {...config.oauth,
           redirectSignIn: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/", // "https://sistemisolari.auth.eu-west-1.amazoncognito.com/",
           redirectSignOut: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/", // "https://sistemisolari.auth.eu-west-1.amazoncognito.com/",

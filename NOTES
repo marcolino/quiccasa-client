@@ -36,3 +36,16 @@ Performance
 Styling
  - Fluid Typography: https://css-tricks.com/snippets/css/fluid-typography/
  - Color Contrast Checker: https://dequeuniversity.com/rules/axe/2.2/color-contrast?application=lighthouse
+
+AWS
+ - Reset Cloudfront distribution alternate domain name for qiuiccasa:
+   https://console.aws.amazon.com/cloudfront/v3/home?region=eu-west-1#/distributions/E30CJEQ2PIR5NL,
+   edit, set alternate domain name to "quiccasa.sistemisolari.com"
+ - Change Route53 Hosted zones: https://console.aws.amazon.com/route53/v2/hostedzones#ListRecordSets/Z01773871GDWEBESZZ419
+   quiccasa.sistemisolari.com A record was: dleaj9yh1gim0.cloudfront.net.
+ - Automating Cognito Custom Auth Domains with Amplify: https://medium.com/@matt.lavin/automating-cognito-custom-auth-domains-with-amplify-33e7b8f13266
+ - Custom domain support with Cognito #1880: https://github.com/aws-amplify/amplify-cli/issues/1880#issuecomment-626331305
+ - Using Your Own Domain for the Hosted UI: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
+
+ Google Search Console:
+ - https://search.google.com/search-console?resource_id=sc-domain%3Asistemisolari.com

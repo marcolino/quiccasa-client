@@ -23,6 +23,7 @@
   "footerHeight": "1.5rem",
   "mobileDesktopWatershed": 900,
   "oauth": {
+    "HostedUIDomain": "quiccasa.sistemisolari.com",
     "domain": "sistemisolari.auth.eu-west-1.amazoncognito.com",
     "scope": [ "phone", "email", "profile", "openid", "aws.cognito.signin.user.admin"],
     "responseType": "code"

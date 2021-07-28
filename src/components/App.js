@@ -9,7 +9,7 @@ import { OnlineStatusProvider, OnlineStatusContext } from "../providers/OnlineSt
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
-import Spinner from "./Spinner";
+// import Spinner from "./Spinner";
 import CookieBanner from "./CookieBanner";
 import { isAuthLocation } from "../libs/Misc";
 import config from "../config";
@@ -25,7 +25,7 @@ export default function App() {
             <CssBaseline />
             <BrowserRouter>
               <Contents />
-              <Spinner />
+              {/* <Spinner /> */}
             </BrowserRouter>
           </StatusProvider>
         </OnlineStatusProvider>
