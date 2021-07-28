@@ -15,7 +15,7 @@ export default function SignOut() {
   useEffect(() => {
     if (!isOnline) { // fake signout while offline...
       // TODO: we should also at least clear localStorage.CognitoIdentityServiceProvider.* keys ...
-      //return toast.warning("Sorry, we are currently offline. Please wait for the network to become available.");
+      //return toast.warning("You are currently offline. Please wait for the network to become available.");
       setAuth({isAuthenticated: false, user: null})
       history.replace("/");
     } else {

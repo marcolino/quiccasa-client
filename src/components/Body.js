@@ -47,8 +47,8 @@ export default function Body() {
       Auth: {
         //oauth: {...oauth,
         oauth: {...config.oauth,
-          redirectSignIn: isLocalhost ? "http://localhost:3000/" : "https://sistemisolari.auth.eu-west-1.amazoncognito.com/",
-          redirectSignOut: isLocalhost ? "http://localhost:3000/" : "https://sistemisolari.auth.eu-west-1.amazoncognito.com/",
+          redirectSignIn: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/", // "https://sistemisolari.auth.eu-west-1.amazoncognito.com/",
+          redirectSignOut: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/", // "https://sistemisolari.auth.eu-west-1.amazoncognito.com/",
         },
         region: process.env.REACT_APP_REGION,
         userPoolId: process.env.REACT_APP_USER_POOL_ID,

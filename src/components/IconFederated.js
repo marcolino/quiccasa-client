@@ -12,7 +12,7 @@ const style = {
 };
 
 const FacebookIcon = () => (
-  <div style={{...style, width: 24, marginLeft: 1}}>
+  <div style={{...style, width: 26, marginLeft: 1}}>
     <FacebookSvg />
   </div>
 );

@@ -81,6 +81,7 @@ export default function SignIn() {
     e.preventDefault();
     if (promiseInProgress) return;
     if (!validateForm()) return;
+    // TODO: centralize this message, it is used more than once...
     if (!isOnline) return toast.warning("Sorry, we are currently offline. Please wait for the network to become available.");
     setError({});
 
@@ -108,7 +109,8 @@ export default function SignIn() {
   const formFederatedSignIn = (e, provider) => {
     e.preventDefault();
     if (promiseInProgress) return;
-    if (!isOnline) return toast.warning("Sorry, we are currently offline. Please wait for the network to become available.");
+    // TODO: centralize this message, it is used more than once...
+    if (!isOnline) return toast.warning("You are currently offline. Please wait for the network to become available.");
 
     federatedSignIn({provider}, {
       success: (user) => {
