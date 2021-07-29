@@ -31,6 +31,7 @@
 - parametrizzare short_name e name in manifest.json - OK
 - verificare che le traduzioni del backend AWS Ampilify (I18n) siano state implementate da Amplify - OPENED ISSUE ON https://github.com/aws-amplify/amplify-js/issues/8599 - See https://github.com/aws-amplify/amplify-js/blob/master/packages/aws-amplify-react/src/AmplifyI18n.tsx
 - handle cookie consent popup - OK
+- usare sempre " anzichè ' - OK
 
 - nei componenti Auth non usare "toast" per i messaggi importanti (codice inviato a ..."), ma inserirli nel layout, quando possibile - ?
 - tracciare la registrazione (e altro) dell'utente con react-tracking e google tag manager (?)
@@ -40,7 +41,7 @@
 - far funzionare i login federati
 - gestire I18n
 - dopo aver gestito I18n (con i18next?), cambiare "html lang" quando si cambia lingua con `i18next.on('languageChanged', (lng) => {document.documentElement.setAttribute('lang', lng);});`
-- aggiungere tests Jest con "toMatchSnapshot()"
+- capire bene Jest.toMatchSnapshot(), e aggiungere tests con gli snapshots
 - dopo aver aggiunto qualche contenuto, pensare a qualche animazione
 - risolvere i vari TODO's
 - accettare invio come main submit in tutti i forms
@@ -51,7 +52,9 @@
 - gestire la navigazione da tastiera (e in signup/confirm, o dove ci sono più submit, attivare il corretto default submit)
 - gestire tags opengraph / twitter in index.html
 - completare il README.md (copiare lo stile di uno bello)
-- usare sempre " anzichè '
+- rendere i login federati attivi su un flag in config
 - rimuovere console.*()
 - organizzare meglio la cartella assets
 - organizzare meglio la configurazione amplify (attualmente in Body)
+- gestire il logging
+- gestire l'auditing

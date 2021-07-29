@@ -25,7 +25,7 @@
   "oauth": {
     "HostedUIDomain": "quiccasa.sistemisolari.com",
     "domain": "sistemisolari.auth.eu-west-1.amazoncognito.com",
-    "scope": [ "phone", "email", "profile", "openid", "aws.cognito.signin.user.admin"],
+    "scope": [ "phone", "email", "profile", "openid", "aws.cognito.signin.user.admin" ],
     "responseType": "code"
   },
   "debugAwsAmplify": false

@@ -9,7 +9,7 @@ import { OnlineStatusProvider, OnlineStatusContext } from "../providers/OnlineSt
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
-// import Spinner from "./Spinner";
+import Spinner from "./Spinner";
 import CookieBanner from "./CookieBanner";
 import { isAuthLocation } from "../libs/Misc";
 import config from "../config";
@@ -25,7 +25,7 @@ export default function App() {
             <CssBaseline />
             <BrowserRouter>
               <Contents />
-              {/* <Spinner /> */}
+              <Spinner />
             </BrowserRouter>
           </StatusProvider>
         </OnlineStatusProvider>
@@ -44,11 +44,18 @@ const useStyles = makeStyles(theme => ({
   }),
   header: {
   },
+  // body: {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   justifyContent: "center",
+  //   alignItems: "left",
+  // },
   body: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "left",
+    padding: theme.spacing(2),
   },
   footer: props => ({
     position: "absolute",
@@ -66,8 +73,12 @@ const Contents = () => {
   return (
     <div className={classes.contentsContainer}>
       <div className={classes.contentsWrap}>
-        <Header className={classes.header} />
-        <Body className={classes.body} />
+        <div className={classes.header}>
+          <Header />
+        </div>
+        <div className={classes.body}>
+          <Body />
+        </div>
         <CookieBanner />
       </div>
       <div className={classes.footer}>

@@ -19,8 +19,8 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import IconCustom from "./IconCustom";
- import IconGravatar from "./IconGravatar";
- import ImageCustom from "./ImageCustom";
+import IconGravatar from "./IconGravatar";
+import ImageCustom from "./ImageCustom";
 import { AuthContext } from "../providers/AuthProvider";
 import config from "../config.json";
 
@@ -52,8 +52,11 @@ const useStyles = makeStyles((theme) => ({
   },
   headerLabel: {
   },
-  title: {
+  title: { // TODO...
     flexGrow: 1,
+    color: "#222",
+    fontWeight: 700,
+    fontSize: "1.5em",
   },
   toolbar: {
     display: "flex",
@@ -72,6 +75,10 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
 }));
+
+const elevation = 24; // header elevation over contents below
+
+
 
 export default function MenuAppBar() {
   const classes = useStyles();
@@ -224,8 +231,8 @@ export default function MenuAppBar() {
 console.log('AUTH:', auth);
   return (
     <header>
-      <AppBar className={classes.header} elevation={5} position="fixed">
-        <Toolbar variant="dense" s_tyle={{fontSize: "1.15em"}}>
+      <AppBar className={classes.header} elevation={elevation} position="fixed">
+        <Toolbar variant="dense">
 
           {/* drawer button */}
           {state.view === "mobile" &&

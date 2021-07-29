@@ -1,23 +1,23 @@
-import React, { useEffect, useContext } from "react";
-import { makeStyles } from "@material-ui/styles";
+import /*React, */{ useEffect, useContext } from "react";
+// import { makeStyles } from "@material-ui/styles";
 import Amplify, { I18n } from "aws-amplify";
 import { currentAuthenticatedUser } from "./AuthPromise";
 import { AuthContext } from "../providers/AuthProvider";
 import Routes from "./Routes";
 import config from "../config.json";
 
-const useStyles = makeStyles(theme => ({
-  body: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "left",
-    padding: theme.spacing(2),
-  },
-}));
+// const useStyles = makeStyles(theme => ({
+//   body: {
+//     display: "flex",
+//     flexDirection: "column",
+//     justifyContent: "center",
+//     alignItems: "left",
+//     padding: theme.spacing(2),
+//   },
+// }));
 
 export default function Body() {
-	const classes = useStyles();
+	//const classes = useStyles();
   const { setAuth } = useContext(AuthContext);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function Body() {
       Auth: {
         oauth: {...config.oauth,
           redirectSignIn: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/", // "https://sistemisolari.auth.eu-west-1.amazoncognito.com/",
-          redirectSignOut: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/", // "https://sistemisolari.auth.eu-west-1.amazoncognito.com/",
+          redirectSignOut: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/", //"https://sistemisolari.auth.eu-west-1.amazoncognito.com/",
         },
         region: process.env.REACT_APP_REGION,
         userPoolId: process.env.REACT_APP_USER_POOL_ID,
@@ -70,9 +70,11 @@ export default function Body() {
     });
   }, [setAuth]);
 
-  return (
-    <div className={classes.body}>
-      {Routes}
-    </div>
-  );
+  return Routes;
+
+  // return (
+  //   <div className={classes.body}>
+  //     {Routes}
+  //   </div>
+  // );
 }

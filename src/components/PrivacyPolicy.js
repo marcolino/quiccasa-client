@@ -1,6 +1,5 @@
-import React/*, { useContext }*/ from "react";
+//import React from "react";
 import { makeStyles } from "@material-ui/styles";
-//import { AuthContext } from "../providers/AuthProvider";
 import config from "../config.json";
 
 const useStyles = makeStyles(theme => ({
