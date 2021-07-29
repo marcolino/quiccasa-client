@@ -4,7 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const useStyles = makeStyles(theme => ({
 	searches: {
-    fontSize: '1.5em',
+    fontSize: "1.5em",
 	},
 }));
 
@@ -14,7 +14,7 @@ export default function Searches() {
 
   return (
     <div className={classes.searches}>
-      {`Searches for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user`}
+      {`Searches for ${auth.isAuthenticated ? "authenticated" : "guest"} user`}
    </div>
   );
 }

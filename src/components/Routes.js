@@ -1,6 +1,7 @@
-import React, { Suspense, lazy } from 'react';
-import { Switch, Route } from 'react-router';
+import React, { Suspense, lazy } from "react";
+import { Switch, Route } from "react-router";
 import Spinner from "./Spinner";
+
 // import Home from "./Home";
 // import SignUp from "./Auth/SignUp";
 // import SignIn from "./Auth/SignIn";

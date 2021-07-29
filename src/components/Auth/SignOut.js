@@ -26,7 +26,7 @@ export default function SignOut() {
           history.replace("/");
         },
         error: (err) => {
-          console.error('signOut error data:', err);
+          console.error("signOut error data:", err);
           toast.error(err.message);
         }
       });

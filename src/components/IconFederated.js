@@ -1,12 +1,12 @@
-import { ReactComponent as FacebookSvg } from '../assets/icons/FederatedFacebook.svg';
-import { ReactComponent as GoogleSvg } from '../assets/icons/FederatedGoogle.svg';
+import { ReactComponent as FacebookSvg } from "../assets/icons/FederatedFacebook.svg";
+import { ReactComponent as GoogleSvg } from "../assets/icons/FederatedGoogle.svg";
 
 const style = {
-  display: 'flex',
+  display: "flex",
   width: 20,
   height: 20,
-  alignItems: 'center',
-  justifyContent: 'center',
+  alignItems: "center",
+  justifyContent: "center",
   marginLeft: 5,
   marginRight: 5,
 };

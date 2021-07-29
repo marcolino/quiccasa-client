@@ -5,7 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { ToastContainer, toast } from "./components/Toasts";
 
-const root = document.getElementById('root');
+const root = document.getElementById("root");
 ReactDOM.render(
   <React.StrictMode>
     <App />
@@ -19,8 +19,8 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // function sendToAnalytics(metric) {
 //   const body = JSON.stringify({[metric.name]: metric.value});
-//   (navigator.sendBeacon && navigator.sendBeacon('/analytics', body)) ||
-//     fetch('/analytics', {body, method: 'POST', keepalive: true});
+//   (navigator.sendBeacon && navigator.sendBeacon("/analytics", body)) ||
+//     fetch("/analytics", {body, method: "POST", keepalive: true});
 // }
 
 // reportWebVitals(sendToAnalytics);

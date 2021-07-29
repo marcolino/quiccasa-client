@@ -9,7 +9,6 @@ export default function CookieBanner() {
   // TODO: an alternative to `dismissOnScroll`, not available yet
   useEffect(() => {
     const onScroll = e => {
-//console.log('scrollTop:', e.target.documentElement.scrollTop);
       if (e.target.documentElement.scrollTop >= scrollOffsetMin) {
         const now = new Date(); const date = new Date(now.setFullYear(now.getFullYear() + 1)).toUTCString(); // +1 year from now
         document.cookie = `CookieConsent=true; expires=${date}; sameSite=Lax`;

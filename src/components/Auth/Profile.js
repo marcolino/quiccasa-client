@@ -4,7 +4,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const useStyles = makeStyles(theme => ({
 	profile: {
-    fontSize: '1.5em',
+    fontSize: "1.5em",
 	},
 }));
 
@@ -14,7 +14,7 @@ export default function Profile() {
 
   return (
     <div className={classes.profile}>
-      {`Profile for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user ${auth.isAuthenticated ? auth.user.attributes.email : ''}`}  
+      {`Profile for ${auth.isAuthenticated ? "authenticated" : "guest"} user ${auth.isAuthenticated ? auth.user.attributes.email : ""}`}  
    </div>
   );
 }

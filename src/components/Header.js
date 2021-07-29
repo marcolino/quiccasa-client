@@ -228,7 +228,6 @@ export default function MenuAppBar() {
     ));
   };
 
-console.log('AUTH:', auth);
   return (
     <header>
       <AppBar className={classes.header} elevation={elevation} position="fixed">

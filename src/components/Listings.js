@@ -4,7 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const useStyles = makeStyles(theme => ({
 	listings: {
-    fontSize: '1.5em',
+    fontSize: "1.5em",
 	},
 }));
 
@@ -14,7 +14,7 @@ export default function Listings() {
 
   return (
     <div className={classes.listings}>
-      {`Listings for ${auth.isAuthenticated ? 'authenticated' : 'guest'} user`}
+      {`Listings for ${auth.isAuthenticated ? "authenticated" : "guest"} user`}
    </div>
   );
 }

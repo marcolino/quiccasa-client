@@ -82,7 +82,7 @@ export default function ForgotPassword() {
 
     forgotPassword(email, {
       success: (data) => {
-        console.log('forgotPassword success data:', data);
+        console.log("forgotPassword success data:", data);
         setWaitingForCode(true);
         setPassword("");
         switch (data.CodeDeliveryDetails.DeliveryMedium) {
@@ -130,11 +130,11 @@ export default function ForgotPassword() {
 
     resendResetPasswordCode(email, {
       success: (data) => {
-        console.log('resendResetPasswordCode success data:', data);
+        console.log("resendResetPasswordCode success data:", data);
         toast.info("Code resent successfully");
       },
       error: (err) => {
-        console.log('resendResetPasswordCode error:', err);
+        console.log("resendResetPasswordCode error:", err);
         switch (err.code) {
           case "ExpiredCodeException":
             setError({ confirmationCode: err }); // blame confirmationCode field as guilty

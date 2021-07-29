@@ -13,9 +13,9 @@ export default createMuiTheme({
   overrides: {
     MuiInputBase: {
       input: {
-        '&:-webkit-autofill': {
-          transitionDelay: '9999s',
-          transitionProperty: 'background-color, color',
+        "&:-webkit-autofill": {
+          transitionDelay: "9999s",
+          transitionProperty: "background-color, color",
         },
       },
     },
