@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Home screen 1`] = `
+<div>
+  <div
+    class="makeStyles-contentsContainer-1"
+  >
+    <div
+      class="makeStyles-contentsWrap-2 makeStyles-contentsWrap-6"
+    >
+      <div
+        class="makeStyles-header-3"
+      >
+        <header>
+          <header
+            class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-header-10 mui-fixed MuiPaper-elevation24"
+          >
+            <div
+              class="MuiToolbar-root MuiToolbar-dense MuiToolbar-gutters"
+            >
+              <a
+                href="/"
+              >
+                <img
+                  alt="icon"
+                  class="makeStyles-logo-11"
+                  height="30"
+                  name="LogoMain"
+                  size="30"
+                  src="LogoMain.png"
+                  width="30"
+                />
+              </a>
+              <div
+                class="makeStyles-title-15"
+              >
+                Quiccasa
+              </div>
+              <div>
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-menuLink-12 MuiTypography-colorInherit"
+                  href="/searches"
+                >
+                  <span
+                    class="makeStyles-headerLabel-14"
+                  >
+                    Searches
+                  </span>
+                </a>
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-menuLink-12 MuiTypography-colorInherit"
+                  href="/listings"
+                >
+                  <span
+                    class="makeStyles-headerLabel-14"
+                  >
+                    Listings
+                  </span>
+                </a>
+              </div>
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-containedSizeSmall MuiButton-sizeSmall"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  Join !
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </header>
+          <div
+            class="makeStyles-offset-9"
+          />
+        </header>
+      </div>
+      <div
+        class="makeStyles-body-4"
+      >
+        <div
+          class="makeStyles-home-33"
+        >
+          Home  for guest user 
+        </div>
+      </div>
+      <div
+        class="CookieConsent"
+        style="align-items: baseline; background: rgb(43, 55, 59); color: white; display: block; flex-wrap: wrap; justify-content: space-between; left: 0px; position: fixed; width: 100%; z-index: 999; font-family: Open Sans; bottom: 0px;"
+      >
+        <div
+          class=""
+          style="flex: 1 0 300px; margin: 15px;"
+        >
+          We use cookies or similar technologies as specified in the 
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorInherit"
+            href="/privacy-policy"
+          >
+            privacy policy
+          </a>
+          .
+           
+           
+           
+          You can consent to the use of such technologies by closing this notice
+          ,
+           
+           
+           
+          or by otherwise continuing interacting with this site.
+        </div>
+        <div
+          class=""
+        >
+          <button
+            aria-label="Accept cookies"
+            class=""
+            id="rcc-confirm-button"
+            style="background: rgb(255, 212, 45); border: 0px; border-radius: 0px; box-shadow: none; color: rgb(78, 80, 59); cursor: pointer; flex: 0 0 auto; padding: 5px 10px; margin: 15px; font-size: 13px; float: right;"
+          >
+            I agree
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="makeStyles-footer-5 makeStyles-footer-7"
+    >
+      <div
+        class="MuiContainer-root makeStyles-footer-23 MuiContainer-maxWidthLg"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-justify-content-xs-center"
+        >
+          <h6
+            class="MuiTypography-root MuiTypography-body2 MuiTypography-colorTextSecondary"
+          >
+            quiccasa-client
+             
+             
+            v
+            0.1.43
+             
+             ~ 
+            ©
+             
+             
+             
+            2021
+            , 
+             
+            <a
+              class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorInherit"
+              href="https://www.sistemisolari.com"
+            >
+              Sistemi Solari
+            </a>
+            <span>
+               
+            </span>
+            <img
+              alt="Network connection indicator"
+              fill="red"
+              height="12"
+              name="Network.on"
+              size="12"
+              src="Network.on.svg"
+              title="Network connection is on"
+              width="12"
+            />
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,4 +1,4 @@
-{
+const config = {
   "companyName": "Sistemi Solari",
   "companyHomeSiteName": "sistemisolari.com",
   "companyHomeSiteUrl": "https://www.sistemisolari.com",
@@ -16,17 +16,26 @@
   "startUrl": ".",
   "display": "standalone",
   "spinner": {
-    "delay": 150,
-    "type": "ThreeDots",
-    "color": "green"
+    "delay": 100,
+    "type": "Audio",
+    "color": "darkred",
+    "size": 200,
+    "opacity": .48,
   },
   "footerHeight": "1.5rem",
+  "extraSmallWatershed": 600,
   "mobileDesktopWatershed": 900,
+  "federatedSigninProviders": [ // we currently handle "Facebook", "Google"
+    "Facebook",
+    "Google",
+  ],
   "oauth": {
     "HostedUIDomain": "quiccasa.sistemisolari.com",
-    "domain": "sistemisolari.auth.eu-west-1.amazoncognito.com",
+    "domain": "auth.sistemisolari.com",
     "scope": [ "phone", "email", "profile", "openid", "aws.cognito.signin.user.admin" ],
-    "responseType": "code"
+    "responseType": "code",
   },
-  "debugAwsAmplify": false
-}
+  "debugAwsAmplify": false,
+};
+
+export default config;

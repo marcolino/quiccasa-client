@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import IconCustom from "./IconCustom";
 import { isAuthLocation } from "../libs/Misc";
-import config from "../config.json";
+import config from "../config";
 import packageJson from "../package.alias.json";
 
 const useStyles = makeStyles(theme => ({

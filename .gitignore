@@ -28,7 +28,7 @@ src/__tests__/lighthouseOutput.json
 
 tmp/
 
-#amplify
+# amplify
 amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/logs

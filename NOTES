@@ -10,16 +10,6 @@ REFERENCES
 
 Authentication
  - AWS Cognito Agnita: https://levelup.gitconnected.com/agnita-authentication-for-create-react-app-using-aws-cognito-80cde1fb781b
- - Amplifi CLI is not necessary. Our tests:
-    amplify user:
-     - name: amplify-sistemisolari
-     - access key id: AKIAXSR47PCTUTFFIO6L
-     - secret access key: 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
-    amplify auth:
-     - domain name prefix: quiccasaclient2fae62b4-2fae62b4
-    amplify endpoints:
-     - Hosted UI Endpoint: https://quiccasaclient2fae62b4-2fae62b4-dev.auth.eu-west-1.amazoncognito.com/
-     - test Your Hosted UI Endpoint: https://quiccasaclient2fae62b4-2fae62b4-dev.auth.eu-west-1.amazoncognito.com/login?response_type=code&client_id=1dh48oq7h897atfbgu3oq49adi&redirect_uri=http://localhost:3000/oauth2/
  - aws-amplify Amplify.configure Auth.oauth parameter "responseType" can be set to "code" or "token";
    note that REFRESH token will only be generated when the responseType is "code"
 
@@ -46,6 +36,10 @@ AWS
  - Automating Cognito Custom Auth Domains with Amplify: https://medium.com/@matt.lavin/automating-cognito-custom-auth-domains-with-amplify-33e7b8f13266
  - Custom domain support with Cognito #1880: https://github.com/aws-amplify/amplify-cli/issues/1880#issuecomment-626331305
  - Using Your Own Domain for the Hosted UI: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
+ - Test Federated Signin: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-configuring-federation-with-social-idp.html
 
+ Email
+  - Create Email Addresses for your Route53 Custom Domain: https://medium.com/responsetap-engineering/easily-create-email-addresses-for-your-route53-custom-domain-589d099dd0f2
+ 
  Google Search Console:
  - https://search.google.com/search-console?resource_id=sc-domain%3Asistemisolari.com

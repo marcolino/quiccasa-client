@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { forgotPassword, forgotPasswordSubmit, resendResetPasswordCode } from "../AuthPromise";
 import { usePromiseTracker } from "react-promise-tracker";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
+import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import LockOpenOutlined from "@material-ui/icons/LockOpenOutlined";
 import ConfirmationNumber from "@material-ui/icons/ConfirmationNumber";
 import Lock from "@material-ui/icons/Lock";
 import LockOpen from "@material-ui/icons/LockOpen";
+import { forgotPassword, forgotPasswordSubmit, resendResetPasswordCode } from "../../libs/TrackPromise";
 import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
-import config from "../../config.json";
+import config from "../../config";
 
 const styles = theme => ({
   avatar: {
@@ -37,7 +42,21 @@ export default function ForgotPassword() {
   const [code, setCode] = useState("");
   const history = useHistory();
   const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState(null);
+  const [dialogContent, setDialogContent] = useState(null);
 
+  const handleOpenDialog = (title, content) => {
+    setDialogTitle(title);
+    setDialogContent(content);
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+    setDialogTitle(null);
+    setDialogContent(null);
+  };
 
   const validateForm = () => { // validate email formally
     if (!waitingForCode) {
@@ -90,7 +109,12 @@ export default function ForgotPassword() {
             const medium = data.CodeDeliveryDetails.AttributeName;
             const email = data.CodeDeliveryDetails.Destination;
             setCodeDeliveryMedium(medium);
-            toast.info(`Verification code sent via ${medium} to ${email}.\nPlease open it and copy and paste it here.`);
+            ///toast.info(`Verification code sent via ${medium} to ${email}.\nPlease open it and copy and paste it here.`);
+            handleOpenDialog(
+              `Verification code sent`,
+              `Verification code sent via ${medium} to ${email}.
+              Please open it and copy and paste it here.`
+            );
         }
       },
       error: (err) => {
@@ -113,7 +137,8 @@ export default function ForgotPassword() {
         setPassword("");
         setPasswordConfirmed("");
         setCode("");
-        toast.success(<div>Password reset successfully.<br />You can now sign in with your new password</div>);
+        ///toast.success(<div>Password reset successfully.<br />You can now sign in with your new password</div>);
+        handleOpenDialog(`Password reset success`, `You can now sign in with your new password`);
         history.push("/signin");
       },
       error: (err) => {
@@ -217,7 +242,7 @@ export default function ForgotPassword() {
 
               <FormInput
                 id={"confirmationCode"}
-                type="text" // number
+                type="number"
                 value={code}
                 onChange={setCode}
                 placeholder={"Numeric code just received by " + codeDeliveryMedium}
@@ -233,7 +258,7 @@ export default function ForgotPassword() {
                 Confirm Password Reset
               </FormButton>
 
-              <Grid container justjustifyContentify="flex-end">
+              <Grid container justifyContent="flex-end">
                 <FormButton
                   onClick={formResendResetPasswordCode}
                   fullWidth={false}
@@ -247,6 +272,32 @@ export default function ForgotPassword() {
           )}
         </fieldset>
       </form>
+
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {dialogTitle}
+        </DialogTitle>
+        <DialogContent id="alert-dialog-description">
+          <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>
+            {dialogContent}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <FormButton
+            onClick={handleCloseDialog}
+            fullWidth={false}
+            className={"buttonSecondary"}
+            autoFocus
+          >
+            {"Ok"}
+          </FormButton>
+        </DialogActions>
+      </Dialog>
 
     </Container>
   );

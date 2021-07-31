@@ -7,7 +7,8 @@ import { AuthProvider } from "../providers/AuthProvider";
 import { StatusProvider } from "../providers/StatusProvider";
 import { OnlineStatusProvider, OnlineStatusContext } from "../providers/OnlineStatusProvider";
 import Header from "./Header";
-import Body from "./Body";
+import Authentication from "./Authentication";
+import Routes from "./Routes";
 import Footer from "./Footer";
 import Spinner from "./Spinner";
 import CookieBanner from "./CookieBanner";
@@ -24,6 +25,7 @@ export default function App() {
           <StatusProvider>
             <CssBaseline />
             <BrowserRouter>
+              <Authentication />
               <Contents />
               <Spinner />
             </BrowserRouter>
@@ -77,7 +79,7 @@ const Contents = () => {
           <Header />
         </div>
         <div className={classes.body}>
-          <Body />
+          <Routes />
         </div>
         <CookieBanner />
       </div>

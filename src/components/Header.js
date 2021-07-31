@@ -22,7 +22,7 @@ import IconCustom from "./IconCustom";
 import IconGravatar from "./IconGravatar";
 import ImageCustom from "./ImageCustom";
 import { AuthContext } from "../providers/AuthProvider";
-import config from "../config.json";
+import config from "../config";
 
 const useStyles = makeStyles((theme) => ({
   root: {

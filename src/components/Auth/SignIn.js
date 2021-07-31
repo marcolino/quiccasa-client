@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { signIn, federatedSignIn } from "../AuthPromise";
 import { usePromiseTracker } from "react-promise-tracker";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -10,13 +9,14 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
+import { signIn, federatedSignIn } from "../../libs/TrackPromise";
 import { FacebookIcon, GoogleIcon } from "../IconFederated";
 import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText, FormDividerWithText, FormCheckbox, FormLink } from "../FormElements";
 import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { validateEmail } from "../../libs/Validation";
-import config from "../../config.json";
+import config from "../../config";
 
 const styles = theme => ({
   avatar: {
@@ -213,38 +213,47 @@ export default function SignIn() {
             </Grid>
           </Grid>
 
-          <Box m={3} />
+          {config.federatedSigninProviders.length && (
+            <>
+              <Box m={3} />
 
-          <FormDividerWithText>
-            <FormText>
-              <i>{"or"}</i>
-            </FormText>
-          </FormDividerWithText>
+              <FormDividerWithText>
+                <FormText>
+                  <i>{"or"}</i>
+                </FormText>
+              </FormDividerWithText>
 
-          <Box m={3} />
+              <Box m={3} />
 
-          <Grid container justifyContent="flex-start">
-            <FormText>
-              {"Sign in with a social account"}
-            </FormText>
-          </Grid>
+              <Grid container justifyContent="flex-start">
+                <FormText>
+                  {"Sign in with a social account"}
+                </FormText>
+              </Grid>
 
-          <Box m={0} />
+              <Box m={0} />
 
-          <FormButton
-            social={"Facebook"}
-            startIcon={<FacebookIcon />}
-            onClick={(e) => formFederatedSignIn(e, "Facebook")}
-          >
-            {"Facebook"}
-          </FormButton>
-          <FormButton
-            social={"Google"}
-            startIcon={<GoogleIcon />}
-            onClick={(e) => formFederatedSignIn(e, "Google")}
-          >
-            {"Google"}
-          </FormButton>
+              {config.federatedSigninProviders.includes("Facebook") && (
+                <FormButton
+                  social={"Facebook"}
+                  startIcon={<FacebookIcon />}
+                  onClick={(e) => formFederatedSignIn(e, "Facebook")}
+                >
+                  {"Facebook"}
+                </FormButton>
+              )}
+
+              {config.federatedSigninProviders.includes("Google") && (
+                <FormButton
+                  social={"Google"}
+                  startIcon={<GoogleIcon />}
+                  onClick={(e) => formFederatedSignIn(e, "Google")}
+                >
+                  {"Google"}
+                </FormButton>
+              )}
+            </>
+          )}
 
         </fieldset>
       </form>

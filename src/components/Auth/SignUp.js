@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link as RouterLink } from "react-router-dom";
-import { signUp, resendSignUp, confirmSignUp } from "../AuthPromise";
 import { usePromiseTracker } from "react-promise-tracker";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
+import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import AccountCircleOutlined from "@material-ui/icons/AccountCircleOutlined";
 import ConfirmationNumber from "@material-ui/icons/ConfirmationNumber";
 import Person from "@material-ui/icons/Person";
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/Lock";
+import { signUp, resendSignUp, confirmSignUp } from "../../libs/TrackPromise";
 import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText, FormLink } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
-import config from "../../config.json";
+import config from "../../config";
 
 const styles = theme => ({
   avatar: {
@@ -30,6 +35,9 @@ const styles = theme => ({
   },
   fieldset: {
     border: 0,
+  },
+  dialogContent: {
+    whiteSpace: "pre-line", // to enable whitespaces in dialog content
   },
 });
 const useStyles = makeStyles((theme) => (styles(theme)));
@@ -46,19 +54,33 @@ export default function SignUp() {
   const [waitingForCode, setWaitingForCode] = useState(false);
   const [code, setCode] = useState("");
   const [error, setError] = useState({});
-  //const [horizontalSpacing, setHorizontalSpacing] = useState(0);
-  const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
-  const [state, setState] = useState({
-    xs: true,
-    horizontalSpacing: 0,
-  });
+  const [formState, setFormState] = useState({ xs: true, horizontalSpacing: 0 });
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState(null);
+  const [dialogContent, setDialogContent] = useState(null);
+  const [dialogCallback, setDialogCallback] = useState(null);
+  const { promiseInProgress } = usePromiseTracker({ delay: config.spinner.delay });
+
+  const handleOpenDialog = (title, content, callback) => {
+    setDialogTitle(title);
+    setDialogContent(content);
+    setDialogCallback(callback);
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+    setDialogTitle(null);
+    setDialogContent(null);
+    dialogCallback && dialogCallback();
+  };
 
   // set up event listener to set correct grid rowSpacing based on inner width
   useEffect(() => {
     const setResponsiveness = () => {
-      window.innerWidth < 600
-        ? setState((prevState) => ({ ...prevState, xs: true, rowSpacing: 0 }))
-        : setState((prevState) => ({ ...prevState, xs: false, rowSpacing: 2 }));
+      window.innerWidth < config.extraSmallWatershed
+        ? setFormState((prevState) => ({ ...prevState, xs: true, rowSpacing: 0 }))
+        : setFormState((prevState) => ({ ...prevState, xs: false, rowSpacing: 2 }));
     };
     setResponsiveness();
     window.addEventListener("resize", () => setResponsiveness());
@@ -122,14 +144,15 @@ export default function SignUp() {
         email,
         name: firstName,
         family_name: lastName,
-        /* IMPROVE: add custom fields
-        phone_number: phoneNumber, // E.164 number convention: country code (1 to 3 digits) + subscriber number (max 12 digits)
-        "custom:favorite_flavor": FavoriteFlavour, // custom attribute, not standard
-        */
+        /**
+         * IMPROVE: add custom fields
+         * phone_number: phoneNumber, // E.164 number convention: country code (1 to 3 digits) + subscriber number (max 12 digits)
+         * "custom:favorite_flavor": FavoriteFlavour, // custom attribute, not standard
+         */
       }
     }, {
       success: (data) => {
-        console.log("signUp success data:", data);
+        console.log("signUp success:", data);
         const medium = data.codeDeliveryDetails.DeliveryMedium.toLowerCase();
         toast.info(`Confirmation code just sent by ${medium}`)
         setCodeDeliveryMedium(medium);
@@ -137,7 +160,7 @@ export default function SignUp() {
         setPassword("");
       },
       error: (err) => {
-        console.error("signup error data:", err);
+        console.error("signup error:", err);
         toast.warning(err.message);
         switch (err.code) {
           case "UsernameExistsException":
@@ -157,19 +180,16 @@ export default function SignUp() {
 
     confirmSignUp(email, code, {
       success: (data) => {
-        if (data === "SUCCESS") {
-          toast.success(<div>Registered successfully.<br />You can now sign in with email and password.</div>);
-        } else {
-          console.error("confirmSignUp success, but data is not 'SUCCESS'", data);
-          toast.error(data);
-        }
-        setWaitingForCode(false);
-        setEmail("");
-        setCode("");
-        history.push("/signin");
+        console.log("confirmSignup success:", data);
+        // data is not meaningful
+        handleOpenDialog(
+          `Registered successfully`,
+          `You can now sign in with email and password\nA capo.`,
+          () => formSignUpCompleted
+        );
       },
       error: (err) => {
-        console.error("confirmSignUp error data:", err);
+        console.error("confirmSignUp error:", err);
         toast.error(err.message);
         setError({ code: err.message});
       },
@@ -185,13 +205,20 @@ export default function SignUp() {
         toast.info(`Code resent successfully by ${codeDeliveryMedium}`);
       },
       error: (err) => {
-        console.error("resendSignUp error data:", err)
+        console.error("resendSignUp error:", err)
         toast.error(err.message);
         setError({ code: err.message});
       },
     });
   };
   
+  const formSignUpCompleted = () => {
+    setWaitingForCode(false);
+    setEmail("");
+    setCode("");
+    history.push("/signin");
+  };
+
   return (
     <Container maxWidth="xs">
 
@@ -218,7 +245,7 @@ export default function SignUp() {
 
               <Box m={1} />
 
-              <Grid container direction={"row"} spacing={state.rowSpacing} >
+              <Grid container direction={"row"} spacing={formState.rowSpacing} >
                 <Grid item xs={12} sm={6}>
                   <FormInput
                     id={"firstName"}
@@ -285,7 +312,7 @@ export default function SignUp() {
                 <FormText component="h6" variant="caption" color="textSecondary" align="center">
                   {"By signing up you agree to our"} <FormLink component={RouterLink} to="/terms-of-use" color="textPrimary">terms of use</FormLink> {""}
                   {"and you confirm you have read our"} <FormLink component={RouterLink} to="/privacy-policy" color="textPrimary">privacy policy</FormLink>
-                  {", including cookie use."}
+                  {", "} {"including cookie use."}
                 </FormText>
               </Grid>
 
@@ -308,7 +335,7 @@ export default function SignUp() {
               <FormButton
                 onClick={formConfirmSignUp}
               >
-                Confirm Sign Up
+                {"Confirm Sign Up"}
               </FormButton>
 
               <Grid container justifyContent="flex-end">
@@ -317,13 +344,39 @@ export default function SignUp() {
                   fullWidth={false}
                   className={"buttonSecondary"}
                 >
-                  Resend code
+                  {"Resend code"}
                 </FormButton>
               </Grid>
             </>
           )}
         </fieldset>
       </form>
+
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {dialogTitle}
+        </DialogTitle>
+        <DialogContent id="alert-dialog-description">
+          <Typography variant="body1" className={classes.dialogContent}>
+            {dialogContent}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <FormButton
+            onClick={handleCloseDialog}
+            fullWidth={false}
+            className={"buttonSecondary"}
+            autoFocus
+          >
+            {"Ok"}
+          </FormButton>
+        </DialogActions>
+      </Dialog>
       
     </Container>
   );

@@ -32,29 +32,33 @@
 - verificare che le traduzioni del backend AWS Ampilify (I18n) siano state implementate da Amplify - OPENED ISSUE ON https://github.com/aws-amplify/amplify-js/issues/8599 - See https://github.com/aws-amplify/amplify-js/blob/master/packages/aws-amplify-react/src/AmplifyI18n.tsx
 - handle cookie consent popup - OK
 - usare sempre " anzichè ' - OK
+- far funzionare il login federato con Google - OK
+- tornare immediatamente da signout, e lasciare amplify in background - OK
+- rendere i login federati attivi su un flag in config - OK
+- organizzare meglio la cartella assets - OK
+- organizzare meglio la configurazione amplify (attualmente in Body) - OK
+- spostare lo Spinner in una posizione migliore, o migliorarlo perchè sia più visibile ovunque - OK
+- capire bene Jest.toMatchSnapshot(), e aggiungere tests con gli snapshots - OK
+- nei componenti Auth non usare "toast" per i messaggi importanti (codice inviato a ..."), ma inserirli nel layout, quando possibile - OK
 
-- nei componenti Auth non usare "toast" per i messaggi importanti (codice inviato a ..."), ma inserirli nel layout, quando possibile - ?
-- tracciare la registrazione (e altro) dell'utente con react-tracking e google tag manager (?)
-- creare le email privacy@sistemisolari.com, info@sistemisolari.com su AWS SES (?)
-- spostare la posizione dello Spinner sull'header (?)
-
-- far funzionare i login federati
+- far funzionare il login federato con Facebook
 - gestire I18n
 - dopo aver gestito I18n (con i18next?), cambiare "html lang" quando si cambia lingua con `i18next.on('languageChanged', (lng) => {document.documentElement.setAttribute('lang', lng);});`
-- capire bene Jest.toMatchSnapshot(), e aggiungere tests con gli snapshots
 - dopo aver aggiunto qualche contenuto, pensare a qualche animazione
+- provare a collegare una funzione lambda
 - risolvere i vari TODO's
 - accettare invio come main submit in tutti i forms
 - tradurre i Temini d'uso e la Privacy Policy almeno in inglese
 - completare (e testare) gli attributi aria
 - capire e gestire testing coverage
-- seguire i suggerimenti di chrome lighhouse
+- seguire i suggerimenti di chrome lighhouse per il profiling
 - gestire la navigazione da tastiera (e in signup/confirm, o dove ci sono più submit, attivare il corretto default submit)
 - gestire tags opengraph / twitter in index.html
 - completare il README.md (copiare lo stile di uno bello)
-- rendere i login federati attivi su un flag in config
 - rimuovere console.*()
-- organizzare meglio la cartella assets
-- organizzare meglio la configurazione amplify (attualmente in Body)
+- creare le email privacy@sistemisolari.com, info@sistemisolari.com su AWS SES (see NOTES#Email)
+- gestire l'auditing: tracciare la registrazione (e altro) dell'utente con react-tracking e google tag manager (forse)
 - gestire il logging
-- gestire l'auditing
+- gestire URL di callback per la rimozione dell'autorizzazione (Facebook e Google)
+- gestire URL per la richiesta di eliminazione dei dati (Facebook e Google)
+- ripulire Google e Facebook console impostazioni inutili per i login federati nel cloud

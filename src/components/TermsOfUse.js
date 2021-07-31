@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import config from "../config.json";
+import config from "../config";
 
 const useStyles = makeStyles(theme => ({
 	termsofuse: {

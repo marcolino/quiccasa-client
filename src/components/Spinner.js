@@ -2,16 +2,11 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { usePromiseTracker } from "react-promise-tracker";
 import Loader from "react-loader-spinner";
-import config from "../config.json";
+import config from "../config";
 
 
 
 export default function Spinner(props) {
-
-  //const spinnerDelay = 150; // milliseconds delay before showing spinner, to avoid flickering on high speed connections
-  //const spinnerType = "ThreeDots";
-  //const spinnerColor = "green";
-
   const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
 
   // centered overlay styles
@@ -23,7 +18,7 @@ export default function Spinner(props) {
       left: 0,
       height: "100%",
       width: "100%",
-      opacity: 0.5,
+      opacity: config.spinner.opacity,
     },
     middle: {
       display: "table-cell",
@@ -43,7 +38,7 @@ export default function Spinner(props) {
     <div className={classes.outer}>
       <div className={classes.middle}>
         <div className={classes.inner}>
-          <Loader type={config.spinner.type} color={config.spinner.color} />
+          <Loader type={config.spinner.type} color={config.spinner.color} height={config.spinner.size} />
         </div>
       </div>
     </div>
