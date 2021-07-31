@@ -85,7 +85,7 @@ exports[`renders Home screen 1`] = `
         <div
           class="makeStyles-home-33"
         >
-          Home  for guest user 
+          Home for guest user 
         </div>
       </div>
       <div
@@ -144,7 +144,7 @@ exports[`renders Home screen 1`] = `
              
              
             v
-            0.1.43
+            0.1.45
              
              ~ 
             ©

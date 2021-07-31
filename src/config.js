@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
   "companyName": "Sistemi Solari",
   "companyHomeSiteName": "sistemisolari.com",
   "companyHomeSiteUrl": "https://www.sistemisolari.com",
@@ -37,5 +37,3 @@ const config = {
   },
   "debugAwsAmplify": false,
 };
-
-export default config;
