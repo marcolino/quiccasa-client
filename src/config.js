@@ -26,7 +26,7 @@ const config = {
   "extraSmallWatershed": 600,
   "mobileDesktopWatershed": 900,
   "federatedSigninProviders": [ // we currently handle "Facebook", "Google"
-    "Facebook",
+    //"Facebook",
     "Google",
   ],
   "oauth": {

@@ -62,3 +62,4 @@
 - gestire URL di callback per la rimozione dell'autorizzazione (Facebook e Google)
 - gestire URL per la richiesta di eliminazione dei dati (Facebook e Google)
 - ripulire Google e Facebook console impostazioni inutili per i login federati nel cloud
+- ripulire User Pools di Aws Cognito non utilizzati (non "Agnita")
