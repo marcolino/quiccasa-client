@@ -56,7 +56,7 @@ export default function PrivacyPolicy() {
           <p> The use of cookies for advertising allows Google and its partners to serve ads to the users of this site (and on other sites) based on the statistical data collected on this site and on the websites of Google partners. </p>
           <p> Users can choose to opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noreferrer"> Ad Settings </ a>. </p>
           <p> By visiting the page {config.appSiteUrl} you can disable cookies from third-party suppliers. </p>
-        </div>
+        </div> 
         <div id="partners" style={{display: "none"}}>
           <h3> Our advertising partners </h3>
           <p> Some of our advertising partners may use cookies on our site to collect user browsing data anonymously. Our advertising partners include: </p>
