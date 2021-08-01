@@ -39,12 +39,14 @@
 - organizzare meglio la configurazione amplify (attualmente in Body) - OK
 - spostare lo Spinner in una posizione migliore, o migliorarlo perchè sia più visibile ovunque - OK
 - capire bene Jest.toMatchSnapshot(), e aggiungere tests con gli snapshots - OK
-- nei componenti Auth non usare "toast" per i messaggi importanti (codice inviato a ..."), ma inserirli nel layout, quando possibile - OK
+- nei componenti Auth non usare "toast" per i messaggi importanti (codice inviato a ..."), ma usare dialogs - OK
+
+- dopo aver aggiunto qualche contenuto, pensare a qualche animazione (con react-router v5 sono difficili, brutte e inutili)
 
 - far funzionare il login federato con Facebook
 - gestire I18n
+- rileggere provacy e termini, e parametrizzare il testo del contenuto, ove necessario
 - dopo aver gestito I18n (con i18next?), cambiare "html lang" quando si cambia lingua con `i18next.on('languageChanged', (lng) => {document.documentElement.setAttribute('lang', lng);});`
-- dopo aver aggiunto qualche contenuto, pensare a qualche animazione
 - provare a collegare una funzione lambda
 - risolvere i vari TODO's
 - accettare invio come main submit in tutti i forms
@@ -63,3 +65,5 @@
 - gestire URL per la richiesta di eliminazione dei dati (Facebook e Google)
 - ripulire Google e Facebook console impostazioni inutili per i login federati nel cloud
 - ripulire User Pools di Aws Cognito non utilizzati (non "Agnita")
+- rimuovere la cartella locale amplify
+- rivedere gli assets.external/*

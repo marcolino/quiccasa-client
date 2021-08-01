@@ -1,12 +1,15 @@
 import React, { useEffect }  from "react";
 import Link from "@material-ui/core/Link";
 import CookieConsent from "react-cookie-consent";
+import { useTranslation } from "react-i18next";
+
+
 
 export default function CookieBanner() {
-
+  const { t } = useTranslation();
   const scrollOffsetMin = 100;
 
-  // TODO: an alternative to `dismissOnScroll`, not available yet
+  // an alternative to `CookieConsent.dismissOnScroll`, not yet available
   useEffect(() => {
     const onScroll = e => {
       if (e.target.documentElement.scrollTop >= scrollOffsetMin) {
@@ -23,18 +26,18 @@ export default function CookieBanner() {
   return (
     <CookieConsent
       location="bottom"
-      buttonText={"I agree"}
+      buttonText={t("I agree")}
       style={{ fontFamily: "Open Sans", background: "#2B373B", display: "block" }}
       buttonStyle={{ color: "#4e503b", fontSize: "13px", float: "right" }}
       expires={365}
       dismissOnScroll={true} // TODO: not handled yet
     >
-      {"We use cookies or similar technologies as specified in the "}
+      {t("We use cookies or similar technologies as specified in the")} {" "}
         <Link color="inherit" href={"/privacy-policy"}>
-          {"privacy policy"}
+          {t("privacy policy")}
         </Link>
-      {"."} {" "} {"You can consent to the use of such technologies by closing this notice"}
-      {","} {" "} {"or by otherwise continuing interacting with this site."}
+      {"."} {" "} {t("You can consent to the use of such technologies by closing this notice")}
+      {","} {" "} {t("or by otherwise continuing interacting with this site.")}
     </CookieConsent>
   );
 }

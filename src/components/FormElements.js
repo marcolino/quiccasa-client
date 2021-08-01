@@ -263,10 +263,6 @@ export const FormLink = (props) => {
   const styles = theme => ({
     normal: {
       cursor: "pointer",
-      // textDecoration: "underline",
-      // "&:hover": {
-      //   color: props.color === "textPrimary" ? "gray" : "darkgray",
-      // },
     },
     disabled: {
       color: "grey",

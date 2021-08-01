@@ -1,20 +1,23 @@
 import { useEffect, useContext } from "react";
-import Amplify, { I18n } from "aws-amplify";
+import Amplify/*, { I18n }*/ from "aws-amplify";
+//import { useTranslation } from "react-i18next";
 import { currentAuthenticatedUser } from "../libs/TrackPromise";
 import { AuthContext } from "../providers/AuthProvider";
 import { isLocalhost } from "../libs/Misc";
+import "../i18n";
 import config from "../config";
 
 
 
 export default function Authentication() {
   const { setAuth } = useContext(AuthContext);
+  //const { i18n } = useTranslation();
 
   useEffect(() => {
 
     /**
      * isAuthenticated:
-     *  - undefined: we don't know yet, we nned this state in suspense
+     *  - undefined: we don't know yet, we need this state in suspense and in routes
      *  - false: guest user
      *  - true: authenticated user
      */
@@ -25,8 +28,8 @@ export default function Authentication() {
     Amplify.configure({
       Auth: {
         oauth: {...config.oauth,
-          redirectSignIn: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
-          redirectSignOut: isLocalhost ? "http://localhost:3000/" : "https://quiccasa.sistemisolari.com/",
+          redirectSignIn: isLocalhost ? config.oauthRedirectSignInLocal : config.oauthRedirectSignInPublic,
+          redirectSignOut: isLocalhost ?  config.oauthRedirectSignOutLocal : config.oauthRedirectSignOutPublic,
         },
         region: process.env.REACT_APP_REGION,
         userPoolId: process.env.REACT_APP_USER_POOL_ID,
@@ -37,9 +40,9 @@ export default function Authentication() {
 
     /**
     * TODO: I18n.setLanguage should enable amplify localized error messages,
-    * but it's not implemented: we should manually translate error messages our side...
+    * but it's not implemented: we shell manually translate error messages our side.
     */
-    I18n.setLanguage("it");
+    //I18n.setLanguage(currentLanguage);
     
     currentAuthenticatedUser({
       success: (user) => {
@@ -51,7 +54,7 @@ export default function Authentication() {
         setAuth({isAuthenticated: false, user: null});
       }
     });
-  }, [setAuth]);
+  }, [setAuth/*, currentLanguage*/]);
 
   return null;
 }

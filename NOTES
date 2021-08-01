@@ -27,6 +27,9 @@ Styling
  - Fluid Typography: https://css-tricks.com/snippets/css/fluid-typography/
  - Color Contrast Checker: https://dequeuniversity.com/rules/axe/2.2/color-contrast?application=lighthouse
 
+Tests
+ - How to ignore partial Jest snapshot diffs: https://lanwen.ru/posts/ignore-jest-snapshot-diffs/
+
 AWS
  - Reset Cloudfront distribution alternate domain name for qiuiccasa:
    https://console.aws.amazon.com/cloudfront/v3/home?region=eu-west-1#/distributions/E30CJEQ2PIR5NL,

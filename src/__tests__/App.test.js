@@ -10,6 +10,10 @@ test("renders Home screen", async () => {
   expect(screen.getAllByText(/Home/i)[0]).toBeInTheDocument(); // check the presence of text "Home" in the DOM
 
   expect(container).toMatchSnapshot();
+
+  // jest.mock('react-i18next', () => ({
+  //   useTranslation: () => ({t: key => key})
+  // }));
 });
 
 // TODO: learn toMatchSnapshot() ...

@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -19,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 export default function Footer(props) {
   const location = useLocation();
 	const classes = useStyles();
+  const { t } = useTranslation();
 
   return isAuthLocation(location) ? null : ( // hide footer while in auth screens
     <Container className={classes.footer}>
@@ -31,7 +33,7 @@ export default function Footer(props) {
             {config.companyName}
           </Link>
           <span>&emsp;</span>
-          <IconCustom name={`Network.${props.isOnline ? "on" : "off"}`} fill="red" size={12} alt="Network connection indicator" title={`Network connection is ${props.isOnline ? "on" : "off"}`} />
+          <IconCustom name={`Network.${props.isOnline ? "on" : "off"}`} fill="red" size={12} alt={t("Network connection indicator")} title={t("Network connection is {{how}}", { how: props.isOnline ? t("on") : t("off") })} />
         </Typography>
       </Grid>
     </Container>

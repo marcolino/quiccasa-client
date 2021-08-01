@@ -46,12 +46,6 @@ const useStyles = makeStyles(theme => ({
   }),
   header: {
   },
-  // body: {
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   justifyContent: "center",
-  //   alignItems: "left",
-  // },
   body: {
     display: "flex",
     flexDirection: "column",

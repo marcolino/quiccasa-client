@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as RouterLink, useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Drawer from "@material-ui/core/Drawer";
@@ -76,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const elevation = 24; // header elevation over contents below
+const elevation = 3; // header elevation over contents below
 
 
 
@@ -84,6 +85,7 @@ export default function MenuAppBar() {
   const classes = useStyles();
   const { auth } = useContext(AuthContext);
   const history = useHistory();
+  const { t } = useTranslation();
 
   // handle responsiveness
   useEffect(() => {
@@ -127,18 +129,18 @@ export default function MenuAppBar() {
 
   const mainItems = [
     {
-      label: "Home",
+      label: t("Home"),
       icon: <HomeIcon />,
       href: "/",
       showInDesktopMode: false,
     },
     {
-      label: "Searches",
+      label: t("Searches"),
       icon: <SearchIcon />,
       href: "/searches",
     },
     {
-      label: "Listings",
+      label: t("Listings"),
       icon: <ListAltIcon />,
       href: "/listings",
     },
@@ -147,23 +149,23 @@ export default function MenuAppBar() {
   const userItems = auth.isAuthenticated ?
     [
       {
-        label: "Profile",
+        label: t("Profile"),
         icon: <AccountCircleIcon />,
         href: "/profile",
       },
       {
-        label: "Sign out",
+        label: t("Sign out"),
         icon: <ExitToAppIcon />,
         href: "/signout",
       },
     ] : [
       {
-        label: "Sign in",
+        label: t("Sign in"),
         icon: <VpnKeyIcon />,
         href: "/signin",
       },
       {
-        label: "Sign up",
+        label: t("Sign up"),
         icon: <AssignmentTurnedInIcon />,
         href: "/signup",
       },
@@ -317,7 +319,7 @@ export default function MenuAppBar() {
                   color="secondary"
                   onClick={handleUserJoin}
                 >
-                  {"Join !"}
+                  {t("Join !")}
                 </Button>
             }
 

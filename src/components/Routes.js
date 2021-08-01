@@ -1,5 +1,8 @@
-import React, { Suspense, lazy } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { Switch, Route } from "react-router";
+import { useLocation } from "react-router";
+import queryString from "query-string";
+import { toast } from "./Toasts";
 import Spinner from "./Spinner";
 
 // import Home from "./Home";
@@ -27,6 +30,16 @@ const PrivacyPolicy = lazy(() => import("./PrivacyPolicy"));
 const TermsOfUse = lazy(() => import("./TermsOfUse"));
 
 export default function Routes () {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const locationParsed = queryString.parse(location.search);
+    if (locationParsed.error) {
+      toast.warning(`Social login did not work, sorry.\n${locationParsed.error}: ${locationParsed.error_description}`);
+    }
+  }, [location]);
+
   return (
     <Suspense fallback={<Spinner />}>
       <Switch>

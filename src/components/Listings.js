@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { AuthContext } from "../providers/AuthProvider";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles(theme => ({
 	listings: {
@@ -11,10 +12,11 @@ const useStyles = makeStyles(theme => ({
 export default function Listings() {
 	const classes = useStyles();
   const { auth } = useContext(AuthContext);
+  const { t } = useTranslation();
 
   return (
     <div className={classes.listings}>
-      {`Listings for ${auth.isAuthenticated ? "authenticated" : "guest"} user`}
+      `${t("Listings")} ${t("for")} ${auth.isAuthenticated ? t("authenticated user") : t("guest user")} ${auth.isAuthenticated ? auth.user.attributes.email : ""}`
    </div>
   );
 }

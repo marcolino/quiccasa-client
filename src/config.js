@@ -26,14 +26,18 @@ module.exports = {
   "extraSmallWatershed": 600,
   "mobileDesktopWatershed": 900,
   "federatedSigninProviders": [ // we currently handle "Facebook", "Google"
-    //"Facebook",
+    //"Facebook", // does not work yet
     "Google",
   ],
   "oauth": {
-    "HostedUIDomain": "quiccasa.sistemisolari.com",
+    //"HostedUIDomain": "quiccasa.sistemisolari.com",
     "domain": "auth.sistemisolari.com",
     "scope": [ "phone", "email", "profile", "openid", "aws.cognito.signin.user.admin" ],
     "responseType": "code",
   },
+  "oauthRedirectSignInLocal": "http://localhost:3000/",
+  "oauthRedirectSignInPublic": "https://quiccasa.sistemisolari.com/",
+  "oauthRedirectSignOutLocal": "http://localhost:3000/",
+  "oauthRedirectSignOutPublic": "https://quiccasa.sistemisolari.com/",
   "debugAwsAmplify": false,
 };
