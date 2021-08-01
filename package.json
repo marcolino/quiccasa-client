@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
@@ -9,10 +9,13 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "aws-amplify": "^4.2.0",
+    "i18next": "^20.3.5",
+    "i18next-browser-languagedetector": "^6.1.2",
     "react": "^17.0.2",
     "react-cookie-consent": "^6.2.4",
     "react-dom": "^17.0.2",
     "react-gravatar": "^2.6.3",
+    "react-i18next": "^11.11.4",
     "react-loader-spinner": "^4.0.0",
     "react-promise-tracker": "^2.1.0",
     "react-router-dom": "^5.2.0",
@@ -38,6 +41,8 @@
     "start": "react-scripts start",
     "start-production": "yarn build && serve -s build",
     "prebuild": "yarn install-pre-push-hook && yarn sitemap-build && yarn favicons-build && yarn manifest-build",
+    "build:translations-parse": "i18next 'src/**/*.js' --config 'src/i18next-parser.config.js'",
+    "build:translate-auto": "node scripts/translate-auto.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-once": "react-scripts test --watchAll=false",
@@ -78,6 +83,7 @@
     "@babel/core": "7.14.6",
     "@babel/preset-env": "^7.14.7",
     "lighthouse": "^8.1.0",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.2",
+    "translate-json-object": "^2.3.7"
   }
 }
