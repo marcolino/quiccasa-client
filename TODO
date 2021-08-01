@@ -40,30 +40,36 @@
 - spostare lo Spinner in una posizione migliore, o migliorarlo perchè sia più visibile ovunque - OK
 - capire bene Jest.toMatchSnapshot(), e aggiungere tests con gli snapshots - OK
 - nei componenti Auth non usare "toast" per i messaggi importanti (codice inviato a ..."), ma usare dialogs - OK
-
-- dopo aver aggiunto qualche contenuto, pensare a qualche animazione (con react-router v5 sono difficili, brutte e inutili)
+- gestire I18n - OK
+- gestire le lingue tipo "en_US" - OK
+- tradurre i Temini d'uso e la Privacy Policy almeno in inglese - OK
+- rimuovere la cartella locale amplify - OK
+- rivedere gli assets.external/* - OK
+- dopo aver aggiunto qualche contenuto, pensare a qualche animazione (con react-router v5 sono difficili, brutte e inutili) - OK
 
 - far funzionare il login federato con Facebook
-- gestire I18n
-- rileggere provacy e termini, e parametrizzare il testo del contenuto, ove necessario
+- finire di tradurre auth/*
+- rileggere privacy e termini, e parametrizzare il testo del contenuto, ove necessario
+- rendere sottolineati i link in CookieBanner (comunque fare come in SignUp)
+- documentare come aggiungere una lingua
+- aggiungere la possibilità di tornare indietro (history.back) da privacy/
 - dopo aver gestito I18n (con i18next?), cambiare "html lang" quando si cambia lingua con `i18next.on('languageChanged', (lng) => {document.documentElement.setAttribute('lang', lng);});`
 - provare a collegare una funzione lambda
 - risolvere i vari TODO's
 - accettare invio come main submit in tutti i forms
-- tradurre i Temini d'uso e la Privacy Policy almeno in inglese
 - completare (e testare) gli attributi aria
 - capire e gestire testing coverage
 - seguire i suggerimenti di chrome lighhouse per il profiling
 - gestire la navigazione da tastiera (e in signup/confirm, o dove ci sono più submit, attivare il corretto default submit)
 - gestire tags opengraph / twitter in index.html
 - completare il README.md (copiare lo stile di uno bello)
-- rimuovere console.*()
+- rimuovere console.*
 - creare le email privacy@sistemisolari.com, info@sistemisolari.com su AWS SES (see NOTES#Email)
 - gestire l'auditing: tracciare la registrazione (e altro) dell'utente con react-tracking e google tag manager (forse)
 - gestire il logging
 - gestire URL di callback per la rimozione dell'autorizzazione (Facebook e Google)
-- gestire URL per la richiesta di eliminazione dei dati (Facebook e Google)
+- gestire URL di callback per la richiesta di eliminazione dei dati (Facebook e Google)
 - ripulire Google e Facebook console impostazioni inutili per i login federati nel cloud
 - ripulire User Pools di Aws Cognito non utilizzati (non "Agnita")
-- rimuovere la cartella locale amplify
-- rivedere gli assets.external/*
+- tests: mockare react-i18next (se necessario)
+- tests: rendere più semplice la rigenerazione degli snapshots

@@ -2,41 +2,38 @@ import React, { useEffect, Suspense, lazy } from "react";
 import { Switch, Route } from "react-router";
 import { useLocation } from "react-router";
 import queryString from "query-string";
+import { useTranslation } from "react-i18next";
+import { getCurrentLanguage } from "../libs/I18n";
 import { toast } from "./Toasts";
 import Spinner from "./Spinner";
 
-// import Home from "./Home";
-// import SignUp from "./Auth/SignUp";
-// import SignIn from "./Auth/SignIn";
-// import SignOut from "./Auth/SignOut";
-// import Profile from "./Auth/Profile";
-// import ForgotPassword from "./Auth/ForgotPassword";
-// import Searches from "./Searches";
-// import Listings from "./Listings";
-// import NotFound from "./NotFound";
-// import PrivacyPolicy from "./PrivacyPolicy";
-// import TermsOfUse from "./TermsOfUse";
-
 const Home = lazy(() => import("./Home"));
-const SignUp = lazy(() => import("./Auth/SignUp"));
-const SignIn = lazy(() => import("./Auth/SignIn"));
-const SignOut = lazy(() => import("./Auth/SignOut"));
-const Profile = lazy(() => import("./Auth/Profile"));
-const ForgotPassword = lazy(() => import("./Auth/ForgotPassword"));
+const SignUp = lazy(() => import("./auth/SignUp"));
+const SignIn = lazy(() => import("./auth/SignIn"));
+const SignOut = lazy(() => import("./auth/SignOut"));
+const Profile = lazy(() => import("./auth/Profile"));
+const ForgotPassword = lazy(() => import("./auth/ForgotPassword"));
 const Searches = lazy(() => import("./Searches"));
 const Listings = lazy(() => import("./Listings"));
 const NotFound = lazy(() => import("./NotFound"));
-const PrivacyPolicy = lazy(() => import("./PrivacyPolicy"));
-const TermsOfUse = lazy(() => import("./TermsOfUse"));
+const PrivacyPolicy = [];
+      PrivacyPolicy["en"] = lazy(() => import("./privacy/en/PrivacyPolicy"));
+      PrivacyPolicy["it"] = lazy(() => import("./privacy/it/PrivacyPolicy"));
+const TermsOfUse = [];
+      TermsOfUse["en"] = lazy(() => import("./privacy/en/TermsOfUse"));
+      TermsOfUse["it"] = lazy(() => import("./privacy/it/TermsOfUse"));
+
+
 
 export default function Routes () {
-
   const location = useLocation();
+  const { i18n } = useTranslation();
 
+  // check for error parameters in location url
   useEffect(() => {
-    const locationParsed = queryString.parse(location.search);
-    if (locationParsed.error) {
-      toast.warning(`Social login did not work, sorry.\n${locationParsed.error}: ${locationParsed.error_description}`);
+    const search = queryString.parse(location.search);
+    if (search.error) {
+      toast.warning(`Social login did not work, sorry.\n${search.error}: ${search.error_description}`);
     }
   }, [location]);
 
@@ -56,8 +53,8 @@ export default function Routes () {
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/searches" component={Searches} /> {/* sitemapFrequency={"daily"} sitemapPriority={1.0} */}
         <Route path="/listings" component={Listings} /> {/* sitemapFrequency={"daily"} sitemapPriority={1.0} */}
-        <Route path="/privacy-policy" component={PrivacyPolicy} />
-        <Route path="/terms-of-use" component={TermsOfUse} />
+        <Route path="/privacy-policy" component={PrivacyPolicy[getCurrentLanguage(i18n)]} />
+        <Route path="/terms-of-use" component={TermsOfUse[getCurrentLanguage(i18n)]} />
         <Route path="" component={NotFound} />
       </Switch>
     </Suspense>

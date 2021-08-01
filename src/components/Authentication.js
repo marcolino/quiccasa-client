@@ -42,7 +42,7 @@ export default function Authentication() {
     * TODO: I18n.setLanguage should enable amplify localized error messages,
     * but it's not implemented: we shell manually translate error messages our side.
     */
-    //I18n.setLanguage(currentLanguage);
+    //I18n.setLanguage(i18n.currentLanguage);
     
     currentAuthenticatedUser({
       success: (user) => {
@@ -54,7 +54,7 @@ export default function Authentication() {
         setAuth({isAuthenticated: false, user: null});
       }
     });
-  }, [setAuth/*, currentLanguage*/]);
+  }, [setAuth/*, i18n.currentLanguage*/]);
 
   return null;
 }
