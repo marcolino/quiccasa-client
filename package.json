@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.49",
+  "version": "0.1.50",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
@@ -41,8 +41,8 @@
     "start": "react-scripts start",
     "start-production": "yarn build && serve -s build",
     "prebuild": "yarn install-pre-push-hook && yarn sitemap-build && yarn favicons-build && yarn manifest-build",
-    "build:translations-parse": "i18next 'src/**/*.js' --config 'src/i18next-parser.config.js'",
-    "build:translate-auto": "node scripts/translate-auto.js",
+    "translations-parse": "i18next 'src/**/*.js' --config 'src/i18next-parser.config.js' --silent",
+    "translate-auto": "node scripts/translate-auto.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-once": "react-scripts test --watchAll=false",
@@ -57,7 +57,7 @@
     "sitemap-search-engines-update": "scripts/sitemap-search-engines-update.sh",
     "favicons-build": "scripts/favicons-build.sh",
     "manifest-build": "scripts/manifest-build.js",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "explore-source-map": "source-map-explorer 'build/static/js/*.js'",
     "lighthouse": "lighthouse http://localhost:3000/ --output json --output-path src/__tests__/lighthouseOutput.json",
     "delete-all-cognito-pool-users": "scripts/delete-all-cognito-pool-users.sh"
   },
