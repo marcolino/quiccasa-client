@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link as RouterLink } from "react-router-dom";
 import { usePromiseTracker } from "react-promise-tracker";
+import { useTranslation } from "react-i18next";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -21,6 +22,7 @@ import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText, FormLink } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
 import config from "../../config";
+import { ETBT } from "../../libs/Misc"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
@@ -60,6 +62,7 @@ export default function SignUp() {
   const [dialogContent, setDialogContent] = useState(null);
   const [dialogCallback, setDialogCallback] = useState(null);
   const { promiseInProgress } = usePromiseTracker({ delay: config.spinner.delay });
+  const { t } = useTranslation();
 
   const handleOpenDialog = (title, content, callback) => {
     setDialogTitle(title);
@@ -93,7 +96,7 @@ export default function SignUp() {
     
     // validate email formally
     if (!validateEmail(email)) {
-      const err = "Please supply a valid email";
+      const err = t("Please supply a valid email");
       setError({ email: err });
       toast.warning(err);
       return false;
@@ -101,21 +104,21 @@ export default function SignUp() {
 
     // check password for minimum complexity
     if (!checkPassword(password)) {
-      const err = "Please supply a more complex password";
+      const err = t("Please supply a more complex password");
       setError({ password: err });
       toast.warning(err);
       return false;
     }
 
     if (!passwordConfirmed) {
-      const err = "Please confirm the password";
+      const err = t("Please confirm the password");
       setError({ passwordConfirmed: err });
       toast.warning(err);
       return false;
     }
 
     if (password !== passwordConfirmed) {
-      const err = "The confirmed password does not match the password";
+      const err = t("The confirmed password does not match the password");
       setError({ passwordConfirmed: err });
       toast.warning(err);
       return false;
@@ -126,7 +129,7 @@ export default function SignUp() {
 
   const validateFormStep2 = () => {
     if (code.length <= 0) {
-      setError({ code: "Code is mandatory"});
+      setError({ code: t("Code is mandatory")});
       return false;
     }
     return true;
@@ -154,21 +157,23 @@ export default function SignUp() {
       success: (data) => {
         console.log("signUp success:", data);
         const medium = data.codeDeliveryDetails.DeliveryMedium.toLowerCase();
-        toast.info(`Confirmation code just sent by ${medium}`)
+        toast.info(t("Confirmation code just sent by {{medium}}", {medium}));
         setCodeDeliveryMedium(medium);
         setWaitingForCode(true);
         setPassword("");
       },
       error: (err) => {
-        console.error("signup error:", err);
-        toast.warning(err.message);
+console.error("signup error:", err);
+ETBT("signup", err);
         switch (err.code) {
           case "UsernameExistsException":
             setError({ email: err.message }); // since we use email as username, we blame email field as guilty
+            toast.warning(t(err.message));
             break;
           default:
             setError({}); // we don't know whom to blame
-        }
+            toast.error(t(err.message));
+          }
       },
     });
   };
@@ -183,14 +188,15 @@ export default function SignUp() {
         console.log("confirmSignup success:", data);
         // data is not meaningful
         handleOpenDialog(
-          `Registered successfully`,
-          `You can now sign in with email and password\nA capo.`,
+          t("Registered successfully"),
+          t("You can now sign in with email and password."),
           () => formSignUpCompleted
         );
       },
       error: (err) => {
-        console.error("confirmSignUp error:", err);
-        toast.error(err.message);
+console.error("confirmSignUp error:", err);
+ETBT("confirmSignUp", err);
+        toast.error(t(err.message));
         setError({ code: err.message});
       },
     });
@@ -202,11 +208,12 @@ export default function SignUp() {
 
     resendSignUp(email, {
       success: (data) => {
-        toast.info(`Code resent successfully by ${codeDeliveryMedium}`);
+        toast.info(t("Code resent successfully by {{codeDeliveryMedium}}", {codeDeliveryMedium}));
       },
       error: (err) => {
-        console.error("resendSignUp error:", err)
-        toast.error(err.message);
+console.error("resendSignUp error:", err);
+ETBT("confirmSignUp", err);
+        toast.error(t(err.message));
         setError({ code: err.message});
       },
     });
@@ -239,7 +246,7 @@ export default function SignUp() {
 
               <Grid container justifyContent="flex-start">
                 <FormText>
-                  {"Register with your data"}
+                  {t("Register with your data")}
                 </FormText>
               </Grid>
 
@@ -251,7 +258,7 @@ export default function SignUp() {
                     id={"firstName"}
                     value={firstName}
                     onChange={setFirstName}
-                    placeholder={"First Name"}
+                    placeholder={t("First Name")}
                     startAdornmentIcon={<Person />}
                     error={error.firstName}
                   />
@@ -262,7 +269,7 @@ export default function SignUp() {
                     id={"lastName"}
                     value={lastName}
                     onChange={setLastName}
-                    placeholder={"Last Name"}
+                    placeholder={t("Last Name")}
                     startAdornmentIcon={<Person />}
                     error={error.lastName}
                   />
@@ -273,7 +280,7 @@ export default function SignUp() {
                 id={"email"}
                 value={email}
                 onChange={setEmail}
-                placeholder={"Email"}
+                placeholder={t("Email")}
                 startAdornmentIcon={<Email />}
                 error={error.email}
               />
@@ -283,7 +290,7 @@ export default function SignUp() {
                 type="password"
                 value={password}
                 onChange={setPassword}
-                placeholder={"Password"}
+                placeholder={t("Password")}
                 startAdornmentIcon={<Lock />}
                 error={error.password}
               />
@@ -293,7 +300,7 @@ export default function SignUp() {
                 type="password"
                 value={passwordConfirmed}
                 onChange={setPasswordConfirmed}
-                placeholder={"Password confirmation"}
+                placeholder={t("Password confirmation")}
                 startAdornmentIcon={<Lock />}
                 error={error.passwordConfirmed}
               />
@@ -303,16 +310,16 @@ export default function SignUp() {
               <FormButton
                 onClick={formSignUp}
               >
-                {"Sign Up"}
+                {t("Sign Up")}
               </FormButton>
 
               <Box m={3} />
 
               <Grid container justifyContent="flex-start">
                 <FormText component="h6" variant="caption" color="textSecondary" align="center">
-                  {"By signing up you agree to our"} <FormLink component={RouterLink} to="/terms-of-use" color="textPrimary">terms of use</FormLink> {""}
-                  {"and you confirm you have read our"} <FormLink component={RouterLink} to="/privacy-policy" color="textPrimary">privacy policy</FormLink>
-                  {", "} {"including cookie use."}
+                  {t("By signing up you agree to our")} <FormLink component={RouterLink} to="/terms-of-use" color="textPrimary">{t("terms of use")}</FormLink> {" "}
+                  {t("and you confirm you have read our")} <FormLink component={RouterLink} to="/privacy-policy" color="textPrimary">{t("privacy policy")}</FormLink>
+                  {", "} {t("including cookie use")} {"."}
                 </FormText>
               </Grid>
 
@@ -327,7 +334,7 @@ export default function SignUp() {
                 type="number"
                 value={code}
                 onChange={setCode}
-                placeholder={`Numeric code just received by ${codeDeliveryMedium}`}
+                placeholder={t("Numeric code just received by {{codeDeliveryMedium}}", {codeDeliveryMedium})}
                 startAdornmentIcon={<ConfirmationNumber />}
                 error={error.code}
               />
@@ -335,7 +342,7 @@ export default function SignUp() {
               <FormButton
                 onClick={formConfirmSignUp}
               >
-                {"Confirm Sign Up"}
+                {t("Confirm Sign Up")}
               </FormButton>
 
               <Grid container justifyContent="flex-end">
@@ -344,7 +351,7 @@ export default function SignUp() {
                   fullWidth={false}
                   className={"buttonSecondary"}
                 >
-                  {"Resend code"}
+                  {t("Resend code")}
                 </FormButton>
               </Grid>
             </>
@@ -373,7 +380,7 @@ export default function SignUp() {
             className={"buttonSecondary"}
             autoFocus
           >
-            {"Ok"}
+            {t("Ok")}
           </FormButton>
         </DialogActions>
       </Dialog>

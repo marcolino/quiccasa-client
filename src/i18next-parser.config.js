@@ -4,7 +4,7 @@ module.exports = {
   contextSeparator: "_",
   // Key separator used in your translation keys
 
-  createOldCatalogs: false,
+  createOldCatalogs: true,
   // Save the \_old files
 
   defaultNamespace: "translation",

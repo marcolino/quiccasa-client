@@ -46,11 +46,11 @@ export default function Authentication() {
     
     currentAuthenticatedUser({
       success: (user) => {
-        console.info("current authenticated user is", user);
+        console.info("authenticated user is", user);
         setAuth({isAuthenticated: true, user});
       },
       error: (err) => {
-        console.info("no current authenticated user");
+        console.info("no authenticated user");
         setAuth({isAuthenticated: false, user: null});
       }
     });

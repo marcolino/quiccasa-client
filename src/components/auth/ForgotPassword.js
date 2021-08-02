@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { usePromiseTracker } from "react-promise-tracker";
+import { useTranslation } from "react-i18next";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -20,6 +21,7 @@ import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
 import config from "../../config";
+import { ETBT } from "../../libs/Misc"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
@@ -45,6 +47,7 @@ export default function ForgotPassword() {
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogTitle, setDialogTitle] = useState(null);
   const [dialogContent, setDialogContent] = useState(null);
+  const { t } = useTranslation();
 
   const handleOpenDialog = (title, content) => {
     setDialogTitle(title);
@@ -61,7 +64,7 @@ export default function ForgotPassword() {
   const validateForm = () => { // validate email formally
     if (!waitingForCode) {
       if (!validateEmail(email)) {
-        const err = "Please supply a valid email";
+        const err = t("Please supply a valid email");
         toast.warning(err);
         setError({ email: err });
         return false;
@@ -70,21 +73,21 @@ export default function ForgotPassword() {
 
     if (waitingForCode) {
       if (!checkPassword(password)) {
-        const err = "Please supply a more complex password";
+        const err = t("Please supply a more complex password");
         toast.warning(err);
         setError({ password: err });
         return false;
       }
 
       if (!passwordConfirmed) {
-        const err = "Please confirm the password";
+        const err = t("Please confirm the password");
         setError({ passwordConfirmed: err });
         toast.warning(err);
         return false;
       }
   
       if (password !== passwordConfirmed) {
-        const err = "The confirmed password does not match the password";
+        const err = t("The confirmed password does not match the password");
         toast.warning(err);
         setError({ passwordConfirmed: err });
         return false;
@@ -101,7 +104,7 @@ export default function ForgotPassword() {
 
     forgotPassword(email, {
       success: (data) => {
-        console.log("forgotPassword success data:", data);
+        console.log("forgotPassword success:", data);
         setWaitingForCode(true);
         setPassword("");
         switch (data.CodeDeliveryDetails.DeliveryMedium) {
@@ -111,15 +114,17 @@ export default function ForgotPassword() {
             setCodeDeliveryMedium(medium);
             ///toast.info(`Verification code sent via ${medium} to ${email}.\nPlease open it and copy and paste it here.`);
             handleOpenDialog(
-              `Verification code sent`,
-              `Verification code sent via ${medium} to ${email}.
-              Please open it and copy and paste it here.`
+              t("Verification code sent"),
+              t(`\
+Verification code sent via {{medium}} to {{email}}.
+Please copy and paste it here.`, {medium, email})
             );
         }
       },
       error: (err) => {
-        console.error("forgotPassword error:", err);
-        toast.error(err.message);
+console.error("forgotPassword error:", err);
+ETBT("forgotPassword", err);
+        toast.error(t(err.message));
         setError({ email: err.message}); // TODO: should we always blame email input for error?
       }
     });
@@ -142,8 +147,9 @@ export default function ForgotPassword() {
         history.push("/signin");
       },
       error: (err) => {
-        console.error("confirmForgotPassword error:", err);
-        toast.error(err.message);
+console.error("confirmForgotPassword error:", err);
+ETBT("confirmForgotPassword", err);
+        toast.error(t(err.message));
         setError({ password: err.message}); // TODO: check whom to blame for error
       }
     });
@@ -153,13 +159,14 @@ export default function ForgotPassword() {
     e.preventDefault();
     setError({});
 
-    resendResetPasswordCode(email, {
+    resendResetPasswordCode('x'+email, {
       success: (data) => {
         console.log("resendResetPasswordCode success data:", data);
         toast.info("Code resent successfully");
       },
       error: (err) => {
-        console.log("resendResetPasswordCode error:", err);
+console.error("resendResetPasswordCode error:", err);
+ETBT("resendResetPasswordCode", err);
         switch (err.code) {
           case "ExpiredCodeException":
             setError({ confirmationCode: err }); // blame confirmationCode field as guilty
@@ -167,18 +174,24 @@ export default function ForgotPassword() {
           default:
             setError({}); // we don't know whom to blame
         }
-        toast.error(err.message);
+        toast.error(t(err.message));
       },
     });
   };
    
-  return (
+// const formTestETBT = () => {
+//   ETBT("errorId", {message: "error value " + (Math.random() + 1).toString(36).substring(7)});
+// };
+
+    return (
     <Container maxWidth="xs">
 
       <form className={classes.form} noValidate autoComplete="off">
         <fieldset disabled={promiseInProgress} className={classes.fieldset}>
           {!waitingForCode && (
             <>
+
+{/* <FormButton onClick={formTestETBT}>{"TEST ETBT"}</FormButton> */}
 
               <Box m={1} />
 
@@ -192,7 +205,7 @@ export default function ForgotPassword() {
 
               <Grid container justifyContent="flex-start">
                 <FormText>
-                  {"Reset password"}
+                  {t("Reset password")}
                 </FormText>
               </Grid>
 
@@ -202,7 +215,7 @@ export default function ForgotPassword() {
                 id={"email"}
                 value={email}
                 onChange={setEmail}
-                placeholder={"Email"}
+                placeholder={t("Email")}
                 startAdornmentIcon={<LockOpen />}
                 error={error.email}
               />
@@ -212,7 +225,7 @@ export default function ForgotPassword() {
               <FormButton
                 onClick={formForgotPassword}
               >
-                {"Request password reset"}
+                {t("Request password reset")}
               </FormButton>
               
             </>
@@ -225,7 +238,7 @@ export default function ForgotPassword() {
                 type="password"
                 value={password}
                 onChange={setPassword}
-                placeholder={"New password"}
+                placeholder={t("New password")}
                 startAdornmentIcon={<Lock />}
                 error={error.password}
               />
@@ -235,7 +248,7 @@ export default function ForgotPassword() {
                 type="password"
                 value={passwordConfirmed}
                 onChange={setPasswordConfirmed}
-                placeholder={"New password confirmation"}
+                placeholder={t("New password confirmation")}
                 startAdornmentIcon={<Lock />}
                 error={error.passwordConfirmed}
               />
@@ -245,7 +258,7 @@ export default function ForgotPassword() {
                 type="number"
                 value={code}
                 onChange={setCode}
-                placeholder={"Numeric code just received by " + codeDeliveryMedium}
+                placeholder={t("Numeric code just received by {{codeDeliveryMedium}}", {codeDeliveryMedium})}
                 startAdornmentIcon={<ConfirmationNumber />}
                 error={error.confirmationCode}
               />
@@ -255,7 +268,7 @@ export default function ForgotPassword() {
               <FormButton
                 onClick={formConfirmForgotPassword}
               >
-                Confirm Password Reset
+                {t("Confirm Password Reset")}
               </FormButton>
 
               <Grid container justifyContent="flex-end">
@@ -264,7 +277,7 @@ export default function ForgotPassword() {
                   fullWidth={false}
                   className={"buttonSecondary"}
                 >
-                  Resend code
+                  {t("Resend code")}
                 </FormButton>
               </Grid>
 
@@ -294,7 +307,7 @@ export default function ForgotPassword() {
             className={"buttonSecondary"}
             autoFocus
           >
-            {"Ok"}
+            {t("Ok")}
           </FormButton>
         </DialogActions>
       </Dialog>

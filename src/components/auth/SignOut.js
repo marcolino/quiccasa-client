@@ -1,9 +1,11 @@
 import { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { signOut } from "../../libs/TrackPromise";
 import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { toast } from "../Toasts";
+import { ETBT } from "../../libs/Misc"; // TODO: remove me when finished collecting serve errors
 
 
 
@@ -11,7 +13,9 @@ export default function SignOut() {
   const history = useHistory();
   const isOnline = useContext(OnlineStatusContext);
   const { setAuth } = useContext(AuthContext);
+  const { t } = useTranslation();
 
+  // use `useEffect` to avoid  "cannot update a component while rendering a different component" error
   useEffect(() => {
     if (!isOnline) { // fake signout while offline...
       // TODO: we should also at least clear localStorage.CognitoIdentityServiceProvider.* keys ...
@@ -21,22 +25,18 @@ export default function SignOut() {
     } else {
       signOut({
         success: () => {
-          //toast.success("Signed out"); // too noisy...
-          // do signout immediately, after calling signOut, and do not do it here, it's too late for a signout...
-          //setAuth({isAuthenticated: false, user: null})
-          //history.replace("/");
+          //toast.success(t("Signed out")); // too noisy...
+          setAuth({isAuthenticated: false, user: null})
+          history.replace("/");
         },
         error: (err) => {
-          console.error("signOut error data:", err);
-          toast.error(err.message);
+console.error("signOut error:", err);
+ETBT("signOut", err);
+          toast.error(t(err.message));
         }
       });
-
-      // do not wait for signOut success, signout user immediately, and hope for the best
-      setAuth({isAuthenticated: false, user: null})
-      history.replace("/");
     }
-  }, [isOnline, history, setAuth]);
+  }, [isOnline, history, setAuth, t]);
 
   return null;
 };

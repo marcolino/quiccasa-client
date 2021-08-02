@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { usePromiseTracker } from "react-promise-tracker";
+import { useTranslation } from "react-i18next";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -17,6 +18,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { validateEmail } from "../../libs/Validation";
 import config from "../../config";
+import { ETBT } from "../../libs/Misc"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
@@ -56,9 +58,9 @@ export default function SignIn() {
   const { setAuth } = useContext(AuthContext);
   const isOnline = useContext(OnlineStatusContext);
   const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
+  const { t } = useTranslation();
 
-  const validateForm = () => {
-    
+  const validateForm = () => {   
     // validate email formally
     if (!validateEmail(email)) {
       const err = "Please supply a valid email";
@@ -99,8 +101,9 @@ export default function SignIn() {
         history.push("/");
       },
       error: (err) => {
-        console.error("signIn error data:", err);
-        toast.error(err.message);
+console.error("signIn error:", err);
+ETBT("signIn", err);
+        toast.error(t(err.message));
         setError({}); // we don't know whom to blame
       },
     });
@@ -117,8 +120,9 @@ export default function SignIn() {
         //console.log("federatedSignIn user:", user); // always undefined, at this moment...
       },
       error: (err) => {
-        console.error("federatedSignIn error data:", err);
-        toast.error(err);
+console.error("federatedSignIn error:", err);
+ETBT("federatedSignIn", err);
+        toast.error(t(err.message));
         setError({}); // we don't know whom to blame
       },
     });
@@ -142,7 +146,7 @@ export default function SignIn() {
 
           <Grid container justifyContent="flex-start">
             <FormText>
-              {"Sign in with email and password"}
+              {t("Sign in with email and password")}
             </FormText>
           </Grid>
 
@@ -152,7 +156,7 @@ export default function SignIn() {
             id={"email"}
             value={email}
             onChange={setEmail}
-            placeholder={"Email"}
+            placeholder={t("Email")}
             startAdornmentIcon={<Person />}
             error={error.email}
           />
@@ -162,7 +166,7 @@ export default function SignIn() {
             type="password"
             value={password}
             onChange={setPassword}
-            placeholder={"Password"}
+            placeholder={t("Password")}
             startAdornmentIcon={<Lock />}
             error={error.password}
           />
@@ -172,7 +176,7 @@ export default function SignIn() {
           <FormButton
             onClick={formSignIn}
           >
-            {"Sign In"}
+            {t("Sign In")}
           </FormButton>
 
           <Grid container alignItems="center">
@@ -182,7 +186,7 @@ export default function SignIn() {
                 onChange={setRememberMe}
                 className={classes.rememberMe}
               >
-                {"Remember me"}
+                {t("Remember me")}
               </FormCheckbox>
             </Grid>
             <Grid className={classes.columnRight}>
@@ -190,7 +194,7 @@ export default function SignIn() {
                 href="/forgot-password"
                 className={classes.forgotPassword}
               >
-                {"Forgot Password?"}
+                {t("Forgot Password?")}
               </FormLink>
             </Grid>
           </Grid>
@@ -200,7 +204,7 @@ export default function SignIn() {
           <Grid container direction="row" justifyContent="center" spacing={1}>
             <Grid item>
               <FormText>
-                {"Don't have an account?"}
+                {t("Don't have an account?")}
               </FormText>
             </Grid>
             <Grid item>
@@ -208,7 +212,7 @@ export default function SignIn() {
                 href="/signup"
                 className={classes.signUp}
               >
-                {"Register Now!"}
+                {t("Register Now!")}
               </FormLink>
             </Grid>
           </Grid>
@@ -219,7 +223,7 @@ export default function SignIn() {
 
               <FormDividerWithText>
                 <FormText>
-                  <i>{"or"}</i>
+                  <i>{t("or")}</i>
                 </FormText>
               </FormDividerWithText>
 
@@ -227,7 +231,7 @@ export default function SignIn() {
 
               <Grid container justifyContent="flex-start">
                 <FormText>
-                  {"Sign in with a social account"}
+                  {t("Sign in with a social account")}
                 </FormText>
               </Grid>
 
@@ -239,7 +243,7 @@ export default function SignIn() {
                   startIcon={<FacebookIcon />}
                   onClick={(e) => formFederatedSignIn(e, "Facebook")}
                 >
-                  {"Facebook"}
+                  {t("Facebook")}
                 </FormButton>
               )}
 
@@ -249,7 +253,7 @@ export default function SignIn() {
                   startIcon={<GoogleIcon />}
                   onClick={(e) => formFederatedSignIn(e, "Google")}
                 >
-                  {"Google"}
+                  {t("Google")}
                 </FormButton>
               )}
             </>

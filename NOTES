@@ -40,6 +40,7 @@ AWS
  - Custom domain support with Cognito #1880: https://github.com/aws-amplify/amplify-cli/issues/1880#issuecomment-626331305
  - Using Your Own Domain for the Hosted UI: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
  - Test Federated Signin: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-configuring-federation-with-social-idp.html
+ - Cache Control - Adding headers to your objects using the Amazon S3 console: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
 
  Email
   - Create Email Addresses for your Route53 Custom Domain: https://medium.com/responsetap-engineering/easily-create-email-addresses-for-your-route53-custom-domain-589d099dd0f2
