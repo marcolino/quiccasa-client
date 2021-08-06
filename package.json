@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.50",
+  "version": "0.1.51",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
@@ -46,6 +46,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-once": "react-scripts test --watchAll=false",
+    "serve": "serve -s build",
     "deploy": "yarn test-once && yarn build && yarn sync",
     "postdeploy": "yarn cloudfront-invalidate-cache && yarn sitemap-search-engines-update",
     "cloudfront-invalidate-cache": "aws cloudfront create-invalidation --distribution-id=E30CJEQ2PIR5NL --paths /",
