@@ -19,8 +19,8 @@ module.exports = {
     delay: 100,
     type: "Audio",
     color: "darkred",
-    size: 200,
-    opacity: .48,
+    size: 66,
+    opacity: .50,
   },
   languages: {
     fallback: "en",

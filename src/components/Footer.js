@@ -21,6 +21,7 @@ export default function Footer(props) {
   const location = useLocation();
 	const classes = useStyles();
   const { t } = useTranslation();
+  const on = t("on"), off = t("off");
 
   return isAuthLocation(location) ? null : ( // hide footer while in auth screens
     <Container className={classes.footer}>
@@ -33,7 +34,7 @@ export default function Footer(props) {
             {config.companyName}
           </Link>
           <span>&emsp;</span>
-          <IconCustom name={`Network.${props.isOnline ? "on" : "off"}`} fill="red" size={12} alt={t("Network connection indicator")} title={t("Network connection is {{how}}", { how: props.isOnline ? t("on") : t("off") })} />
+          <IconCustom name={`Network.${props.isOnline ? "on" : "off"}`} fill="red" size={12} alt={t("Network connection indicator")} title={t("Network connection is {{how}}", { how: props.isOnline ? on : off })} />
         </Typography>
       </Grid>
     </Container>

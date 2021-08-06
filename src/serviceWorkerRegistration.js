@@ -18,6 +18,15 @@ const isLocalhost = Boolean(
     window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 );
 
+// set up a abroadcast channel to the clients to be able to translate service worker messages
+const broadcastChannel = new BroadcastChannel("sw-messages-i18n");
+broadcastChannel.postMessage({title: "Hello from SW"});
+
+// dummy t function to persuade i18-next to parse these text messages too
+const t = (args) => {
+  return args;
+}
+
 export function register(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -34,7 +43,7 @@ export function register(config) {
 
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still exists or not.
-        checkValidServiceWorker(swUrl, config);
+        checkValidServiceWorker(swUrl, config, t);
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
@@ -42,11 +51,15 @@ export function register(config) {
             'This web app is being served cache-first by a service ' +
               'worker. To learn more, visit https://cra.link/PWA'
           );
-          config.info(
-            'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://cra.link/PWA'
-          );
-    });
+          // config.info(
+          //   'This web app is being served cache-first by a service ' +
+          //     'worker. To learn more, visit https://cra.link/PWA'
+          // );
+          broadcastChannel.postMessage({level: "info", message:
+            t("This web app is being served cache-first by a service " +
+            "worker. To learn more, visit https://cra.link/PWA")
+          });
+        });
       } else {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);
