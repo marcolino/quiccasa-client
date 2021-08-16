@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.51",
+  "version": "0.1.52",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
@@ -60,7 +60,8 @@
     "manifest-build": "scripts/manifest-build.js",
     "explore-source-map": "source-map-explorer 'build/static/js/*.js'",
     "lighthouse": "lighthouse http://localhost:3000/ --output json --output-path src/__tests__/lighthouseOutput.json",
-    "delete-all-cognito-pool-users": "scripts/delete-all-cognito-pool-users.sh"
+    "delete-all-cognito-pool-users": "scripts/delete-all-cognito-pool-users.sh",
+    "browserlist-update": "npx browserslist@latest --update-db"
   },
   "eslintConfig": {
     "extends": [
