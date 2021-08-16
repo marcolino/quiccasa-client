@@ -1,11 +1,11 @@
 /**
  * Here we manually collect text from interaction errors with remote
  * endpoints we do not control, and which is not originally localized.
- * With `/src/libs/Misc/ETBT` function we collect in IndexedDB and the
- * value is the English error text, then we collect them manually and
+ * With `/src/libs/I18n/ETBT` function we collect the English error
+ * text in IndexedDB, then we collect them manually and
  * list them here, in the translation `t()` function call.
  * Then, running `yarn translations-parse` we insert them in
- * `locales` folder, and than we can localize it (!).
+ * `/src/locales` folders, and than we can localize it (!).
  */
 
 const amplify = [

@@ -47,10 +47,10 @@
 - rivedere gli assets.external/* - OK
 - dopo aver aggiunto qualche contenuto, pensare a qualche animazione (con react-router v5 sono difficili, brutte e inutili) - OK
 - finire di tradurre auth/* - OK
+- debuggare il service worker - OK
+- tradurre i testi nel serviceworker - OK
+- gestire la cache delle pagine localizzate nel serviceworker - OK
 
-- debuggare il service worker
-- tradurre i testi nel serviceworker
-- gestire la cache delle pagine localizzate nel serviceworker
 - far funzionare il login federato con Facebook
 - rileggere privacy e termini, e parametrizzare il testo del contenuto, ove necessario
 - rendere sottolineati i link in CookieBanner (comunque fare come in SignUp)

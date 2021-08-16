@@ -22,6 +22,7 @@ i18n
     resources,
     fallbackLng: [ config.languages.fallback ],
     keySeparator: false, // we do not use keys in form messages.welcome
+    nsSeparator: false, // do not use namespaces
     interpolation: {
       escapeValue: false // react already safes from xss
     },

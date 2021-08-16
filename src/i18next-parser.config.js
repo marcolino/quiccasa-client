@@ -19,10 +19,10 @@ module.exports = {
   keepRemoved: false,
   // Keep keys from the catalog that are no longer in code
 
-  keySeparator: false, //".",
+  keySeparator: false,
   // Key separator used in your translation keys
   // If you want to use plain english keys, separators such as `.` and `:` will conflict. You might want to set `keySeparator: false` and `namespaceSeparator: false`. That way, `t("Status: Loading...")` will not think that there are a namespace and three separator dots for instance.
-
+  
   // see below for more details
   lexers: {
     hbs: ["HandlebarsLexer"],
@@ -46,7 +46,7 @@ module.exports = {
   locales: ["en", "it"],
   // An array of the locales in your applications
 
-  namespaceSeparator: false, //":",
+  namespaceSeparator: false,
   // Namespace separator used in your translation keys
   // If you want to use plain english keys, separators such as `.` and `:` will conflict. You might want to set `keySeparator: false` and `namespaceSeparator: false`. That way, `t("Status: Loading...")` will not think that there are a namespace and three separator dots for instance.
 

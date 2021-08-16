@@ -18,7 +18,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { validateEmail } from "../../libs/Validation";
 import config from "../../config";
-import { ETBT } from "../../libs/Misc"; // TODO: remove me when finished collecting serve errors
+import { ETBT } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
