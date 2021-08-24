@@ -21,7 +21,7 @@ import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
 import config from "../../config";
-import { ETBT } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
+import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
@@ -123,7 +123,7 @@ Please copy and paste it here.`, {medium, email})
       },
       error: (err) => {
 console.error("forgotPassword error:", err);
-ETBT("forgotPassword", err);
+ETBTAdd("forgotPassword", err);
         toast.error(t(err.message));
         setError({ email: err.message}); // TODO: should we always blame email input for error?
       }
@@ -148,7 +148,7 @@ ETBT("forgotPassword", err);
       },
       error: (err) => {
 console.error("confirmForgotPassword error:", err);
-ETBT("confirmForgotPassword", err);
+        ETBTAdd("confirmForgotPassword", err);
         toast.error(t(err.message));
         setError({ password: err.message}); // TODO: check whom to blame for error
       }
@@ -166,7 +166,7 @@ ETBT("confirmForgotPassword", err);
       },
       error: (err) => {
 console.error("resendResetPasswordCode error:", err);
-ETBT("resendResetPasswordCode", err);
+ETBTAdd("resendResetPasswordCode", err);
         switch (err.code) {
           case "ExpiredCodeException":
             setError({ confirmationCode: err }); // blame confirmationCode field as guilty
@@ -178,12 +178,8 @@ ETBT("resendResetPasswordCode", err);
       },
     });
   };
-   
-// const formTestETBT = () => {
-//   ETBT("errorId", {message: "error value " + (Math.random() + 1).toString(36).substring(7)});
-// };
 
-    return (
+  return (
     <Container maxWidth="xs">
 
       <form className={classes.form} noValidate autoComplete="off">

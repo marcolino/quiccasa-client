@@ -25,4 +25,9 @@
       <changefreq>daily</changefreq>
       <priority>1.0</priority>
     </url>
+    <url>
+      <loc>https://quiccasa.sistemisolari.com/unsubscribe</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.2</priority>
+    </url>
   </urlset>

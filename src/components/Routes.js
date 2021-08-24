@@ -15,6 +15,7 @@ const Profile = lazy(() => import("./auth/Profile"));
 const ForgotPassword = lazy(() => import("./auth/ForgotPassword"));
 const Searches = lazy(() => import("./Searches"));
 const Listings = lazy(() => import("./Listings"));
+const Unsubscribe = lazy(() => import("./Unsubscribe"));
 const NotFound = lazy(() => import("./NotFound"));
 const PrivacyPolicy = [];
       PrivacyPolicy["en"] = lazy(() => import("./privacy/en/PrivacyPolicy"));
@@ -53,6 +54,7 @@ export default function Routes () {
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/searches" component={Searches} /> {/* sitemapFrequency={"daily"} sitemapPriority={1.0} */}
         <Route path="/listings" component={Listings} /> {/* sitemapFrequency={"daily"} sitemapPriority={1.0} */}
+        <Route path="/unsubscribe" component={Unsubscribe} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.2} */}
         <Route path="/privacy-policy" component={PrivacyPolicy[getCurrentLanguage(i18n)]} />
         <Route path="/terms-of-use" component={TermsOfUse[getCurrentLanguage(i18n)]} />
         <Route path="" component={NotFound} />

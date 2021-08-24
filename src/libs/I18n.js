@@ -31,12 +31,30 @@ export const getCurrentLanguage = (i18n) => {
  * @param {caller} string
  * @param {error} object or string
  */
- export function ETBT(caller, err) {
+export function ETBTAdd(caller, err) {
+  return ETBT(caller, err, 'add');
+}
+
+/**
+ * Function to list from IndexedDB errors in English from Cognito/Amplify,
+ * so to be able to localize them all.
+ * To be used only while developing, remove in stable production.
+ * 
+ * @param {caller} string
+ * @param {error} object or string
+ */
+ export function ETBTList(caller, err) {
+  return ETBT(caller, err, 'list');
+}
+
+function ETBT(caller, err, action) {
   caller = caller.toString();
   if ((typeof err === 'object') && (typeof err.message === 'string')) {
     err = err.message;
   } else {
-    err = JSON.encode(err);
+    if (typeof err !== 'string') {
+      err = JSON.stringify(err);
+    }
   }
 
   // save to indexedDB
@@ -65,15 +83,19 @@ export const getCurrentLanguage = (i18n) => {
     var store = tx.objectStore("Amplify");
     /*var index = */store.index("Index");
 
-    // add some data (with changing id to allow storing multiple rows with the same id)
-    store.put({id: id + `-${random()}`, value});
+    if (action === "add") {
+      // add some data (with changing id to allow storing multiple rows with the same id)
+      store.put({id: id + `-${random()}`, value});
+    }
     
-    // query the data
-    store.getAll().onsuccess = function() {
-      var resultUniq = [...new Set(this.result.map(item => item.value))];
-      //this.result.filter((v, i, a) => a.indexOf(v.value) === i);
-      console.log('IndexedDb store getAll():', resultUniq);
-    };
+    if (action === "list") {
+      // query the data
+      store.getAll().onsuccess = function() {
+        var resultUniq = [...new Set(this.result.map(item => item.value))];
+        //this.result.filter((v, i, a) => a.indexOf(v.value) === i);
+        console.log('IndexedDb store list:', resultUniq);
+      };
+    }
 
     // close the db when the transaction is done
     tx.oncomplete = function() {

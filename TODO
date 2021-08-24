@@ -50,12 +50,14 @@
 - debuggare il service worker - OK
 - tradurre i testi nel serviceworker - OK
 - gestire la cache delle pagine localizzate nel serviceworker - OK
+- rileggere privacy e termini - OK
+- parametrizzare il testo del contenuto di privacy e termini, ove necessario - OK
+- rendere sottolineati i link in CookieBanner (comunque fare come in SignUp) - OK
+- codificare in entità HTML le email (per offuscarle e limitare lo SPAM) - OK
 
 - far funzionare il login federato con Facebook
-- rileggere privacy e termini, e parametrizzare il testo del contenuto, ove necessario
-- rendere sottolineati i link in CookieBanner (comunque fare come in SignUp)
 - documentare come aggiungere una lingua
-- aggiungere la possibilità di tornare indietro (history.back) da privacy/
+- aggiungere la possibilità di tornare indietro (history.back) da /privacy-policy e /terms-of-use
 - dopo aver gestito I18n, se si vuole gestire il cambio lingua da parte dell'utente, cambiare "html lang" quando si cambia lingua con `i18next.on('languageChanged', (lng) => {document.documentElement.setAttribute('lang', lng);});`
 - provare a collegare una funzione lambda
 - risolvere i TODO's nel codice
@@ -66,10 +68,10 @@
 - seguire i suggerimenti di chrome lighhouse per il profiling
 - gestire tags opengraph / twitter in index.html
 - completare il README.md (copiare lo stile di uno bello)
-- rimuovere tutti i `console.*`
+- gestire il logging
+- rimuovere tutti i `console.*` non necessari
 - creare le email privacy@sistemisolari.com, info@sistemisolari.com su AWS SES (o email forwards, vedi NOTES#Email)
 - gestire l'auditing: tracciare la registrazione (e altro) dell'utente con react-tracking e google tag manager (forse)
-- gestire il logging
 - gestire URL di callback per la rimozione dell'autorizzazione (Facebook e Google)
 - gestire URL di callback per la richiesta di eliminazione dei dati (Facebook e Google)
 - ripulire Google e Facebook console dalle impostazioni inutili per i login federati nel cloud
@@ -77,7 +79,7 @@
 - capire come controllare la cache di Cloudfront o S3 a qualche ora (vedi https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 - decidere se "please specifiy a more complex password" va bene o è meglio precisare...
 - riempire misc/TextToBeLocalizedFromExternalServers.js con gli errori raccolti in IndexedDB, per tradurre gli errori del server Amplify (e gestirlo solo in sviluppo, oppure mandare i dati su un server)
-- in caso di errore "User already exists" durante la registrazione, valutare se proporre di mandare in /signin
+- in caso di errore "User already exists" durante la registrazione, valutare se proporre di redirigere in /signin
 - integrare `yarn translations-parse` / `yarn translate-auto` nel flusso di deploy (confrontare i files 'locales/translation.json' con gli 'old', e se ci sono differenze interrompere il deploy chiedendo se si vuole tradurre)
 - provare a trovare una api key di yandex per provare a far funzionare `scripts/translate-auto`
 - tests: rendere più semplice la rigenerazione degli snapshots (o decidere di non usarli...)

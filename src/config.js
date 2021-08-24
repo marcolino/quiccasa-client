@@ -13,6 +13,7 @@ module.exports = {
   appName: "quiccasa",
   appTitle: "Quiccasa",
   appSiteUrl: "quiccasa.sistemisolari.com",
+  appTermsValidityStartDate: "01-01-2021",
   startUrl: ".",
   display: "standalone",
   spinner: {
@@ -43,4 +44,12 @@ module.exports = {
   oauthRedirectSignOutLocal: "http://localhost:3000/",
   oauthRedirectSignOutPublic: "https://quiccasa.sistemisolari.com/",
   debugAwsAmplify: false,
+  api: {
+    version: 1,
+    stage: "dev", // "dev" / "prod"
+    enpoint: {
+      development: "https://apidev.sistemisolari.com/",
+      production: "https://api.sistemisolari.com/",
+    }
+  },
 };

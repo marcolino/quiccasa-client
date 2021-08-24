@@ -5,7 +5,7 @@ import { signOut } from "../../libs/TrackPromise";
 import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { toast } from "../Toasts";
-import { ETBT } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
+import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 
 
@@ -31,7 +31,7 @@ export default function SignOut() {
         },
         error: (err) => {
 console.error("signOut error:", err);
-ETBT("signOut", err);
+ETBTAdd("signOut", err);
           toast.error(t(err.message));
         }
       });

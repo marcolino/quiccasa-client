@@ -20,14 +20,14 @@ export default function TermsOfUse() {
         <li>Vendere, noleggiare o fornire in sub-licenza il materiale di {config.appName}</li>
         <li>Riprodurre, duplicare o copiare il materiale di {config.appName}</li>
         <li>Ridistribuire contenuti di {config.appName}</li>
-        <li>Il presente accordo ha inizio dalla data qui indicata.</li>
+        <li>Il presente accordo ha inizio dal {config.appTermsValidityStartDate}.</li>
       </ul>
       <p>Parti di questo sito offrono all'utente la possibilità di pubblicare e scambiare opinioni e informazioni in certe aree del sito. {config.companyHomeSiteName} non filtra, modifica, pubblica o revisiona i commenti prima di aggiungerli sul sito. I commenti non riflettono il punto di vista e l'opinione di {config.companyHomeSiteName}, dei suoi agenti e/o dei suoi affiliati. I commenti riflettono punto di vista e opinione di colui che pubblica tale punto di vista o opinione. Nella misura consentita dalla legge, {config.companyHomeSiteName} non deve essere ritenuta responsabile per i commenti e non può ricevere richieste di risarcimento danni o spese causate dall'uso, dalla pubblicazione e/o dalla presenza dei commenti sul sito.</p>
       <p>{config.companyHomeSiteName} si riserva il diritto di monitorare tutti i commenti e rimuovere quelli che considera non appropriati, offensivi o in violazione con i presenti termini e condizioni.</p>
       <p><strong>Voi garantite che:</strong></p>
       <ul>
         <li>
-          Siete autorizzati a pubblicare commenti sul sito e ha tutte le licenze e i permessi necessari per tale azione;
+          Siete autorizzati a pubblicare commenti sul sito e avete tutte le licenze e i permessi necessari per tale azione;
         </li>
         <li>
           I commenti non violano nessun diritto di proprietà intellettuale, inclusi senza limitazione diritto d'autore, brevetti o marchi commerciali di terze parti;
@@ -39,7 +39,7 @@ export default function TermsOfUse() {
           I commenti non verranno usati per sollecitare o promuovere business, attività commerciali o illegali.
         </li>
         <li>
-          Voi concedete a {config.companyHomeSiteName} una licenza non esclusiva di usare, riprodurre, modificare e autorizza altri a usare, riprodurre e modificare qualsiasi Suo commento in ogni forma, formato o media.
+          Voi concedete a {config.companyHomeSiteName} una licenza non esclusiva di usare, riprodurre, modificare e autorizzare altri a usare, riprodurre e modificare qualsiasi vostro commento in ogni forma, formato o media.
         </li>
       </ul>
       <p><strong>Collegamenti ipertestuali ai nostri contenuti:</strong></p>
@@ -58,7 +58,7 @@ export default function TermsOfUse() {
           Distributori di directory online potrebbero aggiungere un collegamento ipertestuale al nostro sito nello stesso modo fatto per altri siti web indicati
         </li>
         <li>
-          Attività accreditate di sistema eccetto organizzazioni non-profit, società di beneficenza e gruppi di raccolta fondi per attività di carità che non possono aggiungere un collegamento ipertestuale al nostro sito.
+          Aziende accreditate dal sistema eccetto organizzazioni non-profit, società di beneficenza e gruppi di raccolta fondi per attività di carità che non possono aggiungere un collegamento ipertestuale al nostro sito.
         </li>
         <li>
           Queste organizzazioni potrebbero aggiungere un collegamento ipertestuale alla nostra homepage, alle pubblicazioni e alle informazioni di altri siti a patto che il collegamento: (a) non sia ingannevole in alcun modo; (b) non implichi falsamente sponsorizzazione, pubblicità o approvazione del terzo che ha aggiunto il collegamento e dei suoi prodotti e/o servizi; (c) sia adatto al contesto del sito del terzo che ha aggiunto il collegamento.
@@ -67,13 +67,13 @@ export default function TermsOfUse() {
       <p>Potremmo considerare e approvare altre richieste di collegamento dai seguenti tipi di organizzazioni:</p>
       <ul>
         <li>
-          fonti di informazioni commerciali e/o per consumatori conosciute
+          fonti di informazioni commerciali e/o dei consumatori note
         </li>
         <li>
-          siti di community punto.com
+          siti di community dot.com
         </li>
         <li>
-          associazioni o altri gruppi che rappresentano attività di carità
+          associazioni o altri gruppi che rappresentano attività di beneficienza
         </li>
         <li>
           distributori di directory online
@@ -100,10 +100,10 @@ export default function TermsOfUse() {
           Usando l'uniform resource locator collegato
         </li>
         <li>
-          Usando qualsiasi altra descrizione del nostro sito rilevante per contesto e formato dei contenuti sul sito terzo.
+          Usando qualsiasi altra descrizione del nostro sito rilevante per contesto e formato dei contenuti sul sito terzo
         </li>
         <li>
-          Non è consentito uso di logo o immagini di {config.companyHomeSiteName} per collegamenti in caso di mancanza di un accordo di licenza commerciale.
+          Non è consentito uso di logo o immagini di {config.companyHomeSiteName} per collegamenti in caso di mancanza di un accordo di licenza commerciale
         </li>
       </ul>
       <p><strong>Responsabilità sui contenuti:</strong></p>
@@ -112,7 +112,7 @@ export default function TermsOfUse() {
       <p>Ci riserviamo il diritto di richiedere la rimozione di tutti i collegamenti o di un collegamento specifico al nostro sito. Deve approvare immediatamente la richiesta di rimozione dei collegamenti. Ci riserviamo il diritto di modificare termini e condizioni, oltre che politica di collegamento in qualsiasi momento. Continuando a usare il nostro sito, accetta di essere vincolato dai presenti termini e condizioni.</p>
       <p><strong>Rimozione di collegamenti dal nostro sito:</strong></p>
       <p>Nel caso in cui un collegamento sul nostro sito sia offensivo per qualsiasi motivo, potete contattarci e informarci in qualsiasi momento. Considereremo le richieste di rimozione dei collegamenti, tuttavia non siamo obbligati a completare la rimozione o rispondere direttamente.</p>
-      <p>Non garantiamo l'accuratezza delle informazioni presenti sul sito. Non garantiamo che le informazioni siano complete o precise, né promettiamo di assicurare che il sito resti disponibile o che il materiale sul sito venga costantemente aggiornato.</p>
+      <p>Non garantiamo l'accuratezza delle informazioni presenti sul sito. Non garantiamo che le informazioni siano complete o precise, né ci impegniamo ad assicurare che il sito resti disponibile o che il materiale sul sito venga costantemente aggiornato.</p>
       <h3>Esclusione di responsabilità:</h3>
       <p>Nella misura massima consentita dalla legge, escludiamo ogni rappresentanza, garanzia e condizione correlata al nostro sito e all'uso dello stesso. Niente in questa esclusione di responsabilità:</p>
       <ul>
@@ -126,7 +126,7 @@ export default function TermsOfUse() {
           limita la nostra o la Sua responsabilità in modo non consentito dalla legge
         </li>
         <li>
-          esclude la nostra o la Sua responsabilità in modo non escludibile dalla legge.
+          esclude la nostra o la Sua responsabilità in modo non escludibile dalla legge
         </li>
       </ul>
       <p>Le limitazioni e i divieti di responsabilità indicati in questa sezione e in altre parti di questa esclusione di responsabilità: (a) sono soggetti al paragrafo precedente; (b) governano tutte le responsabilità correlate a questa esclusione di responsabilità, incluse quelle correlate a contratto, torto o violazione di obblighi normativi.</p>

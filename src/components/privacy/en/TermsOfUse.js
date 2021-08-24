@@ -20,7 +20,7 @@ export default function TermsOfUse() {
         <li>Sell, rent or sub-license the material of {config.appName}</li>
         <li>Reproduce, duplicate or copy {config.appName}</li>material
         <li>Redistribute contents of {config.appName}</li>
-        <li>This Agreement commences on the date indicated here.</li>
+        <li>This Agreement commences on {config.appTermsValidityStartDate}.</li>
       </ul>
       <p>Parts of this site offer the user the possibility to publish and exchange opinions and information in certain areas of the site. {config.companyHomeSiteName} does not filter, modify, publish or review comments before adding them to the site. Comments do not reflect the views and opinions of {config.companyHomeSiteName}, its agents and / or affiliates. Comments reflect the view and opinion of the publisher of such view or opinion. To the extent permitted by law, {config.companyHomeSiteName} should not be held responsible for comments and cannot receive claims for damages or expenses caused by the use, publication and / or presence of comments on the site.</p>
       <p>{config.companyHomeSiteName} reserves the right to monitor all comments and remove any that it considers inappropriate, offensive or in violation of these terms and conditions.</p>
@@ -85,7 +85,7 @@ export default function TermsOfUse() {
           consultancy, legal and auditing agencies
         </li>
         <li>
-          educational institutions and professional associations.
+          educational institutions and professional associations
         </li>
       </ul>
       <p>We will approve link requests from these organizations if: (a) the link does not place us at a disadvantage for ourselves or for our recorded activities; (b) the organization has no negative record with us; (c) the advantage given by the visibility of the hyperlink compensates for the absence for {config.companyHomeSiteName}; (d) the link is in a general information context.</p>
@@ -100,10 +100,10 @@ export default function TermsOfUse() {
           Using the linked uniform resource locator
         </li>
         <li>
-          Using any other description of our site relevant to the context and format of the content on the third site.
+          Using any other description of our site relevant to the context and format of the content on the third site
         </li>
         <li>
-          The use of {config.companyHomeSiteName} logos or images for linking is not permitted if a commercial license agreement is lacking.
+          The use of {config.companyHomeSiteName} logos or images for linking is not permitted if a commercial license agreement is lacking
         </li>
       </ul>
       <p><strong>Liability for content:</strong></p>

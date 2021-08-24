@@ -90,7 +90,7 @@ exports[`renders Home screen 1`] = `
       </div>
       <div
         class="CookieConsent"
-        style="align-items: baseline; background: rgb(43, 55, 59); color: white; display: block; flex-wrap: wrap; justify-content: space-between; left: 0px; position: fixed; width: 100%; z-index: 999; font-family: Open Sans; bottom: 0px;"
+        style="align-items: baseline; background: rgb(43, 55, 59); color: rgb(153, 153, 153); display: block; flex-wrap: wrap; justify-content: space-between; left: 0px; position: fixed; width: 100%; z-index: 999; font-family: Open Sans; bottom: 0px;"
       >
         <div
           class=""
@@ -100,7 +100,7 @@ exports[`renders Home screen 1`] = `
            
            
           <a
-            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorInherit"
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
             href="/privacy-policy"
           >
             privacy policy
@@ -146,7 +146,7 @@ exports[`renders Home screen 1`] = `
              
              
             v
-            0.1.50
+            0.1.52
              
              ~ 
             ©

@@ -22,7 +22,7 @@ import { toast } from "../Toasts";
 import { FormInput, FormButton, FormText, FormLink } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
 import config from "../../config";
-import { ETBT } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
+import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
@@ -164,7 +164,7 @@ export default function SignUp() {
       },
       error: (err) => {
 console.error("signup error:", err);
-ETBT("signup", err);
+ETBTAdd("signup", err);
         switch (err.code) {
           case "UsernameExistsException":
             setError({ email: err.message }); // since we use email as username, we blame email field as guilty
@@ -195,7 +195,7 @@ ETBT("signup", err);
       },
       error: (err) => {
 console.error("confirmSignUp error:", err);
-ETBT("confirmSignUp", err);
+ETBTAdd("confirmSignUp", err);
         toast.error(t(err.message));
         setError({ code: err.message});
       },
@@ -212,7 +212,7 @@ ETBT("confirmSignUp", err);
       },
       error: (err) => {
 console.error("resendSignUp error:", err);
-ETBT("confirmSignUp", err);
+ETBTAdd("confirmSignUp", err);
         toast.error(t(err.message));
         setError({ code: err.message});
       },

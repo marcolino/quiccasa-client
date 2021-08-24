@@ -42,8 +42,20 @@ AWS
  - Test Federated Signin: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-configuring-federation-with-social-idp.html
  - Cache Control - Adding headers to your objects using the Amazon S3 console: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
 
- Email
-  - Create Email Addresses for your Route53 Custom Domain: https://medium.com/responsetap-engineering/easily-create-email-addresses-for-your-route53-custom-domain-589d099dd0f2
+CORS
+ - React.js API calls to AWS Lambda, API Gateway and dealing with CORS:
+   https://codeburst.io/react-js-api-calls-to-aws-lambda-api-gateway-and-dealing-with-cors-89fb897eb04d
+ - How to set up a custom domain name for Lambda & API Gateway with Serverless
+   https://www.serverless.com/blog/serverless-api-gateway-domain
+ - StackOverflow: Serverless AWS Lambda CORS Error
+   https://stackoverflow.com/questions/46627532/serverless-aws-lambda-cors-error
+
+Cache
+ - Serverless - Invalidating the Cache:
+   https://serverless-stack.com/chapters/deploy-updates.html
+   
+Email
+ - Create Email Addresses for your Route53 Custom Domain: https://medium.com/responsetap-engineering/easily-create-email-addresses-for-your-route53-custom-domain-589d099dd0f2
  
- Google Search Console:
+Google Search Console:
  - https://search.google.com/search-console?resource_id=sc-domain%3Asistemisolari.com

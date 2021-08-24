@@ -6,4 +6,6 @@ It uses AWS S3 for... , AWS Cloudfront for..., AWS Cognito for user authenticati
 
 Features include full I18n support,... 
 
+To add a new language locale support:...
+
 This project was bootstrapped with [Crelate React App](https://github.com/facebook/create-react-app).

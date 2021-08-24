@@ -1,4 +1,5 @@
 {
   "This web app is being served cache-first by a service worker. To learn more, visit https://cra.link/PWA": "Questa web app è servita \"cache-first\" da un service worker. Per saperne di più, visita https://cra.link/PWA",
-  "This web app is being served cache-first by a service worker": "Questa app è servita cache-first da un service worker"
+  "This web app is being served cache-first by a service worker": "Questa app è servita cache-first da un service worker",
+  "yes": "yes"
 }

@@ -1,3 +1,4 @@
+import { encodeEmail } from "../../../libs/Misc";
 import config from "../../../config";
 
 export default function PrivacyPolicy() {
@@ -35,7 +36,7 @@ export default function PrivacyPolicy() {
           </li>
           <li><strong>Cookie di social media (es: Facebook)</strong>
             <br />
-            Questi cookie di terza parte vengono utilizzati per integrare alcune diffuse funzionalità dei principali social media e fornirle all’interno del sito. In particolare permettono la registrazione e l’autenticazione sul sito tramite facebook e google connect, la condivisione e i commenti di pagine del sito sui social, abilitano le funzionalità del “mi piace” su Facebook e del “+1″ su G+.
+            Questi cookie di terza parte vengono utilizzati per integrare alcune diffuse funzionalità dei principali social media e fornirle all’interno del sito. In particolare permettono la registrazione e l’autenticazione sul sito tramite facebook e google connect, la condivisione e i commenti di pagine del sito sui social, abilitano le funzionalità del “mi piace” su Facebook e del “+1” su G+.
           </li>
         </ul>
       </div>
@@ -108,7 +109,7 @@ export default function PrivacyPolicy() {
         <li>Indirizzo: <span id="indirizzo">{config.companyOwnerStreetAddress}</span></li>
         <li>Città: <span id="cap">{config.companyOwnerZipCode}</span> - <span id="citta">{config.companyOwnerCity}</span> (<span id="provincia">{config.companyOwnerProvince}</span>)</li>
         <li>Tel/Fax: <span id="telefono">{config.companyOwnerPhone}</span></li>
-        <li>E-mail: <span id="email">{config.companyOwnerEmail}</span></li>
+        <li>E-mail: <span id="email">{encodeEmail(config.companyOwnerEmail)}</span></li>
       </ul>
       <p>Per esercitare i diritti previsti all'art. 7 del Codice della Privacy ovvero per la cancellazione dei vostri dati dall'archivio, è sufficiente contattarci attraverso uno dei canali messi a disposizione.</p>
       <p>Tutti i dati sono protetti attraverso l'uso di antivirus, firewall e protezione attraverso password.</p>

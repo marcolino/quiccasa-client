@@ -18,7 +18,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { validateEmail } from "../../libs/Validation";
 import config from "../../config";
-import { ETBT } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
+import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
@@ -102,7 +102,7 @@ export default function SignIn() {
       },
       error: (err) => {
 console.error("signIn error:", err);
-ETBT("signIn", err);
+ETBTAdd("signIn", err);
         toast.error(t(err.message));
         setError({}); // we don't know whom to blame
       },
@@ -121,7 +121,7 @@ ETBT("signIn", err);
       },
       error: (err) => {
 console.error("federatedSignIn error:", err);
-ETBT("federatedSignIn", err);
+ETBTAdd("federatedSignIn", err);
         toast.error(t(err.message));
         setError({}); // we don't know whom to blame
       },
