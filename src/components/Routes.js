@@ -7,11 +7,13 @@ import { getCurrentLanguage } from "../libs/I18n";
 import { toast } from "./Toasts";
 import Spinner from "./Spinner";
 
+import Profile from "./auth/Profile";
+
 const Home = lazy(() => import("./Home"));
 const SignUp = lazy(() => import("./auth/SignUp"));
 const SignIn = lazy(() => import("./auth/SignIn"));
 const SignOut = lazy(() => import("./auth/SignOut"));
-const Profile = lazy(() => import("./auth/Profile"));
+//const Profile = lazy(() => import("./auth/Profile"));
 const ForgotPassword = lazy(() => import("./auth/ForgotPassword"));
 const Searches = lazy(() => import("./Searches"));
 const Listings = lazy(() => import("./Listings"));

@@ -12,6 +12,13 @@ export const isEmptyObject = (obj) => {
   );
 };
 
+export const findValueInObjectsArrayByProp = (array, keyProp, valProp, value) => {
+  const result = array.find(a => {
+    return a[keyProp] === value;
+  });
+  return ((typeof result === "object") && (result !== null)) ? result[valProp] : undefined;
+}
+
 export const isAuthLocation = (location) => {
   return (
     (location.pathname === "/signup") ||

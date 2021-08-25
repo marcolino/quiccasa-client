@@ -18,6 +18,7 @@ import theme from "../themes/default"; // here we choose the theme
 
 export default function App() {
 
+  console.log("App rendering");
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
