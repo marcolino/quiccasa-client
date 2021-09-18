@@ -3,7 +3,7 @@ import config from "../../../config";
 export default function TermsOfUse() {
   const contents = (
     <>
-      <h2>Termini e condizioni</h2>
+      <h2>Termini e condizioni d'uso</h2>
       <p><strong>Informativa ai sensi dell'art. 13 del Codice della Privacy</strong></p>
       <p><b>Ai sensi dell'articolo 13 del codice della D.Lgs. 196/2003, vi rendiamo le seguenti informazioni.</b></p>
       <p>I termini e le condizioni seguenti indicano regole e normative per l'utilizzo del sito di <b>{config.companyHomeSiteName}</b>, all'indirizzo <b>{config.appSiteUrl}</b>.</p>
