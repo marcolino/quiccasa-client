@@ -56,10 +56,10 @@
 - codificare in entità HTML le email (per offuscarle e limitare lo SPAM) - OK
 - far funzionare il login federato con Facebook - OK
 - documentare come aggiungere una lingua - OK
+- aggiungere la possibilità di tornare indietro (history.back) da /privacy-policy e /terms-of-use - OK
 
-- aggiungere la possibilità di tornare indietro (history.back) da /privacy-policy e /terms-of-use
 - dopo aver gestito I18n, se si vuole gestire il cambio lingua da parte dell'utente, ricordarsi di cambiare "html lang" quando si cambia lingua con `i18next.on('languageChanged', (lng) => {document.documentElement.setAttribute('lang', lng);});`
-- provare a collegare una funzione lambda
+- provare a collegare una funzione lambda (?)
 - risolvere i TODO's nel codice
 - accettare invio come default submit in tutti i forms
 - gestire la navigazione da tastiera (e in signup/confirm, o dove ci sono più submit, attivare il corretto default submit)
@@ -81,5 +81,5 @@
 - riempire misc/TextToBeLocalizedFromExternalServers.js con gli errori raccolti in IndexedDB, per tradurre gli errori del server Amplify (e gestirlo solo in sviluppo, oppure mandare i dati su un server)
 - in caso di errore "User already exists" durante la registrazione, valutare se proporre di redirigere in /signin
 - integrare `yarn translations-parse` / `yarn translate-auto` nel flusso di deploy (confrontare i files 'locales/translation.json' con gli 'old', e se ci sono differenze interrompere il deploy chiedendo se si vuole tradurre)
-- provare a trovare una api key di yandex per provare a far funzionare `scripts/translate-auto`
+- provare a trovare una api key di yandex (o un altro modo) per provare a far funzionare `scripts/translate-auto`
 - tests: rendere più semplice la rigenerazione degli snapshots (o decidere di non usarli...)
