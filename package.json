@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.55",
+  "version": "0.1.56",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
@@ -39,7 +39,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-production": "yarn build && serve -s build",
+    "start-production": "yarn build && serve -s build -p 3000",
     "prebuild": "yarn install-pre-push-hook && yarn sitemap-build && yarn favicons-build && yarn manifest-build",
     "translations-parse": "i18next 'src/**/*.js' --config 'src/i18next-parser.config.js' --silent",
     "translate-auto": "node scripts/translate-auto.js",
@@ -50,7 +50,7 @@
     "deploy": "yarn test-once && yarn build && yarn sync",
     "postdeploy": "yarn cloudfront-invalidate-cache && yarn sitemap-search-engines-update",
     "cloudfront-invalidate-cache": "aws cloudfront create-invalidation --distribution-id=E30CJEQ2PIR5NL --paths /",
-    "env-decrypt": "gpg -d .env.gpg",
+    "env-decrypt": "echo $(tput setaf 3)Password is the name of your little boat\\!$(tput sgr0); gpg -d .env.gpg",
     "sync": "aws s3 sync build/ s3://quiccasa.sistemisolari.com",
     "eject": "echo -n 'Really sure to eject [yes/no] ? '; read answer; [ $answer = 'yes' ] && react-scripts eject || true",
     "install-pre-push-hook": "cp --remove-destination scripts/git-hooks/pre-push .git/hooks/pre-push && chmod 700 .git/hooks/pre-push",
