@@ -22,7 +22,8 @@ export default function Footer(props) {
 	const classes = useStyles();
   const { t } = useTranslation();
   const on = t("on"), off = t("off");
-
+  const languageIcon = config.languages.supported[navigator.language.slice(0, 2).toLowerCase()].icon; // TODO: do something safer...
+ 
   return isAuthLocation(location) ? null : ( // hide footer while in auth screens
     <Container className={classes.footer}>
       <Grid container justifyContent="center">
@@ -34,7 +35,7 @@ export default function Footer(props) {
             {config.companyName}
           </Link>
           <span>&emsp;</span>
-          <span>{config.languages.supported[navigator.language.toLowerCase()].icon}</span>
+          <span>{languageIcon}</span>
           <span>&emsp;</span>
           <IconCustom name={`Network.${props.isOnline ? "on" : "off"}`} fill="red" size={12} alt={t("Network connection indicator")} title={t("Network connection is {{how}}", { how: props.isOnline ? on : off })} />
         </Typography>

@@ -146,7 +146,7 @@ exports[`renders Home screen 1`] = `
              
              
             v
-            0.1.55
+            0.1.56
              
              ~ 
             ©
@@ -162,6 +162,12 @@ exports[`renders Home screen 1`] = `
             >
               Sistemi Solari
             </a>
+            <span>
+               
+            </span>
+            <span>
+              🇬🇧
+            </span>
             <span>
                
             </span>

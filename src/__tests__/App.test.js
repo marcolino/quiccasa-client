@@ -1,5 +1,5 @@
 import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
-import renderer from "react-test-renderer";
+//import renderer from "react-test-renderer";
 import App from "../components/App";
 
 test("renders Home screen", async () => {
