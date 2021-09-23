@@ -2,5 +2,7 @@
   "This web app is being served cache-first by a service worker. To learn more, visit https://cra.link/PWA": "This web app is being served cache-first by a service worker. To learn more, visit https://cra.link/PWA",
   "Error during service worker registration: {error}": "Error during service worker registration: {error}",
   "This web app is being served cache-first by a service worker": "This web app is being served cache-first by a service worker",
-  "yes": "yes"
+  "yes": "yes",
+  "Facebook": "Facebook",
+  "Google": "Google"
 }

@@ -34,6 +34,8 @@ export default function Footer(props) {
             {config.companyName}
           </Link>
           <span>&emsp;</span>
+          <span>{config.languages.supported[navigator.language.toLowerCase()].icon}</span>
+          <span>&emsp;</span>
           <IconCustom name={`Network.${props.isOnline ? "on" : "off"}`} fill="red" size={12} alt={t("Network connection indicator")} title={t("Network connection is {{how}}", { how: props.isOnline ? on : off })} />
         </Typography>
       </Grid>

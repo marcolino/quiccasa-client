@@ -2,8 +2,8 @@ DOCUMENTATION
 
 Security
  - .env files are excluded by git repositories; .env.gpg files are not;
-   when adding some secret to .env, crypt it with yarn env-crypt;
-   it can be later decrypted with `yarn env-decrypt`.
+   when adding some secret to .env, crypt it with yarn env-crypt (or better
+   add a pre-push hook to encrypt it); it can be later decrypted with `yarn env-decrypt`.
 
 
 REFERENCES

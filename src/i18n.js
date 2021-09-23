@@ -5,6 +5,7 @@ import config from "./config";
 
 import en from "./locales/en/translation.json";
 import it from "./locales/it/translation.json";
+import fr from "./locales/fr/translation.json";
 
 /**
  * All supported languages resources are listed here.
@@ -12,7 +13,8 @@ import it from "./locales/it/translation.json";
  */
 const resources = {
   en: { translation: en },
-  it: { translation: it }
+  it: { translation: it },
+  fr: { translation: fr },
 };
 
 i18n

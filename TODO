@@ -54,18 +54,18 @@
 - parametrizzare il testo del contenuto di privacy e termini, ove necessario - OK
 - rendere sottolineati i link in CookieBanner (comunque fare come in SignUp) - OK
 - codificare in entità HTML le email (per offuscarle e limitare lo SPAM) - OK
+- far funzionare il login federato con Facebook - OK
+- documentare come aggiungere una lingua - OK
 
-- far funzionare il login federato con Facebook
-- documentare come aggiungere una lingua
 - aggiungere la possibilità di tornare indietro (history.back) da /privacy-policy e /terms-of-use
-- dopo aver gestito I18n, se si vuole gestire il cambio lingua da parte dell'utente, cambiare "html lang" quando si cambia lingua con `i18next.on('languageChanged', (lng) => {document.documentElement.setAttribute('lang', lng);});`
+- dopo aver gestito I18n, se si vuole gestire il cambio lingua da parte dell'utente, ricordarsi di cambiare "html lang" quando si cambia lingua con `i18next.on('languageChanged', (lng) => {document.documentElement.setAttribute('lang', lng);});`
 - provare a collegare una funzione lambda
 - risolvere i TODO's nel codice
 - accettare invio come default submit in tutti i forms
 - gestire la navigazione da tastiera (e in signup/confirm, o dove ci sono più submit, attivare il corretto default submit)
 - completare (e testare) gli attributi aria
 - capire e gestire testing coverage
-- seguire i suggerimenti di chrome lighhouse per il profiling
+- seguire i suggerimenti di chrome lighthouse per il profiling
 - gestire tags opengraph / twitter in index.html
 - completare il README.md (copiare lo stile di uno bello)
 - gestire il logging

@@ -1,3 +1,5 @@
+import React from "react";
+
 export const capitalize = (string) => {
   return string ? string.charAt(0).toUpperCase() + string.slice(1) : "";
 };
@@ -259,5 +261,5 @@ export const encodeEmail = (email) => {
         encodedEmail += "&#" + charNum + ";";
       }
     }
-    return encodedEmail;
+    return React.createElement("span", { dangerouslySetInnerHTML: { __html: encodedEmail } });
   }

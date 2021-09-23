@@ -13,18 +13,12 @@ const Home = lazy(() => import("./Home"));
 const SignUp = lazy(() => import("./auth/SignUp"));
 const SignIn = lazy(() => import("./auth/SignIn"));
 const SignOut = lazy(() => import("./auth/SignOut"));
-//const Profile = lazy(() => import("./auth/Profile"));
+const Profile = lazy(() => import("./auth/Profile"));
 const ForgotPassword = lazy(() => import("./auth/ForgotPassword"));
 const Searches = lazy(() => import("./Searches"));
 const Listings = lazy(() => import("./Listings"));
 const Unsubscribe = lazy(() => import("./Unsubscribe"));
 const NotFound = lazy(() => import("./NotFound"));
-const PrivacyPolicy = [];
-      PrivacyPolicy["en"] = lazy(() => import("./legal/en/PrivacyPolicy"));
-      PrivacyPolicy["it"] = lazy(() => import("./legal/it/PrivacyPolicy"));
-const TermsOfUse = [];
-      TermsOfUse["en"] = lazy(() => import("./legal/en/TermsOfUse"));
-      TermsOfUse["it"] = lazy(() => import("./legal/it/TermsOfUse"));
 const Legal = lazy(() => import("./legal/legal"));
 
 

@@ -29,7 +29,7 @@ export default function Authentication() {
       Auth: {
         oauth: {...config.oauth,
           redirectSignIn: isLocalhost ? config.oauthRedirectSignInLocal : config.oauthRedirectSignInPublic,
-          redirectSignOut: isLocalhost ?  config.oauthRedirectSignOutLocal : config.oauthRedirectSignOutPublic,
+          redirectSignOut: isLocalhost ? config.oauthRedirectSignOutLocal : config.oauthRedirectSignOutPublic,
         },
         region: process.env.REACT_APP_REGION,
         userPoolId: process.env.REACT_APP_USER_POOL_ID,
@@ -54,6 +54,7 @@ export default function Authentication() {
         setAuth({isAuthenticated: false, user: null});
       }
     });
+
   }, [setAuth/*, i18n.currentLanguage*/]);
 
   return null;

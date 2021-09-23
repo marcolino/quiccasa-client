@@ -2,7 +2,7 @@ import { encodeEmail } from "../../../libs/Misc";
 import config from "../../../config";
 
 export default function PrivacyPolicy() {
-	const contents = (
+ 	return (
     <>
       <h2>Politica sulla Riservatezza</h2>
       <p><strong>Informativa ai sensi dell'art. 13 del Codice della Privacy</strong></p>
@@ -120,6 +120,4 @@ export default function PrivacyPolicy() {
       <p>Usando il nostro sito web, acconsenti alla nostra politica sulla privacy e accetti i suoi termini. Se desideri ulteriori informazioni o hai domande sulla nostra politica sulla privacy non esitare a contattarci.</p>
     </>
   );
-
-  return contents;
 }

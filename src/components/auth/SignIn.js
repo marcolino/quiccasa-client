@@ -237,7 +237,24 @@ ETBTAdd("federatedSignIn", err);
 
               <Box m={0} />
 
-              {config.federatedSigninProviders.includes("Facebook") && (
+              {
+                config.federatedSigninProviders.map(provider => (
+                  <FormButton
+                    key={provider}
+                    social={provider}
+                    startIcon={
+                      provider === "Facebook" ? <FacebookIcon /> :
+                      provider === "Google" ? <GoogleIcon /> :
+                      <GoogleIcon />
+                    }
+                    onClick={(e) => formFederatedSignIn(e, provider)}
+                  >
+                    {provider}
+                  </FormButton>
+                ))
+              }
+                
+              {/* {config.federatedSigninProviders.includes("Facebook") && (
                 <FormButton
                   social={"Facebook"}
                   startIcon={<FacebookIcon />}
@@ -255,7 +272,7 @@ ETBTAdd("federatedSignIn", err);
                 >
                   {t("Google")}
                 </FormButton>
-              )}
+              )} */}
             </>
           )}
 

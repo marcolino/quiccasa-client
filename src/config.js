@@ -14,7 +14,7 @@ module.exports = {
   appTitle: "Quiccasa",
   appSiteUrl: "quiccasa.sistemisolari.com",
   appTermsValidityStartDate: "01-01-2021",
-  startUrl: ".",
+  startUrl: ".", // TODO: "/" or "." ?
   display: "standalone",
   spinner: {
     delay: 100,
@@ -24,19 +24,23 @@ module.exports = {
     opacity: .50,
   },
   languages: {
+    supported: {
+      "en": { icon: "🇬🇧" },
+      "it": { icon: "🇮🇹" },
+    },
     fallback: "en",
   },
   footerHeight: "1.5rem",
   extraSmallWatershed: 600,
   mobileDesktopWatershed: 900,
   federatedSigninProviders: [ // we currently handle "Facebook", "Google"
-    //"Facebook", // does not work yet
+    "Facebook",
     "Google",
   ],
   oauth: {
-    //HostedUIDomain: "quiccasa.sistemisolari.com",
     domain: "auth.sistemisolari.com",
-    scope: [ "phone", "email", "profile", "openid", "aws.cognito.signin.user.admin" ],
+    // OK for Google // scope: [ "phone", "email", "profile", "openid", "aws.cognito.signin.user.admin" ],
+    scope: [ "email", "openid", "aws.cognito.signin.user.admin" ],
     responseType: "code",
   },
   oauthRedirectSignInLocal: "http://localhost:3000/",

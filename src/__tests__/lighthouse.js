@@ -1,5 +1,5 @@
 // we need to run yarn start, yarn lighthouse to build a fresh lighthouseOutput.json...
-const lighthouseOutput = require("../../testing/lighthouseOutput.json");
+const lighthouseOutput = require("../__tests__/lighthouseOutput.json");
 
 describe("Accessibility", () => {
   test("Accessibility score is within acceptable threshold", () => {

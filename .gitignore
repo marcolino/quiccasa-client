@@ -26,7 +26,7 @@ yarn-error.log*
 
 src/__tests__/lighthouseOutput.json
 
-tmp/
+#tmp/
 
 # # REMOVEME_amplify
 # amplify/\#current-cloud-backend
