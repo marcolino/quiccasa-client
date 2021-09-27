@@ -1,21 +1,21 @@
 import { useEffect } from "react";
-import { ToastContainer as ToastifyContainer, toast } from "react-toastify";
+import { ToastContainer as ToastifyContainer, toast as toastNotification } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
 
 
 
-export function ToastContainer(props) {
+export function ToastNotificationContainer(props) {
   useEffect(() => {
     injectStyle();
   }, []);
 
   return (
     <ToastifyContainer
-      position="top-right"
-      autoClose={4800}
+      position="top-left"
+      autoClose={false}
       hideProgressBar={true}
       newestOnTop={false}
-      closeOnClick
+      //closeOnClick
       rtl={false}
       pauseOnFocusLoss={false}
       draggable
@@ -27,4 +27,4 @@ export function ToastContainer(props) {
   );
 }
 
-export { toast };
+export { toastNotification };

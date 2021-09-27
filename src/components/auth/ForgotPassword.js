@@ -17,7 +17,7 @@ import ConfirmationNumber from "@material-ui/icons/ConfirmationNumber";
 import Lock from "@material-ui/icons/Lock";
 import LockOpen from "@material-ui/icons/LockOpen";
 import { forgotPassword, forgotPasswordSubmit, resendResetPasswordCode } from "../../libs/TrackPromise";
-import { toast } from "../Toasts";
+import { toast } from "../Toast";
 import { FormInput, FormButton, FormText } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
 import config from "../../config";

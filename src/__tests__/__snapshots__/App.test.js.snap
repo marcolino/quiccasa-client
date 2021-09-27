@@ -86,6 +86,13 @@ exports[`renders Home screen 1`] = `
           class="makeStyles-home-33"
         >
           Home for guest user 
+          <br />
+          <p>
+             Need notification permission 🙏 
+          </p>
+          <button>
+            Show Toast
+          </button>
         </div>
       </div>
       <div
@@ -146,7 +153,7 @@ exports[`renders Home screen 1`] = `
              
              
             v
-            0.1.56
+            0.1.59
              
              ~ 
             ©

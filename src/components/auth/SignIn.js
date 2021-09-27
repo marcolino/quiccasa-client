@@ -12,7 +12,7 @@ import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
 import { signIn, federatedSignIn } from "../../libs/TrackPromise";
 import { FacebookIcon, GoogleIcon } from "../IconFederated";
-import { toast } from "../Toasts";
+import { toast } from "../Toast";
 import { FormInput, FormButton, FormText, FormDividerWithText, FormCheckbox, FormLink } from "../FormElements";
 import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";

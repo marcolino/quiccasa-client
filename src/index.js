@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
+//import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import { ToastContainer, toast } from "./components/Toasts";
+import { ToastContainer, toast } from "./components/Toast";
+import { ToastNotificationContainer } from "./components/ToastNotification";
 import { i18n } from "./i18n";
 
 const root = document.getElementById("root");
@@ -11,6 +13,7 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
     <ToastContainer />
+    <ToastNotificationContainer />
   </React.StrictMode>,
   root
 );

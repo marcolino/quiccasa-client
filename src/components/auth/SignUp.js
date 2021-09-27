@@ -18,7 +18,7 @@ import Person from "@material-ui/icons/Person";
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/Lock";
 import { signUp, resendSignUp, confirmSignUp } from "../../libs/TrackPromise";
-import { toast } from "../Toasts";
+import { toast } from "../Toast";
 import { FormInput, FormButton, FormText, FormLink } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
 import config from "../../config";

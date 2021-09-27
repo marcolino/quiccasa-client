@@ -6,7 +6,7 @@ import { trackPromise } from "react-promise-tracker";
 import { useTranslation } from "react-i18next";
 import Container from "@material-ui/core/Container";
 import { AuthContext } from "../providers/AuthProvider";
-import { toast } from "./Toasts";
+import { toast } from "./Toast";
 import { FormButton } from "./FormElements";
 import config from "../config";
 import { ETBTAdd } from "../libs/I18n"; // TODO: remove me when finished collecting serve errors

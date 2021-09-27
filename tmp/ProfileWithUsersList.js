@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import ImageCustom from "../ImageCustom";
 import { getCurrentLanguage } from "../../libs/I18n";
 import { findValueInObjectsArrayByProp } from "../../libs/Misc";
-import { toast } from "../Toasts";
+import { toast } from "../Toast";
 import config from "../../config";
 
 const useStyles = makeStyles(theme => ({

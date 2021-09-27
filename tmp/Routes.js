@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 import queryString from "query-string";
 import { useTranslation } from "react-i18next";
 import { getCurrentLanguage } from "../libs/I18n";
-import { toast } from "./Toasts";
+import { toast } from "./Toast";
 import Spinner from "./Spinner";
 
 import Profile from "./auth/Profile";
