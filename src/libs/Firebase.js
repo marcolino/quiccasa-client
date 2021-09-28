@@ -3,12 +3,6 @@ import "firebase/messaging";
 
 // TODO: put in .env or config
 const firebaseConfig = {
-  // apiKey: "AIzaSyBXAFWdnCz5SNYKJVXUC01Y70DhYgAgSqo",
-  // authDomain: "storemax-50908.firebaseapp.com",
-  // projectId: "storemax-50908",
-  // storageBucket: "storemax-50908.appspot.com",
-  // messagingSenderId: "606599051782",
-  // appId: "1:606599051782:web:e53a0dfd668450c729a187"
   apiKey: "AIzaSyAN-T9JMI8W5oF2Gip2Pcu-E_xtXBB2gE0",
   authDomain: "sistemisolari-quiccasa.firebaseapp.com",
   projectId: "sistemisolari-quiccasa",
@@ -16,19 +10,13 @@ const firebaseConfig = {
   messagingSenderId: "748892040096",
   appId: "1:748892040096:web:69200876ed8ffa8615d2c5",
   //measurementId: "G-HQVK7VFN1W",
-  //databaseURL: "DATABASE-URL",
 };
-//const vapidKey = "BH97plGjFleE6fvFuH_08jfyKG4GTXlZg4tdUcUAwwjOjL0xSPoKAdruBMhW0Qw9G6f7UvaL6yr1VyNbkUvjj8I";
-//const vapidKey = "AAAArl1xq6A:APA91bG9IExDRYr-6rKKIiX358_rz6hpuigqHI7wuII4no3Yq1uraVpr8ijb-ywMxPWyVWjceXi5ILcJdg5awab4i2aqTZ6ivUktL_ZYSd3qNapNA1qQsb0ZN8oPXDEdiKN_FwnNK2eN";
-  // console.firebase.com - Project - Projetc Settings - Cloud Messaging - Certificati Web Push - Coppia di chiavi
-  const vapidKey = "BIvd28CJhQk0nTEdB0nBqGgwspf0ZjtXEtySVXLBRAbuVy0fofllQrIkz6oRHRQASP76O52cLzubRT1uL44ZIyw";
+// console.firebase.com - Project - Projetc Settings - Cloud Messaging - Certificati Web Push - Coppia di chiavi
+const vapidKey = "BIvd28CJhQk0nTEdB0nBqGgwspf0ZjtXEtySVXLBRAbuVy0fofllQrIkz6oRHRQASP76O52cLzubRT1uL44ZIyw";
 
-//firebase.initializeApp(firebaseConfig);
 if (!firebase.apps.length) { // if never inizialized, inizialize app
-//console.log("new", firebase.apps);
   firebase.initializeApp(firebaseConfig);
 } else {
-//console.log("old", firebase.apps);
   firebase.app(); // if already initialized, use that one
 }
 
@@ -37,15 +25,13 @@ try {
   messaging = firebase.messaging();
 } catch (err) {
   console.info("This browser does not support Firebase SDK");
-  messaging = {};
+  messaging = {}; // create a dummy messaging object
   messaging.getToken = async() => {};
   messaging.onMessage = async() => {};
 }
 
 export const getToken = (setTokenFound) => {
-console.log("gettoken");
   return messaging.getToken({vapidKey}).then((currentToken) => {
-console.log("gettoken in messaging");
     if (currentToken) {
       console.info("current token for client:", currentToken);
       setTokenFound(true);
@@ -58,12 +44,12 @@ console.log("gettoken in messaging");
     }
   }).catch(err => { // catch error while creating client token
     if (err.code === "messaging/permission-blocked") {
-      console.error("Notification permission not given by user, token not retrieved");
+      console.error("Notification permission denied by user, token not retrieved");
     } else {
       if (err.code === "messaging/failed-service-worker-registration") {
         console.error("Service worker registration failed");
       } else {
-        console.error("Error was:", JSON.stringify(err));
+        console.error("Error while creating client token:", JSON.stringify(err));
       }
     }
     setTokenFound(false);
