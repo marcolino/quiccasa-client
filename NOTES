@@ -14,7 +14,7 @@ Authentication
    note that REFRESH token will only be generated when the responseType is "code"
 
 Privacy (GDPR)
- - Privacy Policy generator: https://www.lorenzomoio.it/generatore-di-privacy-policy-gratuito/
+ - Privacy Policy generator: https://www.lorenzomoio.it/generatore-di-privacy-policy-gratuito
  - Terms of Use generator: https://zyro.com/it/strumenti/generatore-di-termini-e-condizioni
 
 Material-UI Templates
@@ -24,11 +24,11 @@ Performance
  - lighthouse & jest: https://medium.com/@togmund/lighthouse-jest-testing-what-matters-acbd0ff55825
 
 Styling
- - Fluid Typography: https://css-tricks.com/snippets/css/fluid-typography/
+ - Fluid Typography: https://css-tricks.com/snippets/css/fluid-typography
  - Color Contrast Checker: https://dequeuniversity.com/rules/axe/2.2/color-contrast?application=lighthouse
 
 Tests
- - How to ignore partial Jest snapshot diffs: https://lanwen.ru/posts/ignore-jest-snapshot-diffs/
+ - How to ignore partial Jest snapshot diffs: https://lanwen.ru/posts/ignore-jest-snapshot-diffs
 
 AWS
  - Reset Cloudfront distribution alternate domain name for qiuiccasa:
@@ -64,7 +64,10 @@ I18n
  - Language flags: https://apps.timwhitlock.info/emoji/tables/iso3166
 
 E-Commerce
- - 9 Must-Have Features of a Progressive Web App (PWA) for E-Commerce: https://www.simicart.com/blog/progressive-web-apps-features-for-ecommerce/
+ - 9 Must-Have Features of a Progressive Web App (PWA) for E-Commerce: https://www.simicart.com/blog/progressive-web-apps-features-for-ecommerce
 
 Push Notifications
- - Push notifications with React and Firebase: https://blog.logrocket.com/push-notifications-with-react-and-firebase/
+ - Cloud messaging with Firebase: https://blog.logrocket.com/push-notifications-with-react-and-firebase
+ - Why we don't need Firebase InApp Messaging: https://stackoverflow.com/a/64373136/709439
+ - Firebase Push Notifications In React: https://www.smashingmagazine.com/2020/06/firebase-push-notifications-react
+ - Best practices for FCM registration token management: https://firebase.google.com/docs/cloud-messaging/manage-tokens

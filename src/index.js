@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { ToastContainer, toast } from "./components/Toast";
 import { ToastNotificationContainer } from "./components/ToastNotification";
+import PushNotifications from "./components/PushNotifications";
 import { i18n } from "./i18n";
 
 const root = document.getElementById("root");
@@ -13,7 +14,8 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
     <ToastContainer />
-    <ToastNotificationContainer />
+    <ToastNotificationContainer />{/* TODO: remove me, this duplicates toasts... */}
+    <PushNotifications />
   </React.StrictMode>,
   root
 );
