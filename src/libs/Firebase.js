@@ -60,6 +60,7 @@ export const getToken = (setTokenFound, setToken) => {
   });
 }
 
+/*
 export const subscribeTokenToTopic = (token, topic) => {
   fetch('https://iid.googleapis.com/iid/v1/' + token + '/rel/topics/' + topic, {
     method: 'POST',
@@ -75,6 +76,7 @@ export const subscribeTokenToTopic = (token, topic) => {
     console.error(error);
   })
 }
+*/
 
 export const onMessageListener = () =>
   new Promise((resolve) => {

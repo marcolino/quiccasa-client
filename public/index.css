@@ -41,6 +41,12 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
+/* avoid notifications buttons utline on click (for example) */
+.no-outline-on-focus button:focus,
+.no-outline-on-focus a:focus {
+  outline: none;
+}
+
 /* react-toastify */
 .Toastify__toast--success {
   background: #179013 !important;

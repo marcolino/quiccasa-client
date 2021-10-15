@@ -71,3 +71,6 @@ Push Notifications
  - Why we don't need Firebase InApp Messaging: https://stackoverflow.com/a/64373136/709439
  - Firebase Push Notifications In React: https://www.smashingmagazine.com/2020/06/firebase-push-notifications-react
  - Best practices for FCM registration token management: https://firebase.google.com/docs/cloud-messaging/manage-tokens
+
+ Sounds
+ - Announcing “use-sound”, a React Hook for Sound Effects: https://www.joshwcomeau.com/react/announcing-use-sound-react-hook/

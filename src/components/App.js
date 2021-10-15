@@ -12,6 +12,7 @@ import Routes from "./Routes";
 import Footer from "./Footer";
 import Spinner from "./Spinner";
 import CookieBanner from "./CookieBanner";
+import FloatingActionButton from "./FloatingActionButton";
 import { isAuthLocation } from "../libs/Misc";
 import config from "../config";
 import theme from "../themes/default"; // here we choose the theme
@@ -29,6 +30,7 @@ export default function App() {
               <Contents />
               <Spinner />
             </BrowserRouter>
+            <FloatingActionButton />
           </StatusProvider>
         </OnlineStatusProvider>
       </AuthProvider>

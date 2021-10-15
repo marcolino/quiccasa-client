@@ -16,7 +16,7 @@ export default function PushNotifications() {
    *  - use a better layout to show status of request (preparing for more variables, in the future (geolocalization, ...)
    */
   
-  useEffect(() => {
+  useEffect(() => { // TODO: save timestamp of last getToken(), and repeat it not more often than one week...
     console.log("calling getToken");
     getToken(setTokenFound, setToken);
   }, []);
