@@ -5,8 +5,8 @@ import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { ToastContainer, toast } from "./components/Toast";
-import { ToastNotificationContainer } from "./components/ToastNotification";
-import PushNotifications from "./components/PushNotifications";
+//import { ToastNotificationContainer } from "./components/ToastNotification";
+//import PushNotifications from "./components/PushNotifications";
 import { i18n } from "./i18n";
 
 const root = document.getElementById("root");
@@ -14,8 +14,8 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
     <ToastContainer />
-    <ToastNotificationContainer />{/* TODO: remove me, this duplicates toasts... */}
-    <PushNotifications />
+    {/* <ToastNotificationContainer />TODO: remove me, this duplicates toasts... */}
+    {/* <PushNotifications /> */}
   </React.StrictMode>,
   root
 );
@@ -37,8 +37,16 @@ reportWebVitals(console.log);
 //serviceWorkerRegistration.unregister();
 serviceWorkerRegistration.register();
 
-// Set up a broadcast channel to localize messages from service worker
-const channel = new BroadcastChannel("sw-messages-i18n");
-channel.addEventListener("message", event => {
+// Set up a broadcast channel to localize messages from i18n service worker
+const channel1 = new BroadcastChannel("sw-messages-i18n");
+channel1.addEventListener("message", event => {
+  toast[event.data.level](i18n.t(event.data.message));
+});
+
+// Set up a broadcast channel to localize messages from background push messages service worker
+const channel2 = new BroadcastChannel("sw-background-push-messages");
+channel2.addEventListener("message", event => {
+console.log('received event.data:', event.data);
+  // TODO: add this to a list in localstorage for later retrieval ?
   toast[event.data.level](i18n.t(event.data.message));
 });

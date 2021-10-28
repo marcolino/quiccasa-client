@@ -12,6 +12,7 @@ import Routes from "./Routes";
 import Footer from "./Footer";
 import Spinner from "./Spinner";
 import CookieBanner from "./CookieBanner";
+import PushNotifications from "../components/PushNotifications";
 import FloatingActionButton from "./FloatingActionButton";
 import { isAuthLocation } from "../libs/Misc";
 import config from "../config";
@@ -29,8 +30,9 @@ export default function App() {
               <Authentication />
               <Contents />
               <Spinner />
+              <FloatingActionButton/>
             </BrowserRouter>
-            <FloatingActionButton />
+            <PushNotifications />
           </StatusProvider>
         </OnlineStatusProvider>
       </AuthProvider>

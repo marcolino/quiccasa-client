@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
-import { toastNotification } from "./ToastNotification";
-import { getToken, /*subscribeTokenToTopic, */onMessageListener } from "../libs/Firebase";
+import { useState, useEffect, useContext } from "react";
+//import { toastNotification } from "./ToastNotification";
+import { getToken, onMessageListener } from "../libs/Firebase";
+import { StatusContext } from "../providers/StatusProvider";
 
 export default function PushNotifications() {
   const [message, setMessage] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
-  const [askForNotificationsPermission, setAskForNotificationsPermission] = useState(false);
-  const [tokenFound, setTokenFound] = useState(false);
+  //const [askForNotificationsPermission, setAskForNotificationsPermission] = useState(false);
+  const { setStatus } = useContext(StatusContext);
   // eslint-disable-next-line
   const [token, setToken] = useState(null);
 
@@ -18,16 +19,11 @@ export default function PushNotifications() {
   
   useEffect(() => { // TODO: save timestamp of last getToken(), and repeat it not more often than one week...
     console.log("calling getToken");
-    getToken(setTokenFound, setToken);
+    getToken(setToken);
   }, []);
 
-  // useEffect(() => {
-  //   console.log("calling subscribeTokenToTopic");
-  //   subscribeTokenToTopic(token, 'pushtest');
-  // }, [token]);
-
   onMessageListener().then(message => {
-    console.info("got push message:", message);
+    console.info("Received foreground push message:", message);
     setMessage(message);
     setShowNotification(true);
   }).catch(err => {
@@ -36,32 +32,34 @@ export default function PushNotifications() {
   
   useEffect(() => {
     if (showNotification) {
+      setStatus({pushNotification: message}); // TODO ...
       if (message) { // TODO: design a better graphical output...
-        toastNotification.info(`Title: ${message.notification.title}, Body: ${message.notification.body}, Icon: ${message.notification.icon}, Priority: ${message.priority}, Tag: ${message.notification.tag}`);
+        //toastNotification.info(`Title: ${message.notification.title}, Body: ${message.notification.body}, Icon: ${message.notification.icon}, Priority: ${message.priority}, Tag: ${message.notification.tag}`);
         setMessage(null);
       }
       setShowNotification(false);
     }
-  }, [showNotification, message]);
+  }, [showNotification, message, setStatus]);
 
-  useEffect(() => {
-    if (askForNotificationsPermission) {
-      toastNotification.info("Forcing system notification persmission request...");
-      setAskForNotificationsPermission(false);
-    }
-  }, [askForNotificationsPermission]);
+  // useEffect(() => {
+  //   if (askForNotificationsPermission) {
+  //     toastNotification.info("Forcing system notification permission request...");
+  //     setAskForNotificationsPermission(false);
+  //   }
+  // }, [askForNotificationsPermission]);
 
-  return (
-    <>
-      {tokenFound && (
-        <p> Notification permission enabled 👍🏻 </p>
-      )}
-      {!tokenFound && (
-        <>
-          <p> Notification permission not enabled 🙏 </p>
-          <button onClick={() => setAskForNotificationsPermission(true)}>Allow Push Notifications</button>
-        </>
-      )}
-    </>
-  );
+  return null;
+  // return (
+  //   <>
+  //     {token && (
+  //       <p> Notification permission enabled 👍🏻 </p>
+  //     )}
+  //     {!token && (
+  //       <>
+  //         <p> Notification permission not enabled 🙏 </p>
+  //         <button onClick={() => setAskForNotificationsPermission(true)}>Allow Push Notifications</button>
+  //       </>
+  //     )}
+  //   </>
+  // );
 }

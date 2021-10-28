@@ -81,7 +81,7 @@ const elevation = 3; // header elevation over contents below
 
 
 
-export default function MenuAppBar() {
+export default function Header() {
   const classes = useStyles();
   const { auth } = useContext(AuthContext);
   const history = useHistory();

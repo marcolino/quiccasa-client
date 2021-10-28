@@ -153,6 +153,7 @@ ETBTAdd("federatedSignIn", err);
           <Box m={0} />
 
           <FormInput
+            autoFocus
             id={"email"}
             value={email}
             onChange={setEmail}

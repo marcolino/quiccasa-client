@@ -56,4 +56,18 @@ module.exports = {
       production: "https://api.sistemisolari.com/",
     }
   },
+  indexedDb: {
+    name: 'sw-background-push-messages',
+    version: 1,
+    objectStoresMeta: [
+      {
+        store: 'messages',
+        storeConfig: { keyPath: 'id', autoIncrement: true },
+        storeSchema: [
+          { name: 'name', keypath: 'name', options: { unique: false } },
+          { name: 'email', keypath: 'email', options: { unique: false } }
+        ]
+      }
+    ]
+  }
 };

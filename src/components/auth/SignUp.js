@@ -102,6 +102,14 @@ export default function SignUp() {
       return false;
     }
 
+    // check for password presence
+    if (!password) {
+      const err = t("Please supply a password");
+      setError({ password: err });
+      toast.warning(err);
+      return false;
+    }
+
     // check password for minimum complexity
     if (!checkPassword(password)) {
       const err = t("Please supply a more complex password");
@@ -255,6 +263,7 @@ ETBTAdd("confirmSignUp", err);
               <Grid container direction={"row"} spacing={formState.rowSpacing} >
                 <Grid item xs={12} sm={6}>
                   <FormInput
+                    autoFocus
                     id={"firstName"}
                     value={firstName}
                     onChange={setFirstName}

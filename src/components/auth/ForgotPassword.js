@@ -208,6 +208,7 @@ ETBTAdd("resendResetPasswordCode", err);
               <Box m={1} />
 
               <FormInput
+                autoFocus
                 id={"email"}
                 value={email}
                 onChange={setEmail}

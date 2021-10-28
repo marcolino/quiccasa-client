@@ -6,6 +6,9 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
+
+import i18n from "i18next";
+
 import IconCustom from "./IconCustom";
 import { isAuthLocation } from "../libs/Misc";
 import config from "../config";
@@ -16,6 +19,12 @@ const useStyles = makeStyles(theme => ({
     fontStyle: "italic",
 	},
 }));
+
+const changeLanguage = () => {
+  const language = i18n.language === "it" ? "en" : "it"; // simple switch it<=> en - TODO: let user select language...
+  i18n.changeLanguage(language);
+  document.documentElement.setAttribute("lang", language);
+}
 
 export default function Footer(props) {
   const location = useLocation();
@@ -35,7 +44,7 @@ export default function Footer(props) {
             {config.companyName}
           </Link>
           <span>&emsp;</span>
-          <span>{languageIcon}</span>
+          <span onClick={() => changeLanguage()}>{languageIcon}</span>{/* test only */}
           <span>&emsp;</span>
           <IconCustom name={`Network.${props.isOnline ? "on" : "off"}`} fill="red" size={12} alt={t("Network connection indicator")} title={t("Network connection is {{how}}", { how: props.isOnline ? on : off })} />
         </Typography>

@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import { getCurrentLanguage } from "../libs/I18n";
 import { toast } from "./Toast";
 import Spinner from "./Spinner";
-
 import Profile from "./auth/Profile";
 
 const Home = lazy(() => import("./Home"));
@@ -18,6 +17,7 @@ const ForgotPassword = lazy(() => import("./auth/ForgotPassword"));
 const Searches = lazy(() => import("./Searches"));
 const Listings = lazy(() => import("./Listings"));
 const Unsubscribe = lazy(() => import("./Unsubscribe"));
+const Notifications = lazy(() => import("./Notifications"));
 const NotFound = lazy(() => import("./NotFound"));
 const PrivacyPolicy = [];
       PrivacyPolicy["en"] = lazy(() => import("./legal/en/PrivacyPolicy"));
@@ -58,6 +58,7 @@ export default function Routes () {
         <Route path="/searches" component={Searches} /> {/* sitemapFrequency={"daily"} sitemapPriority={1.0} */}
         <Route path="/listings" component={Listings} /> {/* sitemapFrequency={"daily"} sitemapPriority={1.0} */}
         <Route path="/unsubscribe" component={Unsubscribe} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.2} */}
+        <Route path="/notifications" component={Notifications} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.2} */}
         <Route path="/privacy-policyOLD" component={PrivacyPolicy[getCurrentLanguage(i18n)]} />
         <Route path="/terms-of-useOLD" component={TermsOfUse[getCurrentLanguage(i18n)]} />
         <Route path="/privacy-policy" render={(props) => <Legal language={getCurrentLanguage(i18n)} doc={"privacyPolicy"} /> } />
