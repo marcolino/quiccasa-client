@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.64",
+  "version": "0.1.65",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
@@ -47,6 +47,7 @@
     "translate-auto": "node scripts/translate-auto.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test-update-snapshot": "react-scripts test --updateSnapshot --watchAll=false",
     "test-once": "react-scripts test --watchAll=false",
     "serve": "serve -s build",
     "deploy": "yarn test-once && yarn build && yarn sync",
