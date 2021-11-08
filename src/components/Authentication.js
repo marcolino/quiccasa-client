@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useContext } from "react";
 import Amplify/*, { I18n }*/ from "aws-amplify";
 //import { useTranslation } from "react-i18next";
@@ -9,7 +10,7 @@ import config from "../config";
 
 
 
-export default function Authentication() {
+function Authentication() {
   const { setAuth } = useContext(AuthContext);
   //const { i18n } = useTranslation();
 
@@ -59,3 +60,5 @@ export default function Authentication() {
 
   return null;
 }
+
+export default React.memo(Authentication);

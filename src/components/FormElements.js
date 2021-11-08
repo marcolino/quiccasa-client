@@ -1,4 +1,4 @@
-//import React from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -11,7 +11,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import { shadeColor } from "../libs/Styling";
 import { capitalize, isEmptyObject } from "../libs/Misc";
 
-export const FormInput = (props) => {
+
+
+const FormInput = React.memo((props) => {
   const styles = theme => ({
     startAdornment: {
       backgroundColor: "#eaedf0",
@@ -76,7 +78,7 @@ export const FormInput = (props) => {
       }}
     />
   );
-}
+});
 
 FormInput.propTypes = {
   value: PropTypes.string.isRequired,
@@ -108,7 +110,7 @@ FormInput.defaultProps = {
 
 
 
-export const FormButton = (props) => {
+const FormButton = React.memo((props) => {
   const styles = theme => ({
     button: {
       margin: theme.spacing(1, 0, 0, 0),
@@ -167,7 +169,7 @@ export const FormButton = (props) => {
       {props.children}
     </Button>
   );
-}
+});
 
 FormButton.propTypes = {
   social: PropTypes.oneOf([
@@ -185,7 +187,7 @@ FormButton.defaultProps = {
 
 
 
-export const FormCheckbox = (props) => {
+const FormCheckbox = React.memo((props) => {
   const styles = theme => ({
     disabled: {
       color: "grey",
@@ -221,7 +223,7 @@ export const FormCheckbox = (props) => {
       }
     />
   );
-}
+});
 
 FormCheckbox.propTypes = {
 };
@@ -234,7 +236,7 @@ FormCheckbox.defaultProps = {
 
 
 
-export const FormText = (props) => {
+const FormText = React.memo((props) => {
   return (
     <Typography
       component={props.component}
@@ -246,7 +248,7 @@ export const FormText = (props) => {
       {props.children}
     </Typography>
   );
-};
+});
 
 FormText.propTypes = {
 };
@@ -259,7 +261,7 @@ FormText.defaultProps = {
 
 
 
-export const FormLink = (props) => {
+const FormLink = React.memo((props) => {
   const styles = theme => ({
     normal: {
       cursor: "pointer",
@@ -288,7 +290,7 @@ export const FormLink = (props) => {
       {props.children}
     </Link>
   );
-};
+});
 
 FormLink.propTypes = {
 };
@@ -299,7 +301,7 @@ FormLink.defaultProps = {
 
 
 
-export const FormDividerWithText = (props) => {
+const FormDividerWithText = React.memo((props) => {
   const styles = theme => ({
     container: {
       display: "flex",
@@ -329,7 +331,7 @@ export const FormDividerWithText = (props) => {
       <div className={classes.divider} />
     </div>
   );
-};
+});
 
 FormDividerWithText.propTypes = {
   color: PropTypes.string,
@@ -341,3 +343,5 @@ FormDividerWithText.defaultProps = {
   marginVertical: 1,
   paddingHorizontal: 1,
 };
+
+export {FormInput, FormButton, FormCheckbox, FormText, FormLink, FormDividerWithText};

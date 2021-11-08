@@ -9,7 +9,9 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function Listings() {
+
+
+function Listings() {
 	const classes = useStyles();
   const { auth } = useContext(AuthContext);
   const { t } = useTranslation();
@@ -20,3 +22,5 @@ export default function Listings() {
     </div>
   );
 }
+
+export default React.memo(Listings);

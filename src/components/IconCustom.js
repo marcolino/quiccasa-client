@@ -4,7 +4,9 @@ import IconLogoMain from "../assets/icons/LogoMain.png";
 import IconNetworkOn from "../assets/icons/Network.on.svg";
 import IconNetworkOff from "../assets/icons/Network.off.svg";
 
-export default function IconCustom(props) {
+
+
+function IconCustom(props) {
   let icon = null;
   switch (props.name) {
     case "LogoMain": icon = IconLogoMain; break;
@@ -34,3 +36,6 @@ IconCustom.defaultProps = {
   style: {},
   alt: "icon",
 };
+
+
+export default React.memo(IconCustom);

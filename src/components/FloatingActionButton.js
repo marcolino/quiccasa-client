@@ -5,7 +5,9 @@ import { useTranslation } from "react-i18next";
 import { Container, Button, lightColors, darkColors } from "react-floating-action-button";
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 
-export default function FloatingActionButton(props) {
+
+
+function FloatingActionButton(props) {
   const [show, setShow] = useState(false);
   const { status } = useContext(StatusContext);
   const history = useHistory();
@@ -14,12 +16,12 @@ export default function FloatingActionButton(props) {
   const link = props.link ? props.link : {
     pathname: "/notifications",
     //search: "?query=abc",
-    state: status.pushNotification,
+    state: status.pushNotifications ? status.pushNotifications : {},
   };
 
   useEffect(() => {
-    setShow(status.pushNotification != null);
-  }, [setShow, status.pushNotification]);
+    setShow(status.pushNotifications ? status.pushNotifications.length > 0 : false);
+  }, [setShow, status.pushNotifications, status]);
 
   return show ? (
     <Container>
@@ -41,9 +43,16 @@ export default function FloatingActionButton(props) {
         rotate={true}
         onClick={() => {console.log('FloatingActionButton rocks!', history); setShow(false); history.push(link); }}
         styles={{backgroundColor: darkColors.lighterRed, color: lightColors.white}}
-      ><NotificationsActiveIcon /><span style={{position: "relative", bottom: "-0.8em", fontSize: "90%", fontWeight: "bold"}}>{1/*status.pushNotification*/}</span></Button>
+      >
+        <NotificationsActiveIcon />
+        <span style={{position: "relative", bottom: "-0.8em", fontSize: "90%", fontWeight: "bold"}}>
+          {status.pushNotifications.length > 1 ? status.pushNotifications.length : null}
+        </span>
+      </Button>
     </Container>
   ) : (
     <></>
   )
 }
+
+export default React.memo(FloatingActionButton);

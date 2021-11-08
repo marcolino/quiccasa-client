@@ -1,3 +1,4 @@
+import React from "react";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import privacyPolicy_en from "./en/PrivacyPolicy";
@@ -6,7 +7,7 @@ import termsOfUse_en from "./en/TermsOfUse";
 import termsOfUse_it from "./it/TermsOfUse";
 import config from "../../config";
 
-export default function Legal(props) {
+function Legal(props) {
  	const contents = (
     props.doc === "privacyPolicy" ? (
       (props.language === "en") ?
@@ -48,3 +49,5 @@ Legal.defaultProps = {
   language: config.languages.fallback,
   doc: "",
 };
+
+export default React.memo(Legal);

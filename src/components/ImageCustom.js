@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-export default function ImageCustom(props) {
+
+
+
+function ImageCustom(props) {
   return (
     <img src={props.src} style={props.style} width={props.size} height={props.size} alt={props.alt} {...props} />
   );    
@@ -18,3 +21,5 @@ ImageCustom.defaultProps = {
   style: {},
   alt: "icon",
 };
+
+export default React.memo(ImageCustom);

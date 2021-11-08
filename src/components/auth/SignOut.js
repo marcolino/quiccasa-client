@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -9,7 +10,7 @@ import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished coll
 
 
 
-export default function SignOut() {
+function SignOut() {
   const history = useHistory();
   const isOnline = useContext(OnlineStatusContext);
   const { setAuth } = useContext(AuthContext);
@@ -40,3 +41,5 @@ ETBTAdd("signOut", err);
 
   return null;
 };
+
+export default React.memo(SignOut);

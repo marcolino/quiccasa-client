@@ -9,7 +9,9 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function Searches() {
+
+
+function Searches() {
 	const classes = useStyles();
   const { auth } = useContext(AuthContext);
   const { t } = useTranslation();
@@ -21,3 +23,5 @@ export default function Searches() {
 
   );
 }
+
+export default React.memo(Searches);

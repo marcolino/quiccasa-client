@@ -81,7 +81,7 @@ const elevation = 3; // header elevation over contents below
 
 
 
-export default function Header() {
+function Header() {
   const classes = useStyles();
   const { auth } = useContext(AuthContext);
   const history = useHistory();
@@ -351,3 +351,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default React.memo(Header);

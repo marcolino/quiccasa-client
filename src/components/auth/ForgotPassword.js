@@ -33,7 +33,7 @@ const styles = theme => ({
 });
 const useStyles = makeStyles((theme) => (styles(theme)));
 
-export default function ForgotPassword() {
+function ForgotPassword() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -312,3 +312,5 @@ ETBTAdd("resendResetPasswordCode", err);
     </Container>
   );
 }
+
+export default React.memo(ForgotPassword);

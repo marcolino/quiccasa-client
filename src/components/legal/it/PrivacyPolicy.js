@@ -1,7 +1,8 @@
+import React from "react";
 import { encodeEmail } from "../../../libs/Misc";
 import config from "../../../config";
 
-export default function PrivacyPolicy() {
+function PrivacyPolicy() {
  	return (
     <>
       <h2>Politica sulla Riservatezza</h2>
@@ -121,3 +122,5 @@ export default function PrivacyPolicy() {
     </>
   );
 }
+
+export default React.memo(PrivacyPolicy);

@@ -1,3 +1,4 @@
+import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import Link from "@material-ui/core/Link";
 import { useTranslation } from "react-i18next";
@@ -7,7 +8,9 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function NotFound() {
+
+
+function NotFound() {
 	const classes = useStyles();
   const { t } = useTranslation();
 
@@ -21,3 +24,6 @@ export default function NotFound() {
     </div>
   );
 }
+
+
+export default React.memo(NotFound);

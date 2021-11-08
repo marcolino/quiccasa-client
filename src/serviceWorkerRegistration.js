@@ -19,7 +19,7 @@ const isLocalhost = Boolean(
 );
 
 // set up a broadcast channel to the clients to be able to translate service worker messages
-const broadcastChannel = new BroadcastChannel("sw-messages-i18n");
+const broadcastChannel = new BroadcastChannel("sw-i18n-messages");
 
 // dummy `t` function to persuade i18-next to parse these text messages too
 const t = (args) => {

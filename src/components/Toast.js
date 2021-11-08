@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { ToastContainer as ToastifyContainer, toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
 
 
 
-export function ToastContainer(props) {
+const ToastContainer = React.memo((props) => {
   useEffect(() => {
     injectStyle();
   }, []);
@@ -25,6 +25,6 @@ export function ToastContainer(props) {
       {...props}
     />
   );
-}
+});
 
-export { toast };
+export { ToastContainer, toast };

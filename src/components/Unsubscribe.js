@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { usePromiseTracker } from "react-promise-tracker";
@@ -17,7 +16,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Unsubscribe() {
+
+
+function Unsubscribe() {
 	const classes = useStyles();
   const { auth } = useContext(AuthContext);
   const { t } = useTranslation();
@@ -69,3 +70,5 @@ ETBTAdd("unsubscribeError", err.message);
     </Container>
   );
 }
+
+export default React.memo(Unsubscribe);

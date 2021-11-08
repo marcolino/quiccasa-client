@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 
 
-export default function CookieBanner() {
+function CookieBanner() {
   const { t } = useTranslation();
   const scrollOffsetMin = 100;
 
@@ -41,3 +41,5 @@ export default function CookieBanner() {
     </CookieConsent>
   );
 }
+
+export default React.memo(CookieBanner);

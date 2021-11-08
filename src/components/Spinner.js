@@ -6,7 +6,7 @@ import config from "../config";
 
 
 
-export default function Spinner(props) {
+function Spinner(props) {
   const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
 
   // centered overlay styles
@@ -44,3 +44,5 @@ export default function Spinner(props) {
     </div>
   );
 };
+
+export default React.memo(Spinner);

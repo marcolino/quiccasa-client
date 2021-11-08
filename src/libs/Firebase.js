@@ -34,12 +34,12 @@ export const getToken = (setToken) => {
   return messaging.getToken({vapidKey}).then((currentToken) => {
     if (currentToken) {
       console.info("current token for client:", currentToken);
-      setToken(currentToken);
+      if (setToken) setToken(currentToken);
       // track the token -> client mapping, by sending to backend server
       // show on the UI that permission is secured
     } else {
       console.info("No registration token available, requesting permission to generate one...");
-      setToken(null);
+      if (setToken) setToken(null);
       // shows on the UI that permission is required
     }
   }).catch(err => { // catch error while creating client token

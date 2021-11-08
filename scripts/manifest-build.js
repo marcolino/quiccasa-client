@@ -7,7 +7,7 @@
 
 require("dotenv").config();
 const fs = require("fs");
-const { version } = require("../package.json");
+//const { version } = require("../package.json");
 const config = require("../src/config");
 
 const manifestFileName = "./public/manifest.json";
@@ -33,7 +33,7 @@ for (const faviconsPath of faviconsPaths) {
 if (!error) {
   const manifestJson = {
     "short_name": config.appTitle,
-    "name": `${config.appTitle} by ${config.companyHomeSiteName} (v ${version})`,
+    "name": `${config.appTitle} by ${config.companyHomeSiteName}`,
     "icons": [
       {
         "src": "favicon.ico",

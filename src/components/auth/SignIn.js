@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => (styles(theme)));
 
 
 
-export default function SignIn() {
+function SignIn() {
   const classes = useStyles();
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -283,3 +283,5 @@ ETBTAdd("federatedSignIn", err);
     </Container>
   );
 }
+
+export default React.memo(SignIn);

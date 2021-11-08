@@ -1,6 +1,7 @@
+import React from "react";
 import config from "../../../config";
 
-export default function TermsOfUse() {
+function TermsOfUse() {
   const contents = (
     <>
       <h2>Termini e condizioni d'uso</h2>
@@ -136,3 +137,5 @@ export default function TermsOfUse() {
 
   return contents;
 }
+
+export default React.memo(TermsOfUse);

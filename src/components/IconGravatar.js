@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import Gravatar from "react-gravatar";
 
-export default function IconGravatar(props) {
+
+
+function IconGravatar(props) {
   const styles = theme => ({
     customAvatarIcon: {
     },
@@ -32,3 +34,4 @@ IconGravatar.defaultProps = {
   size: 32,
 };
 
+export default React.memo(IconGravatar);

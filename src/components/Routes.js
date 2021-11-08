@@ -19,9 +19,9 @@ const Listings = lazy(() => import("./Listings"));
 const Unsubscribe = lazy(() => import("./Unsubscribe"));
 const Notifications = lazy(() => import("./Notifications"));
 const NotFound = lazy(() => import("./NotFound"));
-const PrivacyPolicy = [];
-      PrivacyPolicy["en"] = lazy(() => import("./legal/en/PrivacyPolicy"));
-      PrivacyPolicy["it"] = lazy(() => import("./legal/it/PrivacyPolicy"));
+// const PrivacyPolicy = [];
+//       PrivacyPolicy["en"] = lazy(() => import("./legal/en/PrivacyPolicy"));
+//       PrivacyPolicy["it"] = lazy(() => import("./legal/it/PrivacyPolicy"));
 const TermsOfUse = [];
       TermsOfUse["en"] = lazy(() => import("./legal/en/TermsOfUse"));
       TermsOfUse["it"] = lazy(() => import("./legal/it/TermsOfUse"));
@@ -29,7 +29,7 @@ const Legal = lazy(() => import("./legal/legal"));
 
 
 
-export default function Routes () {
+function Routes() {
   const location = useLocation();
   const { i18n } = useTranslation();
 
@@ -59,8 +59,10 @@ export default function Routes () {
         <Route path="/listings" component={Listings} /> {/* sitemapFrequency={"daily"} sitemapPriority={1.0} */}
         <Route path="/unsubscribe" component={Unsubscribe} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.2} */}
         <Route path="/notifications" component={Notifications} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.2} */}
+        {/*
         <Route path="/privacy-policyOLD" component={PrivacyPolicy[getCurrentLanguage(i18n)]} />
         <Route path="/terms-of-useOLD" component={TermsOfUse[getCurrentLanguage(i18n)]} />
+        */}
         <Route path="/privacy-policy" render={(props) => <Legal language={getCurrentLanguage(i18n)} doc={"privacyPolicy"} /> } />
         <Route path="/terms-of-use" render={(props) => <Legal language={getCurrentLanguage(i18n)} doc={"termsOfUse"} /> } />
         <Route path="" component={NotFound} />
@@ -68,3 +70,6 @@ export default function Routes () {
     </Suspense>
   );
 }
+
+
+export default React.memo(Routes);

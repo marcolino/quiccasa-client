@@ -1,3 +1,4 @@
+import React from "react";
 import { useContext } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -9,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export default function Profile() {
+function Profile() {
 	const classes = useStyles();
   const { auth } = useContext(AuthContext);
   const { t } = useTranslation();
@@ -22,3 +23,5 @@ export default function Profile() {
    </div>
   );
 }
+
+export default React.memo(Profile);

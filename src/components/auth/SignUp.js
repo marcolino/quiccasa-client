@@ -44,7 +44,9 @@ const styles = theme => ({
 });
 const useStyles = makeStyles((theme) => (styles(theme)));
 
-export default function SignUp() {
+
+
+function SignUp() {
   const classes = useStyles();
   const history = useHistory();
   const [firstName, setFirstName] = useState("");
@@ -397,3 +399,5 @@ ETBTAdd("confirmSignUp", err);
     </Container>
   );
 }
+
+export default React.memo(SignUp);

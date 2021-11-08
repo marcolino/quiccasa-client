@@ -18,7 +18,7 @@ import { isAuthLocation } from "../libs/Misc";
 import config from "../config";
 import theme from "../themes/default"; // here we choose the theme
 
-export default function App() {
+function App() {
   //console.log("app rendering");
   return (
     <ThemeProvider theme={theme}>
@@ -87,3 +87,5 @@ const Contents = () => {
     </div>
   );
 }
+
+export default App;
