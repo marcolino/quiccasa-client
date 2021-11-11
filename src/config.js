@@ -1,6 +1,4 @@
-import buttonClick from "./assets/sounds/pop.mp3";
-
-const config = {
+module.exports = {
   companyName: "Sistemi Solari",
   companyHomeSiteName: "sistemisolari.com",
   companyHomeSiteUrl: "https://www.sistemisolari.com",
@@ -32,9 +30,9 @@ const config = {
     },
     fallback: "en",
   },
-  sounds: {
-    buttonClick,
-  },
+  // sounds: {
+  //   buttonClick,
+  // },
   footerHeight: "1.5rem",
   extraSmallWatershed: 600,
   mobileDesktopWatershed: 900,
@@ -76,5 +74,3 @@ const config = {
     ]
   }
 };
-
-export default config;
