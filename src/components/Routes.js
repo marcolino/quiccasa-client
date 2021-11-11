@@ -43,12 +43,8 @@ function Routes() {
 
   return (
     <Suspense fallback={<Spinner />}>
-      <Switch>
-        {/**
-         * Comments with `sitemapFrequency` and `sitemapPriority` are for sitemap building:
-         * if they are present, the route is added to sitemap.xml with those values,
-         * when it is automatically built before deploying.
-         */}
+      <div style={styles.content}>
+        <Switch location={location}>
         <Route path="/" exact component={Home} /> {/* sitemapFrequency={"weekly"} sitemapPriority={0.7} */}
         <Route path="/signup" component={SignUp} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.3} */}
         <Route path="/signin" component={SignIn} /> {/* sitemapFrequency={"monthly"} sitemapPriority={0.3} */}
@@ -67,9 +63,40 @@ function Routes() {
         <Route path="/terms-of-use" render={(props) => <Legal language={getCurrentLanguage(i18n)} doc={"termsOfUse"} /> } />
         <Route path="" component={NotFound} />
       </Switch>
+      </div>
     </Suspense>
   );
 }
 
+const styles = {};
+
+styles["fade-enter"] = {
+  opacity: 0,
+  zIndex: 1,
+};
+
+styles["fade-enter"] = {
+  opacity: 0,
+  transition: "opacity 250ms ease-in",
+};
+
+styles["fade-enter-active"] = {
+  opacity: 1,
+  transition: "opacity 250ms ease-in",
+};
+
+// styles.fill = {
+//   position: "absolute",
+//   left: 0,
+//   right: 0,
+//   top: 100,
+//   bottom: 0
+// };
+
+// styles.content = {
+//   ...styles.fill,
+//   top: "140px",
+//   textAlign: "center"
+// };
 
 export default React.memo(Routes);

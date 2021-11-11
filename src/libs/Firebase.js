@@ -13,6 +13,8 @@ const firebaseConfig = {
 };
 // console.firebase.com - Project - Projetc Settings - Cloud Messaging - Certificati Web Push - Coppia di chiavi
 const vapidKey = "BJAzYrLnCaD13Cwv61jZGEiTA8yP7SVmPMY2_m0QO0VI8GFDhs_yKap6_3SrZlmf8eAYrdK7UJIsedyOXyY5ulY";
+const tokenKey = "firebaseMessagingToken";
+const tokenMaxValidityTimeSpan = 7 * 60 * 60 * 24 * 1000; // one week (in milliseconds)
 
 if (!firebase.apps.length) { // if never inizialized, inizialize app
   firebase.initializeApp(firebaseConfig);
@@ -31,12 +33,24 @@ try {
 }
 
 export const getToken = (setToken) => {
-  return messaging.getToken({vapidKey}).then((currentToken) => {
-    if (currentToken) {
-      console.info("current token for client:", currentToken);
-      if (setToken) setToken(currentToken);
-      // track the token -> client mapping, by sending to backend server
+  // check if we already have a valid token saved to local storage
+  const currentTokenString = localStorage.getItem(tokenKey);
+  if (currentTokenString) {
+    const currentToken = JSON.parse(currentTokenString);
+    if (currentToken.timestamp > new Date().getTime() + tokenMaxValidityTimeSpan) { // consider fresh for one week at most
+      // token in local storage is fresh
+      return currentToken;
+    }
+  }
+
+  // we do not already have a valid token saved to local storage, get it from firebase
+  return messaging.getToken({vapidKey}).then((token) => {
+    if (token) {
+      console.info("current token for client:", token);
+      if (setToken) setToken(token);
+      // TODO: track the token -> client mapping, by sending to backend server, and
       // show on the UI that permission is secured
+      localStorage.setItem(tokenKey, JSON.stringify({value: token, timestamp: new Date().getTime()}));
     } else {
       console.info("No registration token available, requesting permission to generate one...");
       if (setToken) setToken(null);

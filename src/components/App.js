@@ -19,7 +19,7 @@ import config from "../config";
 import theme from "../themes/default"; // here we choose the theme
 
 function App() {
-  //console.log("app rendering");
+console.log("app rendering");
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>

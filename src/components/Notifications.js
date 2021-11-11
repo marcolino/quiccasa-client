@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import ShareIcon from '@material-ui/icons/Share';
@@ -11,6 +12,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import red from '@material-ui/core/colors/red';
+import { StatusContext } from "../providers/StatusProvider";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,20 +30,32 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Notifications(props) {
+  const { status, setStatus } = useContext(StatusContext);
+  const history = useHistory();
 	const classes = useStyles();
   //const { t } = useTranslation();
-console.log("props:", props);
 
-  // TODO: check props.location.state is not undefined!
+  const deleteForeverMessage = (index) => {
+    //setStatus({pushNotifications: []}); // TODO: delete only THIS message!
+    setStatus({pushNotifications: status.pushNotifications.filter((notification, i) =>
+      i !== index
+    )});
+console.log("Notifications - (!status.pushNotifications.length):", (!status.pushNotifications.length));
+    if (status.pushNotifications.length <= 1) { // setStatus is asynchronous...
+      history.goBack();
+    }
+  };
+  
+console.log("Notifications - status.pushNotifications:", status.pushNotifications);
+console.log("Notifications - props.location.state:", props.location.state);
 
-  return (
+//{props.location.state && props.location.state.map((state, index) => {
+
+return (
     <div className={classes.root}>
-
-      {/* <div className={classes.notifications}>
-        <div>props: {JSON.stringify(props)}</div>
-      </div> */}
-      {props.location.state.map((state, index) => {
-        const timestamp = state["data.google.c.a.ts"];
+      {status.pushNotifications.map((state, index) => {
+console.log("Notifications state:", state);
+        const timestamp = state.data["google.c.a.ts"];
         const when = new Intl.DateTimeFormat(
           'it-IT'/* TODO */,
           {
@@ -52,15 +66,13 @@ console.log("props:", props);
             minute: '2-digit',
             //second: '2-digit',
           }
-        ).format(timestamp);
+        ).format(timestamp * 1000); // milliseconds required
         return (
           <Card key={index} className={classes.root}>
 
             <CardHeader
               avatar={
-                <Avatar sx={{ bgcolor: red }} aria-label="notification avatar">
-                  F
-                </Avatar>
+                <Avatar sx={{ bgcolor: red }} src={state.notification.image} aria-label="notification avatar" />
               }
               action={
                 <IconButton aria-label="settings">
@@ -85,7 +97,7 @@ console.log("props:", props);
               <IconButton aria-label="share">
                 <ShareIcon /> {/* TODO: handle share */}
               </IconButton>
-              <IconButton aria-label="delete forever">
+              <IconButton aria-label="delete forever" onClick={() => deleteForeverMessage(index)} >
                 <DeleteForeverIcon /> {/* TODO: handle delete forever */}
               </IconButton>
             </CardActions>

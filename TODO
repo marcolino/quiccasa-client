@@ -62,6 +62,7 @@
 - in signup/confirm, o dove ci sono più submit, attivare il corretto default submit (?) - OK
 - decidere se "please specifiy a more complex password" va bene o è meglio precisare (va bene) - OK
 
+- provare a usare entrambi useLocation e useHistory da "react-router" oppure da "react-router-dom"
 - usare useMemo e useCallback per tutti i componenti
 - provare a collegare una funzione lambda (?)
 - risolvere i TODO's nel codice

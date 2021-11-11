@@ -1,6 +1,8 @@
 import React, { useState, createContext } from "react";
 
-const initialState = {};
+const initialState = {
+  pushNotifications: [],
+};
 
 const StatusContext = createContext(initialState);
 

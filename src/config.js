@@ -1,4 +1,6 @@
-module.exports = {
+import buttonClick from "./assets/sounds/pop.mp3";
+
+const config = {
   companyName: "Sistemi Solari",
   companyHomeSiteName: "sistemisolari.com",
   companyHomeSiteUrl: "https://www.sistemisolari.com",
@@ -29,6 +31,9 @@ module.exports = {
       "it": { icon: "🇮🇹" },
     },
     fallback: "en",
+  },
+  sounds: {
+    buttonClick,
   },
   footerHeight: "1.5rem",
   extraSmallWatershed: 600,
@@ -71,3 +76,5 @@ module.exports = {
     ]
   }
 };
+
+export default config;
