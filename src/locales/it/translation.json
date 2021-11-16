@@ -14,7 +14,7 @@
   "Email": "Email",
   "Email verified": "Email verified",
   "Enabled": "Enabled",
-  "Error during service worker registration: {{error}}": "Errore durante la registrazione del service worker: {error}",
+  "Error during service worker registration: {{error}}": "Errore durante la registrazione del service worker: {{error}}",
   "false": "false",
   "First Name": "Nome",
   "for": "per",

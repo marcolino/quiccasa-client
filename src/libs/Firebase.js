@@ -66,7 +66,7 @@ export const getToken = (setToken) => {
         console.error("Error while creating client token:", JSON.stringify(err));
       }
     }
-    setToken(null);
+    if (setToken) setToken(null);
   });
 }
 
