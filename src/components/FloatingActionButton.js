@@ -4,10 +4,10 @@ import { useHistory } from "react-router-dom";
 //import { useTranslation } from "react-i18next";
 import { Container, Button, lightColors, darkColors } from "react-floating-action-button";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
-import useSound from "use-sound";
+//import useSound from "use-sound";
 import { StatusContext } from "../providers/StatusProvider";
 //import config from "../config";
-import buttonClick from "../assets/sounds/pop.mp3";
+//import buttonClick from "../assets/sounds/pop.mp3";
 
 
 
@@ -17,7 +17,7 @@ function FloatingActionButton(props) {
   const location = useLocation();
   const history = useHistory();
   //const { t } = useTranslation();
-  const [play] = useSound(/*config.sounds.*/buttonClick); 
+  //const [play] = useSound(/*config.sounds.*/buttonClick); 
 
   const showingNotifications = (location.pathname === "/notifications");
   const show = (status.pushNotifications.length && !showingNotifications);
@@ -30,7 +30,7 @@ function FloatingActionButton(props) {
 
   const action = () => {
     history.push(link);
-    play();
+    //play();
   };
 
   return show ? (

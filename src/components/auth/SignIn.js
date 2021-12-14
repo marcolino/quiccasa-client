@@ -88,11 +88,12 @@ function SignIn() {
     setError({});
 
     signIn({
-      username: email,
+      //username: email,
+      email,
       password,
     }, {
-      success: (user) => {
-        setAuth({isAuthenticated: true, user});
+      success: (data) => {
+        setAuth({isAuthenticated: true, user: {...data.user, token: data.token}});
         if (!rememberMe) {
           localStorage.clear();
         }

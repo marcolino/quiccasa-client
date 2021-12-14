@@ -57,7 +57,11 @@ module.exports = {
     enpoint: {
       development: "https://apidev.sistemisolari.com/",
       production: "https://api.sistemisolari.com/",
-    }
+    },
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    redirect: "follow",
   },
   indexedDb: {
     name: 'sw-background-push-messages',

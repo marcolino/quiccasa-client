@@ -151,30 +151,27 @@ function SignUp() {
     setError({});
 
     signUp({
-      username: email,
+      email,
       password,
-      attributes: {
-        email,
-        name: firstName,
-        family_name: lastName,
-        /**
-         * IMPROVE: add custom fields
-         * phone_number: phoneNumber, // E.164 number convention: country code (1 to 3 digits) + subscriber number (max 12 digits)
-         * "custom:favorite_flavor": FavoriteFlavour, // custom attribute, not standard
-         */
-      }
+      firstName,
+      lastName,
+      /**
+       * IMPROVE: add custom fields
+       * phone_number: phoneNumber, // E.164 number convention: country code (1 to 3 digits) + subscriber number (max 12 digits)
+       * "custom:favorite_flavor": FavoriteFlavour, // custom attribute, not standard
+       */
     }, {
       success: (data) => {
         console.log("signUp success:", data);
-        const medium = data.codeDeliveryDetails.DeliveryMedium.toLowerCase();
+        const medium = data.codeDeliveryMedium.toLowerCase();
         toast.info(t("Confirmation code just sent by {{medium}}", {medium}));
         setCodeDeliveryMedium(medium);
         setWaitingForCode(true);
         setPassword("");
       },
       error: (err) => {
-console.error("signup error:", err);
-ETBTAdd("signup", err);
+console.error("signup error XXX:", err);
+//ETBTAdd("signup", err);
         switch (err.code) {
           case "UsernameExistsException":
             setError({ email: err.message }); // since we use email as username, we blame email field as guilty
@@ -182,7 +179,7 @@ ETBTAdd("signup", err);
             break;
           default:
             setError({}); // we don't know whom to blame
-            toast.error(t(err.message));
+            toast.error(t(err.message ? err.message : err.statusText)); // TODO: show statusText if !message everywere, better if in an upper middleware level...
           }
       },
     });
@@ -193,7 +190,7 @@ ETBTAdd("signup", err);
     if (!validateFormStep2()) return;
     setError({});
 
-    confirmSignUp(email, code, {
+    confirmSignUp({email, code}, {
       success: (data) => {
         console.log("confirmSignup success:", data);
         // data is not meaningful

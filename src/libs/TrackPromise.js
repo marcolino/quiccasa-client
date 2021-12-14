@@ -1,6 +1,7 @@
 //import React from "react";
 import { Auth } from "aws-amplify";
 import { trackPromise } from "react-promise-tracker";
+import Auth_ from "./Auth";
 
 
 
@@ -15,9 +16,9 @@ export function currentAuthenticatedUser({success, error, final}) {
 
 export function signIn(props, {success, error, final}) {
   trackPromise(
-    Auth.signIn({...props})
-      .then((data) => success(data))
-      .catch((data) => error(data))
+    Auth_.signIn({...props})
+      .then((data) => {console.log("success:", data); success(data)})
+      .catch((data) => {console.log("error:", data); error(data)})
       .finally((data) => final(data))
   );
 }
@@ -33,16 +34,18 @@ export function federatedSignIn(props, {success, error, final}) {
   
 export function signUp(props, {success, error, final}) {
   trackPromise(
-    Auth.signUp({...props})
+    Auth_.signUp({...props})
       .then((data) => success(data))
       .catch((data) => error(data))
       .finally((data) => final(data))
   );
 };
 
-export function confirmSignUp(username, code, {success, error, final}) {
+//export function confirmSignUp(username, code, {success, error, final}) {
+export function confirmSignUp(props, {success, error, final}) {
+console.log('TrackPromise - props:', props);
   trackPromise(
-    Auth.confirmSignUp(username, code)
+    Auth_.confirmSignUp({...props})
       .then((data) => success(data))
       .catch((data) => error(data))
       .finally((data) => final(data))

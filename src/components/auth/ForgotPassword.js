@@ -107,7 +107,7 @@ function ForgotPassword() {
         console.log("forgotPassword success:", data);
         setWaitingForCode(true);
         setPassword("");
-        switch (data.CodeDeliveryDetails.DeliveryMedium) {
+        switch (data.codeDeliveryMedium) {
           default: // in future we could treat EMAIL/SMS/... separately...
             const medium = data.CodeDeliveryDetails.AttributeName;
             const email = data.CodeDeliveryDetails.Destination;

@@ -6,6 +6,7 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { ToastContainer, toast } from "./components/Toast";
 import { i18n } from "./i18n";
 
+console.log("app started rendering");
 const root = document.getElementById("root");
 ReactDOM.render(
   <React.StrictMode>

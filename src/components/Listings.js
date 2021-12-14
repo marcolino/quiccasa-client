@@ -18,7 +18,7 @@ function Listings() {
 
   return (
     <div className={classes.listings}>
-      {`${t("Listings")} ${t("for")} ${auth.isAuthenticated ? t("authenticated user") : t("guest user")} ${auth.isAuthenticated ? auth.user.attributes.email : ""}`}
+      {`${t("Listings")} ${t("for")} ${auth.isAuthenticated ? t("authenticated user") : t("guest user")} ${auth.isAuthenticated ? auth.user.email : ""}`}
     </div>
   );
 }

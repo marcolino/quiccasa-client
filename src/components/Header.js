@@ -290,21 +290,21 @@ function Header() {
                   //<AccountCircleIcon />
 
                   // <IconGravatar
-                  //   email={auth.user.attributes.email}
+                  //   email={auth.user.email}
                   //   size={30}
                   // />
 
-                  //<img src={auth.user.attributes.picture} alt="user's icon" width={30} style={{borderRadius: "50%"}} />
+                  //<img src={auth.user.profileImage} alt="user's icon" width={30} style={{borderRadius: "50%"}} />
 
-                  //<ImageCustom src={auth.user.attributes.picture} alt="user's icon" width={30} style={{borderRadius: "50%"}} />
+                  //<ImageCustom src={auth.user.profileImage} alt="user's icon" width={30} style={{borderRadius: "50%"}} />
 
                   //<IconCustom name="UserPicture" size={30} className={classes.logo} />
 
-                  auth.user.attributes.picture ?
-                    <ImageCustom src={auth.user.attributes.picture} alt="user's icon" width={30} style={{borderRadius: "50%"}} />
+                  auth.user.profileImage ?
+                    <ImageCustom src={auth.user.profileImage} alt="user's icon" width={30} style={{borderRadius: "50%"}} />
                   :
                     <IconGravatar
-                      email={auth.user.attributes.email}
+                      email={auth.user.email}
                       size={30}
                     />
                 :

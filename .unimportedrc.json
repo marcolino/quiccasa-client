@@ -1,0 +1,10 @@
+{
+  "ignoreUnresolved": [],
+  "ignoreUnused": [],
+  "ignoreUnimported": [
+    "src/i18next-parser.config.js",
+    "src/misc/TextToBeLocalizedFromExternalServers.js",
+    "src/service-worker.js",
+    "src/setupTests.js"
+  ]
+}

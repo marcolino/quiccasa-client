@@ -18,7 +18,7 @@ function Profile() {
   return (
     <div className={classes.profile}>
       {(typeof auth.isAuthenticated !== "undefined") && // if auth.isAuthenticated is undefined, we don't know yet about user authentication...
-        `${t("Profile")} ${t("for")} ${auth.isAuthenticated ? t("authenticated user") : t("guest user")} ${auth.isAuthenticated ? auth.user.attributes.email : ""}`
+        `${t("Profile")} ${t("for")} ${auth.isAuthenticated ? t("authenticated user") : t("guest user")} ${auth.isAuthenticated ? auth.user.email : ""}`
       }
    </div>
   );

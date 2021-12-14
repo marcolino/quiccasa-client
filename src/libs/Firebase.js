@@ -46,7 +46,7 @@ export const getToken = (setToken) => {
   // we do not already have a valid token saved to local storage, get it from firebase
   return messaging.getToken({vapidKey}).then((token) => {
     if (token) {
-      console.info("current token for client:", token);
+      console.info("PushNotifications - Firebase - current token for client:", token);
       if (setToken) setToken(token);
       // TODO: track the token -> client mapping, by sending to backend server, and
       // show on the UI that permission is secured

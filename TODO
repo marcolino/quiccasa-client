@@ -86,3 +86,4 @@
 - integrare `yarn translations-parse` / `yarn translate-auto` nel flusso di deploy (confrontare i files 'locales/translation.json' con gli 'old', e se ci sono differenze interrompere il deploy chiedendo se si vuole tradurre)
 - provare a trovare una api key di yandex (o un altro modo) per provare a far funzionare `scripts/translate-auto`
 - tests: rendere più semplice la rigenerazione degli snapshots (o decidere di non usarli...)
+- rimuovere ETBTadd (Amplify error handling)

@@ -19,7 +19,25 @@ import config from "../config";
 import theme from "../themes/default"; // here we choose the theme
 
 function App() {
-console.log("app rendering");
+// /* test calling local express endpoint */
+// var headers = new Headers();
+// headers.append("Content-Type", "application/x-www-form-urlencoded");
+// var urlencoded = new URLSearchParams();
+// urlencoded.append("email", "marcosolari@gmail.com");
+// urlencoded.append("password", "secret");
+// var requestOptions = {
+//   method: "POST",
+//   headers: headers,
+//   body: urlencoded,
+//   redirect: "follow"
+// };
+
+// fetch("//localhost:5000/api/auth/login", requestOptions)
+//   .then(response => response.json())
+//   .then(function(res){ console.log("app success:", res) })
+//   .catch(function(res){ console.log("error:", res) })
+// ;
+
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
