@@ -1,6 +1,6 @@
 {
   "name": "quiccasa-client",
-  "version": "0.1.72",
+  "version": "0.1.73",
   "private": true,
   "scripts": {
     "start": "export PORT=3000 & react-scripts start",
@@ -9,6 +9,7 @@
     "translations-parse": "i18next 'src/**/*.js' --config 'src/i18next-parser.config.js' --silent",
     "translate-auto": "node scripts/translate-auto.js",
     "build": "react-scripts build",
+    "rawbuild": "react-scripts build",
     "test": "react-scripts test",
     "test-update-snapshot": "react-scripts test --updateSnapshot --watchAll=false",
     "test-once": "react-scripts test --watchAll=false",
@@ -29,6 +30,9 @@
     "delete-all-cognito-pool-users": "scripts/delete-all-cognito-pool-users.sh",
     "browserlist-update": "npx browserslist@latest --update-db",
     "optimize": "npx unimported"
+  },
+  "watch": {
+    "rawbuild": "src/**/*.js"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {
@@ -56,6 +60,7 @@
     "firebase": "8.2.1",
     "i18next": "^20.3.5",
     "i18next-browser-languagedetector": "^6.1.2",
+    "npm-watch": "^0.11.0",
     "react": "^17.0.2",
     "react-cookie-consent": "^6.2.4",
     "react-dom": "^17.0.2",
