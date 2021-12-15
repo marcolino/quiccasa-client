@@ -59,7 +59,8 @@ module.exports = {
       production: "https://api.sistemisolari.com/",
     },
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/json",
+      "Content-Type-BACKUP": "x-www-form-urlencoded",
     },
     redirect: "follow",
   },

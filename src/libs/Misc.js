@@ -41,6 +41,22 @@ export const isLocalhost = Boolean(
   )
 );
 
+export function currentFunctionName() {
+  // TODO: remove this long version:
+  // let name = arguments.callee.toString();
+  // name = name.substr('function '.length);
+  // name = name.substr(0, name.indexOf('('));
+  // return name;
+
+  // /* eslint-disable no-caller */
+  // const name = arguments.callee.toString().substring(0, 'function '.length);
+  // return name.substring(0, name.indexOf('('));
+
+  const stack = new Error().stack,
+        caller = stack.split('\n')[2].trim();
+  return caller;
+};
+
 export const encodeEmail = (email) => {
   var encodedEmail = "";
   

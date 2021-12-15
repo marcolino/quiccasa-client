@@ -170,7 +170,7 @@ function SignUp() {
         setPassword("");
       },
       error: (err) => {
-console.error("signup error XXX:", err);
+console.error("signup error:", err);
 //ETBTAdd("signup", err);
         switch (err.code) {
           case "UsernameExistsException":
@@ -179,7 +179,7 @@ console.error("signup error XXX:", err);
             break;
           default:
             setError({}); // we don't know whom to blame
-            toast.error(t(err.message ? err.message : err.statusText)); // TODO: show statusText if !message everywere, better if in an upper middleware level...
+            toast.error(t(err.message));
           }
       },
     });

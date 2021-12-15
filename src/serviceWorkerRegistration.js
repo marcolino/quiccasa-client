@@ -46,10 +46,12 @@ export function register(config) {
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
-          broadcastChannel.postMessage({level: "info", message:
+          //broadcastChannel.postMessage({level: "info", message:
+          console.log(
             t("This web app is being locally served cache-first by a service " +
             "worker. To learn more, visit https://cra.link/PWA")
-          });
+            );
+          //});
         });
       } else {
         // Is not localhost. Just register service worker

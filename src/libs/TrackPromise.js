@@ -7,7 +7,7 @@ import Auth_ from "./Auth";
 
 export function currentAuthenticatedUser({success, error, final}) {
   trackPromise(
-    Auth.currentAuthenticatedUser()
+    Auth_.currentAuthenticatedUser()
       .then((data) => success(data))
       .catch((data) => error(data))
       .finally((data) => final(data))
