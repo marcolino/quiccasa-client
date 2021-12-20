@@ -53,7 +53,7 @@ export function currentFunctionName() {
   // return name.substring(0, name.indexOf('('));
 
   const stack = new Error().stack,
-        caller = stack.split('\n')[2].trim();
+        caller = stack.split('\n')[2].trim().replace(/at\s*/, "").replace(/Object\./, "");
   return caller;
 };
 

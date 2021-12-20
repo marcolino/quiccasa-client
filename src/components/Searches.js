@@ -18,7 +18,7 @@ function Searches() {
 
   return (
     <div className={classes.searches}>
-      {`${t("Searches")} ${t("for")} ${auth.isAuthenticated ? t("authenticated user") : t("guest user")} ${auth.isAuthenticated ? auth.user.email : ""}`}
+      {`${t("Searches")} ${t("for")} ${auth.user ? t("authenticated user") : t("guest user")} ${auth.user ? auth.user.email : ""}`}
     </div>
 
   );

@@ -1,11 +1,13 @@
-import React, { useState, createContext } from "react";
+import React, { createContext } from "react";
+import { usePersistedState } from "../hooks/usePersistedState";
 
-const initialState = { isAuthenticated: false, user: null };
+const initialState = { user: null };
 
 const AuthContext = createContext(initialState);
 
 const AuthProvider = (props) => {
-  const [auth, setAuth] = useState(initialState);
+console.log("calling usePersistedState with initialstate =", initialState);
+  const [auth, setAuth] = usePersistedState('auth', initialState);
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

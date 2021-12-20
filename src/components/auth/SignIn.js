@@ -93,7 +93,7 @@ function SignIn() {
       password,
     }, {
       success: (data) => {
-        setAuth({isAuthenticated: true, user: {...data.user, token: data.token}});
+        setAuth({ user: { ...data.user, token: data.token } });
         if (!rememberMe) {
           localStorage.clear();
         }

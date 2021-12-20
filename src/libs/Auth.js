@@ -3,38 +3,37 @@ import { currentFunctionName } from "../libs/Misc";
 
 const Auth_ = {
   signIn: (params) => {
-    console.log("sigIn"/*currentFunctionName()*/, params);
+console.log(currentFunctionName(), params);
     return fetcher("/api/auth/login", "POST", params);
   },
   signUp: (params) => {
-    console.log("signUp"/*currentFunctionName()*/, params);
+console.log(currentFunctionName(), params);
     return fetcher("/api/auth/register", "POST", params);
   },
   confirmSignUp: (params) => {
-    console.log("confirmSignUp"/*currentFunctionName()*/, params);
+console.log(currentFunctionName(), params);
     // TODO: props = props.filter(key => key === "code");
     return fetcher(`/api/auth/verify/${params.code}`, "GET", params); // TODO: choose: verify or confirmSignUp, and code or token (better code) ...
   },
   currentAuthenticatedUser: (params) => {
-    console.log(currentFunctionName(), params);
+console.log(currentFunctionName(), params);
     return new Promise((resolve, reject) => {
-      const user = { // TODO: get from local session...
-        createdAt: "2021-12-15T16:26:10.447Z",
-        email: "marcosolari@gmail.com",
-        firstName: "Marco",
-        isVerified: true,
-        lastName: "Solari",
-        password: "$2b$10$ux9zOsagrQ4CGXAjE49Y8.Fxd4XMQVA3FSt3QpIIY/YqW4ZnL1xWG",
-        profileImage: "https://i.pinimg.com/564x/15/96/87/159687561cab35ea9646a8f766461226.jpg",
-        updatedAt: "2021-12-15T16:26:24.387Z",
-        __v: 0,
-        _id: "61ba1722cbc8dc74f7348ed0",
-      };
-      if (user) {
-        resolve(user);
+      const auth = JSON.parse(localStorage.getItem('auth'));
+console.log(currentFunctionName(), "auth:", auth);
+      if (auth) {
+console.log(currentFunctionName(), "resolving auth.user:", auth.user);
+        resolve(auth.user);
       } else {
-        reject()
+console.log(currentFunctionName(), "rejecting");
+        reject();
       }
+    });
+  },
+  signOut: (params) => {
+console.log(currentFunctionName());
+    // nothing to do
+    return new Promise((resolve, reject) => {
+      resolve();
     });
   },
 };
@@ -63,10 +62,17 @@ console.log("fetcher opt:", opt);
       redirect: config.api.redirect,
     })
       .then(res => {
-        res.json().then(data => {
-          if (!res.ok) reject({status: res.status, statusText: res.statusText, message: data.message ? data.message : res.statusText})
-          resolve(data);
-        })
+console.log("fetcher res:", res);
+        try {
+          res.json().then(data => {
+console.log("fetcher data:", data);
+            if (!res.ok) reject({status: res.status, statusText: res.statusText, message: data.message ? data.message : res.statusText})
+            resolve(data);
+          });
+        } catch (err) {
+          console.error("fetch error:", err); // TODO: !!!
+        }
+
       })
       .catch(err => reject(err))
     ;

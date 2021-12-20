@@ -17,8 +17,8 @@ function Home() {
 
   return (
     <div className={classes.home}>
-      {(typeof auth.isAuthenticated !== "undefined") && // if auth.isAuthenticated is undefined, we don't know yet about user authentication...
-        `${t("Home")} ${t("for")} ${auth.isAuthenticated ? t("authenticated user") : t("guest user")} ${auth.isAuthenticated ? auth.user.email : ""}`
+      {(typeof auth.user !== "undefined") && // if auth.user is undefined, we don't know yet about user authentication...
+        `${t("Home")} ${t("for")} ${auth.user ? t("authenticated user") : t("guest user")} ${auth.user ? auth.user.email : ""}`
       }
     </div>
   );

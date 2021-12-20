@@ -146,7 +146,7 @@ function Header() {
     },
   ];
 
-  const userItems = auth.isAuthenticated ?
+  const userItems = auth.user ?
     [
       {
         label: t("Profile"),
@@ -230,6 +230,7 @@ function Header() {
     ));
   };
 
+  console.log('HEADER - auth:', auth);
   return (
     <header>
       <AppBar className={classes.header} elevation={elevation} position="fixed">
@@ -278,7 +279,7 @@ function Header() {
 
           {/* user menu */}
           <>
-            {auth.isAuthenticated ?
+            {auth.user ?
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -286,7 +287,7 @@ function Header() {
                 onClick={handleUserMenuOpen}
                 color="inherit"
               >
-                {auth.isAuthenticated ?
+                {auth.user ?
                   //<AccountCircleIcon />
 
                   // <IconGravatar
@@ -312,7 +313,8 @@ function Header() {
                 }
               </IconButton>
             :
-              (auth.isAuthenticated === false) && // if auth.isAuthenticated is undefined, we don't kow yet, so do not show anything...
+              (auth.user === false) && // if auth.user is false, whe show the "Join" button;
+                                       // otherwise (it's null), we don't kow yet, so do not show anything...
                 <Button
                   variant="contained"
                   size="small"

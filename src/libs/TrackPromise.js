@@ -1,5 +1,5 @@
 //import React from "react";
-import { Auth } from "aws-amplify";
+//import { Auth } from "aws-amplify";
 import { trackPromise } from "react-promise-tracker";
 import Auth_ from "./Auth";
 
@@ -25,7 +25,7 @@ export function signIn(props, {success, error, final}) {
 
 export function federatedSignIn(props, {success, error, final}) {
   trackPromise(
-    Auth.federatedSignIn({...props})
+    Auth_.federatedSignIn({...props})
       .then((data) => success(data))
       .catch((data) => error(data))
       .finally((data) => final(data))
@@ -54,7 +54,7 @@ console.log('TrackPromise - props:', props);
 
 export function forgotPassword(username, {success, error, final}) {
   trackPromise(
-    Auth.forgotPassword(username)
+    Auth_.forgotPassword(username)
       .then((data) => success(data))
       .catch((data) => error(data))
       .finally((data) => final(data))
@@ -63,7 +63,7 @@ export function forgotPassword(username, {success, error, final}) {
 
 export function resendSignUp(username, {success, error, final}) {
   trackPromise(
-    Auth.resendSignUp(username)
+    Auth_.resendSignUp(username)
       .then((data) => success(data))
       .catch((data) => error(data))
       .finally((data) => final(data))
@@ -72,7 +72,7 @@ export function resendSignUp(username, {success, error, final}) {
 
 export function forgotPasswordSubmit(username, code, password, {success, error, final}) {
   trackPromise(
-    Auth.forgotPasswordSubmit(username, code, password,)
+    Auth_.forgotPasswordSubmit(username, code, password,)
       .then((data) => success(data))
       .catch((data) => error(data))
       .finally((data) => final(data))
@@ -82,7 +82,7 @@ export function forgotPasswordSubmit(username, code, password, {success, error, 
 export function resendResetPasswordCode(username, {success, error, final}) {
   trackPromise(
     //Auth.resendResetPassword(username)
-    Auth.resendSignUp(username)
+    Auth_.resendSignUp(username)
       .then((data) => success(data))
       .catch((data) => error(data))
       .finally((data) => final(data))
@@ -91,7 +91,7 @@ export function resendResetPasswordCode(username, {success, error, final}) {
 
 export function signOut({success, error, final}) {
   trackPromise(
-    Auth.signOut()
+    Auth_.signOut()
       .then((data) => success(data))
       .catch((data) => error(data))
       .finally((data) => final(data))

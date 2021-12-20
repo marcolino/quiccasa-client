@@ -13,7 +13,7 @@ import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished coll
 function SignOut() {
   const history = useHistory();
   const isOnline = useContext(OnlineStatusContext);
-  const { setAuth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
   const { t } = useTranslation();
 
   // use `useEffect` to avoid  "cannot update a component while rendering a different component" error
@@ -21,13 +21,13 @@ function SignOut() {
     if (!isOnline) { // fake signout while offline...
       // TODO: we should also at least clear localStorage.CognitoIdentityServiceProvider.* keys ...
       //return toast.warning("You are currently offline. Please wait for the network to become available.");
-      setAuth({isAuthenticated: false, user: null})
+      setAuth({ user: false })
       history.replace("/");
     } else {
       signOut({
         success: () => {
           //toast.success(t("Signed out")); // too noisy...
-          setAuth({isAuthenticated: false, user: null})
+          setAuth({ user: false })
           history.replace("/");
         },
         error: (err) => {
@@ -37,7 +37,7 @@ ETBTAdd("signOut", err);
         }
       });
     }
-  }, [isOnline, history, setAuth, t]);
+  }, [isOnline, history, auth, setAuth, t]);
 
   return null;
 };
