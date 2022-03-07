@@ -3,11 +3,11 @@ import React, { useState, useEffect, createContext } from "react";
 const OnlineStatusContext = createContext(true);
 
 const OnlineStatusProvider = (props) => {
-  const [onlineStatus, setOnlineStatus] = useState(true);
+  const [onlineStatus, setOnlineStatus] = useState(navigator.onLine);
 
   useEffect(() => {
-    window.addEventListener("offline", () => setOnlineStatus(false));
-    window.addEventListener("online", () => setOnlineStatus(true));
+    window.addEventListener("offline", () => { console.log("GOING OFFLINE"); setOnlineStatus(false)});
+    window.addEventListener("online", () => { console.log("GOING ONLINE"); setOnlineStatus(true)});
     return () => {
       window.removeEventListener("offline", () => setOnlineStatus(false));
       window.removeEventListener("online", () => setOnlineStatus(true));

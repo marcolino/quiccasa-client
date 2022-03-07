@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory/*, Redirect*/ } from "react-router-dom";
 import { usePromiseTracker } from "react-promise-tracker";
 import { useTranslation } from "react-i18next";
 import { makeStyles } from "@material-ui/styles";
@@ -10,7 +10,9 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
-import { signIn, federatedSignIn } from "../../libs/TrackPromise";
+import i18n from "i18next";
+//import { signIn/*, federatedSignIn*/ } from "../../libs/TrackPromise";
+import { signIn, federatedSignIn } from "../../libs/Fetch";
 import { FacebookIcon, GoogleIcon } from "../IconFederated";
 import { toast } from "../Toast";
 import { FormInput, FormButton, FormText, FormDividerWithText, FormCheckbox, FormLink } from "../FormElements";
@@ -24,9 +26,9 @@ const styles = theme => ({
   avatar: {
     backgroundColor: theme.palette.success.main,
   },
-  rememberMe: {
-    color: theme.palette.success.main,
-  },
+  // rememberMe: {
+  //   color: theme.palette.success.main,
+  // },
   forgotPassword: {
     color: theme.palette.success.main,
   },
@@ -53,12 +55,20 @@ function SignIn() {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(true);
+  //const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState({});
   const { setAuth } = useContext(AuthContext);
   const isOnline = useContext(OnlineStatusContext);
-  const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
+  /* UNUSED */ const { promiseInProgress } = usePromiseTracker({delay: config.spinner.delay});
   const { t } = useTranslation();
+
+  const onlineCheck = () => {
+    if (!isOnline) {
+      toast.warning("Sorry, we are currently offline. Please wait for the network to become available.");
+      return false;
+    }
+    return true;
+  };
 
   const validateForm = () => {   
     // validate email formally
@@ -81,52 +91,59 @@ function SignIn() {
 
   const formSignIn = (e) => {
     e.preventDefault();
-    if (promiseInProgress) return;
     if (!validateForm()) return;
-    // TODO: centralize this message, it is used more than once...
-    if (!isOnline) return toast.warning("Sorry, we are currently offline. Please wait for the network to become available.");
+    if (!onlineCheck()) return;
     setError({});
 
     signIn({
-      //username: email,
       email,
       password,
-    }, {
-      success: (data) => {
-        setAuth({ user: { ...data.user, token: data.token } });
-        if (!rememberMe) {
-          localStorage.clear();
-        }
-        setEmail("");
-        setPassword("");
-        history.push("/");
-      },
-      error: (err) => {
-console.error("signIn error:", err);
-ETBTAdd("signIn", err);
-        toast.error(t(err.message));
-        setError({}); // we don't know whom to blame
-      },
+    }).then(data => {
+      if (!data.ok) {
+        console.warn("signIn error:", data);
+        toast.error(t(data.message));
+        setError({});
+        return;
+      }
+      console.log("signIn success:", data);
+      // TODO: do we need tokens here?
+      setAuth({ user: { ...data.user, accessToken: data.accessToken, refreshToken: data.refreshToken }});
+      // if (!rememberMe) {
+      //   localStorage.clear(); // TODO...
+      // }
+      setEmail("");
+      setPassword("");
+      history.push("/");
+    }).catch(err => {
+      console.error("signIn error catched:", err);
+      toast.error(t(err.message));
+      setError({}); // we can't blame some user input, it's a server side error
     });
   };
 
   const formFederatedSignIn = (e, provider) => {
     e.preventDefault();
-    if (promiseInProgress) return;
-    // TODO: centralize this message, it is used more than once...
-    if (!isOnline) return toast.warning("You are currently offline. Please wait for the network to become available.");
+    if (!validateForm()) return;
+    if (!onlineCheck()) return;
+    setError({});
 
-    federatedSignIn({provider}, {
-      success: (user) => {
-        //console.log("federatedSignIn user:", user); // always undefined, at this moment...
-      },
-      error: (err) => {
-console.error("federatedSignIn error:", err);
-ETBTAdd("federatedSignIn", err);
-        toast.error(t(err.message));
-        setError({}); // we don't know whom to blame
-      },
-    });
+    window.open("/api/auth/loginGoogle", "_self");
+
+    // federatedSignIn().then(data => {
+    //   console.log("federatedSignIn calling setAuth - data:", data);
+    //   // TODO: do we need tokens here?
+    //   setAuth({ user: { ...data.user, accessToken: data.accessToken, refreshToken: data.refreshToken }});
+    //   if (!rememberMe) {
+    //     localStorage.clear();
+    //   }
+    //   setEmail("");
+    //   setPassword("");
+    //   history.push("/");
+    // }).catch(err => {
+    //   console.error("federatedSignIn error:", err);
+    //   toast.error(t(err.message));
+    //   setError({}); // we don't know whom to blame
+    // });
   };
 
   return (
@@ -183,15 +200,15 @@ ETBTAdd("federatedSignIn", err);
 
           <Grid container alignItems="center">
             <Grid className={classes.columnLeft}>
-              <FormCheckbox
+              {/* <FormCheckbox
                 checked={rememberMe}
                 onChange={setRememberMe}
                 className={classes.rememberMe}
               >
                 {t("Remember me")}
-              </FormCheckbox>
+              </FormCheckbox> */}
             </Grid>
-            <Grid className={classes.columnRight}>
+            <Grid className={classes.columnRight} style={{marginTop: 5}}>
               <FormLink
                 href="/forgot-password"
                 className={classes.forgotPassword}
@@ -255,26 +272,6 @@ ETBTAdd("federatedSignIn", err);
                   </FormButton>
                 ))
               }
-                
-              {/* {config.federatedSigninProviders.includes("Facebook") && (
-                <FormButton
-                  social={"Facebook"}
-                  startIcon={<FacebookIcon />}
-                  onClick={(e) => formFederatedSignIn(e, "Facebook")}
-                >
-                  {t("Facebook")}
-                </FormButton>
-              )}
-
-              {config.federatedSigninProviders.includes("Google") && (
-                <FormButton
-                  social={"Google"}
-                  startIcon={<GoogleIcon />}
-                  onClick={(e) => formFederatedSignIn(e, "Google")}
-                >
-                  {t("Google")}
-                </FormButton>
-              )} */}
             </>
           )}
 

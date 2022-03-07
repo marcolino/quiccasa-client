@@ -6,9 +6,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
-
 import i18n from "i18next";
-
 import IconCustom from "./IconCustom";
 import { isAuthLocation } from "../libs/Misc";
 import config from "../config";

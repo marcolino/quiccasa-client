@@ -2,6 +2,7 @@
 
 exports[`renders Home screen 1`] = `
 <div>
+  <div />
   <div
     class="makeStyles-contentsContainer-1"
   >
@@ -83,55 +84,8 @@ exports[`renders Home screen 1`] = `
         class="makeStyles-body-4"
       >
         <div
-          style=""
-        >
-          <div
-            class="makeStyles-home-33"
-          >
-            Home for guest user 
-          </div>
-        </div>
-      </div>
-      <div
-        class="CookieConsent"
-        style="align-items: baseline; background: rgb(43, 55, 59); color: rgb(153, 153, 153); display: block; flex-wrap: wrap; justify-content: space-between; left: 0px; position: fixed; width: 100%; z-index: 999; font-family: Open Sans; bottom: 0px;"
-      >
-        <div
-          class=""
-          style="flex: 1 0 300px; margin: 15px;"
-        >
-          We use cookies or similar technologies as specified in the
-           
-           
-          <a
-            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-            href="/privacy-policy"
-          >
-            privacy policy
-          </a>
-          .
-           
-           
-           
-          You can consent to the use of such technologies by closing this notice
-          ,
-           
-           
-           
-          or by otherwise continuing interacting with this site.
-        </div>
-        <div
-          class=""
-        >
-          <button
-            aria-label="Accept cookies"
-            class=""
-            id="rcc-confirm-button"
-            style="background: rgb(255, 212, 45); border: 0px; border-radius: 0px; box-shadow: none; color: rgb(78, 80, 59); cursor: pointer; flex: 0 0 auto; padding: 5px 10px; margin: 15px; font-size: 13px; float: right;"
-          >
-            I agree
-          </button>
-        </div>
+          style="display: none;"
+        />
       </div>
     </div>
     <div
@@ -150,14 +104,14 @@ exports[`renders Home screen 1`] = `
              
              
             v
-            0.1.71
+            0.1.77
              
              ~ 
             ©
              
              
              
-            2021
+            2022
             , 
              
             <a
@@ -188,6 +142,47 @@ exports[`renders Home screen 1`] = `
           </h6>
         </div>
       </div>
+    </div>
+  </div>
+  <div
+    class="CookieConsent"
+    style="align-items: baseline; background: rgb(43, 55, 59); color: rgb(153, 153, 153); display: block; flex-wrap: wrap; justify-content: space-between; left: 0px; position: fixed; width: 100%; z-index: 999; font-family: Open Sans; bottom: 0px;"
+  >
+    <div
+      class=""
+      style="flex: 1 0 300px; margin: 15px;"
+    >
+      We use cookies or similar technologies as specified in the
+       
+       
+      <a
+        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+        href="/privacy-policy"
+      >
+        privacy policy
+      </a>
+      .
+       
+       
+       
+      You can consent to the use of such technologies by closing this notice
+      ,
+       
+       
+       
+      or by otherwise continuing interacting with this site.
+    </div>
+    <div
+      class=""
+    >
+      <button
+        aria-label="Accept cookies"
+        class=""
+        id="rcc-confirm-button"
+        style="background: rgb(255, 212, 45); border: 0px; border-radius: 0px; box-shadow: none; color: rgb(78, 80, 59); cursor: pointer; flex: 0 0 auto; padding: 5px 10px; margin: 15px; font-size: 13px; float: right;"
+      >
+        I agree
+      </button>
     </div>
   </div>
 </div>

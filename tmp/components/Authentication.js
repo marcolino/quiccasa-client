@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useContext } from "react";
 //import Amplify/*, { I18n }*/ from "aws-amplify";
 //import { useTranslation } from "react-i18next";
-//import { currentAuthenticatedUser } from "../libs/TrackPromise";
+import { currentAuthenticatedUser } from "../libs/TrackPromise";
 import { AuthContext } from "../providers/AuthProvider";
 //import { isLocalhost } from "../libs/Misc";
 import "../i18n"; // TODO: can we remove this import from here? Now we have it in /src/index.js ...
@@ -58,9 +58,10 @@ console.log('Authentication useEffect');
     //     setAuth({ user: null });
     //   }
     // });
-    console.info("Authentication.js: authenticated user:", auth.user);
+    console.info("+++++++++++ Authentication.js: authenticated user:", auth.user);
 
-  }, [auth, setAuth/*, i18n.currentLanguage*/]);
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [/*auth.user,*/ setAuth/*, i18n.currentLanguage*/]);
 
   return null;
 }

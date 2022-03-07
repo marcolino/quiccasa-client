@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import { usePersistedState } from "../hooks/usePersistedState";
 
-const initialState = { user: null };
+const initialState = { user: false };
 
 const AuthContext = createContext(initialState);
 

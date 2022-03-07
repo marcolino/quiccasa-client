@@ -30,7 +30,7 @@ reportWebVitals(console.log);
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.unregister();
+serviceWorkerRegistration.unregister(); // TODO: ONLY TO BETTER DEBUG
 //serviceWorkerRegistration.register();
 
 // Set up a broadcast channel to localize messages from i18n service worker

@@ -11,7 +11,7 @@ const ToastContainer = React.memo((props) => {
 
   return (
     <ToastifyContainer
-      position="top-right"
+      position="bottom-right"
       //autoClose={5000}
       hideProgressBar={true}
       newestOnTop={false}

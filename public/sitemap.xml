@@ -26,13 +26,13 @@
       <priority>1.0</priority>
     </url>
     <url>
-      <loc>https://quiccasa.sistemisolari.com/unsubscribe</loc>
+      <loc>https://quiccasa.sistemisolari.com/notifications</loc>
       <changefreq>monthly</changefreq>
       <priority>0.2</priority>
     </url>
     <url>
-      <loc>https://quiccasa.sistemisolari.com/notifications</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.2</priority>
+      <loc>https://quiccasa.sistemisolari.com/admin-panel</loc>
+      <changefreq>yearly</changefreq>
+      <priority>0</priority>
     </url>
   </urlset>
