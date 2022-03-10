@@ -1,16 +1,16 @@
 {
-  "name": "quiccasa-client",
-  "version": "0.1.86",
+  "name": "appalti190-client",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "start": "export PORT=3000 & react-scripts start",
     "start-production": "yarn build && serve -s build -p 3000",
     "start-dev": "nodemon -w '.' -e 'js,json,css' --ignore build/ --exec 'yarn rawbuild && yarn sound-ok || yarn sound-ko'",
-    "prebuild": "yarn install-pre-push-hook && yarn sitemap-build && yarn favicons-build && yarn manifest-build && rm -r build/",
+    "prebuild": "yarn install-pre-push-hook && yarn sitemap-build && yarn favicons-build && yarn manifest-build && rm -rf build/",
     "build": "react-scripts build",
     "rawbuild": "react-scripts build && yarn sw-add-blacklist && yarn postbuild",
     "sw-add-blacklist": "node scripts/add-blacklist-urls-to-service-worker",
-    "postbuild": "rm -rf ../quiccasa-server/client/build; cp -a build/ ../quiccasa-server/client/",
+    "postbuild": "rm -rf ../appalti190-server/client/build; cp -a build/ ../appalti190-server/client/",
     "translations-parse": "i18next 'src/**/*.js' --config 'src/i18next-parser.config.js' --silent",
     "translate-auto": "node scripts/translate-auto.js",
     "test": "react-scripts test",
@@ -21,7 +21,7 @@
     "postdeploy": "yarn cloudfront-invalidate-cache && yarn sitemap-search-engines-update",
     "cloudfront-invalidate-cache": "aws cloudfront create-invalidation --distribution-id=E30CJEQ2PIR5NL --paths /",
     "env-decrypt": "echo $(tput setaf 3)Password is the name of your little boat\\!$(tput sgr0); gpg -d .env.gpg",
-    "sync": "aws s3 sync build/ s3://quiccasa.sistemisolari.com",
+    "NOsync": "aws s3 sync build/ s3://quiccasa.sistemisolari.com",
     "eject": "echo -n 'Really sure to eject [yes/no] ? '; read answer; [ $answer = 'yes' ] && react-scripts eject || true",
     "install-pre-push-hook": "cp --remove-destination scripts/git-hooks/pre-push .git/hooks/pre-push && chmod 700 .git/hooks/pre-push",
     "sitemap-build": "node scripts/sitemap-build.js",
@@ -37,7 +37,7 @@
     "sound-ok": "play -q -n synth 0.7 sin 4000 2> /dev/null",
     "sound-ko": "play -q -n synth 0.7 sin 200 2> /dev/null"
   },
-  "proxy": "http://localhost:5000",
+  "DISABLED_proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -61,7 +61,7 @@
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.25.0",
     "firebase": "8.2.1",
-    "i18next": "^20.3.5",
+    "i18next": "^21.6.13",
     "i18next-browser-languagedetector": "^6.1.2",
     "moment": "^2.29.1",
     "npm-watch": "^0.11.0",
