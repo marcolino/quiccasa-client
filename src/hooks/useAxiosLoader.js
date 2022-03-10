@@ -11,6 +11,7 @@ export const useAxiosLoader = () => {
   const dec = useCallback(() => setCounter(counter => counter - 1), [setCounter]); // remove from counter
   
   const interceptors = useMemo(() => ({
+    /* eslint-disable no-sequences */
     request: config => (inc(), config),
     response: response => (dec(), response),
     error: error => (dec(), Promise.reject(error)),

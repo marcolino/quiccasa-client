@@ -1,6 +1,6 @@
 //import  { Redirect } from "react-router-dom";
 import config from "../config";
-import { currentFunctionName } from "../libs/Misc";
+//import { currentFunctionName } from "../libs/Misc";
 
 const Auth = {
   signUp: (params) => {

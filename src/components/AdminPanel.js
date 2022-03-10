@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect/*, useContext*/ } from "react";
 import { makeStyles } from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -11,7 +11,7 @@ import { getUsers } from "../libs/Fetch";
 import moment from "moment";
 import "moment/locale/it"; // TODO: import all needed locales... (!!!)
 import { toast } from "./Toast";
-import { AuthContext } from "../providers/AuthProvider";
+//import { AuthContext } from "../providers/AuthProvider";
 
 const useStyles = makeStyles(theme => ({
 	adminPanel: {
@@ -23,24 +23,28 @@ const useStyles = makeStyles(theme => ({
 
 function AdminPanel() {
 	const classes = useStyles();
-  const { auth } = useContext(AuthContext);
+  //const { auth } = useContext(AuthContext);
   const { t } = useTranslation();
 
-  const [data, setData] = useState({});
-  moment.locale("it"); 
-  useEffect(async() => {
+  const [data/*, setData*/] = useState({});
 
-    getUsers({}).then(data => {
-      if (!data.ok) {
-        console.warn("getUsers error:", data);
-        toast.error(t(data.message));
-        return;
-      }
-      console.log("getUsers success:", data);
-    }).catch(err => {
-      console.error("getUsers error catched:", err);
-      toast.error(t(err.message));
-    });
+  moment.locale("it");
+
+  useEffect(() => {
+    (async () => {
+      await getUsers({}).then(data => {
+        if (!data.ok) {
+          console.warn("getUsers error:", data);
+          toast.error(t(data.message));
+          return;
+        }
+        console.log("getUsers success:", data);
+      }).catch(err => {
+        console.error("getUsers error catched:", err);
+        toast.error(t(err.message));
+      });
+    })();
+
 //     try {
 //       const config = {
 //         headers: { Authorization: `Bearer ${auth.user.accessToken}` }
@@ -57,7 +61,7 @@ function AdminPanel() {
 //       console.log("Fetch error:", err); // TODO...
 //       toast.error(t(err.message));
 //     }
-  }, []);
+  }, [t]);
 
   return (
     <div className={classes.adminPanel}>

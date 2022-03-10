@@ -2,7 +2,7 @@
 #
 # Update sitemap to main search engines
 
-sitemapUrl="https://quiccasa.sistemisolari.com/sitemap.xml"
+sitemapUrl="https://appalti190.arsistemi.it/sitemap.xml"
 googleSuccess="Your Sitemap has been successfully added to our list of Sitemaps to crawl."
 bingSuccess="Grazie per avere inviato la sitemap."
 

@@ -23,7 +23,6 @@ import { toast } from "../Toast";
 import { FormInput, FormButton, FormText } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
 import config from "../../config";
-import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
@@ -53,7 +52,7 @@ function ForgotPassword() {
   const [openDialog2, setOpenDialog2] = useState(false);
   const [dialogTitle2, setDialogTitle2] = useState(null);
   const [dialogContent2, setDialogContent2] = useState(null);
-  const [dialogCallback2, setDialogCallback2] = useState(null);
+  //const [dialogCallback2, setDialogCallback2] = useState(null);
   const { t } = useTranslation();
 
   const handleOpenDialog1 = (title, content) => {

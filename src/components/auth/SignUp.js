@@ -22,7 +22,6 @@ import { toast } from "../Toast";
 import { FormInput, FormButton, FormText, FormLink } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
 import config from "../../config";
-import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
@@ -171,7 +170,6 @@ function SignUp() {
       },
       error: (err) => {
 console.error("signup error:", err);
-//ETBTAdd("signup", err);
         switch (err.code) {
           case "UsernameExistsException":
             setError({ email: err.message }); // since we use email as username, we blame email field as guilty
@@ -196,13 +194,12 @@ console.error("signup error:", err);
         // data is not meaningful
         handleOpenDialog(
           t("Registered successfully"),
-          t("You can now sign in with email and password."),
+          t("You can now sign in with email and password") + ".",
           () => formSignUpCompleted
         );
       },
       error: (err) => {
 console.error("confirmSignUp error:", err);
-ETBTAdd("confirmSignUp", err);
         toast.error(t(err.message));
         setError({ code: err.message});
       },
@@ -219,7 +216,6 @@ ETBTAdd("confirmSignUp", err);
       },
       error: (err) => {
 console.error("resendSignUp error:", err);
-ETBTAdd("confirmSignUp", err);
         toast.error(t(err.message));
         setError({ code: err.message});
       },

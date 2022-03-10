@@ -1,19 +1,19 @@
 module.exports = {
-  companyName: "Sistemi Solari",
-  companyHomeSiteName: "sistemisolari.com",
-  companyHomeSiteUrl: "https://www.sistemisolari.com",
-  companyOwner: "Marco Solari",
+  companyName: "AR Sistemi",
+  companyHomeSiteName: "arsistemi.it",
+  companyHomeSiteUrl: "https://www.arsistemi.it",
+  companyOwner: "Marco Solari", // TODO: Antonio?
   companyOwnerFiscalCode: "SLRMRC61M31L219Y",
-  companyOwnerStreetAddress: "Corso Quintino Sella, 92/43",
+  companyOwnerStreetAddress: "Strada di Reaglie, 18",
   companyOwnerCity: "Torino",
   companyOwnerProvince: "TO",
   companyOwnerZipCode: "10132",
   companyOwnerPhone: "+39 333 6480983",
   companyOwnerEmail: "marcosolari@gmail.com",
-  appName: "quiccasa",
-  appTitle: "Quiccasa",
-  appSiteUrl: "quiccasa.sistemisolari.com",
-  appTermsValidityStartDate: "01-01-2021",
+  appName: "appalti190",
+  appTitle: "Appalti190",
+  appSiteUrl: "appalti190.arsistemi.it",
+  appTermsValidityStartDate: "01-01-2022",
   startUrl: ".", // TODO: "/" or "." ?
   display: "standalone",
   spinner: {
@@ -28,7 +28,7 @@ module.exports = {
       "en": { icon: "🇬🇧" },
       "it": { icon: "🇮🇹" },
     },
-    fallback: "en",
+    fallback: "it",
   },
   // sounds: {
   //   buttonClick,
@@ -37,19 +37,19 @@ module.exports = {
   extraSmallWatershed: 600,
   mobileDesktopWatershed: 900,
   federatedSigninProviders: [ // we currently handle "Facebook", "Google"
-    "Facebook",
-    "Google",
+    //"Facebook",
+    //"Google",
   ],
-  oauth: {
+  oauth: { // TODO
     domain: "auth.sistemisolari.com",
     // OK for Google // scope: [ "phone", "email", "profile", "openid", "aws.cognito.signin.user.admin" ],
     scope: [ "email", "openid", "aws.cognito.signin.user.admin" ],
     responseType: "code",
   },
   oauthRedirectSignInLocal: "http://localhost:3000/",
-  oauthRedirectSignInPublic: "https://quiccasa.sistemisolari.com/",
+  oauthRedirectSignInPublic: "https://appalti190.arsistemi.it/",
   oauthRedirectSignOutLocal: "http://localhost:3000/",
-  oauthRedirectSignOutPublic: "https://quiccasa.sistemisolari.com/",
+  oauthRedirectSignOutPublic: "https://appalti190.arsistemi.it/",
   debugAwsAmplify: false,
   api: {
     version: 1,
@@ -77,5 +77,9 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  data: {
+    templateDownloadName: "Appalti190.ots",
+    templateDownloadLink: "/data/Appalti190.ots",
+  },
 };

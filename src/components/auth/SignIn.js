@@ -10,17 +10,16 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Person from "@material-ui/icons/Person";
 import Lock from "@material-ui/icons/Lock";
-import i18n from "i18next";
+//import i18n from "i18next";
 //import { signIn/*, federatedSignIn*/ } from "../../libs/TrackPromise";
-import { signIn, federatedSignIn } from "../../libs/Fetch";
+import { signIn/*, federatedSignIn*/ } from "../../libs/Fetch";
 import { FacebookIcon, GoogleIcon } from "../IconFederated";
 import { toast } from "../Toast";
-import { FormInput, FormButton, FormText, FormDividerWithText, FormCheckbox, FormLink } from "../FormElements";
+import { FormInput, FormButton, FormText, FormDividerWithText, /*FormCheckbox,*/ FormLink } from "../FormElements";
 import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { validateEmail } from "../../libs/Validation";
 import config from "../../config";
-import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
@@ -146,6 +145,7 @@ function SignIn() {
     // });
   };
 
+console.log("config.federatedSigninProviders.length:", config.federatedSigninProviders.length);
   return (
     <Container maxWidth="xs">
 
@@ -236,7 +236,7 @@ function SignIn() {
             </Grid>
           </Grid>
 
-          {config.federatedSigninProviders.length && (
+          {!!config.federatedSigninProviders.length && (
             <>
               <Box m={3} />
 
@@ -274,7 +274,6 @@ function SignIn() {
               }
             </>
           )}
-
         </fieldset>
       </form>
 
