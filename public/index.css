@@ -117,14 +117,16 @@ label {
 
 label h1 {
   font-size: 1.1em;
-  font-style: italic;
+  font-style: bold;
   text-align: center;
   color: black;
 }
 
 .file-drop-error {
-  width: 100%;
+  font-size: 1.1em;
+  font-style: italic;
+  font-weight: bold;
   color: darkred;
   display: inline-block;
-  margin-bottom: 1em;
+  margin-top: 1em;
 }

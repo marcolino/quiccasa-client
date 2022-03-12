@@ -1,7 +1,7 @@
 import { createTheme } from "@material-ui/core/styles";
 //import { createMuiTheme } from "@material-ui/core/styles";
 //import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-ui/core/styles"; // TEMPORARY: temporary, to solve material-ui drawer "findDOMNode is deprecated in StrictModefindDOMNode is deprecated in StrictMode" warning
-import blueGrey from "@material-ui/core/colors/blueGrey";
+//import blueGrey from "@material-ui/core/colors/blueGrey";
 import lightGreen from "@material-ui/core/colors/lightGreen";
 import grey from "@material-ui/core/colors/grey";
 import amber from "@material-ui/core/colors/amber";
@@ -23,9 +23,14 @@ export default createTheme({
   },
   palette: {
     primary: {
-      light: blueGrey[100],
-      main: blueGrey[200],
-      dark: blueGrey[300],
+      light: "#42c2f5",
+      main: "rgba(0,0,0,0.5)",
+      dark: "#778899",
+      //contrastText: "red", //"#fff"
+      // light: blueGrey[100],
+      // main: blueGrey[200],
+      // dark: blueGrey[300],
+      contrastText: "white",
     },
     secondary: {
       light: lightGreen[100],

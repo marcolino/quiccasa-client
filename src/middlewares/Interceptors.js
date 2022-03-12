@@ -37,13 +37,14 @@ let requests = []; // retry queue, each item will be a function to be executed
 
 instance.interceptors.request.use(config => {
   const token = window.localStorage.token;
-  console.log("$$$$$$$$$$$$ getToken", token);
   if (token) {
+    console.log("$$$$$$$$$$$$ token IS SET");
     config.headers["X-Token"] = token;
   }
-  console.log("$$$$$$$$$$$$ getToken after");
+  else console.log("$$$$$$$$$$$$ token IS NOT SET");
   return config;
 }, error => {
+  console.error("instance.interceptors.request.use error:", error)
   return Promise.reject(error);
 });
 

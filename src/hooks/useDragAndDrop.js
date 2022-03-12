@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function useDragAndDrop() {
   const [dragOver, setDragOver] = useState(false);
-  const [fileDropError, setFileDropError] = useState("");
+  const [fileDropError, setFileDropError] = useState(null);
 
   const onDragOver = e => {
     e.preventDefault();

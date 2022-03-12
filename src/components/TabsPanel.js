@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import AppBar from '@material-ui/core/AppBar';
+import Paper from '@material-ui/core/Paper';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
@@ -11,7 +12,7 @@ import Tab01Start from "./Tab01Start";
 import Tab02Download from "./Tab02Download";
 import Tab03FillData from "./Tab03FillData";
 import Tab04Upload from "./Tab04Upload";
-
+import Tab05Check from "./Tab05Check";
 
 
 function TabPanel(props) {
@@ -94,7 +95,7 @@ const a11yProps = (index) => {
 
 const StyledTab = withStyles((theme) => ({
   root: {
-    opacity: 0.2,
+    opacity: 0.8  ,
     //textTransform: 'none',
     //color: '#444',
     //fontWeight: theme.typography.fontWeightRegular,
@@ -115,6 +116,13 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     //width: "100%",
     //backgroundColor: theme.palette.background.paper,
+  },
+  tabs: {
+    "& .MuiTabs-indicator": {
+      //display: "none",
+      backgroundColor: "orange",
+    }
+
   }
 }));
 
@@ -161,24 +169,36 @@ const TabsPanel = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" elevation={0} style={{/*backgroundColor: "transparent",*/ top: 70}}>
-        <Tabs
+      <AppBar position="fixed" elevation={0} style={{/*backgroundColor: "transparent",*/ top: 50}}>
+        {/* <Tabs
           value={tabId}
           onChange={handleChangeTab}
           indicatorColor="primary"
           // textColor="primary"
           variant="scrollable"
           scrollButtons="auto"
-          aria-label="scrollable auto tabs example"
-        >
-          <StyledTab label={`${t("Start")} 🪄`} {...a11yProps(0)} />
-          <StyledTab label={`${t("Download")} ⬇`} {...a11yProps(1)} />
-          <StyledTab label={`${t("Fill your data")} 🖋`} {...a11yProps(2)} />
-          <StyledTab label={`${t("Upload")} ⬆`} {...a11yProps(3)} />
-          <StyledTab label={`${t("Check")} ✔`} {...a11yProps(4)} />
-          <StyledTab label={`${t("Wait for validation")} 🎯`} {...a11yProps(5)} />
-          <StyledTab label={`${t("Finish!")} 🏁`} {...a11yProps(6)} />
-        </Tabs>
+          aria-label="scrollable auto tabs"
+          className={classes.tabs}
+        > */}
+        <Paper elevation={0} square>
+          <Tabs
+            value={tabId}
+            indicatorColor="secondary"
+            textColor="secondary"
+            variant="scrollable"
+            scrollButtons="auto"
+            onChange={handleChangeTab}
+            aria-label="disabled tabs example"
+          >
+            <StyledTab label={`${t("Start")} 🪄`} {...a11yProps(0)} />
+            <StyledTab label={`${t("Download")} ⬇`} {...a11yProps(1)} />
+            <StyledTab label={`${t("Fill your data")} 🖋`} {...a11yProps(2)} />
+            <StyledTab label={`${t("Upload")} ⬆`} {...a11yProps(3)} />
+            <StyledTab label={`${t("Check")} ✔`} {...a11yProps(4)} />
+            <StyledTab label={`${t("Wait for validation")} 🎯`} {...a11yProps(5)} />
+            <StyledTab label={`${t("Finish!")} 🏁`} {...a11yProps(6)} />
+          </Tabs>
+        </Paper>
       </AppBar>
 
       <TabPanel value={tabId} index={0}>
@@ -191,10 +211,10 @@ const TabsPanel = () => {
         <Tab03FillData goto={(where) => goto(where)} />
       </TabPanel>
       <TabPanel value={tabId} index={3}>
-       <Tab04Upload goto={(where) => goto(where)} />
+        <Tab04Upload goto={(where) => goto(where)} />
       </TabPanel>
       <TabPanel value={tabId} index={4}>
-        controlla che sia tutto corretto...
+        <Tab05Check value={tabId} index={4} goto={(where) => goto(where)} />
       </TabPanel>
       <TabPanel value={tabId} index={5}>
         attendi la validazione da parte dell'ANAC...

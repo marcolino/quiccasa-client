@@ -3,17 +3,14 @@ import PropTypes from "prop-types";
 //import { makeStyles } from "@material-ui/styles";
 import { useTranslation } from "react-i18next";
 //import { useDrpzone } from "react-dropzone";
-//import Button from "@material-ui/core/Button";
+import Button from "@material-ui/core/Button";
 //import Paper from "@material-ui/core/Paper";
 //import RootRef from "@material-ui/core/RootRef";
 import useDragAndDrop from "../hooks/useDragAndDrop";
 import { TabContainer, TabBodyScrollable, TabTitle, TabParagraph, TabNextButton } from "./TabsComponents";
+//import { ControlPointDuplicateOutlined } from "@material-ui/icons";
 
-// const useStyles = makeStyles(theme => ({
-//   xul: {
-//     padding: 15,
-//   }
-// }));
+
 
 function Tab04Upload(props) {
   //const classes = useStyles();
@@ -32,44 +29,50 @@ function Tab04Upload(props) {
 
   const onDrop = (e) => {
     e.preventDefault();
-
-    setDragOver(true);
-
     const selectedFile = e?.dataTransfer?.files[0];
-
-    // TODO: check file type or name...
-    // if (selectedFile.type.split("/")[0] !== "image") {
-    //   return setFileDropError("Please provide an image file to upload!");
-    // }
-
-    setFile(selectedFile);
-console.log("selected file:", selectedFile.name);
-    setNextIsEnabled(true);
+//console.log("dropped file:", selectedFile);
+    fileSelect(selectedFile);
   };
 
-  const fileSelect = (e) => {
+  const onFileSelect = (e) => {
+    e.preventDefault();
     const selectedFile = e?.target?.files[0];
-    // TODO: check file type or name...
-    // if (selectedFile.type.split("/")[0] !== "image") {
-    //   return setFileDropError("Please provide an image file to upload!");
-    // }
+//console.log("selected file:", selectedFile);
+    fileSelect(selectedFile);
+  };
 
+  const fileSelect = (selectedFile) => {
     setFileDropError(null);
+    if (!fileValidate(selectedFile)) return;
     setFile(selectedFile);
-console.log("selected file:", selectedFile.name);
     setNextIsEnabled(true);
+    setDragOver(false);
+  };
+
+  const fileValidate = (file) => { // validate file type or name
+    // ods: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+    // xls: application/vnd.ms-excel
+    //console.log("file.type:", file.type);
+    if (!( // TODO: check if these tests are enough general...
+      file.type.split("/")[1].match("officedocument.spreadsheetml.sheet") ||
+      file.type.split("/")[1].match("ms-excel")
+    )) {
+      setFileDropError(t("Please provide a spreadsheet to upload"));
+      return false;
+    }
+    return true;
+  };
+
+  const fileReset = (e) => {
+    setFile(null);
+    document.getElementById("file").value = "";
+    setFileDropError("");
   };
 
   const onNext = () => {
     props.goto("next");
   };
 
-  let uploadSize;
-  if (window.innerHeight >= window.innerWidth) { // portrait
-    uploadSize = window.innerWidth * .33;
-  } else { // landscape
-    uploadSize = window.innerWidth * .25;
-  }
   return (
     <TabContainer>
       <TabBodyScrollable>
@@ -87,20 +90,23 @@ console.log("selected file:", selectedFile.name);
               onDragOver={onDragOver}
               onDragLeave={onDragLeave}
               onDrop={onDrop}
-              style={{ width: uploadSize, border: `${dragOver ? "3px dashed lightgreen" : ""}` }}
+              style={{ width: "100%", textAlign: "center", backgroundColor: `${dragOver ? "yellow" : ""}`}}
             >
-              {file && <h1>{file.name}</h1>}
-              {!file && (
-                <h1 style={{ color: `${dragOver ? "lightgreen" : ""}` }}>
-                  {!dragOver ? t("Drop the file here or click to select it...") : t("Drop here...")}
-                </h1>
-              )}
+              <h4 style={{ color: `${dragOver ? "black" : "#333"}` }}>
+                {t("Drop the file here or click to select from disk")}
+              </h4>
             </label>
-            <input type="file" name="file" id="file" onChange={fileSelect} style={{display: "none"}} />
+            <input type="file" name="file" id="file" onChange={onFileSelect} style={{display: "none"}} />
             {fileDropError && (
-              <span className="file-drop-error">{fileDropError}</span>
+                <div className="file-drop-error">{fileDropError}</div>
             )}
           </form>
+          <br />
+          <TabParagraph>
+            {file && t(`File caricato: ${file.name}`)}
+            <br />
+            {file && <Button variant="contained" size="small" color="default" onClick={fileReset} title={t("Remove file")}> 🗑 </Button>}
+          </TabParagraph>
         </div>
 
       </TabBodyScrollable>
