@@ -7,8 +7,8 @@ export default function Loader() {
   return (
     <div>
       { loading && (
-          <div class="loading">
-            <div class="loader"></div>
+          <div className={"loading"}>
+            <div className={"loader"}></div>
           </div>
         )
       }

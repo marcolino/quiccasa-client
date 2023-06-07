@@ -9,10 +9,10 @@ import { i18n } from "./i18n";
 console.log("app started rendering");
 const root = document.getElementById("root");
 ReactDOM.render(
-  <React.StrictMode>
+  <React.StrictMode/*Fragment*/>
     <App />
     <ToastContainer />
-  </React.StrictMode>,
+  </React.StrictMode/*Fragment*/>,
   root
 );
 

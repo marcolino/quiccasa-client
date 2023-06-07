@@ -6,7 +6,6 @@ import { signOut } from "../../libs/TrackPromise";
 import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { toast } from "../Toast";
-import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 
 
@@ -34,7 +33,6 @@ console.log("signOut calling setAuth");
         },
         error: (err) => {
 console.error("signOut error:", err);
-ETBTAdd("signOut", err);
           toast.error(t(err.message));
         }
       });

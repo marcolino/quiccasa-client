@@ -4,7 +4,7 @@ importScripts("https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.2.1/firebase-messaging.js");
 
 // initialize the Firebase app in the service worker by passing the generated config
-const firebaseConfig = {
+const firebaseConfig = { // TODO: appalti190...
   apiKey: "AIzaSyAN-T9JMI8W5oF2Gip2Pcu-E_xtXBB2gE0",
   authDomain: "sistemisolari-quiccasa.firebaseapp.com",
   projectId: "sistemisolari-quiccasa",
@@ -52,7 +52,6 @@ messaging.onBackgroundMessage(function(payload) {
     var message =
       {id: 1, name: 'body payload'}
     ;
-
 
     // get database from event
     var db = event.target.result;

@@ -62,6 +62,7 @@ Google Search Console
 
 I18n
  - Language flags: https://apps.timwhitlock.info/emoji/tables/iso3166
+ - yarn global add i18next-parser
 
 E-Commerce
  - 9 Must-Have Features of a Progressive Web App (PWA) for E-Commerce: https://www.simicart.com/blog/progressive-web-apps-features-for-ecommerce

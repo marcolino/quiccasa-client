@@ -2,4 +2,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://quiccasa.sistemisolari.com/sitemap.xml
+Sitemap: https://appalti190.arsistemi.it/sitemap.xml

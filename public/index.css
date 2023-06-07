@@ -103,3 +103,30 @@ input::-webkit-inner-spin-button {
     transform: rotate(0deg);
   }
 }
+
+
+/* upload */
+label {
+  width: 100%;
+  border: 3px black dashed;
+  padding: 3em 1.78em;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+label h1 {
+  font-size: 1.1em;
+  font-style: bold;
+  text-align: center;
+  color: black;
+}
+
+.file-drop-error {
+  font-size: 1.1em;
+  font-style: italic;
+  font-weight: bold;
+  color: darkred;
+  display: inline-block;
+  margin-top: 1em;
+}

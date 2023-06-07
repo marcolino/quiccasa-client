@@ -23,7 +23,6 @@ import { toast } from "../Toast";
 import { FormInput, FormButton, FormText } from "../FormElements";
 import { validateEmail, checkPassword } from "../../libs/Validation";
 import config from "../../config";
-//import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {

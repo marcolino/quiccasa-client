@@ -20,7 +20,6 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { OnlineStatusContext } from "../../providers/OnlineStatusProvider";
 import { validateEmail } from "../../libs/Validation";
 import config from "../../config";
-//import { ETBTAdd } from "../../libs/I18n"; // TODO: remove me when finished collecting serve errors
 
 const styles = theme => ({
   avatar: {
@@ -146,6 +145,7 @@ function SignIn() {
     // });
   };
 
+console.log("config.federatedSigninProviders.length:", config.federatedSigninProviders.length);
   return (
     <Container maxWidth="xs">
 
@@ -236,7 +236,7 @@ function SignIn() {
             </Grid>
           </Grid>
 
-          {config.federatedSigninProviders.length && (
+          {!!config.federatedSigninProviders.length && (
             <>
               <Box m={3} />
 
@@ -274,7 +274,6 @@ function SignIn() {
               }
             </>
           )}
-
         </fieldset>
       </form>
 

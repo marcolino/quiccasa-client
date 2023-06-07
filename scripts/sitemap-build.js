@@ -6,7 +6,7 @@
 const fs = require("fs");
 
 const sitemapFileName = "./public/sitemap.xml";
-const hostName = "https://quiccasa.sistemisolari.com"; // the url of the website: the protocol and the domain name
+const hostName = "https://appalti190.arsistemi.it"; // the url of the website: the protocol and the domain name
 const routesPath = "./src/components/Routes.js";
 const defaultFrequency = "monthly";
 const defaultPriority = 0.5;

@@ -43,6 +43,16 @@ export const resendResetPasswordCode = (params) => {
   });
 };
 
+
+export const transformXls2Xml = (params) => {
+  return instance.post("/service/transformXls2Xml", params).then(response => {
+    return { ok: true, ...response.data };
+  }).catch(err => {
+console.warn("err.message", err.message, err.reason)
+    return { ok: false, message: err.message };
+  });
+};
+
 // export const federatedSignIn = (params) => {
 // console.log(currentFunctionName(), params);
 //   //return fetcher("/api/auth/login", "POST", params);

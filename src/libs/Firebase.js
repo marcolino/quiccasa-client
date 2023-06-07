@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/messaging";
 
 // TODO: put in .env or config
-const firebaseConfig = {
+const firebaseConfig = { // TODO...
   apiKey: "AIzaSyAN-T9JMI8W5oF2Gip2Pcu-E_xtXBB2gE0",
   authDomain: "sistemisolari-quiccasa.firebaseapp.com",
   projectId: "sistemisolari-quiccasa",
